@@ -1,4 +1,10 @@
+-- 创建数据库
 CREATE DATABASE fashion DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- 创建用户并授权数据库
+CREATE USER 'fashion'@'%' IDENTIFIED BY 'Fashion!@#';
+GRANT ALL PRIVILEGES ON fashion.* TO 'fashion'@'%';
+FLUSH PRIVILEGES;
 
 USE fashion;
 
@@ -136,9 +142,10 @@ ALTER TABLE `sewing_tasks` ADD FOREIGN KEY (`order_product_id`) REFERENCES `orde
 
 -- 插入示例数据
 
+-- 问题：id类型需要设置成自增的整型吗
 -- 插入客户数据
 INSERT INTO `customers` (`id`, `customer_name`) VALUES
-('c1', '客户A'),
+('c1', '香港理工大学'),
 ('c2', '客户B');
 
 -- 插入订单数据
@@ -163,7 +170,7 @@ INSERT INTO `materials` (`id`, `name`, `unit`, `type`) VALUES
 
 -- 插入工作组数据
 INSERT INTO `working_group` (`id`, `type`, `name`) VALUES
-('wg1', 'cut', '裁剪组1'),
+('wg1', 'cut', '标兵组'),
 ('wg2', 'sew', '缝纫组1');
 
 -- 插入订单产品关系数据
