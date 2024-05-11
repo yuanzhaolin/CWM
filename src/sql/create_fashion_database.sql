@@ -133,3 +133,76 @@ ALTER TABLE `cutting_material_allocation` ADD FOREIGN KEY (`cutting_task_id`) RE
 ALTER TABLE `cutting_material_allocation` ADD FOREIGN KEY (`warehouse_material_id`) REFERENCES `warehouse_material` (`id`);
 ALTER TABLE `sewing_material_allocation` ADD FOREIGN KEY (`warehouse_material_id`) REFERENCES `warehouse_material` (`id`);
 ALTER TABLE `sewing_tasks` ADD FOREIGN KEY (`order_product_id`) REFERENCES `order_product` (`id`);
+
+-- 插入示例数据
+
+-- 插入客户数据
+INSERT INTO `customers` (`id`, `customer_name`) VALUES
+('c1', '客户A'),
+('c2', '客户B');
+
+-- 插入订单数据
+INSERT INTO `orders` (`id`, `user_id`, `order_name`, `created_at`) VALUES
+('o1', 'c1', '订单1', '2024-05-01 08:00:00'),
+('o2', 'c2', '订单2', '2024-05-02 09:00:00');
+
+-- 插入产品类型数据
+INSERT INTO `products_types` (`id`, `description`) VALUES
+('pt1', 'T恤'),
+('pt2', '裤子');
+
+-- 插入产品数据
+INSERT INTO `products` (`id`, `products_type_id`, `attributes`) VALUES
+('p1', 'pt1', '红色, M号'),
+('p2', 'pt2', '蓝色, 32码');
+
+-- 插入原料数据
+INSERT INTO `materials` (`id`, `name`, `unit`, `type`) VALUES
+('m1', '棉布', '米', 'origin'),
+('m2', '棉布片', '片', 'wip');
+
+-- 插入工作组数据
+INSERT INTO `working_group` (`id`, `type`, `name`) VALUES
+('wg1', 'cut', '裁剪组1'),
+('wg2', 'sew', '缝纫组1');
+
+-- 插入订单产品关系数据
+INSERT INTO `order_product` (`id`, `order_id`, `product_id`, `number`) VALUES
+('op1', 'o1', 'p1', 100), -- 订单1中包含100个T恤
+('op2', 'o2', 'p2', 50); -- 订单2中包含50个裤子
+
+-- 插入裁剪任务数据
+-- 问题：是否缺失了origin原料 -> wip原料 合成用量与损耗率的表
+INSERT INTO `cutting_tasks` (`id`, `start_time`, `end_time`, `working_group_id`, `order_product_id`, `planned_number`, `completed_number`, `is_started`) VALUES
+('ct1', '2024-05-03 08:00:00', '2024-05-04 17:00:00', 'wg1', 'op1', 100, 50, TRUE); -- 订单1的裁剪任务, 计划裁剪100个棉布片, 已完成裁剪50个
+
+-- 插入缝纫任务数据
+-- 问题：是否缺失了wip原料 -> product 合成用量与损耗率的表
+INSERT INTO `sewing_tasks` (`id`, `start_time`, `end_time`, `working_group_id`, `order_product_id`, `planned_number`, `completed_number`, `is_started`) VALUES
+('st1', '2024-05-05 08:00:00', '2024-05-06 17:00:00', 'wg2', 'op1', 100, 30, TRUE); -- 订单1的缝纫任务, 计划缝纫100个T恤, 已完成缝纫30个
+
+-- 插入仓库数据
+INSERT INTO `warehouse` (`id`, `name`) VALUES
+('w1', '主仓库'),
+('w2', '辅助仓库');
+
+-- 插入仓库产品关系数据
+-- 问题：是否统计进行中缝纫任务完成的产品，什么时候入库
+INSERT INTO `warehouse_product` (`id`, `warehouse_id`, `product_id`, `left_number`) VALUES
+('wp1', 'w1', 'p1', 0),
+('wp2', 'w2', 'p2', 0);
+
+-- 插入仓库原料关系数据
+-- 问题：是否统计进行中裁剪任务使用的原料以及裁剪后的半成品，什么时候出库与入库
+-- 问题：是否统计进行中的缝纫任务使用的半成品，什么时候出库
+INSERT INTO `warehouse_material` (`id`, `warehouse_id`, `material_id`, `left_number`) VALUES
+('wm1', 'w1', 'm1', 500), -- 主仓库有500米棉布
+('wm2', 'w2', 'm2', 200); -- 辅助仓库有50个棉布片
+
+-- 插入裁剪任务原料分配数据
+INSERT INTO `cutting_material_allocation` (`id`, `warehouse_material_id`, `cutting_task_id`, `allocated_num`, `is_allocated`) VALUES
+('cma1', 'wm1', 'ct1', 100, TRUE); -- 主仓库的100米棉布分配给订单1的裁剪任务, 1米棉布裁剪1个棉布片
+
+-- 插入缝纫任务原料分配数据
+INSERT INTO `sewing_material_allocation` (`id`, `warehouse_material_id`, `sewing_task_id`, `allocated_num`, `is_allocated`) VALUES
+('sma1', 'wm2', 'st1', 100, TRUE); -- 辅助仓库的100片棉布片分配给订单1的缝纫任务, 1片棉布片缝纫1个T恤
