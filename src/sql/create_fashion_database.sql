@@ -4,34 +4,34 @@ USE fashion;
 
 -- 客户信息表
 CREATE TABLE `customers` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '客户ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '客户ID',
   `customer_name` VARCHAR(255) NOT NULL COMMENT '客户名称'
 );
 
 -- 订单信息表
 CREATE TABLE `orders` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '订单ID',
-  `user_id` CHAR(36) NOT NULL COMMENT '客户ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '订单ID',
+  `user_id` VARCHAR(36) NOT NULL COMMENT '客户ID',
   `order_name` VARCHAR(255) NOT NULL COMMENT '订单名称',
   `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '订单创建时间'
 );
 
 -- 产品类型表
 CREATE TABLE `products_types` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '产品类型ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '产品类型ID',
   `description` VARCHAR(255) NOT NULL COMMENT '产品类型描述'
 );
 
 -- 产品表
 CREATE TABLE `products` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '产品ID',
-  `products_type_id` CHAR(36) NOT NULL COMMENT '产品类型ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '产品ID',
+  `products_type_id` VARCHAR(36) NOT NULL COMMENT '产品类型ID',
   `attributes` VARCHAR(255) NOT NULL COMMENT '产品属性'
 );
 
 -- 原料表
 CREATE TABLE `materials` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '原料ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '原料ID',
   `name` VARCHAR(255) NOT NULL COMMENT '原料名称',
   `unit` VARCHAR(255) NOT NULL COMMENT '原料单位',
   `type` ENUM('wip', 'origin') NOT NULL COMMENT '原料类型'
@@ -39,26 +39,26 @@ CREATE TABLE `materials` (
 
 -- 订单产品关系表
 CREATE TABLE `order_product` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '订单产品ID', 
-  `order_id` CHAR(36) NOT NULL COMMENT '订单ID',
-  `product_id` CHAR(36) NOT NULL COMMENT '产品ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '订单产品ID', 
+  `order_id` VARCHAR(36) NOT NULL COMMENT '订单ID',
+  `product_id` VARCHAR(36) NOT NULL COMMENT '产品ID',
   `number` INTEGER NOT NULL DEFAULT 0 COMMENT '订单产品数量'
 );
 
 -- 工作组表
 CREATE TABLE `working_group` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '工作组ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '工作组ID',
   `type` ENUM('sew', 'cut') NOT NULL COMMENT '工作组类型，缝纫小组、裁剪小组',
   `name` VARCHAR(255) NOT NULL COMMENT '工作组名称'
 );
 
 -- 订单产品裁剪任务表
 CREATE TABLE `cutting_tasks` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '裁剪任务ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '裁剪任务ID',
   `start_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '裁剪任务开始时间',
   `end_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '裁剪任务结束时间',
-  `working_group_id` CHAR(36) NOT NULL COMMENT '工作组ID',
-  `order_product_id` CHAR(36) NOT NULL COMMENT '订单产品ID',
+  `working_group_id` VARCHAR(36) NOT NULL COMMENT '工作组ID',
+  `order_product_id` VARCHAR(36) NOT NULL COMMENT '订单产品ID',
   `planned_number` INTEGER NOT NULL DEFAULT 0 COMMENT '计划裁剪数量',
   `completed_number` INTEGER NOT NULL DEFAULT 0 COMMENT '已完成裁剪数量',
   `is_started` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '裁剪任务是否已开始'
@@ -66,11 +66,11 @@ CREATE TABLE `cutting_tasks` (
 
 -- 订单产品缝纫任务表
 CREATE TABLE `sewing_tasks` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '缝纫任务ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '缝纫任务ID',
   `start_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '缝纫任务开始时间',
   `end_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '缝纫任务结束时间',
-  `working_group_id` CHAR(36) NOT NULL COMMENT '工作组ID',
-  `order_product_id` CHAR(36) NOT NULL COMMENT '订单产品ID',
+  `working_group_id` VARCHAR(36) NOT NULL COMMENT '工作组ID',
+  `order_product_id` VARCHAR(36) NOT NULL COMMENT '订单产品ID',
   `planned_number` INTEGER NOT NULL DEFAULT 0 COMMENT '计划缝纫数量',
   `completed_number` INTEGER NOT NULL DEFAULT 0 COMMENT '已完成缝纫数量',
   `is_started` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '缝纫任务是否已开始'
@@ -78,41 +78,41 @@ CREATE TABLE `sewing_tasks` (
 
 -- 订单产品裁剪任务原料分配表
 CREATE TABLE `cutting_material_allocation` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '裁剪任务原料分配ID',
-  `warehouse_material_id` CHAR(36) NOT NULL COMMENT '仓库原料ID',
-  `cutting_task_id` CHAR(36) NOT NULL COMMENT '裁剪任务ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '裁剪任务原料分配ID',
+  `warehouse_material_id` VARCHAR(36) NOT NULL COMMENT '仓库原料ID',
+  `cutting_task_id` VARCHAR(36) NOT NULL COMMENT '裁剪任务ID',
   `allocated_num` INTEGER NOT NULL DEFAULT 0 COMMENT '原料分配数量',
   `is_allocated` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '原料是否已分配'
 );
 
 -- 订单产品缝纫任务原料分配表
 CREATE TABLE `sewing_material_allocation` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '缝纫任务原料分配ID',
-  `warehouse_material_id` CHAR(36) NOT NULL COMMENT '仓库原料ID',
-  `sewing_task_id` CHAR(36) NOT NULL COMMENT '缝纫任务ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '缝纫任务原料分配ID',
+  `warehouse_material_id` VARCHAR(36) NOT NULL COMMENT '仓库原料ID',
+  `sewing_task_id` VARCHAR(36) NOT NULL COMMENT '缝纫任务ID',
   `allocated_num` INTEGER NOT NULL DEFAULT 0 COMMENT '原料分配数量',
   `is_allocated` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '原料是否已分配'
 );
 
 -- 仓库表
 CREATE TABLE `warehouse` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '仓库ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '仓库ID',
   `name` VARCHAR(255) NOT NULL COMMENT '仓库名称'
 );
 
 -- 仓库产品关系表
 CREATE TABLE `warehouse_product` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '仓库产品ID',
-  `warehouse_id` CHAR(36) NOT NULL COMMENT '仓库ID',
-  `product_id` CHAR(36) NOT NULL COMMENT '产品ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '仓库产品ID',
+  `warehouse_id` VARCHAR(36) NOT NULL COMMENT '仓库ID',
+  `product_id` VARCHAR(36) NOT NULL COMMENT '产品ID',
   `left_number` INTEGER NOT NULL DEFAULT 0 COMMENT '产品剩余库存数量'
 );
 
 -- 仓库原料关系表
 CREATE TABLE `warehouse_material` (
-  `id` CHAR(36) PRIMARY KEY COMMENT '仓库原料ID',
-  `warehouse_id` CHAR(36) NOT NULL COMMENT '仓库ID',
-  `material_id` CHAR(36) NOT NULL COMMENT '原料ID',
+  `id` VARCHAR(36) PRIMARY KEY COMMENT '仓库原料ID',
+  `warehouse_id` VARCHAR(36) NOT NULL COMMENT '仓库ID',
+  `material_id` VARCHAR(36) NOT NULL COMMENT '原料ID',
   `left_number` INTEGER NOT NULL DEFAULT 0 COMMENT '原料剩余库存数量'
 );
 
