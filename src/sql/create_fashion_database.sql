@@ -1,5 +1,5 @@
 -- 创建数据库
-CREATE DATABASE fashion DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE fashion;
 
 -- 创建用户并授权数据库
 CREATE USER 'fashion'@'%' IDENTIFIED BY 'Fashion!@#';
