@@ -6,11 +6,10 @@ services:
     container_name: fashion-mysql
     environment:
       MYSQL_ROOT_PASSWORD: Fashion!@#
-      MYSQL_CHARSET: utf8mb4
-      MYSQL_COLLATION: utf8mb4_unicode_ci
     ports:
       - "41970:3306"
     volumes:
-      -  ./mysql_data:/var/lib/mysql
+      - ./charset_and_collation.cnf:/etc/mysql/conf.d/my_custom.cnf
+      - ./mysql_data:/var/lib/mysql
       - ./create_fashion_database.sql:/docker-entrypoint-initdb.d/init-db.sql 
     restart: always
