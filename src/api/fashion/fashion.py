@@ -8,7 +8,7 @@ import pymysql
 from fashion.openai_chat import generate_sql
 from config import conf
 
-def get_data(query: str, model="gpt-4-turbo", retry=3) -> Tuple[str, str]:
+def get_data(query: str, model="gpt-4o", retry=3) -> Tuple[str, str]:
     host = conf().get("mysql_host", "localhost")
     port = conf().get("mysql_port", 3306)
     user = conf().get("mysql_user", "root")
