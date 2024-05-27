@@ -162,7 +162,7 @@ Please output the thought process and answer in the json format below, only outp
 
 """
 
-def generate_sql(query: str, model="gpt-4-turbo") -> str:
+def generate_sql(query: str, model="gpt-4o") -> str:
     try:
       messages = [
           {"role": "system", "content": GENERATE_SQL_PROMPT},
