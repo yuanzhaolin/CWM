@@ -180,6 +180,18 @@ def generate_sql(query: str, model="gpt-4o") -> str:
     except Exception as e:
       raise Exception(f"生成SQL失败: {repr(e)}")
 
+def generate_response(user_query: str, system_query, model="gpt-4o") -> str:
+    try:
+      messages = [
+          {"role": "system", "content": system_query},
+          {"role": "user", "content": user_query}
+      ]
+      completion = client.chat.completions.create(model=model, messages=messages)
+      response_text = completion.choices[0].message.content
+      return response_text
+    except Exception as e:
+      raise Exception(f"生成response失败: {repr(e)}")
+
 if __name__ == "__main__":
     query = "香港理工大学的订单明细"
     print(generate_sql(query))

@@ -8,7 +8,7 @@ import pymysql
 from fashion.openai_chat import generate_sql
 from config import conf
 
-def get_data(query: str, model="gpt-4o", retry=3) -> Tuple[str, str]:
+def get_data(query: str, model="gpt-4o", retry=3, return_sql=False) -> Tuple[str, str]:
     host = conf().get("mysql_host", "localhost")
     port = conf().get("mysql_port", 3306)
     user = conf().get("mysql_user", "root")
@@ -23,7 +23,15 @@ def get_data(query: str, model="gpt-4o", retry=3) -> Tuple[str, str]:
         cursor = connection.cursor()
         cursor.execute(sql)
         rows = cursor.fetchall()
-        return json.dumps(rows, default=datetime_to_str, ensure_ascii=False), ""
+
+        if return_sql:
+            results = {
+                'sql': sql,
+                'rows': rows
+            }
+            return json.dumps(results, default=datetime_to_str, ensure_ascii=False), ""
+        else:
+            return json.dumps(rows, default=datetime_to_str, ensure_ascii=False), ""
     except Exception as e:
         if retry > 0:
             time.sleep(1)
