@@ -1,0 +1,16 @@
+
+1. 学习业务逻辑
+数据库ER图：https://github.com/y18810919727/LLM_garment_MES/blob/main/doc/garment.png
+数据库建表：https://github.com/y18810919727/LLM_garment_MES/blob/main/doc/garment.sql
+
+2. 数据集仿真
+  参考https://github.com/huchenxucs/ChatDB/tree/main/csvs，设计garment MES的仿真数据
+要求：
+1. 全英文
+2. 用户个数>5, 订单数>8, 服装种类>5，裁缝组和缝纫组数量各>3，原料种类大于>5。平均每个缝纫/裁剪组要排>4个任务。
+3. 数据合理
+
+3. 问答任务仿真
+
+参考：https://github.com/huchenxucs/ChatDB/blob/main/sql_examples.py
+设计50个问题
