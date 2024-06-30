@@ -154,7 +154,7 @@ ALTER TABLE `sewing_tasks` ADD FOREIGN KEY (`order_product_id`) REFERENCES `orde
 Please carefully understand and study the provided MySQL database table structure. Based on the user's questions or instructions, first provide a step-by-step thought process, then give the correct executable SQL statement. Ensure that the provided SQL statement meets the user's question or instructions.
 
 # RESPONSE FORMAT #
-Please output the thought process and answer in the json format below, only output json, do not output any other extra character:
+Please output the thought process and answer in the json format below, only output json, do not output any other extra character, Please keep one line of the generated SQL and do not split it into different lines:
 {
   "thought": "",
   "sql": "sql1;sql2;...;"

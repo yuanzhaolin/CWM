@@ -21,8 +21,11 @@ def get_data(query: str, model="gpt-4o", retry=3, return_sql=False) -> Tuple[str
         # 创建连接
         connection = pymysql.connect(host=host, port=port, user=user, password=password, database=database, cursorclass=pymysql.cursors.DictCursor)
         cursor = connection.cursor()
+        start_time = time.time()
         cursor.execute(sql)
         rows = cursor.fetchall()
+        end_time = time.time()
+        print(f"execution time:{end_time - start_time}")
 
         if return_sql:
             results = {
