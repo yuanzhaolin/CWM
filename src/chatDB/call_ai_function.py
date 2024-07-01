@@ -40,7 +40,7 @@ def populate_sql_statement(sql_str: str, previous_sql_results: list[list[dict]])
     description_string = "Find useful information in the results of the previous sql statement, and replace <> with the corresponding information."
 
     result_string = call_ai_function(
-        function_string, args, description_string, model=cfg.fast_llm_model
+        function_string, args, description_string, model=cfg.smart_llm_model
     )
     # print("chatgpt", result_string)
     brace_index = result_string.index("[")

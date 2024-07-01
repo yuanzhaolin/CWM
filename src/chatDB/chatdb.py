@@ -65,6 +65,8 @@ def chain_of_memory(sql_steps, mysql_db):
                 print(f"Database response:\n{sql_res_str}\n")
                 if sql_results:
                     sql_results_history.append(sql_results)
+                else:
+                    sql_results_history.append(sql_res_str)
         else:
             print(f"Execute: \n{ori_sql_cmd}\n")
             sql_results, sql_res_str = mysql_db.execute_sql(ori_sql_cmd)
@@ -72,6 +74,8 @@ def chain_of_memory(sql_steps, mysql_db):
             print(f"Database response:\n{sql_res_str}\n")
             if sql_results:
                 sql_results_history.append(sql_results)
+            else:
+                sql_results_history.append(sql_res_str)
     return sql_results_history, new_mem_ops
 
 
@@ -79,7 +83,7 @@ def generate_chat_responses(user_inp, mysql_db, historical_message):
     # ask steps
     prompt_ask_steps_str = prompt_ask_steps.format(user_inp=user_inp)
     response_steps = chat_with_ai(init_system_msg(), prompt_ask_steps_str, historical_message, None,
-                                  token_limit=cfg.fast_token_limit)
+                                  token_limit=cfg.smart_token_limit)
 
     historical_message[-2]["content"] = prompt_ask_steps_no_egs.format(user_inp=user_inp)
 
@@ -87,13 +91,12 @@ def generate_chat_responses(user_inp, mysql_db, historical_message):
 
     if len(response_steps_list_of_dict) == 0:
         print(f"NOT NEED MEMORY: {response_steps}")
-        return
+        return None, None, "generate sql error"
 
     sql_results_history, new_mem_ops = chain_of_memory(response_steps_list_of_dict, mysql_db)
 
     print("Finish!")
-    return
-
+    return sql_results_history, new_mem_ops, None
 
 def need_update_sql(input_string):
     pattern = r"<\S+>"
@@ -107,10 +110,13 @@ def need_update_sql(input_string):
 
 
 if __name__ == '__main__':
-    mysql_db = init_database(database_info, "try1024")
+    mysql_db = init_database(database_info, None)
     his_msgs = []
     print("START!")
     text = input("USER INPUT: ")
     while True:
-        generate_chat_responses(text, mysql_db, his_msgs)
+        sql_results_history, new_mem_ops, err = generate_chat_responses(text, mysql_db, his_msgs)
+        print(sql_results_history)
+        print(new_mem_ops)
+        print(err)
         text = input("USER INPUT: ")

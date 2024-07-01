@@ -158,10 +158,10 @@ CREATE TABLE `warehouse_material` (
   `left_number` INTEGER NOT NULL DEFAULT 0 COMMENT '原料剩余库存数量'
 );
 """
-print("*****************table details*****************")
-print(table_details)
+# print("*****************table details*****************")
+# print(table_details)
 
-def init_database(database_info, db_name):
+def init_database(database_info=None, db_name=None):
     # global mysqldb
     # print(cfg.mysql_host, cfg.mysql_user, cfg.mysql_password, cfg.mysql_port, db_name)
     mysqldb = MySQLDB(host=cfg.mysql_host, user=cfg.mysql_user, password="Fashion!@#",
@@ -175,13 +175,13 @@ def init_database(database_info, db_name):
     # from urllib.parse import quote
 
     # create database engine
-    connect_str = "mysql+pymysql://{user}:{pw}@{host}/{db}".format(user=cfg.mysql_user,
-                                   pw=quote(cfg.mysql_password),
-                                   host=cfg.mysql_host,
-                                   db=db_name)
-    print(connect_str)
-    engine = create_engine(connect_str)
-    print(database_info)
+    # connect_str = "mysql+pymysql://{user}:{pw}@{host}/{db}".format(user=cfg.mysql_user,
+    #                                pw=quote(cfg.mysql_password),
+    #                                host=cfg.mysql_host,
+    #                                db=db_name)
+    # print(connect_str)
+    # engine = create_engine(connect_str)
+    # print(database_info)
     # read csv data
     # conn = pymysql.connect(
     #         host=cfg.mysql_host,
