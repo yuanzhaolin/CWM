@@ -154,7 +154,7 @@ ALTER TABLE `sewing_tasks` ADD FOREIGN KEY (`order_product_id`) REFERENCES `orde
 Please carefully understand and study the provided MySQL database table structure. Based on the user's questions or instructions, first provide a step-by-step thought process, then give the correct executable SQL statement. Ensure that the provided SQL statement meets the user's question or instructions.
 
 # RESPONSE FORMAT #
-Please output the thought process and answer in the json format below, only output json, do not output any other extra character:
+Please output the thought process and answer in the json format below, only output json, do not output any other extra character, Please keep one line of the generated SQL and do not split it into different lines:
 {
   "thought": "",
   "sql": "sql1;sql2;...;"
@@ -162,7 +162,7 @@ Please output the thought process and answer in the json format below, only outp
 
 """
 
-def generate_sql(query: str, model="gpt-4-turbo") -> str:
+def generate_sql(query: str, model="gpt-4o") -> str:
     try:
       messages = [
           {"role": "system", "content": GENERATE_SQL_PROMPT},
@@ -179,6 +179,18 @@ def generate_sql(query: str, model="gpt-4-turbo") -> str:
       return json_obj["sql"]
     except Exception as e:
       raise Exception(f"生成SQL失败: {repr(e)}")
+
+def generate_response(user_query: str, system_query, model="gpt-4o") -> str:
+    try:
+      messages = [
+          {"role": "system", "content": system_query},
+          {"role": "user", "content": user_query}
+      ]
+      completion = client.chat.completions.create(model=model, messages=messages)
+      response_text = completion.choices[0].message.content
+      return response_text
+    except Exception as e:
+      raise Exception(f"生成response失败: {repr(e)}")
 
 if __name__ == "__main__":
     query = "香港理工大学的订单明细"
