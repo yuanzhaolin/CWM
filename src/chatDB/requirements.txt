@@ -1,4 +1,5 @@
 # python 3.10.4
+-i https://pypi.mirrors.ustc.edu.cn/simple/
 colorama==0.4.6
 openai==0.27.2
 python-dotenv==1.0.0
