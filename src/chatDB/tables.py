@@ -164,8 +164,13 @@ CREATE TABLE `warehouse_material` (
 def init_database(database_info=None, db_name=None):
     # global mysqldb
     # print(cfg.mysql_host, cfg.mysql_user, cfg.mysql_password, cfg.mysql_port, db_name)
-    mysqldb = MySQLDB(host=cfg.mysql_host, user=cfg.mysql_user, password="Fashion!@#",
-                      port=cfg.mysql_port, database='fashion')
+    if hasattr(cfg, 'mysql_database'):
+        mysqldb = MySQLDB(host=cfg.mysql_host, user=cfg.mysql_user, password="Fashion!@#",
+                          port=cfg.mysql_port, database=cfg.mysql_database)
+    else:
+        mysqldb = MySQLDB(host=cfg.mysql_host, user=cfg.mysql_user, password="Fashion!@#",
+                          port=cfg.mysql_port, database='fashion')
+
     return mysqldb
     # print(mysqldb)
     # mysqldb.create_database(db_name)
