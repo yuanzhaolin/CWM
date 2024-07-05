@@ -59,4 +59,4 @@ if __name__ == '__main__':
         }]
         question["answer"] = response
         with open(f'../../outputs/gpt35/{id}.json', 'w', encoding='utf-8') as file:
-            json.dump(question, file, ensure_ascii=False, indent=4)
+            json.dump(question, file, ensure_ascii=False)
