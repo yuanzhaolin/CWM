@@ -1,6 +1,6 @@
 {
     "ID": 29,
-    "q_ch": "2024年6月前未完成的缝纫任务中，完成度百分比最低的缝纫任务是哪个？列出工作组人员名称。",
-    "q_en": "Which sewing task has the lowest completion percentage among the unfinished sewing tasks before June 2024? List the names of team members.",
+    "q_ch": "对所有已经开始但是尚未完成的缝纫任务进行统计，剩余工作量最多的工作组是哪个？",
+    "q_en": "Which workgroup has the highest remaining workload for all sewing tasks that have been started but not yet completed?",
     "gt": ""
 }
