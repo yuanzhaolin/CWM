@@ -3,7 +3,6 @@ from openai import OpenAI
 import re
 from config import conf
 
-
 client = OpenAI(
     api_key=conf().get("openai_api_key", ""),
     base_url=conf().get("openai_base_url", "https://api.chatanywhere.tech/v1")
@@ -162,35 +161,38 @@ Please output the thought process and answer in the json format below, only outp
 
 """
 
+
 def generate_sql(query: str, model="gpt-4o") -> str:
     try:
-      messages = [
-          {"role": "system", "content": GENERATE_SQL_PROMPT},
-          {"role": "user", "content": query}
-      ]
-      completion = client.chat.completions.create(model=model, messages=messages)
-      response_text = completion.choices[0].message.content
-      match = re.search(r'.*(\{.*?\}).*', response_text, re.DOTALL)
-      json_obj = {}
-      if match:
-          json_str = match.group(1)
-          print("生成的sql:", json_str)
-          json_obj = json.loads(json_str)
-      return json_obj["sql"]
+        messages = [
+            {"role": "system", "content": GENERATE_SQL_PROMPT},
+            {"role": "user", "content": query}
+        ]
+        completion = client.chat.completions.create(model=model, messages=messages)
+        response_text = completion.choices[0].message.content
+        match = re.search(r'.*(\{.*?\}).*', response_text, re.DOTALL)
+        json_obj = {}
+        if match:
+            json_str = match.group(1)
+            print("生成的sql:", json_str)
+            json_obj = json.loads(json_str)
+        return json_obj
     except Exception as e:
-      raise Exception(f"生成SQL失败: {repr(e)}")
+        raise Exception(f"生成SQL失败: {repr(e)}")
+
 
 def generate_response(user_query: str, system_query, model="gpt-4o") -> str:
     try:
-      messages = [
-          {"role": "system", "content": system_query},
-          {"role": "user", "content": user_query}
-      ]
-      completion = client.chat.completions.create(model=model, messages=messages)
-      response_text = completion.choices[0].message.content
-      return response_text
+        messages = [
+            {"role": "system", "content": system_query},
+            {"role": "user", "content": user_query}
+        ]
+        completion = client.chat.completions.create(model=model, messages=messages)
+        response_text = completion.choices[0].message.content
+        return response_text
     except Exception as e:
-      raise Exception(f"生成response失败: {repr(e)}")
+        raise Exception(f"生成response失败: {repr(e)}")
+
 
 if __name__ == "__main__":
     query = "香港理工大学的订单明细"

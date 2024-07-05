@@ -66,34 +66,50 @@ cutter = [
 ]
 
 if __name__ == '__main__':
-    # query = input('Please input your query: ')
-    for q in cutter[3:]:
-        query = q
-        data, err = get_data(query, model=args.model, return_sql=True)
+    id = 1
+    with open(f'../../questions/q0702/{id}.json', 'r', encoding='utf-8') as file:
+        question = json.load(file)
+    query = question["q_en"]
 
-        sql = json.loads(data)['sql']
+    data, err = get_data(query, model=args.model, return_sql=True)
 
-        data = json.loads(data)['rows']
+    sql = json.loads(data)['sql']
+    rows = json.loads(data)['rows']
+    execution_time = json.loads(data)['time']
+    thought = json.loads(data)['thought']
 
-        if err:
-            print(f'Error: {err}')
+    if err:
+        print(f'Error: {err}')
 
-        else:
-            print('#' * 50 + ' Result of executing SQL ' + '#' * 50)
-            print(data)
-            response = generate_response(
-                user_query=f'''
-                Please use the content within the <Context></Context> tags as your knowledge to answer user questions.
-                <Context>
-                SQL query used to retrieve data from the database:
-                {sql},
-                Data retrieved from the database based on user questions:
-                {data}
-                </Context>
-                User question: {query}
-                ''',
-                system_query='',
-                model="gpt-3.5-turbo"
-            )
-            print('#' * 50 + ' Response ' + '#' * 50)
-            print(response)
+    else:
+        print('#' * 50 + ' Result of executing SQL ' + '#' * 50)
+        print(rows)
+        response = generate_response(
+            user_query=f'''
+            Please use the content within the <Context></Context> tags as your knowledge to answer user questions.
+            <Context>
+            SQL query used to retrieve data from the database:
+            {sql},
+            Data retrieved from the database based on user questions:
+            {rows}
+            </Context>
+            User question: {query}
+            ''',
+            system_query='',
+            model="gpt-3.5-turbo"
+        )
+
+        print('#' * 50 + ' Response ' + '#' * 50)
+        print(response)
+
+        if 'gt' in question:
+            del question['gt']
+        question["thought"] = thought
+        question["sqls"] = [{
+            "command": sql,
+            "execution time": execution_time,
+            "Result of executing SQL": rows,
+        }]
+        question["answer"] = response
+        with open(f'../../outputs/gpt35/{id}.json', 'w', encoding='utf-8') as file:
+            json.dump(question, file, ensure_ascii=False, indent=4)
