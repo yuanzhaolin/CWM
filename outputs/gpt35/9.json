@@ -1,0 +1,14 @@
+{
+  "ID": 9,
+  "q_ch": "William 的缝纫任务进度如何？",
+  "q_en": "What is the progress of sewing tasks for William?",
+  "thought": "To determine the progress of sewing tasks for William, we need to find the total planned number and completed number of sewing tasks for William's orders. We will join the 'sewing_tasks' table with the 'working_group' table on the 'working_group_id' to filter tasks related to William. Then, we will group by the 'order_product_id' to calculate the total planned and completed numbers.",
+  "sqls": [
+    {
+      "command": "SELECT otp.order_id, SUM(st.planned_number) AS total_planned_number, SUM(st.completed_number) AS total_completed_number FROM sewing_tasks AS st JOIN working_group AS wg ON st.working_group_id = wg.id JOIN order_product AS otp ON st.order_product_id = otp.id WHERE wg.name = 'William' GROUP BY otp.order_id;",
+      "execution time": "0.005418539047241211",
+      "Result of executing SQL": []
+    }
+  ],
+  "answer": "Based on the SQL query provided, the query is designed to retrieve data regarding the progress of sewing tasks for William specifically. However, based on the data retrieved from the database, which is an empty set \"[]\", there is no progress information available for sewing tasks related to William at the moment. This could indicate that there are no sewing tasks assigned to William in the database or that there are no completed tasks yet."
+}

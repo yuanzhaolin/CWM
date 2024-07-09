@@ -13,7 +13,7 @@ parser.add_argument('--model', type=str, default='gpt-3.5-turbo')
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    id = 1
+    id = 50
     with open(f'../../questions/q0702/{id}.json', 'r', encoding='utf-8') as file:
         question = json.load(file)
     query = question["q_en"]
