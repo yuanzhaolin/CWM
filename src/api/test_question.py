@@ -13,7 +13,7 @@ parser.add_argument('--model', type=str, default='gpt-3.5-turbo')
 args = parser.parse_args()
 
 if __name__ == '__main__':
-    id = 50
+    id = 1
     with open(f'../../questions/q0702/{id}.json', 'r', encoding='utf-8') as file:
         question = json.load(file)
     query = question["q_en"]
@@ -24,6 +24,9 @@ if __name__ == '__main__':
     rows = json.loads(data)['rows']
     execution_time = json.loads(data)['time']
     thought = json.loads(data)['thought']
+    completion_tokens = json.loads(data)['completion_tokens']
+    prompt_tokens = json.loads(data)['prompt_tokens']
+    total_tokens = json.loads(data)['total_tokens']
 
     if err:
         print(f'Error: {err}')
@@ -58,5 +61,9 @@ if __name__ == '__main__':
             "Result of executing SQL": rows,
         }]
         question["answer"] = response
+        question['tokens'] = {}
+        question['tokens']['completion_tokens'] = completion_tokens
+        question['tokens']['prompt_tokens'] = prompt_tokens
+        question['tokens']['total_tokens'] = total_tokens
         with open(f'../../outputs/gpt35/{id}.json', 'w', encoding='utf-8') as file:
-            json.dump(question, file, ensure_ascii=False)
+            json.dump(question, file, ensure_ascii=False, indent=2)

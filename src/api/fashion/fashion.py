@@ -21,6 +21,9 @@ def get_data(query: str, model="gpt-4o", retry=3, return_sql=False) -> Tuple[str
         json_obj = generate_sql(query, model)
         sql = json_obj["sql"]
         thought = json_obj["thought"]
+        completion_tokens = json_obj["completion_tokens"]
+        prompt_tokens = json_obj["prompt_tokens"]
+        total_tokens = json_obj["total_tokens"]
         # 创建连接
         connection = pymysql.connect(host=host, port=port, user=user, password=password, database=database,
                                      cursorclass=pymysql.cursors.DictCursor)
@@ -35,7 +38,10 @@ def get_data(query: str, model="gpt-4o", retry=3, return_sql=False) -> Tuple[str
                 'sql': sql,
                 'rows': rows,
                 'time': str(end_time - start_time),
-                'thought': thought
+                'thought': thought,
+                'completion_tokens': completion_tokens,
+                'prompt_tokens': prompt_tokens,
+                'total_tokens': total_tokens
             }
             return json.dumps(results, default=datetime_to_str, ensure_ascii=False), ""
         else:

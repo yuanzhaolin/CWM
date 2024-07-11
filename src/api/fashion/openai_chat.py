@@ -176,6 +176,9 @@ def generate_sql(query: str, model="gpt-4o") -> str:
             json_str = match.group(1)
             print("生成的sql:", json_str)
             json_obj = json.loads(json_str)
+            json_obj['completion_tokens'] = str(completion.usage.completion_tokens)
+            json_obj['prompt_tokens'] = str(completion.usage.prompt_tokens)
+            json_obj['total_tokens'] = str(completion.usage.total_tokens)
         return json_obj
     except Exception as e:
         raise Exception(f"生成SQL失败: {repr(e)}")
