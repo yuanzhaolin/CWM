@@ -1,0 +1,19 @@
+{
+  "ID": 38,
+  "q_ch": "Advanced裁剪组还未完成的裁剪任务是哪些顾客的订单？",
+  "q_en": "Which customer orders are the cutting tasks that the Advanced Cutting Group has not yet completed?",
+  "thought": "To find out which customer orders are associated with cutting tasks that the 'Advanced Cutting Group' has not yet completed, we need to join the 'cutting_tasks' table with the 'order_product' table to get the order ID, then join the 'order_product' table with the 'orders' table to get the customer ID. Finally, we filter out the results where the cutting task is not completed and the working group is the 'Advanced Cutting Group'.",
+  "sqls": [
+    {
+      "command": "SELECT DISTINCT o.user_id\nFROM cutting_tasks ct\nJOIN order_product op ON ct.order_product_id = op.id\nJOIN orders o ON op.order_id = o.id\nWHERE ct.is_started = FALSE AND ct.working_group_id = 'Advanced Cutting Group';",
+      "execution time": "0.0012326240539550781",
+      "Result of executing SQL": []
+    }
+  ],
+  "answer": "Based on the SQL query provided in the context, the cutting tasks that the Advanced Cutting Group has not yet completed are identified by the condition \"ct.is_started = FALSE\". However, since there is no data retrieved from the database based on the provided query, we cannot provide specific customer orders that are associated with these incomplete cutting tasks at this time.",
+  "tokens": {
+    "completion_tokens": "159",
+    "prompt_tokens": "1891",
+    "total_tokens": "2050"
+  }
+}

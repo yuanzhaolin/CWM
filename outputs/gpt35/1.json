@@ -2,11 +2,11 @@
   "ID": 1,
   "q_ch": "PolyU的订单有哪些？",
   "q_en": "What are the orders for PolyU?",
-  "thought": "To retrieve the orders for PolyU, we need to first find the customer ID of PolyU from the customers table and then use that ID to query the orders table for relevant orders.",
+  "thought": "To retrieve the orders for the customer 'PolyU', we need to first find the customer ID for 'PolyU' from the 'customers' table, and then use this customer ID to fetch the orders from the 'orders' table.",
   "sqls": [
     {
       "command": "SELECT * FROM orders WHERE user_id = (SELECT id FROM customers WHERE customer_name = 'PolyU');",
-      "execution time": "0.005926370620727539",
+      "execution time": "0.0016796588897705078",
       "Result of executing SQL": [
         {
           "id": "o1",
@@ -23,5 +23,10 @@
       ]
     }
   ],
-  "answer": "Based on the SQL query provided within the context, the orders retrieved for PolyU are:\n1. Order ID: o1, Order Name: PolyU_Tshirt, Created At: 2024年01月10日 00:00\n2. Order ID: o9, Order Name: PolyU_Skirt, Created At: 2024年05月10日 00:00"
+  "answer": "Based on the information retrieved from the database, the orders for PolyU include:\n1. Order ID: o1, Order Name: PolyU_Tshirt, Created At: 2024年01月10日 00:00\n2. Order ID: o9, Order Name: PolyU_Skirt, Created At: 2024年05月10日 00:00.",
+  "tokens": {
+    "completion_tokens": "82",
+    "prompt_tokens": "1882",
+    "total_tokens": "1964"
+  }
 }

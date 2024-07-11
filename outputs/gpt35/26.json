@@ -1,0 +1,50 @@
+{
+  "ID": 26,
+  "q_ch": "Skilled Sewers使用了哪些原料？",
+  "q_en": "What raw materials are used by Skilled Sewers?",
+  "thought": "To find out the raw materials used by Skilled Sewers, we need to identify Sewing Tasks associated with the Skilled Sewers working group, then join them with Sewing Material Allocation table to get the warehouse material IDs. Finally, join the warehouse material IDs with the Materials table to get the raw material names.",
+  "sqls": [
+    {
+      "command": "SELECT DISTINCT m.name FROM sewing_tasks st JOIN sewing_material_allocation sma ON st.id = sma.sewing_task_id JOIN warehouse_material wm ON sma.warehouse_material_id = wm.id JOIN materials m ON wm.material_id = m.id WHERE st.working_group_id IN (SELECT id FROM working_group WHERE type = 'sew');",
+      "execution time": "0.000125885009765625",
+      "Result of executing SQL": [
+        {
+          "name": "Cotton Fabric"
+        },
+        {
+          "name": "Synthetic Fiber"
+        },
+        {
+          "name": "Fabric Pieces"
+        },
+        {
+          "name": "Denim Fabric Pieces"
+        },
+        {
+          "name": "Wool"
+        },
+        {
+          "name": "Silk"
+        },
+        {
+          "name": "Leather"
+        },
+        {
+          "name": "Denim Fabric"
+        },
+        {
+          "name": "Down"
+        },
+        {
+          "name": "Wool Pieces"
+        }
+      ]
+    }
+  ],
+  "answer": "Based on the SQL query provided, the raw materials used by Skilled Sewers are Cotton Fabric, Synthetic Fiber, Fabric Pieces, Denim Fabric Pieces, Wool, Silk, Leather, Denim Fabric, Down, and Wool Pieces.",
+  "tokens": {
+    "completion_tokens": "145",
+    "prompt_tokens": "1885",
+    "total_tokens": "2030"
+  }
+}

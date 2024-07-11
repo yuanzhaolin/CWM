@@ -1,12 +1,12 @@
 {
   "ID": 6,
   "q_ch": "顾客理大1月的订单包含哪些产品？",
-  "q_en": "What products are included in PolyU's January orders?",
-  "thought": "To retrieve the products included in PolyU's January orders, we need to first find the customer ID for PolyU from the customers table. Next, we can use the customer ID to join the orders and order_product tables to get the products included in PolyU's January orders.",
+  "q_en": "What products are included in PolyU's January 2024 orders?",
+  "thought": "To find the products included in PolyU's January 2024 orders, we need to first retrieve the order ID for PolyU's orders placed in January 2024. Then, we can use the order ID to fetch the products related to these orders from the order_product table.",
   "sqls": [
     {
-      "command": "SELECT p.id, p.attributes FROM products p JOIN order_product op ON p.id = op.product_id JOIN orders o ON o.id = op.order_id JOIN customers c ON c.id = o.user_id WHERE c.customer_name = 'PolyU' AND MONTH(o.created_at) = 1;",
-      "execution time": "0.006883382797241211",
+      "command": "SELECT p.id, p.attributes FROM products p JOIN order_product op ON p.id = op.product_id JOIN orders o ON op.order_id = o.id WHERE o.order_name LIKE '%PolyU%' AND o.created_at BETWEEN '2024-01-01 00:00:00' AND '2024-01-31 23:59:59';",
+      "execution time": "0.0009553432464599609",
       "Result of executing SQL": [
         {
           "id": "p1",
@@ -31,5 +31,10 @@
       ]
     }
   ],
-  "answer": "Based on the SQL query provided in the context and the data retrieved from the database, the products included in PolyU's January orders are as follows:\n\n1. Product ID: p1, Attributes: Red, M size\n2. Product ID: p19, Attributes: Green, M size\n3. Product ID: p3, Attributes: Blue, L size\n4. Product ID: p11, Attributes: White, XL size\n5. Product ID: p27, Attributes: Yellow, S size\n\nThese are the products that were included in orders made by the customer 'PolyU' in the month of January."
+  "answer": "Based on the SQL query provided and the data retrieved from the database, the products included in PolyU's January 2024 orders are as follows:\n1. Product ID: p1, Attributes: Red, M size\n2. Product ID: p19, Attributes: Green, M size\n3. Product ID: p3, Attributes: Blue, L size\n4. Product ID: p11, Attributes: White, XL size\n5. Product ID: p27, Attributes: Yellow, S size",
+  "tokens": {
+    "completion_tokens": "143",
+    "prompt_tokens": "1888",
+    "total_tokens": "2031"
+  }
 }

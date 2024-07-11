@@ -1,0 +1,25 @@
+{
+  "ID": 3,
+  "q_ch": "Emily订购的Dress订单生产进度如何？用百分比来表示。",
+  "q_en": "What is the production progress of the Dress ordered by Emily? Please represent it in percentage.",
+  "thought": "To calculate the production progress of the Dress ordered by Emily, we need to determine the total planned quantity and the total completed quantity of the Dress ordered by Emily. Then we can calculate the production progress in percentage by dividing the completed quantity by the planned quantity and multiplying by 100.",
+  "sqls": [
+    {
+      "command": "SELECT SUM(op.number) AS total_planned_quantity, SUM(ct.completed_number) AS total_completed_quantity, (SUM(ct.completed_number) / SUM(op.number)) * 100 AS production_progress_percentage FROM orders o JOIN customers c ON o.user_id = c.id JOIN order_product op ON o.id = op.order_id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id LEFT JOIN cutting_tasks ct ON op.id = ct.order_product_id WHERE c.customer_name = 'Emily' AND pt.description = 'Dress';",
+      "execution time": "0.0008709430694580078",
+      "Result of executing SQL": [
+        {
+          "total_planned_quantity": null,
+          "total_completed_quantity": null,
+          "production_progress_percentage": null
+        }
+      ]
+    }
+  ],
+  "answer": "Based on the information retrieved from the database, the production progress of the Dress ordered by Emily is not available. The values for total_planned_quantity, total_completed_quantity, and production_progress_percentage are all None. This means that there is no data available to calculate the production progress percentage for the Dress ordered by Emily at this time.",
+  "tokens": {
+    "completion_tokens": "183",
+    "prompt_tokens": "1892",
+    "total_tokens": "2075"
+  }
+}

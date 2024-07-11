@@ -36,15 +36,15 @@ if __name__ == '__main__':
         print(rows)
         response = generate_response(
             user_query=f'''
-            Please use the content within the <Context></Context> tags as your knowledge to answer user questions.
-            <Context>
-            SQL query used to retrieve data from the database:
-            {sql},
-            Data retrieved from the database based on user questions:
-            {rows}
-            </Context>
-            User question: {query}
-            ''',
+             Please use the content within the <Context></Context> tags as your knowledge to answer user questions.
+             <Context>
+             SQL query used to retrieve data from the database:
+             {sql},
+             Data retrieved from the database based on user questions:
+             {rows}
+             </Context>
+             User question: {query}
+             ''',
             system_query='',
             model="gpt-3.5-turbo"
         )

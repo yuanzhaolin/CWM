@@ -2,11 +2,11 @@
   "ID": 5,
   "q_ch": "Sophia的订单创建时间是什么时候？",
   "q_en": "When was Sophia's order created?",
-  "thought": "To find out when Sophia's order was created, we need to join the 'orders' table with the 'customers' table on the 'user_id' and 'id' columns to get the order details for Sophia. We will then filter the results based on Sophia's name and select the 'created_at' field from the 'orders' table.",
+  "thought": "To find out when Sophia's order was created, we need to first identify Sophia's customer ID from the customers table. Then, we can use this customer ID to retrieve the order creation time from the orders table based on the user_id.",
   "sqls": [
     {
       "command": "SELECT o.created_at FROM orders o JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'Sophia';",
-      "execution time": "0.005918979644775391",
+      "execution time": "0.00010633468627929688",
       "Result of executing SQL": [
         {
           "created_at": "2024年03月18日 00:00"
@@ -14,5 +14,10 @@
       ]
     }
   ],
-  "answer": "Sophia's order was created on March 18, 2024, at midnight based on the data retrieved from the database."
+  "answer": "Sophia's order was created on March 18, 2024, at 00:00.",
+  "tokens": {
+    "completion_tokens": "87",
+    "prompt_tokens": "1881",
+    "total_tokens": "1968"
+  }
 }
