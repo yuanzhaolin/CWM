@@ -1,0 +1,19 @@
+{
+  "ID": 47,
+  "q_ch": "为香港理工大学5月10日的订单创建裁剪一个任务，任务期为6月30日到7月12日，负责的裁剪团队为Expert Cutters。其他字段暂时留空。返回裁剪任务编号。",
+  "q_en": "Create a cutting task for the order from the Hong Kong Polytechnic University on May 10th, with a task period from June 30th to July 12th, and the cutting team responsible is Expert Cutters. Other fields are temporarily left blank. Return the cropping task number.",
+  "thought": "To create a cutting task for the order from the Hong Kong Polytechnic University on May 10th, with a task period from June 30th to July 12th, and the cutting team responsible is Expert Cutters, we need to first find the order_id using the customer name 'Hong Kong Polytechnic University' and the order creation date 'May 10th'. Then, find the working group_id for the 'Expert Cutters' team. We can then create a new cutting task with the provided details and retrieve the cutting task number.",
+  "sqls": [
+    {
+      "command": "SELECT o.id AS order_id FROM orders o JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'Hong Kong Polytechnic University' AND DATE(o.created_at) = '2023-05-10'; INSERT INTO cutting_tasks (id, start_time, end_time, working_group_id, order_product_id, planned_number, completed_number, is_started) VALUES ('cutting_task_id', '2023-06-30', '2023-07-12', 'working_group_id', 'order_product_id', 0, 0, FALSE);",
+      "execution time": "0",
+      "Result of executing SQL": []
+    }
+  ],
+  "answer": "",
+  "tokens": {
+    "completion_tokens": "244",
+    "prompt_tokens": "1933",
+    "total_tokens": "2177"
+  }
+}

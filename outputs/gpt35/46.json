@@ -1,0 +1,19 @@
+{
+  "ID": 46,
+  "q_ch": "对于编号为cm19的裁剪任务，分配裁剪物料，物料来源：Main Warehouse, 布料类别：Cotton Fabric，数量：30米。",
+  "q_en": "For cutting task cm19, allocate cutting materials from the Main Warehouse, with the material type being Cotton Fabric and a quantity of 30 meters.",
+  "thought": "To allocate cutting materials for cutting task cm19 from the Main Warehouse with the material type Cotton Fabric and a quantity of 30 meters, we first need to identify the warehouse_material_id for Cotton Fabric in the Main Warehouse. Then, we can insert a new record into the cutting_material_allocation table with the appropriate details.",
+  "sqls": [
+    {
+      "command": "INSERT INTO cutting_material_allocation (id, warehouse_material_id, cutting_task_id, allocated_num, is_allocated) SELECT UUID(), wm.id, 'cm19', 30, FALSE FROM warehouse_material wm JOIN materials m ON wm.material_id = m.id JOIN warehouse w ON wm.warehouse_id = w.id WHERE w.name = 'Main Warehouse' AND m.name = 'Cotton Fabric';",
+      "execution time": "0",
+      "Result of executing SQL": []
+    }
+  ],
+  "answer": "",
+  "tokens": {
+    "completion_tokens": "154",
+    "prompt_tokens": "1903",
+    "total_tokens": "2057"
+  }
+}
