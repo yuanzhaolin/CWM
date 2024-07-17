@@ -1,0 +1,44 @@
+{
+  "ID": 30,
+  "q_ch": "Skilled Sewers 在2024年6月前完成了多少个缝纫任务，这些缝纫任务都做了什么类型的产品？",
+  "q_en": "How many sewing tasks did Skilled Sewers complete before June 2024, and what types of products were produced for these sewing tasks?",
+  "thought": "To find the number of sewing tasks completed by Skilled Sewers before June 2024, we need to query the `sewing_tasks` table and join it with the `working_group` table to filter tasks completed by Skilled Sewers. Next, we join the `order_product` and `products` tables to determine the types of products produced for these sewing tasks. We filter the tasks completed before June 2024 using the end_time column in the `sewing_tasks` table.",
+  "sqls": [
+    {
+      "command": "SELECT COUNT(*) AS completed_sewing_tasks, pt.description AS product_type\nFROM sewing_tasks st\nJOIN working_group wg ON st.working_group_id = wg.id\nJOIN order_product op ON st.order_product_id = op.id\nJOIN products p ON op.product_id = p.id\nJOIN products_types pt ON p.products_type_id = pt.id\nWHERE wg.type = 'sew' AND wg.name = 'Skilled Sewers' AND st.end_time < '2024-06-01'\nGROUP BY pt.description;",
+      "execution time": "0.061211585998535156",
+      "Result of executing SQL": [
+        {
+          "completed_sewing_tasks": 1,
+          "product_type": "Coat"
+        },
+        {
+          "completed_sewing_tasks": 2,
+          "product_type": "Jacket"
+        },
+        {
+          "completed_sewing_tasks": 1,
+          "product_type": "Pants"
+        },
+        {
+          "completed_sewing_tasks": 1,
+          "product_type": "Shorts"
+        },
+        {
+          "completed_sewing_tasks": 2,
+          "product_type": "Skirt"
+        },
+        {
+          "completed_sewing_tasks": 1,
+          "product_type": "Sweater"
+        }
+      ]
+    }
+  ],
+  "answer": "The Skilled Sewers completed the following sewing tasks before June 2024 along with the types of products produced for each task:\n\n- 1 sewing task for Coat\n- 2 sewing tasks for Jacket\n- 1 sewing task for Pants\n- 1 sewing task for Shorts\n- 2 sewing tasks for Skirt\n- 1 sewing task for Sweater",
+  "tokens": {
+    "completion_tokens": "220",
+    "prompt_tokens": "1902",
+    "total_tokens": "2122"
+  }
+}
