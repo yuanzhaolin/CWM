@@ -1,19 +1,33 @@
 {
   "ID": 24,
-  "q_ch": "Elite Sewers 在2024年4月30日前分配的缝纫任务有哪些？",
-  "q_en": "What are the sewing tasks assigned by Elite Sewers before April 30, 2024?",
-  "thought": "To find the sewing tasks assigned by Elite Sewers before April 30, 2024, we need to join the `sewing_tasks` table with the `working_group` table to filter tasks assigned by the 'Elite Sewers' working group. Then, we can use a WHERE clause to select the tasks that have a `start_time` before April 30, 2024.",
+  "q_ch": "Elite Sewers 在2024年6月30日前分配的缝纫任务有哪些？",
+  "q_en": "What sewing tasks will Elite Sewers be assigned before June 30, 2024?",
+  "thought": "To find the sewing tasks assigned to Elite Sewers before June 30, 2024, we need to query the `sewing_tasks` table joined with the `working_group` table to filter for Elite Sewers and check the `end_time` of the tasks.",
   "sqls": [
     {
-      "command": "SELECT * FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE wg.name = 'Elite Sewers' AND st.start_time < '2024-04-30 00:00:00';",
-      "execution time": "0.0010037422180175781",
-      "Result of executing SQL": []
+      "command": "SELECT * FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE wg.name = 'Elite Sewers' AND st.end_time < '2024-06-30';",
+      "execution time": "0.0009844303131103516",
+      "Result of executing SQL": [
+        {
+          "id": "sw31",
+          "start_time": "2024年05月26日 00:00",
+          "end_time": "2024年06月04日 00:00",
+          "working_group_id": "wg10",
+          "order_product_id": "op31",
+          "planned_number": 260,
+          "completed_number": 260,
+          "is_started": 1,
+          "wg.id": "wg10",
+          "type": "sew",
+          "name": "Elite Sewers"
+        }
+      ]
     }
   ],
-  "answer": "Based on the SQL query used to retrieve data from the database and the user question provided, the sewing tasks assigned by Elite Sewers before April 30, 2024 have not been found in the database. The retrieved data based on the query and criteria specified returned an empty result set, indicating that there were no sewing tasks assigned by Elite Sewers before the specified date in the database.",
+  "answer": "Based on the provided data and SQL query, the sewing task assigned to the 'Elite Sewers' working group that will be completed before June 30, 2024 is the task with the following details:\n\n- Task ID: sw31\n- Start Time: May 26, 2024\n- End Time: June 4, 2024\n- Working Group ID: wg10\n- Order Product ID: op31\n- Planned Number: 260\n- Completed Number: 260\n- Type: sew\n- Name: Elite Sewers\n\nThis task will be assigned to the 'Elite Sewers' working group and will be completed before the specified date.",
   "tokens": {
-    "completion_tokens": "139",
-    "prompt_tokens": "1893",
-    "total_tokens": "2032"
+    "completion_tokens": "109",
+    "prompt_tokens": "1892",
+    "total_tokens": "2001"
   }
 }

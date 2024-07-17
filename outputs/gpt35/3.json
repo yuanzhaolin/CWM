@@ -2,21 +2,15 @@
   "ID": 3,
   "q_ch": "Emily订购的Dress订单生产进度如何？用百分比来表示。",
   "q_en": "What is the production progress of the Dress ordered by Emily? Please represent it in percentage.",
-  "thought": "To calculate the production progress of the Dress ordered by Emily, we need to determine the total planned quantity and the total completed quantity of the Dress ordered by Emily. Then we can calculate the production progress in percentage by dividing the completed quantity by the planned quantity and multiplying by 100.",
+  "thought": "To calculate the production progress of the Dress ordered by Emily, we need to determine the total planned number of Dress production, the total completed number of Dress production, and then calculate the progress percentage. We will first find the order_id for the Dress ordered by Emily, then calculate the sum of planned number and completed number of Dress production, and finally calculate the progress percentage.",
   "sqls": [
     {
-      "command": "SELECT SUM(op.number) AS total_planned_quantity, SUM(ct.completed_number) AS total_completed_quantity, (SUM(ct.completed_number) / SUM(op.number)) * 100 AS production_progress_percentage FROM orders o JOIN customers c ON o.user_id = c.id JOIN order_product op ON o.id = op.order_id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id LEFT JOIN cutting_tasks ct ON op.id = ct.order_product_id WHERE c.customer_name = 'Emily' AND pt.description = 'Dress';",
+      "command": "SELECT op.order_id, SUM(op.planned_number) AS total_planned, SUM(op.completed_number) AS total_completed, ROUND(SUM(op.completed_number) / SUM(op.planned_number) * 100, 2) AS progress_percentage FROM order_product op JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'Emily' AND op.product_id IN (SELECT id FROM products WHERE attributes = 'Dress');",
       "execution time": "0.0008709430694580078",
-      "Result of executing SQL": [
-        {
-          "total_planned_quantity": null,
-          "total_completed_quantity": null,
-          "production_progress_percentage": null
-        }
-      ]
+      "Result of executing SQL": []
     }
   ],
-  "answer": "Based on the information retrieved from the database, the production progress of the Dress ordered by Emily is not available. The values for total_planned_quantity, total_completed_quantity, and production_progress_percentage are all None. This means that there is no data available to calculate the production progress percentage for the Dress ordered by Emily at this time.",
+  "answer": "",
   "tokens": {
     "completion_tokens": "183",
     "prompt_tokens": "1892",
