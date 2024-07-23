@@ -1,0 +1,60 @@
+{
+  "ID": 22,
+  "q_ch": "我们现在有哪些缝纫组，哪些裁剪组？",
+  "q_en": "What sewing groups and cutting groups do we have now?",
+  "thought": "To answer this question, we need to retrieve the names of working groups classified by their types from the `working_group` table, where the type can either be 'sew' or 'cut'.",
+  "sqls": [
+    {
+      "command": "SELECT type, name FROM working_group;",
+      "execution time": "0.0",
+      "Result of executing SQL": [
+        {
+          "type": "cut",
+          "name": "Precision Cutters"
+        },
+        {
+          "type": "sew",
+          "name": "Elite Sewers"
+        },
+        {
+          "type": "sew",
+          "name": "Master Sewers"
+        },
+        {
+          "type": "cut",
+          "name": "Master Cutters"
+        },
+        {
+          "type": "cut",
+          "name": "Expert Cutters"
+        },
+        {
+          "type": "cut",
+          "name": "Professional Cutters"
+        },
+        {
+          "type": "cut",
+          "name": "Advanced Cutters"
+        },
+        {
+          "type": "sew",
+          "name": "Skilled Sewers"
+        },
+        {
+          "type": "sew",
+          "name": "Advanced Sewers"
+        },
+        {
+          "type": "sew",
+          "name": "Premier Sewers"
+        }
+      ]
+    }
+  ],
+  "answer": "Here are the sewing and cutting groups we currently have:\n\n**Sewing Groups:**\n1. Elite Sewers\n2. Master Sewers\n3. Skilled Sewers\n4. Advanced Sewers\n5. Premier Sewers\n\n**Cutting Groups:**\n1. Precision Cutters\n2. Master Cutters\n3. Expert Cutters\n4. Professional Cutters\n5. Advanced Cutters",
+  "tokens": {
+    "completion_tokens": "61",
+    "prompt_tokens": "1837",
+    "total_tokens": "1898"
+  }
+}

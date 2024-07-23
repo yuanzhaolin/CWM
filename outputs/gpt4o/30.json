@@ -1,0 +1,44 @@
+{
+  "ID": 30,
+  "q_ch": "Skilled Sewers 在2024年6月前完成了多少个缝纫任务，这些缝纫任务都做了什么类型的产品？",
+  "q_en": "How many sewing tasks did Skilled Sewers complete before June 2024, and what types of products were produced for these sewing tasks?",
+  "thought": "To determine the number and types of sewing tasks completed by the Skilled Sewers working group before June 2024, we'll need to: 1) Identify the ID of the 'Skilled Sewers' working group in the `working_group` table, 2) Count the completed sewing tasks from the `sewing_tasks` table associated with this working group and before June 2024, 3) Join this information with the `order_product` and `products` tables to identify the product types produced.",
+  "sqls": [
+    {
+      "command": "SELECT COUNT(st.id) AS completed_sewing_tasks, pt.description AS product_types FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id JOIN order_product op ON st.order_product_id = op.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE wg.name = 'Skilled Sewers' AND st.completed_number > 0 AND st.end_time < '2024-06-01' GROUP BY pt.description;",
+      "execution time": "0.0011022090911865234",
+      "Result of executing SQL": [
+        {
+          "completed_sewing_tasks": 1,
+          "product_types": "Coat"
+        },
+        {
+          "completed_sewing_tasks": 2,
+          "product_types": "Jacket"
+        },
+        {
+          "completed_sewing_tasks": 1,
+          "product_types": "Pants"
+        },
+        {
+          "completed_sewing_tasks": 1,
+          "product_types": "Shorts"
+        },
+        {
+          "completed_sewing_tasks": 2,
+          "product_types": "Skirt"
+        },
+        {
+          "completed_sewing_tasks": 1,
+          "product_types": "Sweater"
+        }
+      ]
+    }
+  ],
+  "answer": "The Skilled Sewers completed a total of 8 sewing tasks before June 2024. The types of products produced for these sewing tasks and their respective counts are as follows:\n\n- Coat: 1 task\n- Jacket: 2 tasks\n- Pants: 1 task\n- Shorts: 1 task\n- Skirt: 2 tasks\n- Sweater: 1 task",
+  "tokens": {
+    "completion_tokens": "217",
+    "prompt_tokens": "1853",
+    "total_tokens": "2070"
+  }
+}

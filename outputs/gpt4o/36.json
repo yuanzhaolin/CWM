@@ -1,0 +1,80 @@
+{
+  "ID": 36,
+  "q_ch": "顾客是PolyU 的裁剪任务有哪些？",
+  "q_en": "What are the cutting tasks for customers who are PolyU?",
+  "thought": "To find the cutting tasks for customers who are PolyU, we need to join the 'customers', 'orders', 'order_product', and 'cutting_tasks' tables. This allows us to filter the results based on the customer's name and retrieve cutting task details.",
+  "sqls": [
+    {
+      "command": "SELECT ct.* FROM cutting_tasks ct JOIN order_product op ON ct.order_product_id = op.id JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'PolyU';",
+      "execution time": "0.0",
+      "Result of executing SQL": [
+        {
+          "id": "ct1",
+          "start_time": "2024年01月10日 00:00",
+          "end_time": "2024年01月18日 00:00",
+          "working_group_id": "wg2",
+          "order_product_id": "op1",
+          "planned_number": 100,
+          "completed_number": 100,
+          "is_started": 1
+        },
+        {
+          "id": "ct2",
+          "start_time": "2024年01月10日 00:00",
+          "end_time": "2024年02月02日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op2",
+          "planned_number": 240,
+          "completed_number": 240,
+          "is_started": 1
+        },
+        {
+          "id": "ct3",
+          "start_time": "2024年01月10日 00:00",
+          "end_time": "2024年01月19日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op3",
+          "planned_number": 150,
+          "completed_number": 150,
+          "is_started": 1
+        },
+        {
+          "id": "ct4",
+          "start_time": "2024年01月10日 00:00",
+          "end_time": "2024年01月17日 00:00",
+          "working_group_id": "wg2",
+          "order_product_id": "op4",
+          "planned_number": 220,
+          "completed_number": 220,
+          "is_started": 1
+        },
+        {
+          "id": "ct5",
+          "start_time": "2024年01月10日 00:00",
+          "end_time": "2024年02月02日 00:00",
+          "working_group_id": "wg2",
+          "order_product_id": "op5",
+          "planned_number": 260,
+          "completed_number": 260,
+          "is_started": 1
+        },
+        {
+          "id": "ct31",
+          "start_time": "2024年05月10日 00:00",
+          "end_time": "2024年05月26日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op31",
+          "planned_number": 260,
+          "completed_number": 260,
+          "is_started": 1
+        }
+      ]
+    }
+  ],
+  "answer": "The cutting tasks for the customer PolyU are as follows:\n\n1. **Task ID: ct1**\n   - Start Time: 2024年01月10日 00:00\n   - End Time: 2024年01月18日 00:00\n   - Working Group ID: wg2\n   - Order Product ID: op1\n   - Planned Number: 100\n   - Completed Number: 100\n   - Is Started: Yes\n\n2. **Task ID: ct2**\n   - Start Time: 2024年01月10日 00:00\n   - End Time: 2024年02月02日 00:00\n   - Working Group ID: wg3\n   - Order Product ID: op2\n   - Planned Number: 240\n   - Completed Number: 240\n   - Is Started: Yes\n\n3. **Task ID: ct3**\n   - Start Time: 2024年01月10日 00:00\n   - End Time: 2024年01月19日 00:00\n   - Working Group ID: wg3\n   - Order Product ID: op3\n   - Planned Number: 150\n   - Completed Number: 150\n   - Is Started: Yes\n\n4. **Task ID: ct4**\n   - Start Time: 2024年01月10日 00:00\n   - End Time: 2024年01月17日 00:00\n   - Working Group ID: wg2\n   - Order Product ID: op4\n   - Planned Number: 220\n   - Completed Number: 220\n   - Is Started: Yes\n\n5. **Task ID: ct5**\n   - Start Time: 2024年01月10日 00:00\n   - End Time: 2024年02月02日 00:00\n   - Working Group ID: wg2\n   - Order Product ID: op5\n   - Planned Number: 260\n   - Completed Number: 260\n   - Is Started: Yes\n\n6. **Task ID: ct31**\n   - Start Time: 2024年05月10日 00:00\n   - End Time: 2024年05月26日 00:00\n   - Working Group ID: wg3\n   - Order Product ID: op31\n   - Planned Number: 260\n   - Completed Number: 260\n   - Is Started: Yes",
+  "tokens": {
+    "completion_tokens": "114",
+    "prompt_tokens": "1838",
+    "total_tokens": "1952"
+  }
+}

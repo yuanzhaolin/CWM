@@ -1,0 +1,60 @@
+{
+  "ID": 26,
+  "q_ch": "Skilled Sewers使用了哪些原料？",
+  "q_en": "What raw materials are used by Skilled Sewers?",
+  "thought": "To determine which raw materials are used by Skilled Sewers, it's necessary to identify all sewing tasks associated with the 'sew' working group, as well as the raw materials allocated to those tasks. The final query will join tables `sewing_tasks`, `working_group`, `sewing_material_allocation`, and `warehouse_material` to get the required information.",
+  "sqls": [
+    {
+      "command": "SELECT DISTINCT m.id, m.name FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id JOIN sewing_material_allocation sma ON st.id = sma.sewing_task_id JOIN warehouse_material wm ON sma.warehouse_material_id = wm.id JOIN materials m ON wm.material_id = m.id WHERE wg.type = 'sew';",
+      "execution time": "0.0011205673217773438",
+      "Result of executing SQL": [
+        {
+          "id": "m1",
+          "name": "Cotton Fabric"
+        },
+        {
+          "id": "m9",
+          "name": "Synthetic Fiber"
+        },
+        {
+          "id": "m2",
+          "name": "Fabric Pieces"
+        },
+        {
+          "id": "m12",
+          "name": "Denim Fabric Pieces"
+        },
+        {
+          "id": "m3",
+          "name": "Wool"
+        },
+        {
+          "id": "m5",
+          "name": "Silk"
+        },
+        {
+          "id": "m7",
+          "name": "Leather"
+        },
+        {
+          "id": "m11",
+          "name": "Denim Fabric"
+        },
+        {
+          "id": "m13",
+          "name": "Down"
+        },
+        {
+          "id": "m4",
+          "name": "Wool Pieces"
+        }
+      ]
+    }
+  ],
+  "answer": "The raw materials used by Skilled Sewers are:\n\n1. Cotton Fabric\n2. Synthetic Fiber\n3. Fabric Pieces\n4. Denim Fabric Pieces\n5. Wool\n6. Silk\n7. Leather\n8. Denim Fabric\n9. Down\n10. Wool Pieces",
+  "tokens": {
+    "completion_tokens": "156",
+    "prompt_tokens": "1836",
+    "total_tokens": "1992"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "ID": 21,
+  "q_ch": "列出Advanced Sewers在2024年4月到5月的工作任务。",
+  "q_en": "List the work tasks of Advanced Sewers from April to May 2024.",
+  "thought": "To list the work tasks of Advanced Sewers from April to May 2024, we need to join the `working_group` and `sewing_tasks` tables, filter by the `start_time` and `end_time` within April to May 2024, and ensure the `working_group` name is 'Advanced Sewers'.",
+  "sqls": [
+    {
+      "command": "SELECT st.* FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE wg.name = 'Advanced Sewers' AND st.start_time >= '2024-04-01 00:00:00' AND st.end_time <= '2024-05-31 23:59:59';",
+      "execution time": "0.0019800662994384766",
+      "Result of executing SQL": [
+        {
+          "id": "sw16",
+          "start_time": "2024年04月10日 00:00",
+          "end_time": "2024年05月07日 00:00",
+          "working_group_id": "wg8",
+          "order_product_id": "op16",
+          "planned_number": 200,
+          "completed_number": 200,
+          "is_started": 1
+        },
+        {
+          "id": "sw20",
+          "start_time": "2024年04月15日 00:00",
+          "end_time": "2024年05月07日 00:00",
+          "working_group_id": "wg8",
+          "order_product_id": "op20",
+          "planned_number": 90,
+          "completed_number": 90,
+          "is_started": 1
+        },
+        {
+          "id": "sw21",
+          "start_time": "2024年04月04日 00:00",
+          "end_time": "2024年04月12日 00:00",
+          "working_group_id": "wg8",
+          "order_product_id": "op21",
+          "planned_number": 85,
+          "completed_number": 85,
+          "is_started": 1
+        },
+        {
+          "id": "sw22",
+          "start_time": "2024年04月09日 00:00",
+          "end_time": "2024年04月22日 00:00",
+          "working_group_id": "wg8",
+          "order_product_id": "op22",
+          "planned_number": 115,
+          "completed_number": 115,
+          "is_started": 1
+        }
+      ]
+    }
+  ],
+  "answer": "The work tasks of the Advanced Sewers group from April to May 2024 are as follows:\n\n1. **Task ID:** sw16\n   - **Start Time:** 2024年04月10日 00:00\n   - **End Time:** 2024年05月07日 00:00\n   - **Order Product ID:** op16\n   - **Planned Number:** 200\n   - **Completed Number:** 200\n   - **Is Started:** Yes\n\n2. **Task ID:** sw20\n   - **Start Time:** 2024年04月15日 00:00\n   - **End Time:** 2024年05月07日 00:00\n   - **Order Product ID:** op20\n   - **Planned Number:** 90\n   - **Completed Number:** 90\n   - **Is Started:** Yes\n\n3. **Task ID:** sw21\n   - **Start Time:** 2024年04月04日 00:00\n   - **End Time:** 2024年04月12日 00:00\n   - **Order Product ID:** op21\n   - **Planned Number:** 85\n   - **Completed Number:** 85\n   - **Is Started:** Yes\n\n4. **Task ID:** sw22\n   - **Start Time:** 2024年04月09日 00:00\n   - **End Time:** 2024年04月22日 00:00\n   - **Order Product ID:** op22\n   - **Planned Number:** 115\n   - **Completed Number:** 115\n   - **Is Started:** Yes",
+  "tokens": {
+    "completion_tokens": "149",
+    "prompt_tokens": "1842",
+    "total_tokens": "1991"
+  }
+}

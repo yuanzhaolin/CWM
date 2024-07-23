@@ -1,0 +1,30 @@
+{
+  "ID": 20,
+  "q_ch": "剩余库存为零的材料有哪些，列出材料名字？",
+  "q_en": "Which products have zero remaining inventory?",
+  "thought": "To find products with zero remaining inventory, we need to query the `warehouse_product` table where `left_number` is equal to zero. We should join this table with the `products` table to retrieve the product details.",
+  "sqls": [
+    {
+      "command": "SELECT p.* FROM products p JOIN warehouse_product wp ON p.id = wp.product_id WHERE wp.left_number = 0;",
+      "execution time": "0.0014019012451171875",
+      "Result of executing SQL": [
+        {
+          "id": "p1",
+          "products_type_id": "pt1",
+          "attributes": "Red, M size"
+        },
+        {
+          "id": "p2",
+          "products_type_id": "pt2",
+          "attributes": "Blue, 35 size"
+        }
+      ]
+    }
+  ],
+  "answer": "The products that have zero remaining inventory are:\n\n1. Product ID: p1, Attributes: Red, M size\n2. Product ID: p2, Attributes: Blue, 35 size",
+  "tokens": {
+    "completion_tokens": "82",
+    "prompt_tokens": "1833",
+    "total_tokens": "1915"
+  }
+}

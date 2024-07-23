@@ -1,0 +1,24 @@
+{
+  "ID": 14,
+  "q_ch": "剩余库存最多的原料是什么？",
+  "q_en": "What is the material with the highest remaining inventory?",
+  "thought": "To determine the material with the highest remaining inventory, we need to query the 'warehouse_material' table to find the material with the maximum 'left_number'. Since we also need to retrieve the material name, we should join the 'warehouse_material' table with the 'materials' table based on the 'material_id'. Then, we can order by 'left_number' in descending order and limit the results to 1.",
+  "sqls": [
+    {
+      "command": "SELECT m.name, wm.left_number FROM warehouse_material wm JOIN materials m ON wm.material_id = m.id ORDER BY wm.left_number DESC LIMIT 1;",
+      "execution time": "0.001161336898803711",
+      "Result of executing SQL": [
+        {
+          "name": "Silk Pieces",
+          "left_number": 5400
+        }
+      ]
+    }
+  ],
+  "answer": "The material with the highest remaining inventory is Silk Pieces, with 5,400 units left.",
+  "tokens": {
+    "completion_tokens": "127",
+    "prompt_tokens": "1836",
+    "total_tokens": "1963"
+  }
+}

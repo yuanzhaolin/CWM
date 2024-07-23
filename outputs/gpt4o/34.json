@@ -1,0 +1,100 @@
+{
+  "ID": 34,
+  "q_ch": "Master Cutters当前已完成的裁剪任务有哪些？",
+  "q_en": "Which cutting tasks have been completed by Master Cutters?",
+  "thought": "To find the cutting tasks that have been completed by the 'Master Cutters' group, we need to join the `cutting_tasks` table with the `working_group` table on the `working_group_id` column. We will then filter for tasks where the `working_group.name` is 'Master Cutters' and `cutting_tasks.completed_number` is greater than 0.",
+  "sqls": [
+    {
+      "command": "SELECT cutting_tasks.* FROM cutting_tasks JOIN working_group ON cutting_tasks.working_group_id = working_group.id WHERE working_group.name = 'Master Cutters' AND cutting_tasks.completed_number > 0;",
+      "execution time": "0.0023665428161621094",
+      "Result of executing SQL": [
+        {
+          "id": "ct10",
+          "start_time": "2024年03月02日 00:00",
+          "end_time": "2024年03月29日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op10",
+          "planned_number": 100,
+          "completed_number": 100,
+          "is_started": 1
+        },
+        {
+          "id": "ct2",
+          "start_time": "2024年01月10日 00:00",
+          "end_time": "2024年02月02日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op2",
+          "planned_number": 240,
+          "completed_number": 240,
+          "is_started": 1
+        },
+        {
+          "id": "ct23",
+          "start_time": "2024年03月25日 00:00",
+          "end_time": "2024年04月19日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op23",
+          "planned_number": 110,
+          "completed_number": 110,
+          "is_started": 1
+        },
+        {
+          "id": "ct24",
+          "start_time": "2024年03月25日 00:00",
+          "end_time": "2024年04月23日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op24",
+          "planned_number": 105,
+          "completed_number": 105,
+          "is_started": 1
+        },
+        {
+          "id": "ct3",
+          "start_time": "2024年01月10日 00:00",
+          "end_time": "2024年01月19日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op3",
+          "planned_number": 150,
+          "completed_number": 150,
+          "is_started": 1
+        },
+        {
+          "id": "ct31",
+          "start_time": "2024年05月10日 00:00",
+          "end_time": "2024年05月26日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op31",
+          "planned_number": 260,
+          "completed_number": 260,
+          "is_started": 1
+        },
+        {
+          "id": "ct6",
+          "start_time": "2024年02月28日 00:00",
+          "end_time": "2024年03月20日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op6",
+          "planned_number": 95,
+          "completed_number": 95,
+          "is_started": 1
+        },
+        {
+          "id": "ct9",
+          "start_time": "2024年03月01日 00:00",
+          "end_time": "2024年03月06日 00:00",
+          "working_group_id": "wg3",
+          "order_product_id": "op9",
+          "planned_number": 80,
+          "completed_number": 80,
+          "is_started": 1
+        }
+      ]
+    }
+  ],
+  "answer": "The completed cutting tasks by Master Cutters are:\n\n1. **ID:** ct10\n   - **Start Time:** 2024年03月02日 00:00\n   - **End Time:** 2024年03月29日 00:00\n   - **Order Product ID:** op10\n   - **Planned Number:** 100\n   - **Completed Number:** 100\n\n2. **ID:** ct2\n   - **Start Time:** 2024年01月10日 00:00\n   - **End Time:** 2024年02月02日 00:00\n   - **Order Product ID:** op2\n   - **Planned Number:** 240\n   - **Completed Number:** 240\n\n3. **ID:** ct23\n   - **Start Time:** 2024年03月25日 00:00\n   - **End Time:** 2024年04月19日 00:00\n   - **Order Product ID:** op23\n   - **Planned Number:** 110\n   - **Completed Number:** 110\n\n4. **ID:** ct24\n   - **Start Time:** 2024年03月25日 00:00\n   - **End Time:** 2024年04月23日 00:00\n   - **Order Product ID:** op24\n   - **Planned Number:** 105\n   - **Completed Number:** 105\n\n5. **ID:** ct3\n   - **Start Time:** 2024年01月10日 00:00\n   - **End Time:** 2024年01月19日 00:00\n   - **Order Product ID:** op3\n   - **Planned Number:** 150\n   - **Completed Number:** 150\n\n6. **ID:** ct31\n   - **Start Time:** 2024年05月10日 00:00\n   - **End Time:** 2024年05月26日 00:00\n   - **Order Product ID:** op31\n   - **Planned Number:** 260\n   - **Completed Number:** 260\n\n7. **ID:** ct6\n   - **Start Time:** 2024年02月28日 00:00\n   - **End Time:** 2024年03月20日 00:00\n   - **Order Product ID:** op6\n   - **Planned Number:** 95\n   - **Completed Number:** 95\n\n8. **ID:** ct9\n   - **Start Time:** 2024年03月01日 00:00\n   - **End Time:** 2024年03月06日 00:00\n   - **Order Product ID:** op9\n   - **Planned Number:** 80\n   - **Completed Number:** 80",
+  "tokens": {
+    "completion_tokens": "130",
+    "prompt_tokens": "1837",
+    "total_tokens": "1967"
+  }
+}
