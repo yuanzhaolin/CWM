@@ -2,56 +2,21 @@ USER INPUT: To allocate tasks for the order with name "Emily_Dress," which invol
 ANSWER:
 ```
 Step1: Retrieve the order ID for the order with the name "Emily_Dress"
-SELECT id FROM orders WHERE order_name = 'Emily_Dress';
+`SELECT id FROM orders WHERE order_name = 'Emily_Dress';`
 
 Step2: Retrieve the product ID for the product with attributes "Red, M size" and type "Dress"
-SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.attributes = 'Red, M size' AND pt.description = 'Dress';
-example response:
-+-----+
-|  id |
-+-----+
-| p29 |
-+-----+
+`SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.attributes = 'Red, M size' AND pt.description = 'Dress';`
 
 Step3: Retrieve the order_product ID and the number of required products for the specific order and product
-SELECT id, number FROM order_product WHERE order_id = '<order_id>' AND product_id = '<product_id>';
-Execute:
-SELECT id, number FROM order_product WHERE order_id = 'o3' AND product_id = 'p29';
-example response:
-+------+--------+
-|  id  | number |
-+------+--------+
-| op12 |  150   |
-+------+--------+
-
+`SELECT id, number FROM order_product WHERE order_id = '<order_id>' AND product_id = '<product_id>';`
 
 Step4: Retrieve the working group IDs for "Master Cutters", "Professional Cutters", and "Elite Sewers"
-
-Execute:
-SELECT id, name FROM working_group WHERE name IN ('Master Cutters', 'Professional Cutters', 'Elite Sewers');
-
-Database response:
-+------+----------------------+
-|  id  |         name         |
-+------+----------------------+
-| wg10 |     Elite Sewers     |
-| wg3  |    Master Cutters    |
-| wg5  | Professional Cutters |
-+------+----------------------++
-
+`SELECT id, name FROM working_group WHERE name IN ('Master Cutters', 'Professional Cutters', 'Elite Sewers');`
 
 Step5: Insert the cutting tasks for "Master Cutters" and "Professional Cutters"
-
-INSERT INTO cutting_tasks (id, start_time, end_time, working_group_id, order_product_id, planned_number, is_started) VALUES (UUID(), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 30 DAY), '<master_cutters_id>', '<order_product_id>', <half_number>, TRUE);
-Execute:
-INSERT INTO cutting_tasks (id, start_time, end_time, working_group_id, order_product_id, planned_number, completed_number, is_started)
- VALUES (UUID(), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 30 DAY), 'wg3', 'op12', 75, 0, FALSE),
-        (UUID(), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 30 DAY), 'wg5', 'op12', 75, 0, FALSE);
+`INSERT INTO cutting_tasks (id, start_time, end_time, working_group_id, order_product_id, planned_number, is_started)
+ VALUES (UUID(), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 30 DAY), '<master_cutters_id>', '<order_product_id>', <half_number>, FALSE),
+        (UUID(), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 30 DAY), '<professional_cutters_id>', '<order_product_id>', <half_number>, FALSE);`
 
 Step6: Insert the sewing task for "Elite Sewers"
-
-INSERT INTO sewing_tasks (id, start_time, end_time, working_group_id, order_product_id, planned_number, is_started) VALUES (UUID(), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 60 DAY), '<elite_sewers_id>', '<order_product_id>', <total_number>, TRUE);
-Execute:
-INSERT INTO sewing_tasks (id, start_time, end_time, working_group_id, order_product_id, planned_number, is_started) VALUES (UUID(), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 60 DAY), 'wg10', 'op12', 150, FALSE);
-
-```
+`INSERT INTO sewing_tasks (id, start_time, end_time, working_group_id, order_product_id, planned_number, is_started) VALUES (UUID(), CURRENT_TIMESTAMP, DATE_ADD(CURRENT_TIMESTAMP, INTERVAL 60 DAY), '<elite_sewers_id>', '<order_product_id>', <total_number>, TRUE);`
