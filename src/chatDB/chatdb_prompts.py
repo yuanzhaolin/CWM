@@ -1,5 +1,15 @@
 from langchain.prompts import PromptTemplate
-from sql_examples import egs
+# from sql_examples_bak import egs
+
+# load the examples from the sql_examples/*files in the same directory
+import os
+egs = []
+sql_examples_dir = os.path.join(os.path.dirname(__file__), "sql_examples")
+for file in os.listdir(sql_examples_dir):
+    if file.endswith(".sql") or file.endswith(".txt"):
+        with open(os.path.join(sql_examples_dir, file), "r") as f:
+            egs.append(f.read())
+
 
 
 prompt_ask_steps_temp = """
@@ -31,8 +41,8 @@ prompt_ask_steps = PromptTemplate(
         template=prompt_ask_steps_temp,
         input_variables=["user_inp"],
         partial_variables={
-            # "egs": '\n'.join(egs),
-            "egs": ""
+            "egs": '\n'.join(egs),
+            # "egs": ""
         }
     )
 
