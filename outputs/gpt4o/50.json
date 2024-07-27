@@ -1,0 +1,19 @@
+{
+  "ID": 50,
+  "q_ch": "对于编号为ct33的裁剪任务，预计任务结束时间需要延迟至2024年7月31日",
+  "q_en": "The expected completion date for cutting task ct33 needs to be extended to July 31, 2024.",
+  "thought": "To update the expected completion date for a specific cutting task, we need to update the `end_time` for the given `cutting_task_id`. We will use the `UPDATE` statement to modify this record.",
+  "sqls": [
+    {
+      "command": "UPDATE cutting_tasks SET end_time = '2024-07-31 23:59:59' WHERE id = 'ct33';",
+      "execution time": "0.0",
+      "Result of executing SQL": []
+    }
+  ],
+  "answer": "Based on the provided context, to extend the expected completion date for the cutting task `ct33` to July 31, 2024, you would use the following SQL query:\n\n```sql\nUPDATE cutting_tasks SET end_time = '2024-07-31 23:59:59' WHERE id = 'ct33';\n```\n\nThis query updates the `end_time` for the task with the `id` `ct33` to `2024-07-31 23:59:59`.",
+  "tokens": {
+    "completion_tokens": "84",
+    "prompt_tokens": "1848",
+    "total_tokens": "1932"
+  }
+}

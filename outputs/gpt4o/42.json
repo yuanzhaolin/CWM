@@ -1,0 +1,19 @@
+{
+  "ID": 42,
+  "q_ch": "对于PolyU在2024年1月提交的订单，将所有生产Yellow, S size类型T-shirt的缝纫任务设置成开始状态。",
+  "q_en": "For orders submitted by PolyU in January 2024, set all sewing tasks for producing Yellow, S size type T-shirts to start status. ",
+  "thought": "To fulfill the request, I need to first identify the customer ID for 'PolyU'. Then, I will find the order IDs submitted by this customer in January 2024. Next, I will join to find the product IDs for 'Yellow, S size type T-shirts'. Finally, I will update the sewing tasks associated with these orders and products to set the 'is_started' field to TRUE.",
+  "sqls": [
+    {
+      "command": "WITH polyu_orders AS (SELECT o.id FROM orders o JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'PolyU' AND o.created_at BETWEEN '2024-01-01' AND '2024-01-31'), t_shirt_products AS (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'T-shirt' AND p.attributes = 'Yellow, S size') UPDATE sewing_tasks st JOIN order_product op ON st.order_product_id = op.id SET st.is_started = TRUE WHERE st.order_product_id IN (SELECT op.id FROM op JOIN polyu_orders po ON op.order_id = po.id AND op.product_id IN (SELECT id FROM t_shirt_products));",
+      "execution time": "0",
+      "Result of executing SQL": []
+    }
+  ],
+  "answer": "",
+  "tokens": {
+    "completion_tokens": "249",
+    "prompt_tokens": "1856",
+    "total_tokens": "2105"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "ID": 45,
+  "q_ch": "主仓库出库Cotton Fabric100份。",
+  "q_en": "Please release 100 units of cotton fabric from the Main warehouse.",
+  "thought": "To release 100 units of cotton fabric from the Main warehouse, I need to identify the warehouse (Main), locate the cotton fabric in the warehouse_material table, and then update the left_number field to decrease it by 100 units.",
+  "sqls": [
+    {
+      "command": "UPDATE warehouse_material wm INNER JOIN materials m ON wm.material_id = m.id INNER JOIN warehouse w ON wm.warehouse_id = w.id SET wm.left_number = wm.left_number - 100 WHERE m.name = 'cotton fabric' AND w.name = 'Main' AND wm.left_number >= 100;",
+      "execution time": "0.0008671283721923828",
+      "Result of executing SQL": []
+    }
+  ],
+  "answer": "Certainly! The SQL query to release 100 units of cotton fabric from the Main warehouse has already been provided. Here it is:\n\n```sql\nUPDATE warehouse_material wm\nINNER JOIN materials m ON wm.material_id = m.id\nINNER JOIN warehouse w ON wm.warehouse_id = w.id\nSET wm.left_number = wm.left_number - 100\nWHERE m.name = 'cotton fabric' AND w.name = 'Main' AND wm.left_number >= 100;\n```\n\nThis query will decrease the number of cotton fabric units by 100 in the Main warehouse, provided that there are at least 100 units available.",
+  "tokens": {
+    "completion_tokens": "121",
+    "prompt_tokens": "1839",
+    "total_tokens": "1960"
+  }
+}
