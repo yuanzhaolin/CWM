@@ -6,6 +6,7 @@ from tables import init_database, database_info, table_details
 from langchain.prompts import PromptTemplate
 from call_ai_function import populate_sql_statement
 from chat import chat_with_ai
+from rewrite_query import rewrite_query
 
 
 def get_steps_from_response(response):
@@ -110,13 +111,17 @@ def need_update_sql(input_string):
 
 
 if __name__ == '__main__':
+    enable_rewrite_query = True
     mysql_db = init_database(database_info, None)
     his_msgs = []
     print("START!")
-    text = input("USER INPUT: ")
+    query = input("USER INPUT: ")
     while True:
-        sql_results_history, new_mem_ops, err = generate_chat_responses(text, mysql_db, his_msgs)
-        print(sql_results_history)
-        print(new_mem_ops)
-        print(err)
-        text = input("USER INPUT: ")
+        # 使用 rewrite_query 函数优化用户输入的问题
+        if enable_rewrite_query:
+            query = rewrite_query(query)
+        sql_results_history, new_mem_ops, err = generate_chat_responses(query, mysql_db, his_msgs)
+        print("\n***********sql_results_history***********\n", sql_results_history)
+        print("\n***********new_mem_ops***********\n", new_mem_ops)
+        print("\n***********err***********\n", err)
+        query = input("USER INPUT: ")
