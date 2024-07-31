@@ -1,0 +1,26 @@
+{
+  "ID": 51,
+  "q_ch": "未完成的订单中，哪个订单完成的进度最快？",
+  "q_en": "Which order has the fastest completion progress among the unfinished orders?",
+  "thought": "To determine the fastest completion progress among unfinished orders, we need to calculate the completion percentage of both sewing and cutting tasks for each order. Then, we filter out the orders that are not yet fully completed in any task (either sewing or cutting). Lastly, we order the results based on completion progress in descending order and limit the result to one order to get the fastest completion progress.",
+  "sqls": [
+    {
+      "command": "SELECT orders.id, orders.order_name, SUM(c.completed_number)/SUM(c.planned_number) AS cutting_completion_progress, SUM(s.completed_number)/SUM(s.planned_number) AS sewing_completion_progress FROM orders LEFT JOIN order_product op ON orders.id = op.order_id LEFT JOIN cutting_tasks c ON op.id = c.order_product_id LEFT JOIN sewing_tasks s ON op.id = s.order_product_id WHERE (c.is_started = TRUE AND c.planned_number > c.completed_number) OR (s.is_started = TRUE AND s.planned_number > s.completed_number) GROUP BY orders.id ORDER BY (SUM(c.completed_number)/SUM(c.planned_number) + SUM(s.completed_number)/SUM(s.planned_number))/2 DESC LIMIT 1;",
+      "execution time": "0.002216339111328125",
+      "Result of executing SQL": [
+        {
+          "id": "o6",
+          "order_name": "Michael_SweaterAndShorts",
+          "cutting_completion_progress": null,
+          "sewing_completion_progress": null
+        }
+      ]
+    }
+  ],
+  "answer": "Based on the data retrieved from the database, the order with the fastest completion progress among the unfinished orders is \"Michael_SweaterAndShorts\" with the order ID \"o6\". However, it is important to note that both cutting and sewing completion progress for this order are listed as `None`, which implies that either the tasks have not progressed or their progress hasn't been recorded in the database.",
+  "tokens": {
+    "completion_tokens": "237",
+    "prompt_tokens": "1838",
+    "total_tokens": "2075"
+  }
+}

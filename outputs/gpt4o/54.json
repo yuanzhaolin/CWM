@@ -1,0 +1,45 @@
+{
+  "ID": 54,
+  "q_ch": "列出所有缝纫组的进度百分比。",
+  "q_en": "List the progress percentage of all sewing groups",
+  "thought": "To list the progress percentage of all sewing groups, we need to first calculate the completion percentage for each sewing task by dividing the completed_number by the planned_number. Then we can aggregate this data for each sewing group (working_group) based on their IDs and calculate the average completion percentage.",
+  "sqls": [
+    {
+      "command": "SELECT working_group.id AS group_id, working_group.name AS group_name, AVG(sewing_tasks.completed_number / sewing_tasks.planned_number * 100) AS progress_percentage FROM working_group JOIN sewing_tasks ON working_group.id = sewing_tasks.working_group_id WHERE working_group.type = 'sew' GROUP BY working_group.id, working_group.name;",
+      "execution time": "0.0010042190551757812",
+      "Result of executing SQL": [
+        {
+          "group_id": "wg10",
+          "group_name": "Elite Sewers",
+          "progress_percentage": null
+        },
+        {
+          "group_id": "wg2",
+          "group_name": "Master Sewers",
+          "progress_percentage": null
+        },
+        {
+          "group_id": "wg7",
+          "group_name": "Skilled Sewers",
+          "progress_percentage": null
+        },
+        {
+          "group_id": "wg8",
+          "group_name": "Advanced Sewers",
+          "progress_percentage": null
+        },
+        {
+          "group_id": "wg9",
+          "group_name": "Premier Sewers",
+          "progress_percentage": null
+        }
+      ]
+    }
+  ],
+  "answer": "Based on the available data, it appears that the progress percentages for all sewing groups are not present. Here is the list of sewing groups along with their progress percentages:\n\n1. Elite Sewers: No data available\n2. Master Sewers: No data available\n3. Skilled Sewers: No data available\n4. Advanced Sewers: No data available\n5. Premier Sewers: No data available",
+  "tokens": {
+    "completion_tokens": "139",
+    "prompt_tokens": "1834",
+    "total_tokens": "1973"
+  }
+}
