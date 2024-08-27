@@ -1,0 +1,51 @@
+{
+  "ID": 38,
+  "q_ch": "Advanced裁剪组还未完成的裁剪任务是哪些顾客的订单？",
+  "q_en": "Which customer orders are the cutting tasks that the Advanced Cutting Group has not yet completed?",
+  "sqls": [
+    {
+      "command": [
+        "SELECT id FROM working_group WHERE name = 'Advanced Cutters';",
+        "SELECT order_product_id FROM cutting_tasks WHERE working_group_id = 'wg6' AND completed_number < planned_number;",
+        "SELECT order_id FROM order_product WHERE id IN ('op15', 'op32');",
+        "SELECT o.id AS order_id, o.order_name, c.customer_name\n FROM orders o\n JOIN customers c ON o.user_id = c.id\n WHERE o.id IN ('o4', 'o10');"
+      ],
+      "Result of executing SQL": [
+        [
+          {
+            "id": "wg6"
+          }
+        ],
+        [
+          {
+            "order_product_id": "op15"
+          },
+          {
+            "order_product_id": "op32"
+          }
+        ],
+        [
+          {
+            "order_id": "o4"
+          },
+          {
+            "order_id": "o10"
+          }
+        ],
+        [
+          {
+            "order_id": "o10",
+            "order_name": "John_Jacket",
+            "customer_name": "John"
+          },
+          {
+            "order_id": "o4",
+            "order_name": "James_WinterOrder",
+            "customer_name": "James"
+          }
+        ]
+      ]
+    }
+  ],
+  "total_tokens": 4155
+}

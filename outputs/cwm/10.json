@@ -1,0 +1,96 @@
+{
+  "ID": 10,
+  "q_ch": "对于Michael下的SweaterAndShorts的订单，还有哪些产品没有制造完成，列出未完成产品的类型和数量？",
+  "q_en": "For Michael's SweaterAndShorts order, which other products have not been manufactured yet? Please list the types and quantities of unfinished products.",
+  "sqls": [
+    {
+      "command": [
+        "SELECT id FROM customers WHERE customer_name = 'Michael';",
+        "SELECT id FROM orders WHERE order_name = 'Michael_SweaterAndShorts' AND user_id = 'c6';",
+        "SELECT id, product_id, number FROM order_product WHERE order_id = 'c6';",
+        "SELECT id, product_id, number FROM order_product WHERE order_id = 'o6';",
+        "SELECT order_product_id, SUM(completed_number) AS total_completed_cutting FROM cutting_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id = 'o6') GROUP BY order_product_id;",
+        "SELECT order_product_id, SUM(completed_number) AS total_completed_sewing FROM sewing_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id = 'o6') GROUP BY order_product_id;",
+        "SELECT op.id AS order_product_id, op.number AS total_required, COALESCE(ct.total_completed_cutting, 0) + COALESCE(st.total_completed_sewing, 0) AS total_completed FROM order_product op LEFT JOIN (SELECT order_product_id, SUM(completed_number) AS total_completed_cutting FROM cutting_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id = 'o6') GROUP BY order_product_id) ct ON op.id = ct.order_product_id LEFT JOIN (SELECT order_product_id, SUM(completed_number) AS total_completed_sewing FROM sewing_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id = 'o6') GROUP BY order_product_id) st ON op.id = st.order_product_id WHERE op.order_id = 'o6';",
+        "SELECT p.id, pt.description, (op.total_required - op.total_completed) AS unfinished_quantity FROM products p JOIN products_types pt ON p.products_type_id = pt.id JOIN (SELECT op.id AS order_product_id, op.product_id, op.number AS total_required, COALESCE(ct.total_completed_cutting, 0) + COALESCE(st.total_completed_sewing, 0) AS total_completed FROM order_product op LEFT JOIN (SELECT order_product_id, SUM(completed_number) AS total_completed_cutting FROM cutting_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id = 'o6') GROUP BY order_product_id) ct ON op.id = ct.order_product_id LEFT JOIN (SELECT order_product_id, SUM(completed_number) AS total_completed_sewing FROM sewing_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id = 'o6') GROUP BY order_product_id) st ON op.id = st.order_product_id WHERE op.order_id = 'o6') op ON p.id = op.product_id WHERE (op.total_required - op.total_completed) > 0;"
+      ],
+      "Result of executing SQL": [
+        [
+          {
+            "id": "c6"
+          }
+        ],
+        [
+          {
+            "id": "o6"
+          }
+        ],
+        "no results found.",
+        [
+          {
+            "id": "op22",
+            "product_id": "p25",
+            "number": 115
+          },
+          {
+            "id": "op23",
+            "product_id": "p8",
+            "number": 110
+          },
+          {
+            "id": "op24",
+            "product_id": "p16",
+            "number": 105
+          }
+        ],
+        [
+          {
+            "order_product_id": "op22",
+            "total_completed_cutting": null
+          },
+          {
+            "order_product_id": "op23",
+            "total_completed_cutting": null
+          },
+          {
+            "order_product_id": "op24",
+            "total_completed_cutting": null
+          }
+        ],
+        [
+          {
+            "order_product_id": "op22",
+            "total_completed_sewing": null
+          },
+          {
+            "order_product_id": "op23",
+            "total_completed_sewing": null
+          },
+          {
+            "order_product_id": "op24",
+            "total_completed_sewing": null
+          }
+        ],
+        [
+          {
+            "order_product_id": "op22",
+            "total_required": 115,
+            "total_completed": null
+          },
+          {
+            "order_product_id": "op23",
+            "total_required": 110,
+            "total_completed": null
+          },
+          {
+            "order_product_id": "op24",
+            "total_required": 105,
+            "total_completed": null
+          }
+        ],
+        "no results found."
+      ]
+    }
+  ],
+  "total_tokens": 10280
+}

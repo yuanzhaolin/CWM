@@ -1,8 +1,8 @@
 {
   "ID": 20,
   "q_ch": "剩余库存为零的材料有哪些，列出材料名字？",
-  "q_en": "Which products have zero remaining inventory?",
-  "thought": "We need to query the products that have zero remaining inventory in the warehouse. This can be achieved by joining the 'products' table with the 'warehouse_product' table on the 'id' column of products and 'product_id' column of warehouse_product. We will then filter the result to only include products with zero remaining inventory.",
+  "q_en": "What are the materials with zero remaining inventory and list their names?",
+  "thought": "To retrieve the materials with zero remaining inventory, we need to query the 'materials' table and join it with the 'warehouse_material' table to check the remaining inventory. We will filter the results where the 'left_number' is zero. Finally, we will select the names of the materials.",
   "sqls": [
     {
       "command": "SELECT p.id, p.products_type_id, p.attributes FROM products p JOIN warehouse_product wp ON p.id = wp.product_id WHERE wp.left_number = 0;",

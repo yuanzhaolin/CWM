@@ -1,0 +1,83 @@
+{
+  "ID": 3,
+  "q_ch": "Emily订购的Dress订单生产进度如何？用百分比来表示。",
+  "q_en": "What is the production progress of the Dress ordered by Emily? Please represent it in percentage.",
+  "sqls": [
+    {
+      "command": [
+        "SELECT id FROM customers WHERE customer_name = 'Emily';",
+        "SELECT id FROM orders WHERE user_id = 'c3';",
+        "SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'Dress';",
+        "SELECT id, number FROM order_product WHERE order_id IN (SELECT id FROM orders WHERE user_id = 'c3') AND product_id IN (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'Dress');",
+        "SELECT SUM(planned_number) AS total_planned_cutting, SUM(completed_number) AS total_completed_cutting FROM cutting_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id IN (SELECT id FROM orders WHERE user_id = 'c3') AND product_id IN (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'Dress'));",
+        "SELECT SUM(planned_number) AS total_planned_sewing, SUM(completed_number) AS total_completed_sewing FROM sewing_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id IN (SELECT id FROM orders WHERE user_id = 'c3') AND product_id IN (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'Dress'));",
+        "SELECT (total_completed_cutting + total_completed_sewing) / (total_planned_cutting + total_planned_sewing) * 100 AS production_progress FROM (SELECT SUM(planned_number) AS total_planned_cutting, SUM(completed_number) AS total_completed_cutting FROM cutting_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id IN (SELECT id FROM orders WHERE user_id = 'c3') AND product_id IN (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'Dress'))) AS cutting, (SELECT SUM(planned_number) AS total_planned_sewing, SUM(completed_number) AS total_completed_sewing FROM sewing_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id IN (SELECT id FROM orders WHERE user_id = 'c3') AND product_id IN (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'Dress'))) AS sewing;"
+      ],
+      "Result of executing SQL": [
+        [
+          {
+            "id": "c3"
+          }
+        ],
+        [
+          {
+            "id": "o11"
+          },
+          {
+            "id": "o3"
+          }
+        ],
+        [
+          {
+            "id": "p13"
+          },
+          {
+            "id": "p21"
+          },
+          {
+            "id": "p29"
+          },
+          {
+            "id": "p5"
+          }
+        ],
+        [
+          {
+            "id": "op13",
+            "number": 130
+          },
+          {
+            "id": "op11",
+            "number": 140
+          },
+          {
+            "id": "op12",
+            "number": 150
+          },
+          {
+            "id": "op14",
+            "number": 120
+          }
+        ],
+        [
+          {
+            "total_planned_cutting": null,
+            "total_completed_cutting": null
+          }
+        ],
+        [
+          {
+            "total_planned_sewing": null,
+            "total_completed_sewing": null
+          }
+        ],
+        [
+          {
+            "production_progress": null
+          }
+        ]
+      ]
+    }
+  ],
+  "total_tokens": 6481
+}

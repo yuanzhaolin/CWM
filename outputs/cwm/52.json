@@ -1,0 +1,213 @@
+{
+  "ID": 52,
+  "q_ch": "列出2024年6月的订单使用的原料和数量？并整理成{原料：剩余数量}的形式。",
+  "q_en": "List the raw materials and quantities used for orders in June 2024? And organize it into the form of {raw materials: remaining quantity}.",
+  "sqls": [
+    {
+      "command": [
+        "SELECT op.id AS order_product_id\n FROM order_product op\n JOIN orders o ON op.order_id = o.id\n WHERE o.created_at BETWEEN '2024-06-01' AND '2024-06-30';",
+        "SELECT m.name AS raw_material, SUM(cma.allocated_num) AS used_quantity\n FROM cutting_material_allocation cma\n JOIN warehouse_material wm ON cma.warehouse_material_id = wm.id\n JOIN materials m ON wm.material_id = m.id\n WHERE cma.cutting_task_id IN (SELECT id FROM cutting_tasks WHERE order_product_id IN (SELECT op.id FROM order_product op JOIN orders o ON op.order_id = o.id WHERE o.created_at BETWEEN '2024-06-01' AND '2024-06-30'))\n GROUP BY m.name;",
+        "SELECT m.name AS raw_material, SUM(sma.allocated_num) AS used_quantity\n FROM sewing_material_allocation sma\n JOIN warehouse_material wm ON sma.warehouse_material_id = wm.id\n JOIN materials m ON wm.material_id = m.id\n WHERE sma.sewing_task_id IN (SELECT id FROM sewing_tasks WHERE order_product_id IN (SELECT op.id FROM order_product op JOIN orders o ON op.order_id = o.id WHERE o.created_at BETWEEN '2024-06-01' AND '2024-06-30'))\n GROUP BY m.name;",
+        "SELECT raw_material, SUM(used_quantity) AS total_used_quantity\n FROM (\n   SELECT m.name AS raw_material, SUM(cma.allocated_num) AS used_quantity\n   FROM cutting_material_allocation cma\n   JOIN warehouse_material wm ON cma.warehouse_material_id = wm.id\n   JOIN materials m ON wm.material_id = m.id\n   WHERE cma.cutting_task_id IN (SELECT id FROM cutting_tasks WHERE order_product_id IN (SELECT op.id FROM order_product op JOIN orders o ON op.order_id = o.id WHERE o.created_at BETWEEN '2024-06-01' AND '2024-06-30'))\n   GROUP BY m.name\n   UNION ALL\n   SELECT m.name AS raw_material, SUM(sma.allocated_num) AS used_quantity\n   FROM sewing_material_allocation sma\n   JOIN warehouse_material wm ON sma.warehouse_material_id = wm.id\n   JOIN materials m ON wm.material_id = m.id\n   WHERE sma.sewing_task_id IN (SELECT id FROM sewing_tasks WHERE order_product_id IN (SELECT op.id FROM order_product op JOIN orders o ON op.order_id = o.id WHERE o.created_at BETWEEN '2024-06-01' AND '2024-06-30'))\n   GROUP BY m.name\n ) AS combined\n GROUP BY raw_material;",
+        "SELECT m.name AS raw_material, wm.left_number AS remaining_quantity\n FROM warehouse_material wm\n JOIN materials m ON wm.material_id = m.id;",
+        "SELECT remaining.raw_material, remaining.remaining_quantity - COALESCE(used.total_used_quantity, 0) AS remaining_quantity\n FROM (\n   SELECT m.name AS raw_material, wm.left_number AS remaining_quantity\n   FROM warehouse_material wm\n   JOIN materials m ON wm.material_id = m.id\n ) AS remaining\n LEFT JOIN (\n   SELECT raw_material, SUM(used_quantity) AS total_used_quantity\n   FROM (\n     SELECT m.name AS raw_material, SUM(cma.allocated_num) AS used_quantity\n     FROM cutting_material_allocation cma\n     JOIN warehouse_material wm ON cma.warehouse_material_id = wm.id\n     JOIN materials m ON wm.material_id = m.id\n     WHERE cma.cutting_task_id IN (SELECT id FROM cutting_tasks WHERE order_product_id IN (SELECT op.id FROM order_product op JOIN orders o ON op.order_id = o.id WHERE o.created_at BETWEEN '2024-06-01' AND '2024-06-30'))\n     GROUP BY m.name\n     UNION ALL\n     SELECT m.name AS raw_material, SUM(sma.allocated_num) AS used_quantity\n     FROM sewing_material_allocation sma\n     JOIN warehouse_material wm ON sma.warehouse_material_id = wm.id\n     JOIN materials m ON wm.material_id = m.id\n     WHERE sma.sewing_task_id IN (SELECT id FROM sewing_tasks WHERE order_product_id IN (SELECT op.id FROM order_product op JOIN orders o ON op.order_id = o.id WHERE o.created_at BETWEEN '2024-06-01' AND '2024-06-30'))\n     GROUP BY m.name\n   ) AS combined\n   GROUP BY raw_material\n ) AS used ON remaining.raw_material = used.raw_material;"
+      ],
+      "Result of executing SQL": [
+        [
+          {
+            "order_product_id": "op32"
+          },
+          {
+            "order_product_id": "op33"
+          },
+          {
+            "order_product_id": "op34"
+          }
+        ],
+        [
+          {
+            "raw_material": "Cotton Fabric",
+            "used_quantity": null
+          },
+          {
+            "raw_material": "Denim Fabric",
+            "used_quantity": null
+          },
+          {
+            "raw_material": "Leather",
+            "used_quantity": null
+          },
+          {
+            "raw_material": "Synthetic Fiber",
+            "used_quantity": null
+          },
+          {
+            "raw_material": "Wool",
+            "used_quantity": null
+          }
+        ],
+        [
+          {
+            "raw_material": "Cotton Fabric",
+            "used_quantity": null
+          },
+          {
+            "raw_material": "Denim Fabric",
+            "used_quantity": null
+          },
+          {
+            "raw_material": "Leather",
+            "used_quantity": null
+          },
+          {
+            "raw_material": "Synthetic Fiber",
+            "used_quantity": null
+          },
+          {
+            "raw_material": "Wool",
+            "used_quantity": null
+          }
+        ],
+        [
+          {
+            "raw_material": "Cotton Fabric",
+            "total_used_quantity": null
+          },
+          {
+            "raw_material": "Denim Fabric",
+            "total_used_quantity": null
+          },
+          {
+            "raw_material": "Leather",
+            "total_used_quantity": null
+          },
+          {
+            "raw_material": "Synthetic Fiber",
+            "total_used_quantity": null
+          },
+          {
+            "raw_material": "Wool",
+            "total_used_quantity": null
+          }
+        ],
+        [
+          {
+            "raw_material": "Cotton Fabric",
+            "remaining_quantity": 3500
+          },
+          {
+            "raw_material": "Synthetic Fiber Pieces",
+            "remaining_quantity": 1500
+          },
+          {
+            "raw_material": "Denim Fabric",
+            "remaining_quantity": 4500
+          },
+          {
+            "raw_material": "Denim Fabric Pieces",
+            "remaining_quantity": 3180
+          },
+          {
+            "raw_material": "Down",
+            "remaining_quantity": 1230
+          },
+          {
+            "raw_material": "Down Pieces",
+            "remaining_quantity": 2420
+          },
+          {
+            "raw_material": "Fabric Pieces",
+            "remaining_quantity": 3200
+          },
+          {
+            "raw_material": "Wool",
+            "remaining_quantity": 4100
+          },
+          {
+            "raw_material": "Wool Pieces",
+            "remaining_quantity": 3550
+          },
+          {
+            "raw_material": "Silk",
+            "remaining_quantity": 1100
+          },
+          {
+            "raw_material": "Silk Pieces",
+            "remaining_quantity": 5400
+          },
+          {
+            "raw_material": "Leather",
+            "remaining_quantity": 2200
+          },
+          {
+            "raw_material": "Leather Pieces",
+            "remaining_quantity": 1300
+          },
+          {
+            "raw_material": "Synthetic Fiber",
+            "remaining_quantity": 0
+          }
+        ],
+        [
+          {
+            "raw_material": "Cotton Fabric",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Denim Fabric",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Leather",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Synthetic Fiber",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Wool",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Synthetic Fiber Pieces",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Denim Fabric Pieces",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Down",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Down Pieces",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Fabric Pieces",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Wool Pieces",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Silk",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Silk Pieces",
+            "remaining_quantity": null
+          },
+          {
+            "raw_material": "Leather Pieces",
+            "remaining_quantity": null
+          }
+        ]
+      ]
+    }
+  ],
+  "total_tokens": 4755
+}

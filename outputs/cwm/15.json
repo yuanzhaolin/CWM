@@ -1,0 +1,22 @@
+{
+  "ID": 15,
+  "q_ch": "剩余库存最少的原料是什么？",
+  "q_en": "What is the material with the lowest remaining inventory?",
+  "sqls": [
+    {
+      "command": [
+        "SELECT m.id, m.name, SUM(wm.left_number) AS remaining_inventory\n FROM warehouse_material wm\n JOIN materials m ON wm.material_id = m.id\n GROUP BY m.id, m.name\n ORDER BY remaining_inventory ASC\n LIMIT 1;"
+      ],
+      "Result of executing SQL": [
+        [
+          {
+            "id": "m9",
+            "name": "Synthetic Fiber",
+            "remaining_inventory": null
+          }
+        ]
+      ]
+    }
+  ],
+  "total_tokens": 8683
+}

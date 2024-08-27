@@ -1,0 +1,38 @@
+{
+  "ID": 23,
+  "q_ch": "主仓库和辅助仓库中，哪个仓库的Cotton Fabric更多？",
+  "q_en": "Which warehouse has more Cotton Fabric between the main and auxiliary warehouses?",
+  "sqls": [
+    {
+      "command": [
+        "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
+        "SELECT id, name FROM warehouse WHERE name IN ('Main Warehouse', 'Auxiliary warehouse');",
+        "SELECT wm.warehouse_id, wm.left_number FROM warehouse_material wm WHERE wm.material_id = 'm1' AND wm.warehouse_id IN ('w1', 'w2');"
+      ],
+      "Result of executing SQL": [
+        [
+          {
+            "id": "m1"
+          }
+        ],
+        [
+          {
+            "id": "w1",
+            "name": "Main Warehouse"
+          },
+          {
+            "id": "w2",
+            "name": "Auxiliary warehouse"
+          }
+        ],
+        [
+          {
+            "warehouse_id": "w1",
+            "left_number": 3500
+          }
+        ]
+      ]
+    }
+  ],
+  "total_tokens": 3871
+}
