@@ -12,7 +12,7 @@ extract_entity_prompt_template = """
 - orders.order_name
 - products_types.description
 - products.attributes
-- materals.name
+- materials.name
 - warehouse.name
 - working_group.name
 
@@ -21,7 +21,7 @@ extract_entity_prompt_template = """
 - orders.order_name：订单名称 eggs "订单A", "3号订单"
 - products_types.description：产品类型名称 eggs "裙子", "T恤"
 - products.attributes：产品样式 egg "红色M码", "黑色小号"
-- materals.name：生产衣服需要的材料名称 eggs "棉布", "丝绸"
+- materials.name：生产衣服需要的材料名称 eggs "棉布", "丝绸"
 - warehouse.name：仓库名称 eggs "主仓库", "仓库B"
 - working_group.name：裁剪或缝纫任务的工作小组名称 eggs "大师裁剪组" "专家缝纫组"
 
@@ -42,7 +42,7 @@ extract_entity_prompt_template = """
     "orders.order_name": ["订单A"],
     "products_types.description": ["裙子", "T恤"],
     "products.attributes": ["红色大号"],
-    "materals.name": ["棉布"],
+    "materials.name": ["棉布"],
     "warehouse.name": [],
     "working_group.name": [],
 }}

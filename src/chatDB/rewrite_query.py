@@ -61,7 +61,15 @@ def rewrite_query(question):
     主仓库有什么
     改写后的问题：
     <warehouse.warehouse_name = 'Main Warehouse'> 有什么
-    
+    4. 原问题：
+    Advanced缝纫组有什么任务
+    改写后的问题：
+    <working_group.name = 'Advanced Sewers'> 有什么任务
+    5. 原问题：
+    Advanced裁剪组有什么任务
+    改写后的问题：
+    <working_group.name = 'Advanced Cutters'> 有什么任务
+
     # 原问题
     {question}
 
