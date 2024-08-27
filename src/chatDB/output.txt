@@ -38,7 +38,7 @@ standard_entity_names = {
         "Purple, M size", "Red, M size", "Red, L size", "Silver, S size", "White, L size",
         "White, XL size", "Yellow, L size", "Yellow, S size"
     ],
-    "materals.name": [
+    "materials.name": [
         "Cotton Fabric", "Synthetic Fiber Pieces", "Denim Fabric", "Denim Fabric Pieces",
         "Down", "Down Pieces", "Fabric Pieces", "Wool", "Wool Pieces", "Silk", "Silk Pieces",
         "Leather", "Leather Pieces", "Synthetic Fiber"
