@@ -82,6 +82,8 @@ def chain_of_memory(sql_steps, mysql_db):
 
 def generate_chat_responses(user_inp, mysql_db, historical_message):
     # ask steps
+    if cfg.agent_on:
+        pass
     prompt_ask_steps_str = prompt_ask_steps.format(user_inp=user_inp)
     response_steps = chat_with_ai(init_system_msg(), prompt_ask_steps_str, historical_message, None,
                                   token_limit=cfg.smart_token_limit)

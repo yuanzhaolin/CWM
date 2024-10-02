@@ -103,7 +103,7 @@ CREATE TABLE `cutting_tasks` (
   `order_product_id` VARCHAR(36) NOT NULL COMMENT '订单产品ID',
   `planned_number` INTEGER NOT NULL DEFAULT 0 COMMENT '计划裁剪数量',
   `completed_number` INTEGER NOT NULL DEFAULT 0 COMMENT '已完成裁剪数量',
-  `is_started` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '裁剪任务是否已开始'
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT 'Status of the task 0: not start, 1: on-going, 2: completed',
 );
 
 -- 订单产品缝纫任务表
@@ -115,7 +115,8 @@ CREATE TABLE `sewing_tasks` (
   `order_product_id` VARCHAR(36) NOT NULL COMMENT '订单产品ID',
   `planned_number` INTEGER NOT NULL DEFAULT 0 COMMENT '计划缝纫数量',
   `completed_number` INTEGER NOT NULL DEFAULT 0 COMMENT '已完成缝纫数量',
-  `is_started` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '缝纫任务是否已开始'
+  `is_started` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '缝纫任务是否已开始',
+  `status` int(11) NOT NULL DEFAULT 0 COMMENT 'Status of the task 0: not start, 1: on-going, 2: completed',
 );
 
 -- 订单产品裁剪任务原料分配表
@@ -157,6 +158,31 @@ CREATE TABLE `warehouse_material` (
   `material_id` VARCHAR(36) NOT NULL COMMENT '原料ID',
   `left_number` INTEGER NOT NULL DEFAULT 0 COMMENT '原料剩余库存数量'
 );
+
+-- Relation between product and work-in-progress materials
+CREATE TABLE `product_material`  (
+  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Product Material ID',
+  `product_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Product ID',
+  `material_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Material ID',
+  `number` int(11) NOT NULL DEFAULT 0.0 COMMENT 'Required Quantity of material',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE,
+  CONSTRAINT `product_material_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `product_material_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) 
+
+-- Relation between Work-in-progress and original materials
+CREATE TABLE `wip_material`  (
+  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Product Material ID',
+  `wip_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Wip material ID',
+  `origin_material_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Original Material ID',
+  `number` float NOT NULL DEFAULT 0.0 COMMENT 'Required Quantity of material',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `wip_id`(`wip_id`) USING BTREE,
+  CONSTRAINT `wip_material_ibfk_1` FOREIGN KEY (`wip_id`) REFERENCES `materials` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `wip_material_ibfk_2` FOREIGN KEY (`origin_material_id`) REFERENCES `materials` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) 
+
 """
 # print("*****************table details*****************")
 # print(table_details)
@@ -165,7 +191,7 @@ def init_database(database_info=None, db_name=None):
     # global mysqldb
     # print(cfg.mysql_host, cfg.mysql_user, cfg.mysql_password, cfg.mysql_port, db_name)
     mysqldb = MySQLDB(host=cfg.mysql_host, user=cfg.mysql_user, password="Fashion!@#",
-                          port=cfg.mysql_port, database='fashion2')
+                          port=cfg.mysql_port, database=cfg.mysql_schema)
 
     return mysqldb
     # print(mysqldb)

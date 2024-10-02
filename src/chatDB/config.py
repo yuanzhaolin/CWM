@@ -39,6 +39,7 @@ class Config(metaclass=Singleton):
         self.continuous_mode = False
         self.continuous_limit = 0
         self.speak_mode = False
+        self.agent_on = True
 
         self.fast_llm_model = os.getenv("FAST_LLM_MODEL", "gpt-3.5-turbo")
         self.smart_llm_model = os.getenv("SMART_LLM_MODEL", "gpt-4")
@@ -46,6 +47,7 @@ class Config(metaclass=Singleton):
         self.smart_token_limit = int(os.getenv("SMART_TOKEN_LIMIT", 8000))
 
         self.openai_api_key = os.getenv("OPENAI_API_KEY")
+        self.openai_base_url = os.getenv("OPENAI_BASE_URL")
         # import pdb; pdb.set_trace()
         self.temperature = float(os.getenv("TEMPERATURE", "1"))
         self.use_azure = os.getenv("USE_AZURE") == 'True'
@@ -55,6 +57,7 @@ class Config(metaclass=Singleton):
         self.mysql_host = os.getenv("MYSQL_HOST", "localhost")
         self.mysql_user = os.getenv("MYSQL_USER", "root")
         self.mysql_port = int(os.getenv("MYSQL_PORT", "3306"))
+        self.mysql_schema = os.getenv("MYSQL_SCHEMA", "garment")
 
         if self.use_azure:
             self.load_azure_config()

@@ -165,3 +165,10 @@ cython_debug/
 #.idea/
 
 /push_all.sh
+
+.auto-coder/
+actions/
+output.txt
+.auto-coder/
+actions/
+output.txt

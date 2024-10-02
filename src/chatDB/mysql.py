@@ -50,6 +50,10 @@ class MySQLDB(object):
                     self.cursor.execute(sub_sql)
             result = self.cursor.fetchall()
             self.conn.commit()
+
+            if 'INSERT' in sql:
+                self.cursor.execute('SELECT LAST_INSERT_ID();')
+                result = self.cursor.fetchall()
         except Exception as e:
             self.conn.rollback()
             error_message = f"SQL error: {str(e)}"
@@ -117,6 +121,9 @@ class MySQLDB(object):
         sql = f"DROP DATABASE `{self.database}`"
         self.execute_sql(sql, raise_err=True)
         self.database = None
+
+    def last_insert_row_id(self):
+        return self.cursor.lastrowid
 
     # def __del__(self):
     #     if self.database is not None:
