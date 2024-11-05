@@ -1,5 +1,6 @@
 import time
 import os
+import openai
 from openai import OpenAI
 from colorama import Fore
 from config import cfg
@@ -26,18 +27,18 @@ def create_chat_completion(messages, model=cfg.fast_llm_model, temperature=cfg.t
             
             completion = client.chat.completions.create(**params)
             return completion.choices[0].message.content
-        except client.RateLimitError:
+        except openai.RateLimitError:
             if cfg.debug_mode:
                 print(Fore.RED + "Error: ", "API Rate Limit Reached. Waiting 20 seconds..." + Fore.RESET)
             time.sleep(20)
-        except client.APIError as e:
+        except openai.APIError as e:
             if e.status_code == 502:
                 if cfg.debug_mode:
                     print(Fore.RED + "Error: ", "API Bad gateway. Waiting 20 seconds..." + Fore.RESET)
                 time.sleep(20)
             else:
                 raise
-        except client.BadRequestError:
+        except openai.BadRequestError:
             raise
 
     raise RuntimeError("Failed to get response after 5 retries")

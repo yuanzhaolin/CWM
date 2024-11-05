@@ -6,6 +6,9 @@ from chatdb import generate_chat_responses, init_database
 
 app = FastAPI()
 mysql_db = init_database()
+from expired_dict import ExpiredDict
+
+history = ExpiredDict(3600)
 
 # 创建一个HTTPBearer实例，用于处理Authorization头
 security = HTTPBearer()
@@ -25,17 +28,23 @@ def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
 def chatdb_handler(data: dict, credentials: HTTPAuthorizationCredentials = Depends(verify_token)):
     print(datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"), "data:", data)
     user_input = data.get("user_input")
+    conversation_id = data.get("conversation_id")
+    historical_message, dialogue_context, context_abstract = history.get(conversation_id, ([], [], ""))
     if not user_input:
         return {"error": "User input is required"}
-    sql_results, sql_commands, err = generate_chat_responses(user_inp=user_input, mysql_db=mysql_db, historical_message=[])
+    sql_results, sql_commands, err, response, context_abstract = generate_chat_responses(
+        user_inp=user_input, mysql_db=mysql_db, historical_message=historical_message, context_abstract=context_abstract
+    )
+    dialogue_context.extend([f'User: {user_input}', f'System: {response}'])
+    history[conversation_id] = historical_message, dialogue_context,  context_abstract
     if err:
         return {"error": err}
-    result = ""
-    for sql_command, sql_result in zip(sql_commands, sql_results):
-        result += f"sql命令：{sql_command[0]}\n"
-        result += f"执行结果：{sql_result}\n\n"
+    result = f"Final response\n{response}\n\n"
+    # for sql_command, sql_result in zip(sql_commands, sql_results):
+    #     result += f"sql command：{sql_command[0]}\n"
+    #     result += f"execution result：{sql_result}\n\n"
     return {"result": result}
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=41973)
+    uvicorn.run(app, host="0.0.0.0", port=41973, workers=1)

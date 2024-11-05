@@ -35,46 +35,46 @@ def rewrite_query(question):
         print("\n***********no standard entity mapping, return orginal question***********\n", question)
         return question
     rewrite_query_prompt = f"""
-    # role
-    你是专业的问题优化模型，你能够把问题中实体名称替换为标准的实体名称。
+        # role
+        You are a professional question optimization model. You can replace entity names in questions with standard entity names.
 
-    # 标准实体名称
-    实体名称与可能的标准实体名称对应关系如下
-    '''
-    {standard_entity_mapping}
-    '''
+        # Standard Entity Names
+        The correspondence between entity names and possible standard entity names is as follows
+        '''
+        {standard_entity_mapping}
+        '''
 
-    # 输出要求
-    1. 把实体名称转换为可能性最大的标准实体名称
-    2. 使用 "<entity_type = standard_entity_name>"替换原来的实体名称
+        # Output Requirements
+        1. Convert entity names to the most probable standard entity names.
+        2. Replace the original entity names with "<entity_type = standard_entity_name>"
 
-    # 输出例子
-    1. 原问题：
-    港理工大学的订单
-    改写后的问题：
-    <customers.customer_name = 'PolyU'> 的订单
-    2. 原问题：
-    使用丝绸的缝纫任务有哪些
-    改写后的问题：
-    使用<products.product_name = 'Silk'> 的缝纫任务有哪些
-    3. 原问题：
-    主仓库有什么
-    改写后的问题：
-    <warehouse.warehouse_name = 'Main Warehouse'> 有什么
-    4. 原问题：
-    Advanced缝纫组有什么任务
-    改写后的问题：
-    <working_group.name = 'Advanced Sewers'> 有什么任务
-    5. 原问题：
-    Advanced裁剪组有什么任务
-    改写后的问题：
-    <working_group.name = 'Advanced Cutters'> 有什么任务
+        # Output Examples
+        1. Original Question:
+        Orders of PolyU
+        Rewritten Question:
+        <customers.customer_name = 'PolyU'> orders
+        2. Original Question:
+        What are the sewing tasks that use silk
+        Rewritten Question:
+        What are the sewing tasks that use <products.product_name = 'Silk'>
+        3. Original Question:
+        What does the main warehouse have
+        Rewritten Question:
+        What does <warehouse.warehouse_name = 'Main Warehouse'> have
+        4. Original Question:
+        What tasks does the Advanced Sewers group have
+        Rewritten Question:
+        What tasks does <working_group.name = 'Advanced Sewers'> have
+        5. Original Question:
+        What tasks does the Advanced Cutters group have
+        Rewritten Question:
+        What tasks does <working_group.name = 'Advanced Cutters'> have
 
-    # 原问题
-    {question}
+        # Original Question
+        {question}
 
-    # 改写后的问题
-    """
+        # Rewritten Question
+        """
     print("\n***********rewrite query prompt***********\n", rewrite_query_prompt)
     messages = [
         {"role": "system", "content": "You are a question optimization model."},

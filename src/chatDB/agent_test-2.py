@@ -17,6 +17,7 @@ model = ChatOpenAI(
     model="gpt-3.5-turbo",
     api_key=cfg.openai_api_key,  # if you prefer to pass api key in directly instaed of using env vars
     base_url=cfg.openai_base_url,
+    temperature=0,
 )
 
 response = model.invoke([HumanMessage(content="hi!")])
@@ -51,9 +52,17 @@ def pow1(a: int ) -> int:
     """
     return  (a ** 2 ) * c
 
+@tool(parse_docstring=True)
+def void() -> str:
+    """ If the query cannot be solved other tools, call this tool.
+
+    Args:
+    """
+    return  'Unable to solve the query.'
 
 
-tools = [sum2, mul2]
+
+tools = [sum2, mul2, pow1, void]
 tools_dict = {tool.name: tool for tool in tools}
 # tools = [pow1]
 
@@ -76,7 +85,11 @@ conversational_memory = ConversationBufferWindowMemory(
 agent = model.bind_tools(tools)
 prompt = ChatPromptTemplate.from_messages(
     [
-        ("system", "You are a mathematical assistant. Several tools are available to you."),
+        ("system", "You are a mathematical assistant. Several tools are available to you. You have to use the tools to solve the query. "
+                   "If the query cannot be solved, call the void tool. "
+                   "Unfortunately, the Assistant is terrible at maths. "
+                   "When provided with math questions, no matter how simple, assistant always refers to its trusty tools and absolutely does NOT try to answer math questions by itself"
+                   "Even if the returned answer is wrong, the assistant will still return the answer."),
         ("human", "{input}"),
         # Placeholders fill up a **list** of messages
         ("placeholder", "{agent_scratchpad}"),
@@ -91,7 +104,8 @@ agent_executor = AgentExecutor(agent=agent, tools=tools)
 questions = [
     'what is 2 + 2',
     'what is 3 * 3',
-    'What if change * to + ?'
+    'What if change * to + ?',
+    'What is 3/2?'
 ]
 
 # messages = []

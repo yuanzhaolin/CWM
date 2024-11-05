@@ -44,145 +44,227 @@ def get_database_info(tables):
 database_info = get_database_info(tables)
 # table_details = "\n".join(tables)
 table_details = """
--- 客户信息表
-CREATE TABLE `customers` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '客户ID',
-  `customer_name` VARCHAR(255) NOT NULL COMMENT '客户名称'
-);
+-- ----------------------------
+-- Table structure for customers
+-- ----------------------------
+CREATE TABLE `customers`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Customer ID',
+  `customer_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Customer Name',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
--- 订单信息表
-CREATE TABLE `orders` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '订单ID',
-  `user_id` VARCHAR(36) NOT NULL COMMENT '客户ID',
-  `order_name` VARCHAR(255) NOT NULL COMMENT '订单名称',
-  `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '订单创建时间'
-);
+-- ----------------------------
+-- Table structure for cutting_material_allocation
+-- ----------------------------
+CREATE TABLE `cutting_material_allocation`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Cutting Task Material Allocation ID',
+  `warehouse_material_id` int UNSIGNED NULL COMMENT 'Warehouse Material ID',
+  `cutting_task_id` int UNSIGNED NOT NULL COMMENT 'Cutting Task ID',
+  `allocated_num` int(11) NOT NULL DEFAULT 0 COMMENT 'Allocated Material Quantity',
+  `is_allocated` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Is Material Allocated',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `cutting_task_id`(`cutting_task_id`) USING BTREE,
+  INDEX `warehouse_material_id`(`warehouse_material_id`) USING BTREE,
+  CONSTRAINT `cutting_material_allocation_ibfk_1` FOREIGN KEY (`cutting_task_id`) REFERENCES `cutting_tasks` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `cutting_material_allocation_ibfk_2` FOREIGN KEY (`warehouse_material_id`) REFERENCES `warehouse_material` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
--- 产品类型表
-CREATE TABLE `products_types` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '产品类型ID',
-  `description` VARCHAR(255) NOT NULL COMMENT '产品类型描述'
-);
-
--- 产品表
-CREATE TABLE `products` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '产品ID',
-  `products_type_id` VARCHAR(36) NOT NULL COMMENT '产品类型ID',
-  `attributes` VARCHAR(255) NOT NULL COMMENT '产品属性'
-);
-
--- 原料表
-CREATE TABLE `materials` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '原料ID',
-  `name` VARCHAR(255) NOT NULL COMMENT '原料名称',
-  `unit` VARCHAR(255) NOT NULL COMMENT '原料单位',
-  `type` ENUM('wip', 'origin') NOT NULL COMMENT '原料类型'
-);
-
--- 订单产品关系表
-CREATE TABLE `order_product` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '订单产品ID', 
-  `order_id` VARCHAR(36) NOT NULL COMMENT '订单ID',
-  `product_id` VARCHAR(36) NOT NULL COMMENT '产品ID',
-  `number` INTEGER NOT NULL DEFAULT 0 COMMENT '订单产品数量'
-);
-
--- 工作组表
-CREATE TABLE `working_group` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '工作组ID',
-  `type` ENUM('sew', 'cut') NOT NULL COMMENT '工作组类型，缝纫小组、裁剪小组',
-  `name` VARCHAR(255) NOT NULL COMMENT '工作组名称'
-);
-
--- 订单产品裁剪任务表
-CREATE TABLE `cutting_tasks` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '裁剪任务ID',
-  `start_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '裁剪任务开始时间',
-  `end_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '裁剪任务结束时间',
-  `working_group_id` VARCHAR(36) NOT NULL COMMENT '工作组ID',
-  `order_product_id` VARCHAR(36) NOT NULL COMMENT '订单产品ID',
-  `planned_number` INTEGER NOT NULL DEFAULT 0 COMMENT '计划裁剪数量',
-  `completed_number` INTEGER NOT NULL DEFAULT 0 COMMENT '已完成裁剪数量',
+-- ----------------------------
+-- Table structure for cutting_tasks
+-- ----------------------------
+CREATE TABLE `cutting_tasks`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Cutting Task ID',
+  `start_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Cutting Task Start Time',
+  `end_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Cutting Task End Time',
+  `working_group_id` int UNSIGNED NOT NULL COMMENT 'Working Group ID',
+  `order_product_id` int UNSIGNED NOT NULL COMMENT 'Order Product ID',
+  `produced_wip_id` int UNSIGNED NOT NULL COMMENT 'Produced WIP material ID',
+  `planned_number` int(11) NOT NULL DEFAULT 0 COMMENT 'Planned Cutting Quantity',
+  `completed_number` int(11) NOT NULL DEFAULT 0 COMMENT 'Completed Cutting Quantity',
   `status` int(11) NOT NULL DEFAULT 0 COMMENT 'Status of the task 0: not start, 1: on-going, 2: completed',
-);
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `working_group_id`(`working_group_id`) USING BTREE,
+  INDEX `order_product_id`(`order_product_id`) USING BTREE,
+  CONSTRAINT `cutting_tasks_ibfk_1` FOREIGN KEY (`working_group_id`) REFERENCES `working_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `cutting_tasks_ibfk_2` FOREIGN KEY (`order_product_id`) REFERENCES `order_product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
--- 订单产品缝纫任务表
-CREATE TABLE `sewing_tasks` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '缝纫任务ID',
-  `start_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '缝纫任务开始时间',
-  `end_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '缝纫任务结束时间',
-  `working_group_id` VARCHAR(36) NOT NULL COMMENT '工作组ID',
-  `order_product_id` VARCHAR(36) NOT NULL COMMENT '订单产品ID',
-  `planned_number` INTEGER NOT NULL DEFAULT 0 COMMENT '计划缝纫数量',
-  `completed_number` INTEGER NOT NULL DEFAULT 0 COMMENT '已完成缝纫数量',
-  `is_started` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '缝纫任务是否已开始',
+-- ----------------------------
+-- Table structure for materials
+-- ----------------------------
+CREATE TABLE `materials`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Material ID',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Material Name',
+  `unit` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Material Unit',
+  `type` enum('wip','origin') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Material Type',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+
+
+-- ----------------------------
+-- Table structure for order_product
+-- ----------------------------
+CREATE TABLE `order_product`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Order Product ID',
+  `order_id` int UNSIGNED NOT NULL COMMENT 'Order ID',
+  `product_id` int UNSIGNED NOT NULL COMMENT 'Product ID',
+  `number` int(11) NOT NULL DEFAULT 0 COMMENT 'Order Product Quantity',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `order_id`(`order_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE,
+  CONSTRAINT `order_product_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `order_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+
+
+-- ----------------------------
+-- Table structure for orders
+-- ----------------------------
+CREATE TABLE `orders`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Order ID',
+  `user_id` int UNSIGNED NOT NULL COMMENT '客户ID',
+  `order_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Order Name',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Order 创建Time ',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `user_id`(`user_id`) USING BTREE,
+  CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `customers` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for products
+-- ----------------------------
+CREATE TABLE `products`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'product ID',
+  `products_type_id` int UNSIGNED NOT NULL COMMENT 'product typeID',
+  `attributes` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'product 属性',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `products_type_id`(`products_type_id`) USING BTREE,
+  CONSTRAINT `products_ibfk_1` FOREIGN KEY (`products_type_id`) REFERENCES `products_types` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for products_types
+-- ----------------------------
+CREATE TABLE `products_types`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'product typeID',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'product type描述',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for sewing_material_allocation
+-- ----------------------------
+CREATE TABLE `sewing_material_allocation`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Sewing Task Material 分配ID',
+  `warehouse_material_id` int UNSIGNED NULL COMMENT 'warehouse Material ID',
+  `sewing_task_id` int UNSIGNED NOT NULL COMMENT 'Sewing Task ID',
+  `allocated_num` int(11) NOT NULL DEFAULT 0 COMMENT 'Material 分配number',
+  `is_allocated` tinyint(1) NOT NULL DEFAULT 0 COMMENT 'Material 是否已分配',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `sewing_task_id`(`sewing_task_id`) USING BTREE,
+  INDEX `warehouse_material_id`(`warehouse_material_id`) USING BTREE,
+  CONSTRAINT `sewing_material_allocation_ibfk_1` FOREIGN KEY (`sewing_task_id`) REFERENCES `sewing_tasks` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `sewing_material_allocation_ibfk_2` FOREIGN KEY (`warehouse_material_id`) REFERENCES `warehouse_material` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Table structure for sewing_tasks
+-- ----------------------------
+CREATE TABLE `sewing_tasks`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Sewing Task ID',
+  `start_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Sewing Task Start Time ',
+  `end_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'Sewing Task End Time ',
+  `working_group_id` int UNSIGNED NOT NULL COMMENT 'Working Group ID',
+  `order_product_id` int UNSIGNED NOT NULL COMMENT 'Order product ID',
+  `planned_number` int(11) NOT NULL DEFAULT 0 COMMENT 'planned Sewing number',
+  `completed_number` int(11) NOT NULL DEFAULT 0 COMMENT 'completed Sewing number',
   `status` int(11) NOT NULL DEFAULT 0 COMMENT 'Status of the task 0: not start, 1: on-going, 2: completed',
-);
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `working_group_id`(`working_group_id`) USING BTREE,
+  INDEX `order_product_id`(`order_product_id`) USING BTREE,
+  CONSTRAINT `sewing_tasks_ibfk_1` FOREIGN KEY (`working_group_id`) REFERENCES `working_group` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `sewing_tasks_ibfk_2` FOREIGN KEY (`order_product_id`) REFERENCES `order_product` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
--- 订单产品裁剪任务原料分配表
-CREATE TABLE `cutting_material_allocation` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '裁剪任务原料分配ID',
-  `warehouse_material_id` VARCHAR(36) NOT NULL COMMENT '仓库原料ID',
-  `cutting_task_id` VARCHAR(36) NOT NULL COMMENT '裁剪任务ID',
-  `allocated_num` INTEGER NOT NULL DEFAULT 0 COMMENT '原料分配数量',
-  `is_allocated` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '原料是否已分配'
-);
+-- ----------------------------
+-- Table structure for warehouse
+-- ----------------------------
+CREATE TABLE `warehouse`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'warehouse ID',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'warehouse Name',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
--- 订单产品缝纫任务原料分配表
-CREATE TABLE `sewing_material_allocation` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '缝纫任务原料分配ID',
-  `warehouse_material_id` VARCHAR(36) NOT NULL COMMENT '仓库原料ID',
-  `sewing_task_id` VARCHAR(36) NOT NULL COMMENT '缝纫任务ID',
-  `allocated_num` INTEGER NOT NULL DEFAULT 0 COMMENT '原料分配数量',
-  `is_allocated` BOOLEAN NOT NULL DEFAULT FALSE COMMENT '原料是否已分配'
-);
+-- ----------------------------
+-- Table structure for warehouse_material
+-- ----------------------------
+CREATE TABLE `warehouse_material`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'warehouse Material ID',
+  `warehouse_id` int UNSIGNED NOT NULL COMMENT 'warehouse ID',
+  `material_id` int UNSIGNED NOT NULL COMMENT 'Material ID',
+  `total_number` int(11) NOT NULL DEFAULT 0 COMMENT 'Total Material Inventory Quantity',
+  `left_number` int(11) NOT NULL DEFAULT 0 COMMENT 'Remaining Material Inventory Quantity',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `warehouse_id`(`warehouse_id`) USING BTREE,
+  INDEX `material_id`(`material_id`) USING BTREE,
+  CONSTRAINT `warehouse_material_ibfk_1` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `warehouse_material_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
--- 仓库表
-CREATE TABLE `warehouse` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '仓库ID',
-  `name` VARCHAR(255) NOT NULL COMMENT '仓库名称'
-);
+-- ----------------------------
+-- Table structure for warehouse_product
+-- ----------------------------
+CREATE TABLE `warehouse_product`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'warehouse product ID',
+  `warehouse_id` int UNSIGNED NOT NULL COMMENT 'warehouse ID',
+  `product_id` int UNSIGNED NOT NULL COMMENT 'product ID',
+  `left_number` int(11) NOT NULL DEFAULT 0 COMMENT 'Remaining Product Inventory Quantity',
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `warehouse_id`(`warehouse_id`) USING BTREE,
+  INDEX `product_id`(`product_id`) USING BTREE,
+  CONSTRAINT `warehouse_product_ibfk_1` FOREIGN KEY (`warehouse_id`) REFERENCES `warehouse` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `warehouse_product_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
--- 仓库产品关系表
-CREATE TABLE `warehouse_product` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '仓库产品ID',
-  `warehouse_id` VARCHAR(36) NOT NULL COMMENT '仓库ID',
-  `product_id` VARCHAR(36) NOT NULL COMMENT '产品ID',
-  `left_number` INTEGER NOT NULL DEFAULT 0 COMMENT '产品剩余库存数量'
-);
+-- ----------------------------
+-- Table structure for working_group
+-- ----------------------------
+CREATE TABLE `working_group`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Working Group ID',
+  `type` enum('sew','cut') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Working Group type，Sewing group、Cutting group',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Working Group Name',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
--- 仓库原料关系表
-CREATE TABLE `warehouse_material` (
-  `id` VARCHAR(36) PRIMARY KEY COMMENT '仓库原料ID',
-  `warehouse_id` VARCHAR(36) NOT NULL COMMENT '仓库ID',
-  `material_id` VARCHAR(36) NOT NULL COMMENT '原料ID',
-  `left_number` INTEGER NOT NULL DEFAULT 0 COMMENT '原料剩余库存数量'
-);
-
--- Relation between product and work-in-progress materials
+-- ----------------------------
+-- Table structure for product_material
+-- ----------------------------
 CREATE TABLE `product_material`  (
-  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Product Material ID',
-  `product_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Product ID',
-  `material_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Material ID',
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Product Material ID',
+  `product_id` int UNSIGNED NOT NULL COMMENT 'Product ID',
+  `material_id` int UNSIGNED NOT NULL COMMENT 'Material ID',
   `number` int(11) NOT NULL DEFAULT 0.0 COMMENT 'Required Quantity of material',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `product_id`(`product_id`) USING BTREE,
   CONSTRAINT `product_material_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `product_material_ibfk_2` FOREIGN KEY (`material_id`) REFERENCES `materials` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) 
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
--- Relation between Work-in-progress and original materials
+-- ----------------------------
+-- Table structure for product_material
+-- ----------------------------
 CREATE TABLE `wip_material`  (
-  `id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Product Material ID',
-  `wip_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Wip material ID',
-  `origin_material_id` varchar(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT 'Original Material ID',
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'Product Material ID',
+  `wip_id` int UNSIGNED NOT NULL COMMENT 'Wip material ID',
+  `origin_material_id` int UNSIGNED NOT NULL COMMENT 'Original Material ID',
   `number` float NOT NULL DEFAULT 0.0 COMMENT 'Required Quantity of material',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `wip_id`(`wip_id`) USING BTREE,
   CONSTRAINT `wip_material_ibfk_1` FOREIGN KEY (`wip_id`) REFERENCES `materials` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `wip_material_ibfk_2` FOREIGN KEY (`origin_material_id`) REFERENCES `materials` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) 
-
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 """
 # print("*****************table details*****************")
 # print(table_details)

@@ -51,6 +51,43 @@ def populate_sql_statement(sql_str: str, previous_sql_results: list[list[dict]])
     list_of_str = ast.literal_eval(result_string)
     return list_of_str
 
+def rewrite_user_request(user_input: str, context: list[str]) -> str:
+    # Try to fix the SQL using GPT:
+    function_string = "def rewrite_user_request(user_input: str, context: list[str]) -> str:"
+    args = [f"'''{user_input}'''", f"'''{context}'''"]
+    description_string = ("Based on the dialogue context, compile a complete user request, "
+                          "ensuring all important entity information is included.")
+
+    result_string = call_ai_function(
+        function_string, args, description_string, model=cfg.smart_llm_model
+    )
+    # print("chatgpt", result_string)
+    return result_string
+
+def populate_operation_statement(operation_str: str, previous_operating_results: list[list[dict]], op_type) -> list[str]:
+    # Try to fix the SQL using GPT:
+    function_string = "def populate_operation_statement(operation_str: str, previous_operation_results: list[list[dict]]) -> list[str]:"
+    args = [f"'''{operation_str}'''", f"'''{previous_operating_results}'''"]
+    description_string = (
+        "Find useful information in the results of the previous operating statement, and replace <> with the corresponding information. "
+        "If you are unable to identify the parameters within the <> using the given information, Please generate "
+        "a question within it that begins with 'ASK!' to ask the user for the required information.."
+    )
+    result_string = call_ai_function(
+        function_string, args, description_string, model=cfg.smart_llm_model
+    )
+    # print("chatgpt", result_string)
+    brace_index = result_string.index("[")
+    result_string = result_string[brace_index:]
+    last_brace_index = result_string.rindex("]")
+    result_string = result_string[:last_brace_index + 1]
+    # print(result_string)
+    if op_type == 'Tool':
+        return [result_string]
+    else:
+        list_of_str = ast.literal_eval(result_string)
+        return list_of_str
+
 
 if __name__ == '__main__':
     previous_sql_results = [[{"sale_id": 3}],
