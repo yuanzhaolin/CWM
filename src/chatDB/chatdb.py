@@ -135,15 +135,22 @@ def generate_chat_responses(user_inp, mysql_db, historical_message, context_abst
 
     if len(response_steps_list_of_dict) == 0:
         print(f"NOT NEED MEMORY: {response_steps}")
-        return None, None, "generate sql error"
+        # return None, None, "None",
+        sql_results_history, new_mem_ops = [], []
+        # historical_message[-1]["content"] = str(sql_results_history)
+        # create_chat_completion(
+        #     [create_chat_message('system', '')]
+        # )
+        responses = generate_final_response(user_inp, sql_results_history, cfg.smart_llm_model, cfg.smart_token_limit)
+    else:
 
-    sql_results_history, new_mem_ops = chain_of_memory(response_steps_list_of_dict, mysql_db)
-    # historical_message[-1]["content"] = str(sql_results_history)
-    context_abstract = generate_abstract_context(sql_results_history, cfg.smart_llm_model, context_abstract, cfg.smart_token_limit)
-    # create_chat_completion(
-    #     [create_chat_message('system', '')]
-    # )
-    responses = generate_final_response(user_inp, sql_results_history, cfg.smart_llm_model, cfg.smart_token_limit)
+        sql_results_history, new_mem_ops = chain_of_memory(response_steps_list_of_dict, mysql_db)
+        # historical_message[-1]["content"] = str(sql_results_history)
+        context_abstract = generate_abstract_context(sql_results_history, cfg.smart_llm_model, context_abstract, cfg.smart_token_limit)
+        # create_chat_completion(
+        #     [create_chat_message('system', '')]
+        # )
+        responses = generate_final_response(user_inp, sql_results_history, cfg.smart_llm_model, cfg.smart_token_limit)
     # historical_message[-1]["content"] = context_abstract
     # full_message_history, model, old_abstract, token_limit
     print("Finish!")
