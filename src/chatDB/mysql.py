@@ -50,9 +50,8 @@ class MySQLDB(object):
                     self.cursor.execute(sub_sql)
             result = self.cursor.fetchall()
             self.conn.commit()
-            # if 'INSERT' in sql:
-            #     self.cursor.execute('SELECT LAST_INSERT_ID();')
-            #     result = self.cursor.fetchall()
+            if 'INSERT' in sql:
+                result = [{'auto_increment_id': self.cursor.lastrowid}]
         except Exception as e:
             self.conn.rollback()
             error_message = f"SQL error: {str(e)}"

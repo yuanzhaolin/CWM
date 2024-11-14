@@ -1,0 +1,19 @@
+{
+    "ID": 37,
+    "q_ch": "对所有结束时间在2024年7月前，且未完成的裁剪任务中，计划裁剪数量最多的任务是什么？",
+    "q_en": "What is the task with the highest planned quantity among all cutting tasks that have not been completed and have an end date before July 2024??",
+    "gt": "Hey there! 😄\n\nI've got the details you're looking for. Among all the cutting tasks that haven't been completed and have an end date before July 2024, here's the one with the highest planned quantity:\n\n| Task ID | Planned Quantity |\n|---------|------------------|\n|    5    |        260       |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT ct.id, ct.planned_number FROM cutting_tasks ct WHERE ct.status != 2 AND ct.end_time < '2024-07-01' ORDER BY ct.planned_number DESC LIMIT 1;",
+            "description": "Retrieve the cutting task with the highest planned quantity among tasks that have not been completed and have an end date before July 2024",
+            "results": [
+                {
+                    "id": 5,
+                    "planned_number": 260
+                }
+            ]
+        }
+    ]
+}

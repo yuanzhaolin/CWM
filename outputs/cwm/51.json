@@ -1,185 +1,140 @@
 {
-  "ID": 51,
-  "q_ch": "未完成的订单中，哪个订单完成的进度最快？",
-  "q_en": "Which order has the fastest completion progress among the unfinished orders?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT order_product_id, SUM(completed_number) / SUM(planned_number) AS cutting_progress\n FROM cutting_tasks\n WHERE is_started = TRUE AND completed_number < planned_number\n GROUP BY order_product_id;",
-        "SELECT order_product_id, SUM(completed_number) / SUM(planned_number) AS sewing_progress\n FROM sewing_tasks\n WHERE is_started = TRUE AND completed_number < planned_number\n GROUP BY order_product_id;",
-        "SELECT op.order_id, (COALESCE(ct.cutting_progress, 0) + COALESCE(st.sewing_progress, 0)) / 2 AS overall_progress\n FROM order_product op\n LEFT JOIN (SELECT order_product_id, SUM(completed_number) / SUM(planned_number) AS cutting_progress\n            FROM cutting_tasks\n            WHERE is_started = TRUE AND completed_number < planned_number\n            GROUP BY order_product_id) ct ON op.id = ct.order_product_id\n LEFT JOIN (SELECT order_product_id, SUM(completed_number) / SUM(planned_number) AS sewing_progress\n            FROM sewing_tasks\n            WHERE is_started = TRUE AND completed_number < planned_number\n            GROUP BY order_product_id) st ON op.id = st.order_product_id;",
-        "SELECT order_id\n FROM (SELECT op.order_id, (COALESCE(ct.cutting_progress, 0) + COALESCE(st.sewing_progress, 0)) / 2 AS overall_progress\n       FROM order_product op\n       LEFT JOIN (SELECT order_product_id, SUM(completed_number) / SUM(planned_number) AS cutting_progress\n                  FROM cutting_tasks\n                  WHERE is_started = TRUE AND completed_number < planned_number\n                  GROUP BY order_product_id) ct ON op.id = ct.order_product_id\n       LEFT JOIN (SELECT order_product_id, SUM(completed_number) / SUM(planned_number) AS sewing_progress\n                  FROM sewing_tasks\n                  WHERE is_started = TRUE AND completed_number < planned_number\n                  GROUP BY order_product_id) st ON op.id = st.order_product_id) progress\n ORDER BY overall_progress DESC\n LIMIT 1;"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "order_product_id": "op15",
-            "cutting_progress": null
-          },
-          {
-            "order_product_id": "op30",
-            "cutting_progress": null
-          },
-          {
-            "order_product_id": "op32",
-            "cutting_progress": null
-          }
-        ],
-        [
-          {
-            "order_product_id": "op4",
-            "sewing_progress": null
-          },
-          {
-            "order_product_id": "op7",
-            "sewing_progress": null
-          }
-        ],
-        [
-          {
-            "order_id": "o1",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o2",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o4",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o8",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o10",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o1",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o1",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o1",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o1",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o11",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o12",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o2",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o2",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o2",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o2",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o3",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o3",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o3",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o3",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o4",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o4",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o4",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o5",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o5",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o5",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o6",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o6",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o6",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o7",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o7",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o7",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o8",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o8",
-            "overall_progress": null
-          },
-          {
-            "order_id": "o9",
-            "overall_progress": null
-          }
-        ],
-        [
-          {
-            "order_id": "o8"
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 3502
+    "ID": 51,
+    "q_ch": "未完成的订单中，哪个订单完成的进度最快？",
+    "q_en": "Which order has the fastest completion progress among the unfinished orders?",
+    "gt": "Sure! Let's take a look at the unfinished orders and see which one has the fastest completion progress. Here's a summary of the completion progress for each order:\n\n| Order Name                  | Completion Progress |\n|-----------------------------|---------------------|\n| PolyU_Tshirt                | 100.00%             |\n| John_Pants                  | 100.00%             |\n| Emily_Dress                 | 85.19%              |\n| James_WinterOrder           | 100.00%             |\n| Sophia_SkirtAndJacket       | 100.00%             |\n| Michael_SweaterAndShorts    | 74.24%              |\n| Olivia_WinterOrder          | 100.00%             |\n| William_Skirt_Sweater_Shorts| 100.00%             |\n| PolyU_Skirt                 | 100.00%             |\n| John_Jacket                 | 0.00%               |\n| Emily_Pants                 | 0.00%               |\n| James_Skirt                 | 0.00%               |\n\nThe order with the fastest completion progress among the unfinished ones is **William_Skirt_Sweater_Shorts** with a completion progress of 100%! 🎉 Keep up the great work! 😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT o.id, o.order_name FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id;",
+            "description": "Retrieve the IDs and names of all unfinished orders",
+            "results": [
+                {
+                    "id": 1,
+                    "order_name": "PolyU_Tshirt"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants"
+                },
+                {
+                    "id": 3,
+                    "order_name": "Emily_Dress"
+                },
+                {
+                    "id": 4,
+                    "order_name": "James_WinterOrder"
+                },
+                {
+                    "id": 5,
+                    "order_name": "Sophia_SkirtAndJacket"
+                },
+                {
+                    "id": 6,
+                    "order_name": "Michael_SweaterAndShorts"
+                },
+                {
+                    "id": 7,
+                    "order_name": "Olivia_WinterOrder"
+                },
+                {
+                    "id": 8,
+                    "order_name": "William_Skirt_Sweater_Shorts"
+                },
+                {
+                    "id": 9,
+                    "order_name": "PolyU_Skirt"
+                },
+                {
+                    "id": 10,
+                    "order_name": "John_Jacket"
+                },
+                {
+                    "id": 11,
+                    "order_name": "Emily_Pants"
+                },
+                {
+                    "id": 12,
+                    "order_name": "James_Skirt"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.id, o.order_name, SUM(st.completed_number) / SUM(op.number) AS completion_progress FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id;",
+            "description": "Calculate the completion progress for each unfinished order",
+            "results": [
+                {
+                    "id": 1,
+                    "order_name": "PolyU_Tshirt",
+                    "completion_progress": "1.0000"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants",
+                    "completion_progress": "1.0000"
+                },
+                {
+                    "id": 3,
+                    "order_name": "Emily_Dress",
+                    "completion_progress": "0.8519"
+                },
+                {
+                    "id": 4,
+                    "order_name": "James_WinterOrder",
+                    "completion_progress": "1.0000"
+                },
+                {
+                    "id": 5,
+                    "order_name": "Sophia_SkirtAndJacket",
+                    "completion_progress": "1.0000"
+                },
+                {
+                    "id": 6,
+                    "order_name": "Michael_SweaterAndShorts",
+                    "completion_progress": "0.7424"
+                },
+                {
+                    "id": 7,
+                    "order_name": "Olivia_WinterOrder",
+                    "completion_progress": "1.0000"
+                },
+                {
+                    "id": 8,
+                    "order_name": "William_Skirt_Sweater_Shorts",
+                    "completion_progress": "1.0000"
+                },
+                {
+                    "id": 9,
+                    "order_name": "PolyU_Skirt",
+                    "completion_progress": "1.0000"
+                },
+                {
+                    "id": 10,
+                    "order_name": "John_Jacket",
+                    "completion_progress": "0.0000"
+                },
+                {
+                    "id": 11,
+                    "order_name": "Emily_Pants",
+                    "completion_progress": "0.0000"
+                },
+                {
+                    "id": 12,
+                    "order_name": "James_Skirt",
+                    "completion_progress": "0.0000"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT order_name FROM (SELECT o.id, o.order_name, SUM(st.completed_number) / SUM(op.number) AS completion_progress FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id) AS order_progress ORDER BY completion_progress DESC LIMIT 1;",
+            "description": "Identify the order with the highest completion progress",
+            "results": [
+                {
+                    "order_name": "William_Skirt_Sweater_Shorts"
+                }
+            ]
+        }
+    ]
 }

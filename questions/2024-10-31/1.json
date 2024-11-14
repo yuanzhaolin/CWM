@@ -1,0 +1,32 @@
+{
+    "ID": 1,
+    "q_ch": "PolyU的订单有哪些？",
+    "q_en": "What are the orders for PolyU?",
+    "gt": "Sure! Here are the orders for the customer named \"PolyU\":\n\n| Order Name       |\n|------------------|\n| PolyU_Tshirt     |\n| PolyU_Skirt      |\n| Order for PolyU  |\n\nLooks like PolyU has some stylish choices! 😄 If you have any more questions, feel free to ask!",
+    "steps": [
+        {
+            "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
+            "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "sql": "SELECT order_name FROM orders WHERE user_id = '1';",
+            "description": "Retrieve the orders for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "order_name": "PolyU_Tshirt"
+                },
+                {
+                    "order_name": "PolyU_Skirt"
+                },
+                {
+                    "order_name": "Order for PolyU"
+                }
+            ]
+        }
+    ]
+}

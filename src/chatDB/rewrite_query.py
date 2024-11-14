@@ -75,7 +75,7 @@ def rewrite_query(question):
 
         # Rewritten Question
         """
-    print("\n***********rewrite query prompt***********\n", rewrite_query_prompt)
+    # print("\n***********rewrite query prompt***********\n", rewrite_query_prompt)
     messages = [
         {"role": "system", "content": "You are a question optimization model."},
         {"role": "user", "content": rewrite_query_prompt}

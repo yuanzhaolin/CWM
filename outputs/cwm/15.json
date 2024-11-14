@@ -1,22 +1,29 @@
 {
-  "ID": 15,
-  "q_ch": "剩余库存最少的原料是什么？",
-  "q_en": "What is the material with the lowest remaining inventory?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT m.id, m.name, SUM(wm.left_number) AS remaining_inventory\n FROM warehouse_material wm\n JOIN materials m ON wm.material_id = m.id\n GROUP BY m.id, m.name\n ORDER BY remaining_inventory ASC\n LIMIT 1;"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "m9",
-            "name": "Synthetic Fiber",
-            "remaining_inventory": null
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 8683
+    "ID": 15,
+    "q_ch": "剩余库存最少的原料是什么？",
+    "q_en": "What is the material with the lowest remaining inventory?",
+    "gt": "Sure thing! Let's dive into the details of the material with the lowest remaining inventory. 📦\n\n| Material ID | Material Name | Remaining Inventory |\n|-------------|---------------|---------------------|\n| 5           | Silk          | 1100                |\n\nIt looks like **Silk** is the material with the lowest remaining inventory, with just 1100 units left. Keep an eye on that stock! 😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT material_id, left_number FROM warehouse_material ORDER BY left_number ASC LIMIT 1;",
+            "description": "Retrieve the material ID and the remaining inventory quantity for each material in the warehouse",
+            "results": [
+                {
+                    "material_id": 5,
+                    "left_number": 1100
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT name FROM materials WHERE id = '5';",
+            "description": "Retrieve the name of the material with the lowest remaining inventory",
+            "results": [
+                {
+                    "name": "Silk"
+                }
+            ]
+        }
+    ]
 }

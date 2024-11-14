@@ -1,0 +1,28 @@
+{
+    "ID": 38,
+    "q_ch": "Advanced裁剪组还未完成的裁剪任务是哪些顾客的订单？",
+    "q_en": "Which customer orders are the cutting tasks that the Advanced Cutting Group has not yet completed?",
+    "gt": "Sure thing! Let's dive into the details of the customer orders that the \"Advanced Cutters\" haven't completed yet. Here's what I found:\n\n| Order ID | Customer Name |\n|----------|---------------|\n| 2        | John          |\n\nIt looks like John has an order that the \"Advanced Cutters\" are still working on. If you have any more questions or need further assistance, feel free to ask! 😄",
+    "steps": [
+        {
+            "sql": "SELECT id FROM working_group WHERE name = 'Advanced Cutters';",
+            "description": "Retrieve the working group ID for the working group with the name \"Advanced Cutters\"",
+            "results": [
+                {
+                    "id": 6
+                }
+            ]
+        },
+        "no results found.",
+        {
+            "sql": "SELECT DISTINCT o.id, c.customer_name FROM orders o JOIN order_product op ON o.id = op.order_id JOIN customers c ON o.user_id = c.id WHERE op.id IN (6);",
+            "description": "Retrieve the order IDs and customer names for the orders associated with the retrieved order_product IDs",
+            "results": [
+                {
+                    "id": 2,
+                    "customer_name": "John"
+                }
+            ]
+        }
+    ]
+}

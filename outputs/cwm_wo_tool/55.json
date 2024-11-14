@@ -1,0 +1,157 @@
+{
+    "ID": 55,
+    "q_ch": "所有订单中总共做的前三多的商品是什么？",
+    "q_en": "What are the top three products made in all orders in total?",
+    "gt": "Sure thing! Let's dive into the top three products made in all orders. Here's a neat table to showcase the details:\n\n| Product ID | Description | Attributes     |\n|------------|-------------|----------------|\n| 27         | T-shirt     | Yellow, S size |\n| 7          | Skirt       | Purple, M size |\n| 15         | Skirt       | Pink, M size   |\n\nThese are the top three products that have been made the most in all orders. Quite a colorful selection, isn't it? 😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT product_id, SUM(number) as total_made FROM order_product GROUP BY product_id;",
+            "description": "Retrieve the total number of each product made in all orders",
+            "results": [
+                {
+                    "product_id": 1,
+                    "total_made": "150"
+                },
+                {
+                    "product_id": 2,
+                    "total_made": "50"
+                },
+                {
+                    "product_id": 3,
+                    "total_made": "150"
+                },
+                {
+                    "product_id": 4,
+                    "total_made": "80"
+                },
+                {
+                    "product_id": 5,
+                    "total_made": "120"
+                },
+                {
+                    "product_id": 6,
+                    "total_made": "200"
+                },
+                {
+                    "product_id": 7,
+                    "total_made": "540"
+                },
+                {
+                    "product_id": 8,
+                    "total_made": "110"
+                },
+                {
+                    "product_id": 9,
+                    "total_made": "180"
+                },
+                {
+                    "product_id": 10,
+                    "total_made": "60"
+                },
+                {
+                    "product_id": 11,
+                    "total_made": "220"
+                },
+                {
+                    "product_id": 12,
+                    "total_made": "95"
+                },
+                {
+                    "product_id": 13,
+                    "total_made": "130"
+                },
+                {
+                    "product_id": 14,
+                    "total_made": "175"
+                },
+                {
+                    "product_id": 15,
+                    "total_made": "345"
+                },
+                {
+                    "product_id": 16,
+                    "total_made": "105"
+                },
+                {
+                    "product_id": 17,
+                    "total_made": "100"
+                },
+                {
+                    "product_id": 18,
+                    "total_made": "75"
+                },
+                {
+                    "product_id": 19,
+                    "total_made": "240"
+                },
+                {
+                    "product_id": 20,
+                    "total_made": "220"
+                },
+                {
+                    "product_id": 21,
+                    "total_made": "140"
+                },
+                {
+                    "product_id": 22,
+                    "total_made": "185"
+                },
+                {
+                    "product_id": 23,
+                    "total_made": "95"
+                },
+                {
+                    "product_id": 24,
+                    "total_made": "195"
+                },
+                {
+                    "product_id": 25,
+                    "total_made": "115"
+                },
+                {
+                    "product_id": 26,
+                    "total_made": "200"
+                },
+                {
+                    "product_id": 27,
+                    "total_made": "260"
+                },
+                {
+                    "product_id": 28,
+                    "total_made": "110"
+                },
+                {
+                    "product_id": 29,
+                    "total_made": "150"
+                },
+                {
+                    "product_id": 30,
+                    "total_made": "240"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT p.id, p.attributes, pt.description FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.id IN (SELECT product_id FROM (SELECT product_id FROM order_product GROUP BY product_id ORDER BY SUM(number) DESC LIMIT 3) as top_products);",
+            "description": "Retrieve the product details for the top three products based on the total number made",
+            "results": [
+                {
+                    "id": 27,
+                    "attributes": "Yellow, S size",
+                    "description": "T-shirt"
+                },
+                {
+                    "id": 7,
+                    "attributes": "Purple, M size",
+                    "description": "Skirt"
+                },
+                {
+                    "id": 15,
+                    "attributes": "Pink, M size",
+                    "description": "Skirt"
+                }
+            ]
+        }
+    ]
+}

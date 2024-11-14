@@ -1,0 +1,93 @@
+{
+    "ID": 3,
+    "q_ch": "Emily订购的Dress订单生产进度如何？用百分比来表示。",
+    "q_en": "What is the production progress of the Dress ordered by Emily? Please represent it in percentage.",
+    "gt": "Hello there! 😄 Let's take a look at the production progress for the dresses ordered by Emily. Here's a summary of the progress in percentage:\n\n| Product Type | Customer | Production Progress (%) |\n|--------------|----------|-------------------------|\n| Dress        | Emily    | 85.19%                  |\n\nEmily's dresses are coming along nicely, with a production progress of 85.19%! 🎉 Keep an eye out for the final touches! If you have any more questions, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'Emily';",
+            "description": "Retrieve the customer ID for the customer with the name \"Emily\"",
+            "results": [
+                {
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '3';",
+            "description": "Retrieve the order IDs for orders placed by the customer \"Emily\"",
+            "results": [
+                {
+                    "id": 3
+                },
+                {
+                    "id": 11
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM products WHERE products_type_id = (SELECT id FROM products_types WHERE description = 'Dress');",
+            "description": "Retrieve the product IDs for products of type \"Dress\"",
+            "results": [
+                {
+                    "id": 5
+                },
+                {
+                    "id": 13
+                },
+                {
+                    "id": 21
+                },
+                {
+                    "id": 29
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id, number FROM order_product WHERE order_id IN (3, 11) AND product_id IN (5, 13, 21, 29);",
+            "description": "Retrieve the order_product IDs and the total number of products for the specific orders and products",
+            "results": [
+                {
+                    "id": 11,
+                    "number": 140
+                },
+                {
+                    "id": 12,
+                    "number": 150
+                },
+                {
+                    "id": 13,
+                    "number": 130
+                },
+                {
+                    "id": 14,
+                    "number": 120
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT SUM(completed_number) FROM sewing_tasks WHERE order_product_id IN (11, 12, 13, 14);",
+            "description": "Retrieve the total completed number of sewing tasks for the specific order_products",
+            "results": [
+                {
+                    "SUM(completed_number)": "460"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT (SUM(completed_number) / SUM(number)) * 100 AS production_progress FROM sewing_tasks st JOIN order_product op ON st.order_product_id = op.id WHERE op.id IN (11, 12, 13, 14);",
+            "description": "Calculate the production progress as a percentage",
+            "results": [
+                {
+                    "production_progress": "85.1852"
+                }
+            ]
+        }
+    ]
+}

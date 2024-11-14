@@ -1,50 +1,55 @@
 {
-  "ID": 22,
-  "q_ch": "我们现在有哪些缝纫组，哪些裁剪组？",
-  "q_en": "What sewing groups and cutting groups do we have now?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT name FROM working_group WHERE type = 'sew';",
-        "SELECT name FROM working_group WHERE type = 'cut';"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "name": "Elite Sewers"
-          },
-          {
-            "name": "Master Sewers"
-          },
-          {
-            "name": "Skilled Sewers"
-          },
-          {
-            "name": "Advanced Sewers"
-          },
-          {
-            "name": "Premier Sewers"
-          }
-        ],
-        [
-          {
-            "name": "Precision Cutters"
-          },
-          {
-            "name": "Master Cutters"
-          },
-          {
-            "name": "Expert Cutters"
-          },
-          {
-            "name": "Professional Cutters"
-          },
-          {
-            "name": "Advanced Cutters"
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 10751
+    "ID": 22,
+    "q_ch": "我们现在有哪些缝纫组，哪些裁剪组？",
+    "q_en": "What sewing groups and cutting groups do we have now?",
+    "gt": "Hello there! 😄 Let's take a look at the sewing and cutting groups we have right now. Here's a handy table for you:\n\n| Group Name          | Type  |\n|---------------------|-------|\n| Precision Cutters   | Cut   |\n| Master Sewers       | Sew   |\n| Master Cutters      | Cut   |\n| Expert Cutters      | Cut   |\n| Professional Cutters| Cut   |\n| Advanced Cutters    | Cut   |\n| Skilled Sewers      | Sew   |\n| Advanced Sewers     | Sew   |\n| Premier Sewers      | Sew   |\n| Elite Sewers        | Sew   |\n\nI hope this helps! If you have any more questions, feel free to ask. 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT name, type FROM working_group WHERE type IN ('sew', 'cut');",
+            "description": "Retrieve the names of all sewing and cutting groups",
+            "results": [
+                {
+                    "name": "Precision Cutters",
+                    "type": "cut"
+                },
+                {
+                    "name": "Master Sewers",
+                    "type": "sew"
+                },
+                {
+                    "name": "Master Cutters",
+                    "type": "cut"
+                },
+                {
+                    "name": "Expert Cutters",
+                    "type": "cut"
+                },
+                {
+                    "name": "Professional Cutters",
+                    "type": "cut"
+                },
+                {
+                    "name": "Advanced Cutters",
+                    "type": "cut"
+                },
+                {
+                    "name": "Skilled Sewers",
+                    "type": "sew"
+                },
+                {
+                    "name": "Advanced Sewers",
+                    "type": "sew"
+                },
+                {
+                    "name": "Premier Sewers",
+                    "type": "sew"
+                },
+                {
+                    "name": "Elite Sewers",
+                    "type": "sew"
+                }
+            ]
+        }
+    ]
 }

@@ -1,0 +1,28 @@
+{
+    "ID": 48,
+    "q_ch": "我是Advanced Sewers，请将属于我的所有2024年5月1日-2024年5月30日之间开始的裁剪任务转给Premier Sewers。",
+    "q_en": "I am an Advanced Sewer. Please transfer all cutting tasks that started between May 1, 2024, and May 30, 2024, to Premier Sewers.",
+    "gt": "Hello there! 😊 It looks like you're looking to transfer some tasks. Let's get that sorted out for you!\n\nHere's what we found:\n\n| Task ID | Action Required |\n|---------|-----------------|\n| 31      | Transfer to Premier Sewers |\n\nThe task that started between May 1, 2024, and May 30, 2024, is ready to be transferred to the Premier Sewers group. If you have any more questions or need further assistance, feel free to ask! 🚀",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Premier Sewers';",
+            "description": "Retrieve the working group ID for \"Premier Sewers\"",
+            "results": [
+                {
+                    "id": 9
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM cutting_tasks WHERE start_time BETWEEN '2024-05-01' AND '2024-05-30';",
+            "description": "Retrieve the IDs of cutting tasks that started between May 1, 2024, and May 30, 2024",
+            "results": [
+                {
+                    "id": 31
+                }
+            ]
+        }
+    ]
+}

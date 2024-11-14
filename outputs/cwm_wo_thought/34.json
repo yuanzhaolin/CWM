@@ -1,0 +1,28 @@
+{
+    "ID": 34,
+    "q_ch": "Master Cutters当前已完成的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks have been completed by Master Cutters?",
+    "gt": "Hey there! 😄\n\nI've got the info you need about the cutting tasks completed by the \"Master Cutters\" working group. Here's a quick look at the task:\n\n| Task ID |\n|---------|\n|    3    |\n\nLooks like task number 3 has been successfully completed by the Master Cutters. If you have any more questions or need further details, feel free to ask! 🛠️✨",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Master Cutters';",
+            "description": "Retrieve the working group ID for the working group with the name \"Master Cutters\"",
+            "results": [
+                {
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT ct.id FROM cutting_tasks ct WHERE ct.working_group_id = '3' AND ct.status = 2;",
+            "description": "Retrieve the completed cutting tasks for the working group \"Master Cutters\"",
+            "results": [
+                {
+                    "id": 3
+                }
+            ]
+        }
+    ]
+}

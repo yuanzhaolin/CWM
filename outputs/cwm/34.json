@@ -1,95 +1,28 @@
 {
-  "ID": 34,
-  "q_ch": "Master Cutters当前已完成的裁剪任务有哪些？",
-  "q_en": "Which cutting tasks have been completed by Master Cutters?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id FROM working_group WHERE name = 'Master Cutters';",
-        "SELECT id, start_time, end_time, order_product_id, planned_number, completed_number, is_started\n FROM cutting_tasks\n WHERE working_group_id = 'wg3' AND completed_number = planned_number;"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "wg3"
-          }
-        ],
-        [
-          {
-            "id": "ct10",
-            "start_time": "2024年03月02日 00:00",
-            "end_time": "2024年03月29日 00:00",
-            "order_product_id": "op10",
-            "planned_number": 100,
-            "completed_number": 100,
-            "is_started": 1
-          },
-          {
-            "id": "ct2",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年02月02日 00:00",
-            "order_product_id": "op2",
-            "planned_number": 240,
-            "completed_number": 240,
-            "is_started": 1
-          },
-          {
-            "id": "ct23",
-            "start_time": "2024年03月25日 00:00",
-            "end_time": "2024年04月19日 00:00",
-            "order_product_id": "op23",
-            "planned_number": 110,
-            "completed_number": 110,
-            "is_started": 1
-          },
-          {
-            "id": "ct24",
-            "start_time": "2024年03月25日 00:00",
-            "end_time": "2024年04月23日 00:00",
-            "order_product_id": "op24",
-            "planned_number": 105,
-            "completed_number": 105,
-            "is_started": 1
-          },
-          {
-            "id": "ct3",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月19日 00:00",
-            "order_product_id": "op3",
-            "planned_number": 150,
-            "completed_number": 150,
-            "is_started": 1
-          },
-          {
-            "id": "ct31",
-            "start_time": "2024年05月10日 00:00",
-            "end_time": "2024年05月26日 00:00",
-            "order_product_id": "op31",
-            "planned_number": 260,
-            "completed_number": 260,
-            "is_started": 1
-          },
-          {
-            "id": "ct6",
-            "start_time": "2024年02月28日 00:00",
-            "end_time": "2024年03月20日 00:00",
-            "order_product_id": "op6",
-            "planned_number": 95,
-            "completed_number": 95,
-            "is_started": 1
-          },
-          {
-            "id": "ct9",
-            "start_time": "2024年03月01日 00:00",
-            "end_time": "2024年03月06日 00:00",
-            "order_product_id": "op9",
-            "planned_number": 80,
-            "completed_number": 80,
-            "is_started": 1
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 15468
+    "ID": 34,
+    "q_ch": "Master Cutters当前已完成的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks have been completed by Master Cutters?",
+    "gt": "Hey there! 😄\n\nI've got the info you need about the cutting tasks completed by the \"Master Cutters\" working group. Here's a quick look at the task:\n\n| Task ID |\n|---------|\n|    3    |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Master Cutters';",
+            "description": "Retrieve the working group ID for the working group with the name \"Master Cutters\"",
+            "results": [
+                {
+                    "id": 3
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT ct.id FROM cutting_tasks ct WHERE ct.working_group_id = '3' AND ct.status = 2;",
+            "description": "Retrieve the cutting tasks that have been completed by the working group \"Master Cutters\"",
+            "results": [
+                {
+                    "id": 3
+                }
+            ]
+        }
+    ]
 }

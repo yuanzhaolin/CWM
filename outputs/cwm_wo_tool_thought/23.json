@@ -1,0 +1,48 @@
+{
+    "ID": 23,
+    "q_ch": "主仓库和辅助仓库中，哪个仓库的Cotton Fabric更多？",
+    "q_en": "Which warehouse has more Cotton Fabric between the main and auxiliary warehouses?",
+    "gt": "Sure! Let's dive into the details and find out which warehouse has more Cotton Fabric. 🏢\n\nBased on the information we have:\n\n| Warehouse Name       | Cotton Fabric Quantity |\n|----------------------|------------------------|\n| Main Warehouse       | 3400                   |\n| Auxiliary Warehouse  | Not provided           |\n\nIt seems we only have the quantity for the Main Warehouse, which is 3400 units of Cotton Fabric. Unfortunately, we don't have the data for the Auxiliary Warehouse. Without that information, we can't definitively say which warehouse has more Cotton Fabric. 🤔\n\nIf you have more data or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
+            "description": "Retrieve the warehouse ID for \"Main Warehouse\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Auxiliary Warehouse';",
+            "description": "Retrieve the warehouse ID for \"Auxiliary Warehouse\"",
+            "results": [
+                {
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
+            "description": "Retrieve the material ID for \"Cotton Fabric\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT left_number FROM warehouse_material WHERE warehouse_id = '1' AND material_id = '1';",
+            "description": "Retrieve the remaining quantity of \"Cotton Fabric\" in \"Main Warehouse\"",
+            "results": [
+                {
+                    "left_number": 3400
+                }
+            ]
+        }
+    ]
+}

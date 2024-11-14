@@ -1,0 +1,388 @@
+{
+    "ID": 10,
+    "q_ch": "对于Michael下的SweaterAndShorts的订单，还有哪些产品没有制造完成，列出未完成产品的类型及属性描述和数量？",
+    "q_en": "For Michael's SweaterAndShorts order, which other products have not been manufactured yet? Please list the types, attributes and quantities of unfinished products.",
+    "gt": "Sure thing! Let's take a look at the unfinished products for Michael's order \"Michael_SweaterAndShorts\". Here's a list of the types, attributes, and quantities of products that are still in the works:\n\n| Product Type | Attributes       | Unfinished Quantity |\n|--------------|------------------|---------------------|\n| Sweater      | Blue, S size     | 55                  |\n| Shorts       | Silver, S size   | 30                  |\n| T-shirt      | Red, M size      | 100                 |\n| T-shirt      | Red, M size      | 50                  |\n| T-shirt      | Blue, L size     | 150                 |\n| T-shirt      | White, XL size   | 220                 |\n| T-shirt      | Green, M size    | 240                 |\n| T-shirt      | Yellow, S size   | 260                 |\n| Pants        | Blue, 35 size    | 50                  |\n| Pants        | Black, 34 size   | 80                  |\n| Pants        | Blue, 30 size    | 95                  |\n| Pants        | Grey, 29 size    | 100                 |\n| Pants        | Grey, 29 size    | 120                 |\n| Pants        | Brown, 34 size   | 110                 |\n| Dress        | Pink, S size     | 120                 |\n| Dress        | Black, S size    | 130                 |\n| Dress        | Gold, L size     | 140                 |\n| Dress        | Red, M size      | 150                 |\n| Jacket       | Brown, L size    | 200                 |\n| Jacket       | Yellow, L size   | 175                 |\n| Jacket       | Brown, S size    | 185                 |\n| Jacket       | Black, XL size   | 90                  |\n| Jacket       | Black, XL size   | 150                 |\n| Skirt        | Purple, M size   | 210                 |\n| Skirt        | Purple, M size   | 330                 |\n| Skirt        | Pink, M size     | 85                  |\n| Skirt        | Pink, M size     | 260                 |\n| Skirt        | Green, XL size   | 95                  |\n| Shorts       | Red, L size      | 195                 |\n| Sweater      | Grey, L size     | 180                 |\n| Sweater      | Blue, XL size    | 70                  |\n| Sweater      | Blue, XL size    | 30                  |\n| Coat         | White, L size    | 60                  |\n| Coat         | Purple, S size   | 75                  |\n| Coat         | Red, M size      | 200                 |\n\nThat's quite a list! 😄 If you have any more questions or need further details, feel free to ask!",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT o.id FROM orders o JOIN customers c ON o.user_id = c.id WHERE o.order_name = 'Michael_SweaterAndShorts' AND c.customer_name = 'Michael';",
+            "description": "Retrieve the order ID for the order with the name \"Michael_SweaterAndShorts\" for the customer \"Michael\"",
+            "results": [
+                {
+                    "id": 6
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT op.id, op.product_id, op.number FROM order_product op WHERE op.order_id = '6';",
+            "description": "Retrieve the order_product IDs and quantities for the specific order",
+            "results": [
+                {
+                    "id": 22,
+                    "product_id": 25,
+                    "number": 115
+                },
+                {
+                    "id": 23,
+                    "product_id": 8,
+                    "number": 110
+                },
+                {
+                    "id": 24,
+                    "product_id": 16,
+                    "number": 105
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT st.order_product_id, SUM(st.completed_number) AS completed_quantity FROM sewing_tasks st WHERE st.order_product_id IN (22, 23, 24) GROUP BY st.order_product_id;",
+            "description": "Retrieve the completed quantities for each product in the order from sewing tasks",
+            "results": [
+                {
+                    "order_product_id": 22,
+                    "completed_quantity": "60"
+                },
+                {
+                    "order_product_id": 23,
+                    "completed_quantity": "80"
+                },
+                {
+                    "order_product_id": 24,
+                    "completed_quantity": "105"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT op.product_id, (op.number - IFNULL(st.completed_quantity, 0)) AS unfinished_quantity FROM order_product op LEFT JOIN (SELECT st.order_product_id, SUM(st.completed_number) AS completed_quantity FROM sewing_tasks st WHERE st.order_product_id IN (22, 23, 24) GROUP BY st.order_product_id) st ON op.id = st.order_product_id WHERE op.number > IFNULL(st.completed_quantity, 0);",
+            "description": "Calculate the unfinished quantities for each product by subtracting completed quantities from ordered quantities",
+            "results": [
+                {
+                    "product_id": 25,
+                    "unfinished_quantity": "55"
+                },
+                {
+                    "product_id": 8,
+                    "unfinished_quantity": "30"
+                },
+                {
+                    "product_id": 1,
+                    "unfinished_quantity": "100"
+                },
+                {
+                    "product_id": 19,
+                    "unfinished_quantity": "240"
+                },
+                {
+                    "product_id": 3,
+                    "unfinished_quantity": "150"
+                },
+                {
+                    "product_id": 11,
+                    "unfinished_quantity": "220"
+                },
+                {
+                    "product_id": 27,
+                    "unfinished_quantity": "260"
+                },
+                {
+                    "product_id": 12,
+                    "unfinished_quantity": "95"
+                },
+                {
+                    "product_id": 28,
+                    "unfinished_quantity": "110"
+                },
+                {
+                    "product_id": 2,
+                    "unfinished_quantity": "50"
+                },
+                {
+                    "product_id": 4,
+                    "unfinished_quantity": "80"
+                },
+                {
+                    "product_id": 20,
+                    "unfinished_quantity": "100"
+                },
+                {
+                    "product_id": 21,
+                    "unfinished_quantity": "140"
+                },
+                {
+                    "product_id": 29,
+                    "unfinished_quantity": "150"
+                },
+                {
+                    "product_id": 13,
+                    "unfinished_quantity": "130"
+                },
+                {
+                    "product_id": 5,
+                    "unfinished_quantity": "120"
+                },
+                {
+                    "product_id": 22,
+                    "unfinished_quantity": "185"
+                },
+                {
+                    "product_id": 26,
+                    "unfinished_quantity": "200"
+                },
+                {
+                    "product_id": 14,
+                    "unfinished_quantity": "175"
+                },
+                {
+                    "product_id": 6,
+                    "unfinished_quantity": "200"
+                },
+                {
+                    "product_id": 23,
+                    "unfinished_quantity": "95"
+                },
+                {
+                    "product_id": 30,
+                    "unfinished_quantity": "90"
+                },
+                {
+                    "product_id": 15,
+                    "unfinished_quantity": "85"
+                },
+                {
+                    "product_id": 18,
+                    "unfinished_quantity": "75"
+                },
+                {
+                    "product_id": 17,
+                    "unfinished_quantity": "70"
+                },
+                {
+                    "product_id": 10,
+                    "unfinished_quantity": "60"
+                },
+                {
+                    "product_id": 7,
+                    "unfinished_quantity": "210"
+                },
+                {
+                    "product_id": 9,
+                    "unfinished_quantity": "180"
+                },
+                {
+                    "product_id": 24,
+                    "unfinished_quantity": "195"
+                },
+                {
+                    "product_id": 15,
+                    "unfinished_quantity": "260"
+                },
+                {
+                    "product_id": 30,
+                    "unfinished_quantity": "150"
+                },
+                {
+                    "product_id": 20,
+                    "unfinished_quantity": "120"
+                },
+                {
+                    "product_id": 7,
+                    "unfinished_quantity": "330"
+                },
+                {
+                    "product_id": 1,
+                    "unfinished_quantity": "50"
+                },
+                {
+                    "product_id": 17,
+                    "unfinished_quantity": "30"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT pt.description, p.attributes, u.unfinished_quantity FROM products p JOIN products_types pt ON p.products_type_id = pt.id JOIN (SELECT op.product_id, (op.number - IFNULL(st.completed_quantity, 0)) AS unfinished_quantity FROM order_product op LEFT JOIN (SELECT st.order_product_id, SUM(st.completed_number) AS completed_quantity FROM sewing_tasks st WHERE st.order_product_id IN (22, 23, 24) GROUP BY st.order_product_id) st ON op.id = st.order_product_id WHERE op.number > IFNULL(st.completed_quantity, 0)) u ON p.id = u.product_id;",
+            "description": "Retrieve the product types and attributes for the unfinished products",
+            "results": [
+                {
+                    "description": "Sweater",
+                    "attributes": "Blue, S size",
+                    "unfinished_quantity": "55"
+                },
+                {
+                    "description": "Shorts",
+                    "attributes": "Silver, S size",
+                    "unfinished_quantity": "30"
+                },
+                {
+                    "description": "T-shirt",
+                    "attributes": "Red, M size",
+                    "unfinished_quantity": "100"
+                },
+                {
+                    "description": "T-shirt",
+                    "attributes": "Red, M size",
+                    "unfinished_quantity": "50"
+                },
+                {
+                    "description": "T-shirt",
+                    "attributes": "Blue, L size",
+                    "unfinished_quantity": "150"
+                },
+                {
+                    "description": "T-shirt",
+                    "attributes": "White, XL size",
+                    "unfinished_quantity": "220"
+                },
+                {
+                    "description": "T-shirt",
+                    "attributes": "Green, M size",
+                    "unfinished_quantity": "240"
+                },
+                {
+                    "description": "T-shirt",
+                    "attributes": "Yellow, S size",
+                    "unfinished_quantity": "260"
+                },
+                {
+                    "description": "Pants",
+                    "attributes": "Blue, 35 size",
+                    "unfinished_quantity": "50"
+                },
+                {
+                    "description": "Pants",
+                    "attributes": "Black, 34 size",
+                    "unfinished_quantity": "80"
+                },
+                {
+                    "description": "Pants",
+                    "attributes": "Blue, 30 size",
+                    "unfinished_quantity": "95"
+                },
+                {
+                    "description": "Pants",
+                    "attributes": "Grey, 29 size",
+                    "unfinished_quantity": "100"
+                },
+                {
+                    "description": "Pants",
+                    "attributes": "Grey, 29 size",
+                    "unfinished_quantity": "120"
+                },
+                {
+                    "description": "Pants",
+                    "attributes": "Brown, 34 size",
+                    "unfinished_quantity": "110"
+                },
+                {
+                    "description": "Dress",
+                    "attributes": "Pink, S size",
+                    "unfinished_quantity": "120"
+                },
+                {
+                    "description": "Dress",
+                    "attributes": "Black, S size",
+                    "unfinished_quantity": "130"
+                },
+                {
+                    "description": "Dress",
+                    "attributes": "Gold, L size",
+                    "unfinished_quantity": "140"
+                },
+                {
+                    "description": "Dress",
+                    "attributes": "Red, M size",
+                    "unfinished_quantity": "150"
+                },
+                {
+                    "description": "Jacket",
+                    "attributes": "Brown, L size",
+                    "unfinished_quantity": "200"
+                },
+                {
+                    "description": "Jacket",
+                    "attributes": "Yellow, L size",
+                    "unfinished_quantity": "175"
+                },
+                {
+                    "description": "Jacket",
+                    "attributes": "Brown, S size",
+                    "unfinished_quantity": "185"
+                },
+                {
+                    "description": "Jacket",
+                    "attributes": "Black, XL size",
+                    "unfinished_quantity": "90"
+                },
+                {
+                    "description": "Jacket",
+                    "attributes": "Black, XL size",
+                    "unfinished_quantity": "150"
+                },
+                {
+                    "description": "Skirt",
+                    "attributes": "Purple, M size",
+                    "unfinished_quantity": "210"
+                },
+                {
+                    "description": "Skirt",
+                    "attributes": "Purple, M size",
+                    "unfinished_quantity": "330"
+                },
+                {
+                    "description": "Skirt",
+                    "attributes": "Pink, M size",
+                    "unfinished_quantity": "85"
+                },
+                {
+                    "description": "Skirt",
+                    "attributes": "Pink, M size",
+                    "unfinished_quantity": "260"
+                },
+                {
+                    "description": "Skirt",
+                    "attributes": "Green, XL size",
+                    "unfinished_quantity": "95"
+                },
+                {
+                    "description": "Shorts",
+                    "attributes": "Red, L size",
+                    "unfinished_quantity": "195"
+                },
+                {
+                    "description": "Sweater",
+                    "attributes": "Grey, L size",
+                    "unfinished_quantity": "180"
+                },
+                {
+                    "description": "Sweater",
+                    "attributes": "Blue, XL size",
+                    "unfinished_quantity": "70"
+                },
+                {
+                    "description": "Sweater",
+                    "attributes": "Blue, XL size",
+                    "unfinished_quantity": "30"
+                },
+                {
+                    "description": "Coat",
+                    "attributes": "White, L size",
+                    "unfinished_quantity": "60"
+                },
+                {
+                    "description": "Coat",
+                    "attributes": "Purple, S size",
+                    "unfinished_quantity": "75"
+                },
+                {
+                    "description": "Coat",
+                    "attributes": "Red, M size",
+                    "unfinished_quantity": "200"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,101 @@
+{
+    "ID": 10,
+    "q_ch": "对于Michael下的SweaterAndShorts的订单，还有哪些产品没有制造完成，列出未完成产品的类型及属性描述和数量？",
+    "q_en": "For Michael's SweaterAndShorts order, which other products have not been manufactured yet? Please list the types, attributes and quantities of unfinished products.",
+    "gt": "Hey there! 😄 Let's take a look at the products that haven't been fully manufactured yet for Michael's order \"Michael_SweaterAndShorts\". Here's what I found:\n\n| Product Type | Attributes       | Unfinished Quantity |\n|--------------|------------------|---------------------|\n| Sweater      | Blue, S size     | 55                  |\n| Shorts       | Silver, S size   | 30                  |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'Michael';",
+            "description": "Retrieve the customer ID for the customer with the name \"Michael\"",
+            "results": [
+                {
+                    "id": 6
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE order_name = 'Michael_SweaterAndShorts' AND user_id = '6';",
+            "description": "Retrieve the order ID for the order with the name \"Michael_SweaterAndShorts\"",
+            "results": [
+                {
+                    "id": 6
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id, product_id, number FROM order_product WHERE order_id = '6';",
+            "description": "Retrieve the order_product IDs and quantities for the specific order",
+            "results": [
+                {
+                    "id": 22,
+                    "product_id": 25,
+                    "number": 115
+                },
+                {
+                    "id": 23,
+                    "product_id": 8,
+                    "number": 110
+                },
+                {
+                    "id": 24,
+                    "product_id": 16,
+                    "number": 105
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT order_product_id, SUM(completed_number) as completed_quantity FROM sewing_tasks WHERE order_product_id IN (22, 23, 24) GROUP BY order_product_id;",
+            "description": "Retrieve the completed quantities of sewing tasks for each order_product",
+            "results": [
+                {
+                    "order_product_id": 22,
+                    "completed_quantity": "60"
+                },
+                {
+                    "order_product_id": 23,
+                    "completed_quantity": "80"
+                },
+                {
+                    "order_product_id": 24,
+                    "completed_quantity": "105"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT op.product_id, (op.number - IFNULL(st.completed_quantity, 0)) as unfinished_quantity FROM order_product op LEFT JOIN (SELECT order_product_id, SUM(completed_number) as completed_quantity FROM sewing_tasks WHERE order_product_id IN (22, 23, 24) GROUP BY order_product_id) st ON op.id = st.order_product_id WHERE op.order_id = '6' AND (op.number - IFNULL(st.completed_quantity, 0)) > 0;",
+            "description": "Calculate the unfinished quantities for each product",
+            "results": [
+                {
+                    "product_id": 25,
+                    "unfinished_quantity": "55"
+                },
+                {
+                    "product_id": 8,
+                    "unfinished_quantity": "30"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT pt.description, p.attributes, up.unfinished_quantity FROM products p JOIN products_types pt ON p.products_type_id = pt.id JOIN (SELECT op.product_id, (op.number - IFNULL(st.completed_quantity, 0)) as unfinished_quantity FROM order_product op LEFT JOIN (SELECT order_product_id, SUM(completed_number) as completed_quantity FROM sewing_tasks WHERE order_product_id IN (22, 23, 24) GROUP BY order_product_id) st ON op.id = st.order_product_id WHERE op.order_id = '6' AND (op.number - IFNULL(st.completed_quantity, 0)) > 0) up ON p.id = up.product_id;",
+            "description": "Retrieve the product types and attributes for unfinished products",
+            "results": [
+                {
+                    "description": "Sweater",
+                    "attributes": "Blue, S size",
+                    "unfinished_quantity": "55"
+                },
+                {
+                    "description": "Shorts",
+                    "attributes": "Silver, S size",
+                    "unfinished_quantity": "30"
+                }
+            ]
+        }
+    ]
+}

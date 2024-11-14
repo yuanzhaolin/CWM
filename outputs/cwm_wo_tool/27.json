@@ -1,0 +1,193 @@
+{
+    "ID": 27,
+    "q_ch": "我是Advanced Sewers，我尚未完成的任务有哪些，对应的顾客都是谁？",
+    "q_en": "I am Advanced Sewers. What are the tasks I have not yet completed?",
+    "gt": "Hello there! 😄 Let's take a look at the tasks that the \"Advanced Sewers\" group hasn't completed yet. Here's a handy table for you:\n\n| Task ID | Order Name               | Product Description | Attributes     | Planned Number | Completed Number | Status       |\n|---------|--------------------------|---------------------|----------------|----------------|------------------|--------------|\n| 22      | Michael_SweaterAndShorts | Sweater             | Blue, S size   | 115            | 60               | In Progress  |\n| 25      | Olivia_WinterOrder       | Coat                | Purple, S size | 75             | 75               | In Progress  |\n| 33      | Emily_Pants              | Pants               | Grey, 29 size  | 120            | 0                | Not Started  |\n\nThese are the tasks that are still in progress or not started yet. Keep up the great work, and you'll have them completed in no time! 🚀",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Advanced Sewers';",
+            "description": "Retrieve the working group ID for the group named \"Advanced Sewers\"",
+            "results": [
+                {
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id, start_time, end_time, order_product_id, planned_number, completed_number, status FROM sewing_tasks WHERE working_group_id = '8' AND status != 2;",
+            "description": "Retrieve the sewing tasks assigned to \"Advanced Sewers\" that are not yet completed",
+            "results": [
+                {
+                    "id": 6,
+                    "start_time": "2024-03-20 00:00:00",
+                    "end_time": "2024-04-07 00:00:00",
+                    "order_product_id": 6,
+                    "planned_number": 95,
+                    "completed_number": 95,
+                    "status": 1
+                },
+                {
+                    "id": 7,
+                    "start_time": "2024-03-06 00:00:00",
+                    "end_time": "2024-03-22 00:00:00",
+                    "order_product_id": 7,
+                    "planned_number": 110,
+                    "completed_number": 110,
+                    "status": 1
+                },
+                {
+                    "id": 9,
+                    "start_time": "2024-03-06 00:00:00",
+                    "end_time": "2024-03-20 00:00:00",
+                    "order_product_id": 9,
+                    "planned_number": 80,
+                    "completed_number": 80,
+                    "status": 1
+                },
+                {
+                    "id": 20,
+                    "start_time": "2024-04-15 00:00:00",
+                    "end_time": "2024-05-07 00:00:00",
+                    "order_product_id": 20,
+                    "planned_number": 90,
+                    "completed_number": 90,
+                    "status": 1
+                },
+                {
+                    "id": 21,
+                    "start_time": "2024-04-04 00:00:00",
+                    "end_time": "2024-04-12 00:00:00",
+                    "order_product_id": 21,
+                    "planned_number": 85,
+                    "completed_number": 85,
+                    "status": 1
+                },
+                {
+                    "id": 22,
+                    "start_time": "2024-04-09 00:00:00",
+                    "end_time": "2024-04-22 00:00:00",
+                    "order_product_id": 22,
+                    "planned_number": 115,
+                    "completed_number": 60,
+                    "status": 0
+                },
+                {
+                    "id": 25,
+                    "start_time": "2024-05-14 00:00:00",
+                    "end_time": "2024-06-03 00:00:00",
+                    "order_product_id": 25,
+                    "planned_number": 75,
+                    "completed_number": 75,
+                    "status": 0
+                },
+                {
+                    "id": 33,
+                    "start_time": "2024-07-17 00:00:00",
+                    "end_time": "2024-08-03 00:00:00",
+                    "order_product_id": 33,
+                    "planned_number": 120,
+                    "completed_number": 0,
+                    "status": 0
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.order_name, p.attributes, pt.description FROM order_product op JOIN orders o ON op.order_id = o.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id = '6';",
+            "description": "Retrieve the order name and product details for each task",
+            "results": [
+                {
+                    "order_name": "John_Pants",
+                    "attributes": "Blue, 30 size",
+                    "description": "Pants"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.order_name, p.attributes, pt.description FROM order_product op JOIN orders o ON op.order_id = o.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id = '7';",
+            "description": "Retrieve the order name and product details for each task",
+            "results": [
+                {
+                    "order_name": "John_Pants",
+                    "attributes": "Brown, 34 size",
+                    "description": "Pants"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.order_name, p.attributes, pt.description FROM order_product op JOIN orders o ON op.order_id = o.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id = '9';",
+            "description": "Retrieve the order name and product details for each task",
+            "results": [
+                {
+                    "order_name": "John_Pants",
+                    "attributes": "Black, 34 size",
+                    "description": "Pants"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.order_name, p.attributes, pt.description FROM order_product op JOIN orders o ON op.order_id = o.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id = '20';",
+            "description": "Retrieve the order name and product details for each task",
+            "results": [
+                {
+                    "order_name": "Sophia_SkirtAndJacket",
+                    "attributes": "Black, XL size",
+                    "description": "Jacket"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.order_name, p.attributes, pt.description FROM order_product op JOIN orders o ON op.order_id = o.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id = '21';",
+            "description": "Retrieve the order name and product details for each task",
+            "results": [
+                {
+                    "order_name": "Sophia_SkirtAndJacket",
+                    "attributes": "Pink, M size",
+                    "description": "Skirt"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.order_name, p.attributes, pt.description FROM order_product op JOIN orders o ON op.order_id = o.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id = '22';",
+            "description": "Retrieve the order name and product details for each task",
+            "results": [
+                {
+                    "order_name": "Michael_SweaterAndShorts",
+                    "attributes": "Blue, S size",
+                    "description": "Sweater"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.order_name, p.attributes, pt.description FROM order_product op JOIN orders o ON op.order_id = o.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id = '25';",
+            "description": "Retrieve the order name and product details for each task",
+            "results": [
+                {
+                    "order_name": "Olivia_WinterOrder",
+                    "attributes": "Purple, S size",
+                    "description": "Coat"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.order_name, p.attributes, pt.description FROM order_product op JOIN orders o ON op.order_id = o.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id = '33';",
+            "description": "Retrieve the order name and product details for each task",
+            "results": [
+                {
+                    "order_name": "Emily_Pants",
+                    "attributes": "Grey, 29 size",
+                    "description": "Pants"
+                }
+            ]
+        }
+    ]
+}

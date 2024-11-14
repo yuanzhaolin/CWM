@@ -1,0 +1,28 @@
+{
+    "ID": 43,
+    "q_ch": "向仓库Main Warehouse，入库Leather 1000份。",
+    "q_en": "Send 1000 Leathers to the Main Warehouse for storage.",
+    "gt": "Sure thing! Here's the information you need to send 1000 units of Leather to the Main Warehouse for storage. 📦\n\n| Material Name | Material ID | Warehouse Name | Warehouse ID |\n|---------------|-------------|----------------|--------------|\n| Leather       | 7           | Main Warehouse | 1            |\n\nEverything is set for the transfer! If you have any more questions or need further assistance, feel free to ask. 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Leather';",
+            "description": "Retrieve the material ID for the material with the name \"Leather\"",
+            "results": [
+                {
+                    "id": 7
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
+            "description": "Retrieve the warehouse ID for the warehouse with the name \"Main Warehouse\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        }
+    ]
+}

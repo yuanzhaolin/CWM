@@ -1,0 +1,7 @@
+## Definition of the progress of an order
+The total completed quantity of all sewing tasks corresponding to the products in an order, divided by the total quantity of products in an order.
+
+## Requirement
+When you are asked to create a new order, the default order name is "Order" + the current date and time. For example, if the current date and time is 2021-07-01 12:00:00, the default order name is "Order20210701120000".
+
+

@@ -1,267 +1,140 @@
 {
-  "ID": 11,
-  "q_ch": "2024年4月30日前完成的裁剪任务有哪些？",
-  "q_en": "What cutting tasks will be completed before April 30, 2024?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id, start_time, end_time, working_group_id, order_product_id, planned_number, completed_number, is_started FROM cutting_tasks WHERE end_time < '2024-04-30';"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "ct1",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月18日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op1",
-            "planned_number": 100,
-            "completed_number": 100,
-            "is_started": 1
-          },
-          {
-            "id": "ct10",
-            "start_time": "2024年03月02日 00:00",
-            "end_time": "2024年03月29日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op10",
-            "planned_number": 100,
-            "completed_number": 100,
-            "is_started": 1
-          },
-          {
-            "id": "ct11",
-            "start_time": "2024年03月02日 00:00",
-            "end_time": "2024年03月21日 00:00",
-            "working_group_id": "wg4",
-            "order_product_id": "op11",
-            "planned_number": 140,
-            "completed_number": 140,
-            "is_started": 1
-          },
-          {
-            "id": "ct12",
-            "start_time": "2024年03月02日 00:00",
-            "end_time": "2024年03月27日 00:00",
-            "working_group_id": "wg5",
-            "order_product_id": "op12",
-            "planned_number": 150,
-            "completed_number": 150,
-            "is_started": 1
-          },
-          {
-            "id": "ct13",
-            "start_time": "2024年03月02日 00:00",
-            "end_time": "2024年03月27日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op13",
-            "planned_number": 130,
-            "completed_number": 130,
-            "is_started": 1
-          },
-          {
-            "id": "ct14",
-            "start_time": "2024年03月02日 00:00",
-            "end_time": "2024年03月18日 00:00",
-            "working_group_id": "wg5",
-            "order_product_id": "op14",
-            "planned_number": 120,
-            "completed_number": 120,
-            "is_started": 1
-          },
-          {
-            "id": "ct15",
-            "start_time": "2024年03月11日 00:00",
-            "end_time": "2024年03月26日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op15",
-            "planned_number": 185,
-            "completed_number": 160,
-            "is_started": 1
-          },
-          {
-            "id": "ct16",
-            "start_time": "2024年03月11日 00:00",
-            "end_time": "2024年04月10日 00:00",
-            "working_group_id": "wg4",
-            "order_product_id": "op16",
-            "planned_number": 200,
-            "completed_number": 200,
-            "is_started": 1
-          },
-          {
-            "id": "ct17",
-            "start_time": "2024年03月11日 00:00",
-            "end_time": "2024年03月25日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op17",
-            "planned_number": 175,
-            "completed_number": 175,
-            "is_started": 1
-          },
-          {
-            "id": "ct18",
-            "start_time": "2024年03月11日 00:00",
-            "end_time": "2024年04月07日 00:00",
-            "working_group_id": "wg1",
-            "order_product_id": "op18",
-            "planned_number": 200,
-            "completed_number": 200,
-            "is_started": 1
-          },
-          {
-            "id": "ct19",
-            "start_time": "2024年03月18日 00:00",
-            "end_time": "2024年04月12日 00:00",
-            "working_group_id": "wg4",
-            "order_product_id": "op19",
-            "planned_number": 95,
-            "completed_number": 95,
-            "is_started": 1
-          },
-          {
-            "id": "ct2",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年02月02日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op2",
-            "planned_number": 240,
-            "completed_number": 240,
-            "is_started": 1
-          },
-          {
-            "id": "ct20",
-            "start_time": "2024年03月18日 00:00",
-            "end_time": "2024年04月15日 00:00",
-            "working_group_id": "wg4",
-            "order_product_id": "op20",
-            "planned_number": 90,
-            "completed_number": 90,
-            "is_started": 1
-          },
-          {
-            "id": "ct21",
-            "start_time": "2024年03月18日 00:00",
-            "end_time": "2024年04月04日 00:00",
-            "working_group_id": "wg4",
-            "order_product_id": "op21",
-            "planned_number": 85,
-            "completed_number": 85,
-            "is_started": 1
-          },
-          {
-            "id": "ct22",
-            "start_time": "2024年03月25日 00:00",
-            "end_time": "2024年04月09日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op22",
-            "planned_number": 115,
-            "completed_number": 115,
-            "is_started": 1
-          },
-          {
-            "id": "ct23",
-            "start_time": "2024年03月25日 00:00",
-            "end_time": "2024年04月19日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op23",
-            "planned_number": 110,
-            "completed_number": 110,
-            "is_started": 1
-          },
-          {
-            "id": "ct24",
-            "start_time": "2024年03月25日 00:00",
-            "end_time": "2024年04月23日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op24",
-            "planned_number": 105,
-            "completed_number": 105,
-            "is_started": 1
-          },
-          {
-            "id": "ct3",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月19日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op3",
-            "planned_number": 150,
-            "completed_number": 150,
-            "is_started": 1
-          },
-          {
-            "id": "ct30",
-            "start_time": "2024年04月19日 00:00",
-            "end_time": "2024年04月26日 00:00",
-            "working_group_id": "wg1",
-            "order_product_id": "op30",
-            "planned_number": 195,
-            "completed_number": 180,
-            "is_started": 1
-          },
-          {
-            "id": "ct4",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月17日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op4",
-            "planned_number": 220,
-            "completed_number": 220,
-            "is_started": 1
-          },
-          {
-            "id": "ct5",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年02月02日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op5",
-            "planned_number": 260,
-            "completed_number": 260,
-            "is_started": 1
-          },
-          {
-            "id": "ct6",
-            "start_time": "2024年02月28日 00:00",
-            "end_time": "2024年03月20日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op6",
-            "planned_number": 95,
-            "completed_number": 95,
-            "is_started": 1
-          },
-          {
-            "id": "ct7",
-            "start_time": "2024年02月28日 00:00",
-            "end_time": "2024年03月06日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op7",
-            "planned_number": 110,
-            "completed_number": 110,
-            "is_started": 1
-          },
-          {
-            "id": "ct8",
-            "start_time": "2024年02月28日 00:00",
-            "end_time": "2024年03月08日 00:00",
-            "working_group_id": "wg4",
-            "order_product_id": "op8",
-            "planned_number": 50,
-            "completed_number": 50,
-            "is_started": 1
-          },
-          {
-            "id": "ct9",
-            "start_time": "2024年03月01日 00:00",
-            "end_time": "2024年03月06日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op9",
-            "planned_number": 80,
-            "completed_number": 80,
-            "is_started": 1
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 7659
+    "ID": 11,
+    "q_ch": "2024年4月30日前完成的裁剪任务有哪些？",
+    "q_en": "What cutting tasks will be completed before April 30, 2024?",
+    "gt": "Sure thing! Here are the cutting tasks that will be completed before April 30, 2024. I've organized them into a neat table for you! 📅✂️\n\n| Task ID | End Time           | Working Group Name   |\n|---------|--------------------|----------------------|\n| 1       | January 18, 2024   | Master Sewers        |\n| 2       | February 2, 2024   | Master Cutters       |\n| 3       | January 19, 2024   | Master Cutters       |\n| 4       | January 17, 2024   | Master Sewers        |\n| 5       | February 2, 2024   | Master Sewers        |\n| 6       | March 20, 2024     | Master Cutters       |\n| 7       | March 6, 2024      | Master Sewers        |\n| 8       | March 8, 2024      | Expert Cutters       |\n| 9       | March 6, 2024      | Master Cutters       |\n| 10      | March 29, 2024     | Master Cutters       |\n| 11      | March 21, 2024     | Expert Cutters       |\n| 12      | March 27, 2024     | Professional Cutters |\n| 13      | March 27, 2024     | Master Sewers        |\n| 14      | March 18, 2024     | Professional Cutters |\n| 15      | March 26, 2024     | Master Sewers        |\n| 16      | April 10, 2024     | Expert Cutters       |\n| 17      | March 25, 2024     | Master Sewers        |\n| 18      | April 7, 2024      | Precision Cutters    |\n| 19      | April 12, 2024     | Expert Cutters       |\n| 20      | April 15, 2024     | Expert Cutters       |\n| 21      | April 4, 2024      | Expert Cutters       |\n| 22      | April 9, 2024      | Master Sewers        |\n| 23      | April 19, 2024     | Master Cutters       |\n| 24      | April 23, 2024     | Master Cutters       |\n| 30      | April 26, 2024     | Precision Cutters    |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT ct.id, ct.end_time, wg.name AS working_group_name FROM cutting_tasks ct JOIN working_group wg ON ct.working_group_id = wg.id WHERE ct.end_time < '2024-04-30';",
+            "description": "Retrieve the cutting tasks that have an end time before April 30, 2024",
+            "results": [
+                {
+                    "id": 1,
+                    "end_time": "2024-01-18 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 2,
+                    "end_time": "2024-02-02 00:00:00",
+                    "working_group_name": "Master Cutters"
+                },
+                {
+                    "id": 3,
+                    "end_time": "2024-01-19 00:00:00",
+                    "working_group_name": "Master Cutters"
+                },
+                {
+                    "id": 4,
+                    "end_time": "2024-01-17 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 5,
+                    "end_time": "2024-02-02 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 6,
+                    "end_time": "2024-03-20 00:00:00",
+                    "working_group_name": "Master Cutters"
+                },
+                {
+                    "id": 7,
+                    "end_time": "2024-03-06 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 8,
+                    "end_time": "2024-03-08 00:00:00",
+                    "working_group_name": "Expert Cutters"
+                },
+                {
+                    "id": 9,
+                    "end_time": "2024-03-06 00:00:00",
+                    "working_group_name": "Master Cutters"
+                },
+                {
+                    "id": 10,
+                    "end_time": "2024-03-29 00:00:00",
+                    "working_group_name": "Master Cutters"
+                },
+                {
+                    "id": 11,
+                    "end_time": "2024-03-21 00:00:00",
+                    "working_group_name": "Expert Cutters"
+                },
+                {
+                    "id": 12,
+                    "end_time": "2024-03-27 00:00:00",
+                    "working_group_name": "Professional Cutters"
+                },
+                {
+                    "id": 13,
+                    "end_time": "2024-03-27 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 14,
+                    "end_time": "2024-03-18 00:00:00",
+                    "working_group_name": "Professional Cutters"
+                },
+                {
+                    "id": 15,
+                    "end_time": "2024-03-26 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 16,
+                    "end_time": "2024-04-10 00:00:00",
+                    "working_group_name": "Expert Cutters"
+                },
+                {
+                    "id": 17,
+                    "end_time": "2024-03-25 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 18,
+                    "end_time": "2024-04-07 00:00:00",
+                    "working_group_name": "Precision Cutters"
+                },
+                {
+                    "id": 19,
+                    "end_time": "2024-04-12 00:00:00",
+                    "working_group_name": "Expert Cutters"
+                },
+                {
+                    "id": 20,
+                    "end_time": "2024-04-15 00:00:00",
+                    "working_group_name": "Expert Cutters"
+                },
+                {
+                    "id": 21,
+                    "end_time": "2024-04-04 00:00:00",
+                    "working_group_name": "Expert Cutters"
+                },
+                {
+                    "id": 22,
+                    "end_time": "2024-04-09 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 23,
+                    "end_time": "2024-04-19 00:00:00",
+                    "working_group_name": "Master Cutters"
+                },
+                {
+                    "id": 24,
+                    "end_time": "2024-04-23 00:00:00",
+                    "working_group_name": "Master Cutters"
+                },
+                {
+                    "id": 30,
+                    "end_time": "2024-04-26 00:00:00",
+                    "working_group_name": "Precision Cutters"
+                }
+            ]
+        }
+    ]
 }

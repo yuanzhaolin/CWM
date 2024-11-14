@@ -1,156 +1,66 @@
 {
-  "ID": 18,
-  "q_ch": "使用 Cotton Fabric 的裁剪任务有哪些？",
-  "q_en": "Which cutting tasks use Cotton Fabric?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
-        "SELECT cutting_task_id FROM cutting_material_allocation WHERE warehouse_material_id IN (SELECT id FROM warehouse_material WHERE material_id = 'm1');",
-        "SELECT ct.id, ct.start_time, ct.end_time, ct.working_group_id, ct.order_product_id, ct.planned_number, ct.completed_number, ct.is_started FROM cutting_tasks ct WHERE ct.id IN (SELECT cutting_task_id FROM cutting_material_allocation WHERE warehouse_material_id IN (SELECT id FROM warehouse_material WHERE material_id = 'm1'));"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "m1"
-          }
-        ],
-        [
-          {
-            "cutting_task_id": "ct1"
-          },
-          {
-            "cutting_task_id": "ct2"
-          },
-          {
-            "cutting_task_id": "ct19"
-          },
-          {
-            "cutting_task_id": "ct3"
-          },
-          {
-            "cutting_task_id": "ct21"
-          },
-          {
-            "cutting_task_id": "ct4"
-          },
-          {
-            "cutting_task_id": "ct28"
-          },
-          {
-            "cutting_task_id": "ct31"
-          },
-          {
-            "cutting_task_id": "ct5"
-          },
-          {
-            "cutting_task_id": "ct34"
-          }
-        ],
-        [
-          {
-            "id": "ct1",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月18日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op1",
-            "planned_number": 100,
-            "completed_number": 100,
-            "is_started": 1
-          },
-          {
-            "id": "ct19",
-            "start_time": "2024年03月18日 00:00",
-            "end_time": "2024年04月12日 00:00",
-            "working_group_id": "wg4",
-            "order_product_id": "op19",
-            "planned_number": 95,
-            "completed_number": 95,
-            "is_started": 1
-          },
-          {
-            "id": "ct2",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年02月02日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op2",
-            "planned_number": 240,
-            "completed_number": 240,
-            "is_started": 1
-          },
-          {
-            "id": "ct21",
-            "start_time": "2024年03月18日 00:00",
-            "end_time": "2024年04月04日 00:00",
-            "working_group_id": "wg4",
-            "order_product_id": "op21",
-            "planned_number": 85,
-            "completed_number": 85,
-            "is_started": 1
-          },
-          {
-            "id": "ct28",
-            "start_time": "2024年04月19日 00:00",
-            "end_time": "2024年05月12日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op28",
-            "planned_number": 210,
-            "completed_number": 210,
-            "is_started": 1
-          },
-          {
-            "id": "ct3",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月19日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op3",
-            "planned_number": 150,
-            "completed_number": 150,
-            "is_started": 1
-          },
-          {
-            "id": "ct31",
-            "start_time": "2024年05月10日 00:00",
-            "end_time": "2024年05月26日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op31",
-            "planned_number": 260,
-            "completed_number": 260,
-            "is_started": 1
-          },
-          {
-            "id": "ct34",
-            "start_time": "2024年06月30日 00:00",
-            "end_time": "2024年07月10日 00:00",
-            "working_group_id": "wg4",
-            "order_product_id": "op34",
-            "planned_number": 330,
-            "completed_number": 0,
-            "is_started": 0
-          },
-          {
-            "id": "ct4",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月17日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op4",
-            "planned_number": 220,
-            "completed_number": 220,
-            "is_started": 1
-          },
-          {
-            "id": "ct5",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年02月02日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op5",
-            "planned_number": 260,
-            "completed_number": 260,
-            "is_started": 1
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 10392
+    "ID": 18,
+    "q_ch": "使用 Cotton Fabric 的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks use Cotton Fabric?",
+    "gt": "Sure thing! Here are the cutting tasks that use **Cotton Fabric** as a material. I've organized the details into a neat table for you. 😊\n\n| Cutting Task ID | Start Time     | End Time       | Working Group ID | Order Product ID | Produced WIP ID | Planned Number | Completed Number | Status     |\n|-----------------|----------------|----------------|------------------|------------------|-----------------|----------------|------------------|------------|\n| 1               | January 10, 2024 | January 18, 2024 | 2                | 1                | 2               | 100            | 100              | Completed  |\n| 2               | January 10, 2024 | February 2, 2024 | 3                | 2                | 10              | 240            | 240              | In Progress|\n| 3               | January 10, 2024 | January 19, 2024 | 3                | 3                | 2               | 150            | 150              | Completed  |\n| 4               | January 10, 2024 | January 17, 2024 | 2                | 4                | 4               | 220            | 220              | In Progress|\n| 5               | January 10, 2024 | February 2, 2024 | 2                | 5                | 8               | 260            | 260              | In Progress|\n| 19              | March 18, 2024   | April 12, 2024   | 4                | 19               | 6               | 95             | 95               | In Progress|\n| 21              | March 18, 2024   | April 4, 2024    | 4                | 21               | 10              | 85             | 85               | In Progress|\n| 28              | April 19, 2024   | May 12, 2024     | 2                | 28               | 4               | 210            | 210              | In Progress|\n\nThe status values indicate the progress of the task, where \"In Progress\" might represent ongoing tasks and \"Completed\" represents finished tasks. If you have any more questions, feel free to ask! 😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
+            "description": "Retrieve the material ID for the material with the name \"Cotton Fabric\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse_material WHERE material_id = '1';",
+            "description": "Retrieve the warehouse material ID for the material \"Cotton Fabric\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT cutting_task_id FROM cutting_material_allocation WHERE warehouse_material_id = '1' AND is_allocated = 1;",
+            "description": "Retrieve the cutting task IDs that use the warehouse material \"Cotton Fabric\"",
+            "results": [
+                {
+                    "cutting_task_id": 1
+                },
+                {
+                    "cutting_task_id": 2
+                },
+                {
+                    "cutting_task_id": 3
+                },
+                {
+                    "cutting_task_id": 4
+                },
+                {
+                    "cutting_task_id": 5
+                },
+                {
+                    "cutting_task_id": 19
+                },
+                {
+                    "cutting_task_id": 21
+                },
+                {
+                    "cutting_task_id": 28
+                }
+            ]
+        },
+        {
+            "type": "Tool",
+            "results": {
+                "input": "Retrieve the details of the cutting tasks using the IDs obtained in Step 3\n[\"tool_find_cutting_task, {'cutting_task_id': 1}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 2}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 3}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 4}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 5}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 19}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 21}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 28}, Find the cutting task details\"]",
+                "output": "Here are the details of the cutting tasks:\n\n1. **Cutting Task ID: 1**\n   - Start Time: January 10, 2024\n   - End Time: January 18, 2024\n   - Working Group ID: 2\n   - Order Product ID: 1\n   - Produced WIP ID: 2\n   - Planned Number: 100\n   - Completed Number: 100\n   - Status: 2\n\n2. **Cutting Task ID: 2**\n   - Start Time: January 10, 2024\n   - End Time: February 2, 2024\n   - Working Group ID: 3\n   - Order Product ID: 2\n   - Produced WIP ID: 10\n   - Planned Number: 240\n   - Completed Number: 240\n   - Status: 1\n\n3. **Cutting Task ID: 3**\n   - Start Time: January 10, 2024\n   - End Time: January 19, 2024\n   - Working Group ID: 3\n   - Order Product ID: 3\n   - Produced WIP ID: 2\n   - Planned Number: 150\n   - Completed Number: 150\n   - Status: 2\n\n4. **Cutting Task ID: 4**\n   - Start Time: January 10, 2024\n   - End Time: January 17, 2024\n   - Working Group ID: 2\n   - Order Product ID: 4\n   - Produced WIP ID: 4\n   - Planned Number: 220\n   - Completed Number: 220\n   - Status: 1\n\n5. **Cutting Task ID: 5**\n   - Start Time: January 10, 2024\n   - End Time: February 2, 2024\n   - Working Group ID: 2\n   - Order Product ID: 5\n   - Produced WIP ID: 8\n   - Planned Number: 260\n   - Completed Number: 260\n   - Status: 1\n\n6. **Cutting Task ID: 19**\n   - Start Time: March 18, 2024\n   - End Time: April 12, 2024\n   - Working Group ID: 4\n   - Order Product ID: 19\n   - Produced WIP ID: 6\n   - Planned Number: 95\n   - Completed Number: 95\n   - Status: 1\n\n7. **Cutting Task ID: 21**\n   - Start Time: March 18, 2024\n   - End Time: April 4, 2024\n   - Working Group ID: 4\n   - Order Product ID: 21\n   - Produced WIP ID: 10\n   - Planned Number: 85\n   - Completed Number: 85\n   - Status: 1\n\n8. **Cutting Task ID: 28**\n   - Start Time: April 19, 2024\n   - End Time: May 12, 2024\n   - Working Group ID: 2\n   - Order Product ID: 28\n   - Produced WIP ID: 4\n   - Planned Number: 210\n   - Completed Number: 210\n   - Status: 1\n\nThe status values indicate the progress of the task, where 1 might represent \"in progress\" and 2 might represent \"completed.\""
+            }
+        }
+    ]
 }

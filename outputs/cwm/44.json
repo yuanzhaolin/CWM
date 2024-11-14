@@ -1,26 +1,28 @@
 {
-  "ID": 44,
-  "q_ch": "请将100件p15号产品入库到辅助仓库。",
-  "q_en": "Please store 100 units of product p15 in the auxiliary warehouse.",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id FROM warehouse WHERE name = 'Auxiliary warehouse';",
-        "SELECT id FROM warehouse_product WHERE warehouse_id = 'w2' AND product_id = 'p15';",
-        "UPDATE warehouse_product SET left_number = left_number + 100 WHERE id = 'w2';",
-        "INSERT INTO warehouse_product (id, warehouse_id, product_id, left_number) VALUES (UUID(), 'w2', 'p15', 100);"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "w2"
-          }
-        ],
-        "no results found.",
-        "update data successfully.",
-        "insert data successfully."
-      ]
-    }
-  ],
-  "total_tokens": 5495
+    "ID": 44,
+    "q_ch": "请将100件ID为15的产品入库到辅助仓库。",
+    "q_en": "Please store 100 units of product with ID=15 in the auxiliary warehouse.",
+    "gt": "Sure thing! Here's what we've done for you:\n\n| Action | Details |\n|--------|---------|\n| **Warehouse Name** | Auxiliary warehouse |\n| **Product ID** | 15 |\n| **Quantity Stored** | 100 units |\n\nWe've successfully stored 100 units of the product with ID=15 in the Auxiliary warehouse. Everything is set! 🎉 If you have any more requests or questions, feel free to ask. 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Auxiliary warehouse';",
+            "description": "Retrieve the warehouse ID for the warehouse with the name \"Auxiliary warehouse\"",
+            "results": [
+                {
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "INSERT INTO warehouse_product (warehouse_id, product_id, left_number) VALUES ('2', 15, 100);",
+            "description": "Insert 100 units of the product with ID=15 into the specified warehouse",
+            "results": [
+                {
+                    "auto_increment_id": 3
+                }
+            ]
+        }
+    ]
 }

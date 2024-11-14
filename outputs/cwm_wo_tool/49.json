@@ -1,0 +1,24 @@
+{
+    "ID": 49,
+    "q_ch": "对于编号为34的缝纫任务，所有的工作量我都已完成，请更新已完成数量。",
+    "q_en": "I have completed all the workload for the sewing task with ID 34. Please update the completed quantity.",
+    "gt": "### Task Update Confirmation\n\nHey there! 😄 Great job on completing all the workload for the sewing task with ID 34! Here's a quick summary of the update:\n\n| Task ID | Planned Quantity | Completed Quantity Update Status |\n|---------|------------------|----------------------------------|\n| 34      | 330              | Successfully updated! 🎉         |\n\nYour completed quantity has been updated to match the planned number. Keep up the fantastic work! 🚀",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT planned_number FROM sewing_tasks WHERE id = 34;",
+            "description": "Retrieve the planned number for the sewing task with ID 34",
+            "results": [
+                {
+                    "planned_number": 330
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "UPDATE sewing_tasks SET completed_number = (SELECT planned_number FROM (SELECT planned_number FROM sewing_tasks WHERE id = 34) AS temp) WHERE id = 34;",
+            "description": "Update the completed number for the sewing task with ID 34 to match the planned number",
+            "results": "update data successfully."
+        }
+    ]
+}

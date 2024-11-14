@@ -1,0 +1,212 @@
+{
+    "ID": 51,
+    "q_ch": "未完成的订单中，哪个订单完成的进度最快？",
+    "q_en": "Which order has the fastest completion progress among the unfinished orders?",
+    "gt": "Sure! Let's take a look at the orders and their completion progress to find out which one is leading the pack among the unfinished ones. Here's a summary of the progress for each order:\n\n| Order Name                  | Completion Progress |\n|-----------------------------|---------------------|\n| PolyU_Tshirt                | 100%                |\n| John_Pants                  | 100%                |\n| Emily_Dress                 | 85.19%              |\n| James_WinterOrder           | 100%                |\n| Sophia_SkirtAndJacket       | 100%                |\n| Michael_SweaterAndShorts    | 74.24%              |\n| Olivia_WinterOrder          | 100%                |\n| William_Skirt_Sweater_Shorts| 100%                |\n| PolyU_Skirt                 | 100%                |\n| John_Jacket                 | 0%                  |\n| Emily_Pants                 | 0%                  |\n| James_Skirt                 | 0%                  |\n\nAmong the unfinished orders, **PolyU_Tshirt** has the fastest completion progress with a perfect score of 100%! 🎉 Keep up the great work!",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT o.id, o.order_name FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2;",
+            "description": "Retrieve the IDs and names of all unfinished orders",
+            "results": [
+                {
+                    "id": 1,
+                    "order_name": "PolyU_Tshirt"
+                },
+                {
+                    "id": 1,
+                    "order_name": "PolyU_Tshirt"
+                },
+                {
+                    "id": 1,
+                    "order_name": "PolyU_Tshirt"
+                },
+                {
+                    "id": 1,
+                    "order_name": "PolyU_Tshirt"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants"
+                },
+                {
+                    "id": 3,
+                    "order_name": "Emily_Dress"
+                },
+                {
+                    "id": 3,
+                    "order_name": "Emily_Dress"
+                },
+                {
+                    "id": 3,
+                    "order_name": "Emily_Dress"
+                },
+                {
+                    "id": 3,
+                    "order_name": "Emily_Dress"
+                },
+                {
+                    "id": 4,
+                    "order_name": "James_WinterOrder"
+                },
+                {
+                    "id": 5,
+                    "order_name": "Sophia_SkirtAndJacket"
+                },
+                {
+                    "id": 5,
+                    "order_name": "Sophia_SkirtAndJacket"
+                },
+                {
+                    "id": 5,
+                    "order_name": "Sophia_SkirtAndJacket"
+                },
+                {
+                    "id": 6,
+                    "order_name": "Michael_SweaterAndShorts"
+                },
+                {
+                    "id": 6,
+                    "order_name": "Michael_SweaterAndShorts"
+                },
+                {
+                    "id": 6,
+                    "order_name": "Michael_SweaterAndShorts"
+                },
+                {
+                    "id": 7,
+                    "order_name": "Olivia_WinterOrder"
+                },
+                {
+                    "id": 7,
+                    "order_name": "Olivia_WinterOrder"
+                },
+                {
+                    "id": 7,
+                    "order_name": "Olivia_WinterOrder"
+                },
+                {
+                    "id": 8,
+                    "order_name": "William_Skirt_Sweater_Shorts"
+                },
+                {
+                    "id": 8,
+                    "order_name": "William_Skirt_Sweater_Shorts"
+                },
+                {
+                    "id": 8,
+                    "order_name": "William_Skirt_Sweater_Shorts"
+                },
+                {
+                    "id": 9,
+                    "order_name": "PolyU_Skirt"
+                },
+                {
+                    "id": 10,
+                    "order_name": "John_Jacket"
+                },
+                {
+                    "id": 11,
+                    "order_name": "Emily_Pants"
+                },
+                {
+                    "id": 12,
+                    "order_name": "James_Skirt"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.id, o.order_name, SUM(st.completed_number) / SUM(op.number) AS progress FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id;",
+            "description": "Calculate the completion progress for each unfinished order",
+            "results": [
+                {
+                    "id": 1,
+                    "order_name": "PolyU_Tshirt",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 3,
+                    "order_name": "Emily_Dress",
+                    "progress": "0.8519"
+                },
+                {
+                    "id": 4,
+                    "order_name": "James_WinterOrder",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 5,
+                    "order_name": "Sophia_SkirtAndJacket",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 6,
+                    "order_name": "Michael_SweaterAndShorts",
+                    "progress": "0.7424"
+                },
+                {
+                    "id": 7,
+                    "order_name": "Olivia_WinterOrder",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 8,
+                    "order_name": "William_Skirt_Sweater_Shorts",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 9,
+                    "order_name": "PolyU_Skirt",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 10,
+                    "order_name": "John_Jacket",
+                    "progress": "0.0000"
+                },
+                {
+                    "id": 11,
+                    "order_name": "Emily_Pants",
+                    "progress": "0.0000"
+                },
+                {
+                    "id": 12,
+                    "order_name": "James_Skirt",
+                    "progress": "0.0000"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT order_name FROM (SELECT o.id, o.order_name, SUM(st.completed_number) / SUM(op.number) AS progress FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id) AS order_progress ORDER BY progress DESC LIMIT 1;",
+            "description": "Identify the order with the highest completion progress",
+            "results": [
+                {
+                    "order_name": "PolyU_Tshirt"
+                }
+            ]
+        }
+    ]
+}

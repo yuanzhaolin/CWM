@@ -43,7 +43,8 @@ def chatdb_handler(data: dict, credentials: HTTPAuthorizationCredentials = Depen
     # for sql_command, sql_result in zip(sql_commands, sql_results):
     #     result += f"sql command：{sql_command[0]}\n"
     #     result += f"execution result：{sql_result}\n\n"
-    return {"result": result}
+    # return {"result": result}
+    return sql_results
 
 if __name__ == "__main__":
     import uvicorn

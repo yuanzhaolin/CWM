@@ -1,32 +1,166 @@
 {
-  "ID": 29,
-  "q_ch": "对所有已经开始但是尚未完成的缝纫任务进行统计，剩余工作量最多的工作组是哪个？",
-  "q_en": "Which workgroup has the highest remaining workload for all sewing tasks that have been started but not yet completed?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload\n FROM sewing_tasks\n WHERE is_started = TRUE AND completed_number < planned_number\n GROUP BY working_group_id;",
-        "SELECT wg.name, st.remaining_workload\n FROM working_group wg\n JOIN (SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload\n       FROM sewing_tasks\n       WHERE is_started = TRUE AND completed_number < planned_number\n       GROUP BY working_group_id) st\n ON wg.id = st.working_group_id\n ORDER BY st.remaining_workload DESC\n LIMIT 1;"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "working_group_id": "wg2",
-            "remaining_workload": null
-          },
-          {
-            "working_group_id": "wg8",
-            "remaining_workload": null
-          }
-        ],
-        [
-          {
-            "name": "Master Sewers",
-            "remaining_workload": null
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 13275
+    "ID": 29,
+    "q_ch": "对所有已经开始但是尚未完成的缝纫任务进行统计，剩余工作量最多的工作组是哪个？",
+    "q_en": "Which workgroup has the highest remaining workload for all sewing tasks that have been started but not yet completed?",
+    "gt": "Sure thing! Based on the data, the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed is **Master Sewers**. 🎉\n\nHere's a quick summary of the remaining workloads for each workgroup:\n\n| Workgroup ID | Remaining Workload |\n|--------------|--------------------|\n| 2            | 40                 |\n| 7            | 0                  |\n| 8            | 0                  |\n| 9            | 0                  |\n| 10           | 0                  |\n\nAs you can see, the Master Sewers (Workgroup ID 2) have a remaining workload of 40, which is the highest among the groups. Keep up the great work! 💪😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id, working_group_id, planned_number, completed_number FROM sewing_tasks WHERE status = 1;",
+            "description": "Retrieve the IDs and names of all sewing tasks that have been started but not yet completed",
+            "results": [
+                {
+                    "id": 2,
+                    "working_group_id": 9,
+                    "planned_number": 240,
+                    "completed_number": 240
+                },
+                {
+                    "id": 3,
+                    "working_group_id": 9,
+                    "planned_number": 150,
+                    "completed_number": 150
+                },
+                {
+                    "id": 4,
+                    "working_group_id": 2,
+                    "planned_number": 220,
+                    "completed_number": 220
+                },
+                {
+                    "id": 5,
+                    "working_group_id": 2,
+                    "planned_number": 260,
+                    "completed_number": 260
+                },
+                {
+                    "id": 6,
+                    "working_group_id": 8,
+                    "planned_number": 95,
+                    "completed_number": 95
+                },
+                {
+                    "id": 7,
+                    "working_group_id": 8,
+                    "planned_number": 110,
+                    "completed_number": 110
+                },
+                {
+                    "id": 8,
+                    "working_group_id": 7,
+                    "planned_number": 50,
+                    "completed_number": 50
+                },
+                {
+                    "id": 9,
+                    "working_group_id": 8,
+                    "planned_number": 80,
+                    "completed_number": 80
+                },
+                {
+                    "id": 12,
+                    "working_group_id": 2,
+                    "planned_number": 150,
+                    "completed_number": 120
+                },
+                {
+                    "id": 13,
+                    "working_group_id": 2,
+                    "planned_number": 130,
+                    "completed_number": 120
+                },
+                {
+                    "id": 14,
+                    "working_group_id": 2,
+                    "planned_number": 120,
+                    "completed_number": 120
+                },
+                {
+                    "id": 15,
+                    "working_group_id": 2,
+                    "planned_number": 185,
+                    "completed_number": 185
+                },
+                {
+                    "id": 19,
+                    "working_group_id": 7,
+                    "planned_number": 95,
+                    "completed_number": 95
+                },
+                {
+                    "id": 20,
+                    "working_group_id": 8,
+                    "planned_number": 90,
+                    "completed_number": 90
+                },
+                {
+                    "id": 21,
+                    "working_group_id": 8,
+                    "planned_number": 85,
+                    "completed_number": 85
+                },
+                {
+                    "id": 28,
+                    "working_group_id": 7,
+                    "planned_number": 210,
+                    "completed_number": 210
+                },
+                {
+                    "id": 29,
+                    "working_group_id": 7,
+                    "planned_number": 180,
+                    "completed_number": 180
+                },
+                {
+                    "id": 30,
+                    "working_group_id": 2,
+                    "planned_number": 195,
+                    "completed_number": 195
+                },
+                {
+                    "id": 31,
+                    "working_group_id": 10,
+                    "planned_number": 260,
+                    "completed_number": 260
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id;",
+            "description": "Calculate the remaining workload for each sewing task\nThought For each sewing task, the remaining workload is the difference between the planned number and the completed number. This can be calculated using the results from Step1.\n\nStep3: Sum the remaining workload for each working group",
+            "results": [
+                {
+                    "working_group_id": 2,
+                    "remaining_workload": "40"
+                },
+                {
+                    "working_group_id": 7,
+                    "remaining_workload": "0"
+                },
+                {
+                    "working_group_id": 8,
+                    "remaining_workload": "0"
+                },
+                {
+                    "working_group_id": 9,
+                    "remaining_workload": "0"
+                },
+                {
+                    "working_group_id": 10,
+                    "remaining_workload": "0"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT wg.name FROM working_group wg JOIN (SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id ORDER BY remaining_workload DESC LIMIT 1) AS max_workload ON wg.id = max_workload.working_group_id;",
+            "description": "Retrieve the name of the working group with the highest remaining workload",
+            "results": [
+                {
+                    "name": "Master Sewers"
+                }
+            ]
+        }
+    ]
 }

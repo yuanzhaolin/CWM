@@ -70,8 +70,9 @@ def populate_operation_statement(operation_str: str, previous_operating_results:
     args = [f"'''{operation_str}'''", f"'''{previous_operating_results}'''"]
     description_string = (
         "Find useful information in the results of the previous operating statement, and replace <> with the corresponding information. "
-        "If you are unable to identify the parameters within the <> using the given information, Please generate "
-        "a question within it that begins with 'ASK!' to ask the user for the required information.."
+        "If you are unable to identify the parameters within the <> using the given information."
+        "If the operation type is 'Tool' and the tool must be invoked multiple times with varying parameters, "
+        "please output a list of tool operations with distinct parameters."
     )
     result_string = call_ai_function(
         function_string, args, description_string, model=cfg.smart_llm_model

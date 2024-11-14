@@ -1,307 +1,160 @@
 {
-  "ID": 12,
-  "q_ch": "2024年5月31日前完成的缝纫任务有哪些？",
-  "q_en": "What sewing tasks will be completed before May 31, 2024?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id, start_time, end_time, working_group_id, order_product_id, planned_number, completed_number, is_started FROM sewing_tasks WHERE end_time < '2024-05-31';"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "sw1",
-            "start_time": "2024年01月18日 00:00",
-            "end_time": "2024年02月07日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op1",
-            "planned_number": 100,
-            "completed_number": 100,
-            "is_started": 1
-          },
-          {
-            "id": "sw10",
-            "start_time": "2024年03月29日 00:00",
-            "end_time": "2024年04月09日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op10",
-            "planned_number": 100,
-            "completed_number": 100,
-            "is_started": 1
-          },
-          {
-            "id": "sw11",
-            "start_time": "2024年03月21日 00:00",
-            "end_time": "2024年04月14日 00:00",
-            "working_group_id": "wg9",
-            "order_product_id": "op11",
-            "planned_number": 140,
-            "completed_number": 140,
-            "is_started": 1
-          },
-          {
-            "id": "sw12",
-            "start_time": "2024年03月27日 00:00",
-            "end_time": "2024年04月12日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op12",
-            "planned_number": 150,
-            "completed_number": 150,
-            "is_started": 1
-          },
-          {
-            "id": "sw13",
-            "start_time": "2024年03月27日 00:00",
-            "end_time": "2024年04月06日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op13",
-            "planned_number": 130,
-            "completed_number": 130,
-            "is_started": 1
-          },
-          {
-            "id": "sw14",
-            "start_time": "2024年03月18日 00:00",
-            "end_time": "2024年04月08日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op14",
-            "planned_number": 120,
-            "completed_number": 120,
-            "is_started": 1
-          },
-          {
-            "id": "sw15",
-            "start_time": "2024年03月26日 00:00",
-            "end_time": "2024年04月09日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op15",
-            "planned_number": 185,
-            "completed_number": 185,
-            "is_started": 1
-          },
-          {
-            "id": "sw16",
-            "start_time": "2024年04月10日 00:00",
-            "end_time": "2024年05月07日 00:00",
-            "working_group_id": "wg8",
-            "order_product_id": "op16",
-            "planned_number": 200,
-            "completed_number": 200,
-            "is_started": 1
-          },
-          {
-            "id": "sw17",
-            "start_time": "2024年03月25日 00:00",
-            "end_time": "2024年04月22日 00:00",
-            "working_group_id": "wg7",
-            "order_product_id": "op17",
-            "planned_number": 175,
-            "completed_number": 175,
-            "is_started": 1
-          },
-          {
-            "id": "sw18",
-            "start_time": "2024年04月07日 00:00",
-            "end_time": "2024年04月21日 00:00",
-            "working_group_id": "wg7",
-            "order_product_id": "op18",
-            "planned_number": 200,
-            "completed_number": 200,
-            "is_started": 1
-          },
-          {
-            "id": "sw19",
-            "start_time": "2024年04月12日 00:00",
-            "end_time": "2024年04月23日 00:00",
-            "working_group_id": "wg7",
-            "order_product_id": "op19",
-            "planned_number": 95,
-            "completed_number": 95,
-            "is_started": 1
-          },
-          {
-            "id": "sw2",
-            "start_time": "2024年02月02日 00:00",
-            "end_time": "2024年02月15日 00:00",
-            "working_group_id": "wg9",
-            "order_product_id": "op2",
-            "planned_number": 240,
-            "completed_number": 240,
-            "is_started": 1
-          },
-          {
-            "id": "sw20",
-            "start_time": "2024年04月15日 00:00",
-            "end_time": "2024年05月07日 00:00",
-            "working_group_id": "wg8",
-            "order_product_id": "op20",
-            "planned_number": 90,
-            "completed_number": 90,
-            "is_started": 1
-          },
-          {
-            "id": "sw21",
-            "start_time": "2024年04月04日 00:00",
-            "end_time": "2024年04月12日 00:00",
-            "working_group_id": "wg8",
-            "order_product_id": "op21",
-            "planned_number": 85,
-            "completed_number": 85,
-            "is_started": 1
-          },
-          {
-            "id": "sw22",
-            "start_time": "2024年04月09日 00:00",
-            "end_time": "2024年04月22日 00:00",
-            "working_group_id": "wg8",
-            "order_product_id": "op22",
-            "planned_number": 115,
-            "completed_number": 115,
-            "is_started": 1
-          },
-          {
-            "id": "sw23",
-            "start_time": "2024年04月19日 00:00",
-            "end_time": "2024年05月01日 00:00",
-            "working_group_id": "wg7",
-            "order_product_id": "op23",
-            "planned_number": 110,
-            "completed_number": 110,
-            "is_started": 1
-          },
-          {
-            "id": "sw24",
-            "start_time": "2024年04月23日 00:00",
-            "end_time": "2024年05月20日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op24",
-            "planned_number": 105,
-            "completed_number": 105,
-            "is_started": 1
-          },
-          {
-            "id": "sw26",
-            "start_time": "2024年05月04日 00:00",
-            "end_time": "2024年05月15日 00:00",
-            "working_group_id": "wg9",
-            "order_product_id": "op26",
-            "planned_number": 70,
-            "completed_number": 70,
-            "is_started": 1
-          },
-          {
-            "id": "sw27",
-            "start_time": "2024年05月04日 00:00",
-            "end_time": "2024年05月15日 00:00",
-            "working_group_id": "wg7",
-            "order_product_id": "op27",
-            "planned_number": 60,
-            "completed_number": 60,
-            "is_started": 1
-          },
-          {
-            "id": "sw28",
-            "start_time": "2024年05月12日 00:00",
-            "end_time": "2024年05月28日 00:00",
-            "working_group_id": "wg7",
-            "order_product_id": "op28",
-            "planned_number": 210,
-            "completed_number": 210,
-            "is_started": 1
-          },
-          {
-            "id": "sw29",
-            "start_time": "2024年05月11日 00:00",
-            "end_time": "2024年05月19日 00:00",
-            "working_group_id": "wg7",
-            "order_product_id": "op29",
-            "planned_number": 180,
-            "completed_number": 180,
-            "is_started": 1
-          },
-          {
-            "id": "sw3",
-            "start_time": "2024年01月19日 00:00",
-            "end_time": "2024年02月08日 00:00",
-            "working_group_id": "wg9",
-            "order_product_id": "op3",
-            "planned_number": 150,
-            "completed_number": 150,
-            "is_started": 1
-          },
-          {
-            "id": "sw30",
-            "start_time": "2024年04月26日 00:00",
-            "end_time": "2024年05月15日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op30",
-            "planned_number": 195,
-            "completed_number": 195,
-            "is_started": 1
-          },
-          {
-            "id": "sw4",
-            "start_time": "2024年01月17日 00:00",
-            "end_time": "2024年01月30日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op4",
-            "planned_number": 220,
-            "completed_number": 200,
-            "is_started": 1
-          },
-          {
-            "id": "sw5",
-            "start_time": "2024年02月02日 00:00",
-            "end_time": "2024年02月25日 00:00",
-            "working_group_id": "wg2",
-            "order_product_id": "op5",
-            "planned_number": 260,
-            "completed_number": 260,
-            "is_started": 1
-          },
-          {
-            "id": "sw6",
-            "start_time": "2024年03月20日 00:00",
-            "end_time": "2024年04月07日 00:00",
-            "working_group_id": "wg8",
-            "order_product_id": "op6",
-            "planned_number": 95,
-            "completed_number": 95,
-            "is_started": 1
-          },
-          {
-            "id": "sw7",
-            "start_time": "2024年03月06日 00:00",
-            "end_time": "2024年03月22日 00:00",
-            "working_group_id": "wg8",
-            "order_product_id": "op7",
-            "planned_number": 110,
-            "completed_number": 100,
-            "is_started": 1
-          },
-          {
-            "id": "sw8",
-            "start_time": "2024年03月08日 00:00",
-            "end_time": "2024年04月05日 00:00",
-            "working_group_id": "wg7",
-            "order_product_id": "op8",
-            "planned_number": 50,
-            "completed_number": 50,
-            "is_started": 1
-          },
-          {
-            "id": "sw9",
-            "start_time": "2024年03月06日 00:00",
-            "end_time": "2024年03月20日 00:00",
-            "working_group_id": "wg8",
-            "order_product_id": "op9",
-            "planned_number": 80,
-            "completed_number": 80,
-            "is_started": 1
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 7907
+    "ID": 12,
+    "q_ch": "2024年5月31日前完成的缝纫任务有哪些？",
+    "q_en": "What sewing tasks will be completed before May 31, 2024?",
+    "gt": "Sure! Here are the sewing tasks that will be completed before May 31, 2024. I've organized them into a neat table for you. 😊\n\n| Task ID | End Time          | Working Group Name |\n|---------|-------------------|--------------------|\n| 1       | 2024-02-07        | Master Sewers      |\n| 2       | 2024-02-15        | Premier Sewers     |\n| 3       | 2024-02-08        | Premier Sewers     |\n| 4       | 2024-01-30        | Master Sewers      |\n| 5       | 2024-02-25        | Master Sewers      |\n| 6       | 2024-04-07        | Advanced Sewers    |\n| 7       | 2024-03-22        | Advanced Sewers    |\n| 8       | 2024-04-05        | Skilled Sewers     |\n| 9       | 2024-03-20        | Advanced Sewers    |\n| 10      | 2024-04-09        | Master Sewers      |\n| 11      | 2024-04-14        | Premier Sewers     |\n| 12      | 2024-04-12        | Master Sewers      |\n| 13      | 2024-04-06        | Master Sewers      |\n| 14      | 2024-04-08        | Master Sewers      |\n| 15      | 2024-04-09        | Master Sewers      |\n| 16      | 2024-05-07        | Advanced Sewers    |\n| 17      | 2024-04-22        | Skilled Sewers     |\n| 18      | 2024-04-21        | Skilled Sewers     |\n| 19      | 2024-04-23        | Skilled Sewers     |\n| 20      | 2024-05-07        | Advanced Sewers    |\n| 21      | 2024-04-12        | Advanced Sewers    |\n| 22      | 2024-04-22        | Advanced Sewers    |\n| 23      | 2024-05-01        | Skilled Sewers     |\n| 24      | 2024-05-20        | Master Sewers      |\n| 26      | 2024-05-15        | Premier Sewers     |\n| 27      | 2024-05-15        | Skilled Sewers     |\n| 28      | 2024-05-28        | Skilled Sewers     |\n| 29      | 2024-05-19        | Skilled Sewers     |\n| 30      | 2024-05-15        | Master Sewers      |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT st.id, st.end_time, wg.name AS working_group_name FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE st.end_time < '2024-05-31';",
+            "description": "Retrieve the sewing tasks that have an end time before May 31, 2024",
+            "results": [
+                {
+                    "id": 1,
+                    "end_time": "2024-02-07 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 2,
+                    "end_time": "2024-02-15 00:00:00",
+                    "working_group_name": "Premier Sewers"
+                },
+                {
+                    "id": 3,
+                    "end_time": "2024-02-08 00:00:00",
+                    "working_group_name": "Premier Sewers"
+                },
+                {
+                    "id": 4,
+                    "end_time": "2024-01-30 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 5,
+                    "end_time": "2024-02-25 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 6,
+                    "end_time": "2024-04-07 00:00:00",
+                    "working_group_name": "Advanced Sewers"
+                },
+                {
+                    "id": 7,
+                    "end_time": "2024-03-22 00:00:00",
+                    "working_group_name": "Advanced Sewers"
+                },
+                {
+                    "id": 8,
+                    "end_time": "2024-04-05 00:00:00",
+                    "working_group_name": "Skilled Sewers"
+                },
+                {
+                    "id": 9,
+                    "end_time": "2024-03-20 00:00:00",
+                    "working_group_name": "Advanced Sewers"
+                },
+                {
+                    "id": 10,
+                    "end_time": "2024-04-09 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 11,
+                    "end_time": "2024-04-14 00:00:00",
+                    "working_group_name": "Premier Sewers"
+                },
+                {
+                    "id": 12,
+                    "end_time": "2024-04-12 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 13,
+                    "end_time": "2024-04-06 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 14,
+                    "end_time": "2024-04-08 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 15,
+                    "end_time": "2024-04-09 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 16,
+                    "end_time": "2024-05-07 00:00:00",
+                    "working_group_name": "Advanced Sewers"
+                },
+                {
+                    "id": 17,
+                    "end_time": "2024-04-22 00:00:00",
+                    "working_group_name": "Skilled Sewers"
+                },
+                {
+                    "id": 18,
+                    "end_time": "2024-04-21 00:00:00",
+                    "working_group_name": "Skilled Sewers"
+                },
+                {
+                    "id": 19,
+                    "end_time": "2024-04-23 00:00:00",
+                    "working_group_name": "Skilled Sewers"
+                },
+                {
+                    "id": 20,
+                    "end_time": "2024-05-07 00:00:00",
+                    "working_group_name": "Advanced Sewers"
+                },
+                {
+                    "id": 21,
+                    "end_time": "2024-04-12 00:00:00",
+                    "working_group_name": "Advanced Sewers"
+                },
+                {
+                    "id": 22,
+                    "end_time": "2024-04-22 00:00:00",
+                    "working_group_name": "Advanced Sewers"
+                },
+                {
+                    "id": 23,
+                    "end_time": "2024-05-01 00:00:00",
+                    "working_group_name": "Skilled Sewers"
+                },
+                {
+                    "id": 24,
+                    "end_time": "2024-05-20 00:00:00",
+                    "working_group_name": "Master Sewers"
+                },
+                {
+                    "id": 26,
+                    "end_time": "2024-05-15 00:00:00",
+                    "working_group_name": "Premier Sewers"
+                },
+                {
+                    "id": 27,
+                    "end_time": "2024-05-15 00:00:00",
+                    "working_group_name": "Skilled Sewers"
+                },
+                {
+                    "id": 28,
+                    "end_time": "2024-05-28 00:00:00",
+                    "working_group_name": "Skilled Sewers"
+                },
+                {
+                    "id": 29,
+                    "end_time": "2024-05-19 00:00:00",
+                    "working_group_name": "Skilled Sewers"
+                },
+                {
+                    "id": 30,
+                    "end_time": "2024-05-15 00:00:00",
+                    "working_group_name": "Master Sewers"
+                }
+            ]
+        }
+    ]
 }

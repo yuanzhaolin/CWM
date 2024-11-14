@@ -1,36 +1,28 @@
 {
-  "ID": 43,
-  "q_ch": "向仓库Main Warehouse，入库Leather 1000份。",
-  "q_en": "Send 1000 Leathers to the Main Warehouse for storage.",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id FROM materials WHERE name = 'Leather';",
-        "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
-        "SELECT id FROM warehouse_material WHERE warehouse_id = 'w1' AND material_id = 'm7';",
-        "UPDATE warehouse_material SET left_number = left_number + 1000 WHERE id = 'wm7';",
-        "INSERT INTO warehouse_material (id, warehouse_id, material_id, left_number) VALUES (UUID(), 'w1', 'm7', 1000);"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "m7"
-          }
-        ],
-        [
-          {
-            "id": "w1"
-          }
-        ],
-        [
-          {
-            "id": "wm7"
-          }
-        ],
-        "update data successfully.",
-        "insert data successfully."
-      ]
-    }
-  ],
-  "total_tokens": 5199
+    "ID": 43,
+    "q_ch": "向仓库Main Warehouse，入库Leather 1000份。",
+    "q_en": "Send 1000 Leathers to the Main Warehouse for storage.",
+    "gt": "Sure thing! Here's the information you need:\n\n| Material Name | Material ID | Warehouse Name | Warehouse ID | Quantity |\n|---------------|-------------|----------------|--------------|----------|\n| Leather       | 7           | Main Warehouse | 1            | 1000     |\n\nYou can go ahead and send 1000 units of Leather to the Main Warehouse for storage. 📦🚚 If you need any more help, just let me know! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Leather';",
+            "description": "Retrieve the material ID for the material with the name \"Leather\"",
+            "results": [
+                {
+                    "id": 7
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
+            "description": "Retrieve the warehouse ID for the warehouse with the name \"Main Warehouse\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        }
+    ]
 }

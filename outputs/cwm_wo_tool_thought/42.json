@@ -1,0 +1,48 @@
+{
+    "ID": 42,
+    "q_ch": "对于PolyU在2024年1月提交的订单，将所有生产红色小码类型T-shirt的缝纫任务设置成开始状态。",
+    "q_en": "For orders submitted by PolyU in January 2024, set all sewing tasks for producing Red, M size type T-shirts to start status. ",
+    "gt": "Sure thing! Let's break down the task and see what we have:\n\n### Task Overview\nWe need to set all sewing tasks to \"start status\" for orders submitted by the customer \"PolyU\" in January 2024, specifically for products that are \"Red, M size\" T-shirts.\n\n### SQL Query Results\nHere's a summary of the information we gathered:\n\n| **Description** | **Result** |\n|-----------------|------------|\n| Customer ID for \"PolyU\" | 1 |\n| Order IDs for \"PolyU\" in January 2024 | 1 |\n| Product ID for \"Red, M size\" T-shirt | 1 |\n| Order_Product ID for the specific order and product | 1 |\n\n### Next Steps\nWith these IDs, you can proceed to update the sewing tasks to \"start status\" for the specified order and product. 🎉\n\nIf you need any more help or have further questions, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
+            "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '1' AND created_at BETWEEN '2024-01-01' AND '2024-01-31';",
+            "description": "Retrieve the order IDs for orders submitted by the customer \"PolyU\" in January 2024",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.attributes = 'Red, M size' AND pt.description = 'T-shirt';",
+            "description": "Retrieve the product ID for the product with attributes \"Red, M size\" and type \"T-shirt\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM order_product WHERE order_id IN (1) AND product_id = '1';",
+            "description": "Retrieve the order_product IDs for the specific orders and product",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,129 @@
+{
+    "ID": 19,
+    "q_ch": "使用 Silk 的缝纫任务有哪些？",
+    "q_en": "Which sewing tasks use Silk?",
+    "gt": "Sure thing! Let's dive into the sewing tasks that use the material \"Silk\". Here's a list of the sewing task IDs that are associated with \"Silk\":\n\n| Sewing Task ID |\n|----------------|\n| 5              |\n| 6              |\n| 8              |\n| 11             |\n| 14             |\n| 15             |\n| 16             |\n| 19             |\n| 24             |\n| 25             |\n| 27             |\n| 29             |\n| 31             |\n| 32             |\n\nThese tasks are all about creating something fabulous with \"Silk\"! 🧵✨ If you have any more questions, feel free to ask! 😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Silk';",
+            "description": "Retrieve the material ID for the material with the name \"Silk\"",
+            "results": [
+                {
+                    "id": 5
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT wip_id FROM wip_material WHERE origin_material_id = '5';",
+            "description": "Retrieve the WIP material IDs that use the original material \"Silk\"",
+            "results": [
+                {
+                    "wip_id": 6
+                },
+                {
+                    "wip_id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT order_product_id FROM cutting_tasks WHERE produced_wip_id IN ('6', '8');",
+            "description": "Retrieve the order product IDs that produce the WIP materials using \"Silk\"",
+            "results": [
+                {
+                    "order_product_id": 5
+                },
+                {
+                    "order_product_id": 6
+                },
+                {
+                    "order_product_id": 8
+                },
+                {
+                    "order_product_id": 11
+                },
+                {
+                    "order_product_id": 14
+                },
+                {
+                    "order_product_id": 15
+                },
+                {
+                    "order_product_id": 16
+                },
+                {
+                    "order_product_id": 19
+                },
+                {
+                    "order_product_id": 24
+                },
+                {
+                    "order_product_id": 25
+                },
+                {
+                    "order_product_id": 27
+                },
+                {
+                    "order_product_id": 29
+                },
+                {
+                    "order_product_id": 31
+                },
+                {
+                    "order_product_id": 32
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM sewing_tasks WHERE order_product_id IN ('5', '6', '8', '11', '14', '15', '16', '19', '24', '25', '27', '29', '31', '32');",
+            "description": "Retrieve the sewing task IDs that use the order products associated with \"Silk\"",
+            "results": [
+                {
+                    "id": 5
+                },
+                {
+                    "id": 6
+                },
+                {
+                    "id": 8
+                },
+                {
+                    "id": 11
+                },
+                {
+                    "id": 14
+                },
+                {
+                    "id": 15
+                },
+                {
+                    "id": 16
+                },
+                {
+                    "id": 19
+                },
+                {
+                    "id": 24
+                },
+                {
+                    "id": 25
+                },
+                {
+                    "id": 27
+                },
+                {
+                    "id": 29
+                },
+                {
+                    "id": 31
+                },
+                {
+                    "id": 32
+                }
+            ]
+        }
+    ]
+}

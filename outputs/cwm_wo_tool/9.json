@@ -1,0 +1,66 @@
+{
+    "ID": 9,
+    "q_ch": "William 的缝纫任务进度如何？",
+    "q_en": "What is the progress of sewing tasks for William?",
+    "gt": "Hello there! 😄 Let's take a look at the progress of sewing tasks for our customer, William. Here's a summary of the completed tasks:\n\n| Order Product ID | Total Number of Products | Completed Number of Sewing Tasks |\n|------------------|--------------------------|----------------------------------|\n| 28               | 210                      | 210                              |\n| 29               | 180                      | 180                              |\n| 30               | 195                      | 195                              |\n\nGreat news! 🎉 All sewing tasks for William's orders have been completed. If you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'William';",
+            "description": "Retrieve the customer ID for the customer with the name \"William\"",
+            "results": [
+                {
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '8';",
+            "description": "Retrieve the order IDs for the customer \"William\"",
+            "results": [
+                {
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id, number FROM order_product WHERE order_id IN ('8');",
+            "description": "Retrieve the order_product IDs and the total number of products for each order of the customer",
+            "results": [
+                {
+                    "id": 28,
+                    "number": 210
+                },
+                {
+                    "id": 29,
+                    "number": 180
+                },
+                {
+                    "id": 30,
+                    "number": 195
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT order_product_id, SUM(completed_number) AS completed_number FROM sewing_tasks WHERE order_product_id IN ('28', '29', '30') GROUP BY order_product_id;",
+            "description": "Retrieve the completed number of sewing tasks for each order_product",
+            "results": [
+                {
+                    "order_product_id": 28,
+                    "completed_number": "210"
+                },
+                {
+                    "order_product_id": 29,
+                    "completed_number": "180"
+                },
+                {
+                    "order_product_id": 30,
+                    "completed_number": "195"
+                }
+            ]
+        }
+    ]
+}

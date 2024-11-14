@@ -1,0 +1,72 @@
+{
+    "ID": 6,
+    "q_ch": "顾客理大2024年1月的订单包含哪些产品？",
+    "q_en": "What products are included in PolyU's January 2024 orders?",
+    "gt": "Hello there! 😄 Let's take a look at the products included in the order named \"James_WinterOrder\" for the customer \"PolyU\". Here's a neat table with all the details:\n\n| Product ID | Attributes     | Description |\n|------------|----------------|-------------|\n| 1          | Red, M size    | T-shirt     |\n| 19         | Blue, L size   | T-shirt     |\n| 3          | White, XL size | T-shirt     |\n| 11         | Green, M size  | T-shirt     |\n| 27         | Yellow, S size | T-shirt     |\n\nThese are the fabulous T-shirts included in the order! If you have any more questions, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
+            "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT product_id, number FROM order_product WHERE order_id = '1';",
+            "description": "Retrieve the product IDs and quantities for the order from Step2",
+            "results": [
+                {
+                    "product_id": 1,
+                    "number": 100
+                },
+                {
+                    "product_id": 19,
+                    "number": 240
+                },
+                {
+                    "product_id": 3,
+                    "number": 150
+                },
+                {
+                    "product_id": 11,
+                    "number": 220
+                },
+                {
+                    "product_id": 27,
+                    "number": 260
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT p.attributes, pt.description FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.id IN (1, 19, 3, 11, 27);",
+            "description": "Retrieve the product attributes and types for the product IDs from Step3",
+            "results": [
+                {
+                    "attributes": "Red, M size",
+                    "description": "T-shirt"
+                },
+                {
+                    "attributes": "Blue, L size",
+                    "description": "T-shirt"
+                },
+                {
+                    "attributes": "White, XL size",
+                    "description": "T-shirt"
+                },
+                {
+                    "attributes": "Green, M size",
+                    "description": "T-shirt"
+                },
+                {
+                    "attributes": "Yellow, S size",
+                    "description": "T-shirt"
+                }
+            ]
+        }
+    ]
+}

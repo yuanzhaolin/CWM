@@ -1,0 +1,56 @@
+{
+    "ID": 39,
+    "q_ch": "使用 Leather 的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks use Leather?",
+    "gt": "Hey there! 😄 It looks like you're curious about which cutting tasks involve the use of leather. Based on the data I have, here are the cutting task IDs that use leather:\n\n| Cutting Task ID |\n|-----------------|\n| 5               |\n| 11              |\n| 16              |\n| 24              |\n| 27              |\n| 31              |\n| 32              |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Leather';",
+            "description": "Retrieve the material ID for the material with the name \"Leather\"",
+            "results": [
+                {
+                    "id": 7
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT wip_id FROM wip_material WHERE origin_material_id = '7';",
+            "description": "Retrieve the WIP material ID that uses the material \"Leather\"",
+            "results": [
+                {
+                    "wip_id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM cutting_tasks WHERE produced_wip_id = '8';",
+            "description": "Retrieve the cutting task IDs that use the WIP material \"Leather\"",
+            "results": [
+                {
+                    "id": 5
+                },
+                {
+                    "id": 11
+                },
+                {
+                    "id": 16
+                },
+                {
+                    "id": 24
+                },
+                {
+                    "id": 27
+                },
+                {
+                    "id": 31
+                },
+                {
+                    "id": 32
+                }
+            ]
+        }
+    ]
+}

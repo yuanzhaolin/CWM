@@ -1,0 +1,29 @@
+{
+    "ID": 15,
+    "q_ch": "剩余库存最少的原料是什么？",
+    "q_en": "What is the material with the lowest remaining inventory?",
+    "gt": "Sure! Based on the latest data, the material with the lowest remaining inventory is:\n\n| Material ID | Material Name | Remaining Inventory |\n|-------------|---------------|---------------------|\n| 5           | Silk          | 1100                |\n\nIt looks like Silk is running low in stock! 🧵✨ If you need more information, feel free to ask! 😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT material_id, left_number FROM warehouse_material ORDER BY left_number ASC LIMIT 1;",
+            "description": "Retrieve the material ID and remaining inventory quantity from the warehouse_material table",
+            "results": [
+                {
+                    "material_id": 5,
+                    "left_number": 1100
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT name FROM materials WHERE id = '5';",
+            "description": "Retrieve the name of the material with the lowest remaining inventory",
+            "results": [
+                {
+                    "name": "Silk"
+                }
+            ]
+        }
+    ]
+}

@@ -46,6 +46,9 @@ class Config(metaclass=Singleton):
         self.enable_rewrite_query = os.getenv("ENABLE_REWRITE_QUERY", True)
         self.fast_token_limit = int(os.getenv("FAST_TOKEN_LIMIT", 4000))
         self.smart_token_limit = int(os.getenv("SMART_TOKEN_LIMIT", 8000))
+        self.tool_open = os.getenv("TOOL_OPEN", "True")=="True"
+        self.thought_open = os.getenv("THOUGHT_OPEN", "True")=="True"
+        self.sleep = os.getenv("SLEEP", "False")=="True"
 
         self.openai_api_key = os.getenv("OPENAI_API_KEY")
         self.openai_base_url = os.getenv("OPENAI_BASE_URL")

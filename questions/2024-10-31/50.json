@@ -1,0 +1,13 @@
+{
+    "ID": 50,
+    "q_ch": "对于编号为33的裁剪任务，预计任务结束时间需要延迟至2024年7月31日",
+    "q_en": "The expected completion date for cutting task 33 needs to be extended to July 31, 2024.",
+    "gt": "Sure thing! Let's update the expected completion date for cutting task 33. Here are the current details of the task:\n\n| **Detail**           | **Information**          |\n|----------------------|--------------------------|\n| **Start Time**       | June 25, 2024            |\n| **End Time**         | July 17, 2024            |\n| **Working Group ID** | 3                        |\n| **Order Product ID** | 33                       |\n| **Produced WIP ID**  | 10                       |\n| **Planned Number**   | 120                      |\n| **Completed Number** | 0                        |\n| **Status**           | 0 (Not yet completed)    |\n\nLet's extend the expected completion date to **July 31, 2024**. 🎉 If you need any more help or adjustments, just let me know! 😊",
+    "steps": [
+        {
+            "input": "Retrieve the current details of the cutting task with ID 33\ntool_find_cutting_task, {'cutting_task_id': '33'}, Find the cutting task by the cutting task ID",
+            "output": "The current details of the cutting task with ID 33 are as follows:\n\n- **Start Time:** June 25, 2024\n- **End Time:** July 17, 2024\n- **Working Group ID:** 3\n- **Order Product ID:** 33\n- **Produced WIP ID:** 10\n- **Planned Number:** 120\n- **Completed Number:** 0\n- **Status:** 0 (indicating the task is not yet completed)"
+        },
+        "update data successfully."
+    ]
+}

@@ -1,62 +1,85 @@
 {
-  "ID": 4,
-  "q_ch": "James 的订单包含哪些产品？",
-  "q_en": "What products are included in James's order?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id FROM customers WHERE customer_name = 'James';",
-        "SELECT id FROM orders WHERE user_id = 'c4';",
-        "SELECT op.order_id, p.attributes, pt.description, op.number FROM order_product op JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.order_id IN (SELECT id FROM orders WHERE user_id = 'c4');"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "c4"
-          }
-        ],
-        [
-          {
-            "id": "o12"
-          },
-          {
-            "id": "o4"
-          }
-        ],
-        [
-          {
-            "order_id": "o12",
-            "attributes": "Purple, M size",
-            "description": "Skirt",
-            "number": 330
-          },
-          {
-            "order_id": "o4",
-            "attributes": "Brown, S size",
-            "description": "Jacket",
-            "number": 185
-          },
-          {
-            "order_id": "o4",
-            "attributes": "Red, M size",
-            "description": "Coat",
-            "number": 200
-          },
-          {
-            "order_id": "o4",
-            "attributes": "Yellow, L size",
-            "description": "Jacket",
-            "number": 175
-          },
-          {
-            "order_id": "o4",
-            "attributes": "Brown, L size",
-            "description": "Jacket",
-            "number": 200
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 5299
+    "ID": 4,
+    "q_ch": "James 的订单包含哪些产品？",
+    "q_en": "What products are included in James's order?",
+    "gt": "Hey there! 😄 Let's take a look at the products included in James's order. Here's a neat table for you:\n\n| Product Type | Attributes       |\n|--------------|------------------|\n| Jacket       | Brown, L size    |\n| Skirt        | Purple, M size   |\n| Jacket       | Yellow, L size   |\n| Jacket       | Brown, S size    |\n| Coat         | Red, M size      |\n\nJames has quite a stylish selection, don't you think? If you have any more questions, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'James';",
+            "description": "Retrieve the customer ID for the customer with the name \"James\"",
+            "results": [
+                {
+                    "id": 4
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '4';",
+            "description": "Retrieve the order IDs for the customer with the retrieved customer ID",
+            "results": [
+                {
+                    "id": 4
+                },
+                {
+                    "id": 12
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT product_id, number FROM order_product WHERE order_id IN ('4', '12');",
+            "description": "Retrieve the product IDs and quantities for each order associated with the customer",
+            "results": [
+                {
+                    "product_id": 22,
+                    "number": 185
+                },
+                {
+                    "product_id": 26,
+                    "number": 200
+                },
+                {
+                    "product_id": 14,
+                    "number": 175
+                },
+                {
+                    "product_id": 6,
+                    "number": 200
+                },
+                {
+                    "product_id": 7,
+                    "number": 330
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT p.attributes, pt.description FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.id IN ('22', '26', '14', '6', '7');",
+            "description": "Retrieve the product attributes and type descriptions for the retrieved product IDs",
+            "results": [
+                {
+                    "attributes": "Brown, L size",
+                    "description": "Jacket"
+                },
+                {
+                    "attributes": "Purple, M size",
+                    "description": "Skirt"
+                },
+                {
+                    "attributes": "Yellow, L size",
+                    "description": "Jacket"
+                },
+                {
+                    "attributes": "Brown, S size",
+                    "description": "Jacket"
+                },
+                {
+                    "attributes": "Red, M size",
+                    "description": "Coat"
+                }
+            ]
+        }
+    ]
 }

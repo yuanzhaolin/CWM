@@ -1,0 +1,18 @@
+{
+    "ID": 25,
+    "q_ch": "对于Master Sewers 已经完成的所有缝纫任务，有哪些是在2024年2月1日之后创建的?",
+    "q_en": "For all sewing tasks completed by Master Sewers, which ones were created after February 1, 2024?",
+    "gt": "Sure thing! Let's dive into the details of the sewing tasks completed by the \"Master Sewers\" group. 🎉\n\nBased on the SQL query results, we have identified the working group ID for \"Master Sewers\" as **2**. Now, let's focus on the tasks created after February 1, 2024. Unfortunately, the SQL result provided doesn't include specific task details, so I can't list them out for you. 😅\n\nIf you have more data or need further assistance, feel free to ask! I'm here to help. 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Master Sewers';",
+            "description": "Retrieve the working group ID for \"Master Sewers\"",
+            "results": [
+                {
+                    "id": 2
+                }
+            ]
+        }
+    ]
+}

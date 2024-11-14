@@ -1,26 +1,28 @@
 {
-  "ID": 7,
-  "q_ch": "顾客PolyU 下的订单总数是多少？",
-  "q_en": "How many orders are there in total under PolyU?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id FROM customers WHERE customer_name = 'PolyU';",
-        "SELECT COUNT(*) AS total_orders FROM orders WHERE user_id = 'c1';"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "c1"
-          }
-        ],
-        [
-          {
-            "total_orders": 2
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 5812
+    "ID": 7,
+    "q_ch": "顾客PolyU 下的订单总数是多少？",
+    "q_en": "How many orders are there in total under PolyU?",
+    "gt": "Sure thing! Based on the information provided, here's what I found:\n\n| Customer Name | Total Orders |\n|---------------|--------------|\n| PolyU         | 3            |\n\nIt looks like there are a total of **3 orders** under the customer name \"PolyU\". 🎉 If you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
+            "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT COUNT(*) FROM orders WHERE user_id = '1';",
+            "description": "Count the total number of orders for the customer with the retrieved customer ID",
+            "results": [
+                {
+                    "COUNT(*)": 3
+                }
+            ]
+        }
+    ]
 }

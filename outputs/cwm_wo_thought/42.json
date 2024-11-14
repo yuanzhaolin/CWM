@@ -1,0 +1,48 @@
+{
+    "ID": 42,
+    "q_ch": "对于PolyU在2024年1月提交的订单，将所有生产红色小码类型T-shirt的缝纫任务设置成开始状态。",
+    "q_en": "For orders submitted by PolyU in January 2024, set all sewing tasks for producing Red, M size type T-shirts to start status. ",
+    "gt": "Sure thing! Let's get those sewing tasks started for the orders you're interested in. Here's a quick summary of what we found:\n\n| **Task** | **Details** |\n|----------|-------------|\n| **Customer** | PolyU |\n| **Order Date** | January 2024 |\n| **Product** | T-shirt |\n| **Attributes** | Red, M size |\n\nFor the orders submitted by PolyU in January 2024, all sewing tasks for producing Red, M size T-shirts are set to start status. 🎉 If you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
+            "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '1' AND created_at BETWEEN '2024-01-01' AND '2024-01-31';",
+            "description": "Retrieve the order IDs for orders submitted by the customer \"PolyU\" in January 2024",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.attributes = 'Red, M size' AND pt.description = 'T-shirt';",
+            "description": "Retrieve the product ID for the product with attributes \"Red, M size\" and type \"T-shirt\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM order_product WHERE order_id IN (1) AND product_id = '1';",
+            "description": "Retrieve the order_product IDs for the specific orders and product",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        }
+    ]
+}

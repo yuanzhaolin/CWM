@@ -1,113 +1,126 @@
 {
-  "ID": 36,
-  "q_ch": "顾客是PolyU 的裁剪任务有哪些？",
-  "q_en": "What are the cutting tasks for customers who are PolyU?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id FROM customers WHERE customer_name = 'PolyU';",
-        "SELECT id FROM orders WHERE user_id = 'c1';",
-        "SELECT id FROM order_product WHERE order_id IN (SELECT id FROM orders WHERE user_id = 'c1');",
-        "SELECT id, start_time, end_time, working_group_id, order_product_id, planned_number, completed_number, is_started FROM cutting_tasks WHERE order_product_id IN (SELECT id FROM order_product WHERE order_id IN (SELECT id FROM orders WHERE user_id = 'c1'));"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "c1"
-          }
-        ],
-        [
-          {
-            "id": "o1"
-          },
-          {
-            "id": "o9"
-          }
-        ],
-        [
-          {
-            "id": "op1"
-          },
-          {
-            "id": "op2"
-          },
-          {
-            "id": "op3"
-          },
-          {
-            "id": "op4"
-          },
-          {
-            "id": "op5"
-          },
-          {
-            "id": "op31"
-          }
-        ],
-        [
-          {
-            "id": "ct1",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月18日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op1",
-            "planned_number": 100,
-            "completed_number": 100,
-            "is_started": 1
-          },
-          {
-            "id": "ct2",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年02月02日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op2",
-            "planned_number": 240,
-            "completed_number": 240,
-            "is_started": 1
-          },
-          {
-            "id": "ct3",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月19日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op3",
-            "planned_number": 150,
-            "completed_number": 150,
-            "is_started": 1
-          },
-          {
-            "id": "ct4",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年01月17日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op4",
-            "planned_number": 220,
-            "completed_number": 220,
-            "is_started": 1
-          },
-          {
-            "id": "ct5",
-            "start_time": "2024年01月10日 00:00",
-            "end_time": "2024年02月02日 00:00",
-            "working_group_id": "wg6",
-            "order_product_id": "op5",
-            "planned_number": 260,
-            "completed_number": 260,
-            "is_started": 1
-          },
-          {
-            "id": "ct31",
-            "start_time": "2024年05月10日 00:00",
-            "end_time": "2024年05月26日 00:00",
-            "working_group_id": "wg3",
-            "order_product_id": "op31",
-            "planned_number": 260,
-            "completed_number": 260,
-            "is_started": 1
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 16599
+    "ID": 36,
+    "q_ch": "顾客是PolyU 的裁剪任务有哪些？",
+    "q_en": "What are the cutting tasks for customers who are PolyU?",
+    "gt": "Sure! Here are the cutting tasks for the customer named \"PolyU\" based on the available data. Let's take a look at the details:\n\n| Task ID | Start Time          | End Time            | Working Group Name | Planned Number | Completed Number | Status |\n|---------|---------------------|---------------------|--------------------|----------------|------------------|--------|\n| 1       | 2024-01-10 00:00:00 | 2024-01-18 00:00:00 | Master Sewers      | 100            | 100              | 2      |\n| 2       | 2024-01-10 00:00:00 | 2024-02-02 00:00:00 | Master Cutters     | 240            | 240              | 1      |\n| 3       | 2024-01-10 00:00:00 | 2024-01-19 00:00:00 | Master Cutters     | 150            | 150              | 2      |\n| 4       | 2024-01-10 00:00:00 | 2024-01-17 00:00:00 | Master Sewers      | 220            | 220              | 1      |\n| 5       | 2024-01-10 00:00:00 | 2024-02-02 00:00:00 | Master Sewers      | 260            | 260              | 1      |\n| 31      | 2024-05-10 00:00:00 | 2024-05-26 00:00:00 | Master Cutters     | 260            | 260              | 1      |\n\n- **Status Legend**:\n  - 1: In Progress\n  - 2: Completed\n\nThese tasks are handled by the talented teams of \"Master Sewers\" and \"Master Cutters.\" Keep up the great work! 😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
+            "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '1';",
+            "description": "Retrieve the order IDs for orders placed by the customer \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                },
+                {
+                    "id": 9
+                },
+                {
+                    "id": 13
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM order_product WHERE order_id IN (1, 9, 13);",
+            "description": "Retrieve the order_product IDs for the orders associated with the customer \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                },
+                {
+                    "id": 2
+                },
+                {
+                    "id": 3
+                },
+                {
+                    "id": 4
+                },
+                {
+                    "id": 5
+                },
+                {
+                    "id": 31
+                },
+                {
+                    "id": 35
+                },
+                {
+                    "id": 36
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT ct.id, ct.start_time, ct.end_time, wg.name AS working_group_name, ct.planned_number, ct.completed_number, ct.status FROM cutting_tasks ct JOIN working_group wg ON ct.working_group_id = wg.id WHERE ct.order_product_id IN (1, 2, 3, 4, 5, 31, 35, 36);",
+            "description": "Retrieve the cutting tasks for the order products associated with the customer \"PolyU\"",
+            "results": [
+                {
+                    "id": 1,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-01-18 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "planned_number": 100,
+                    "completed_number": 100,
+                    "status": 2
+                },
+                {
+                    "id": 2,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-02-02 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "planned_number": 240,
+                    "completed_number": 240,
+                    "status": 1
+                },
+                {
+                    "id": 3,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-01-19 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "planned_number": 150,
+                    "completed_number": 150,
+                    "status": 2
+                },
+                {
+                    "id": 4,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-01-17 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "planned_number": 220,
+                    "completed_number": 220,
+                    "status": 1
+                },
+                {
+                    "id": 5,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-02-02 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "planned_number": 260,
+                    "completed_number": 260,
+                    "status": 1
+                },
+                {
+                    "id": 31,
+                    "start_time": "2024-05-10 00:00:00",
+                    "end_time": "2024-05-26 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "planned_number": 260,
+                    "completed_number": 260,
+                    "status": 1
+                }
+            ]
+        }
+    ]
 }

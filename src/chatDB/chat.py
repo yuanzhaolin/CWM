@@ -41,13 +41,14 @@ def generate_context(prompt, relevant_memory, full_message_history, model):
     current_tokens_used = token_counter.count_message_tokens(current_context, "gpt-3.5-turbo")
     return next_message_to_add_index, current_tokens_used, insertion_index, current_context
 
-def generate_abstract_context(full_message_history, model, old_abstract, token_limit):
+def generate_abstract_context(user_inp, response, model, old_abstract, token_limit):
     contexts = [
         create_chat_message("system",
         'Please generate an abstract based on the prior conversation context and the older context abstract. '
         'The abstract should be organized as a key-value table that incorporates significant entity information '
         'and records retrieved from the database.'),
-        create_chat_message("user", f"The prior conversation context: \n {full_message_history}"),
+        create_chat_message("user", f"The user input: \n {user_inp}"),
+        create_chat_message("user", f"The response: \n {response}"),
         create_chat_message("user", f"The old context abstract: \n{old_abstract}")
     ]
     tokens_remaining = token_limit - token_counter.count_message_tokens(contexts, "gpt-4")  #
@@ -61,6 +62,16 @@ def generate_abstract_context(full_message_history, model, old_abstract, token_l
 def generate_final_response(user_inp, sql_resutls, model, token_limit):
     from cwm_prompts import prompt_summary_final_response
     contexts = [create_chat_message("user", prompt_summary_final_response.format(user_inp=user_inp, sql_results=str(sql_resutls)))]
+    tokens_remaining = token_limit - token_counter.count_message_tokens(contexts, "gpt-4")  #
+    return create_chat_completion(
+        model=model,
+        messages=contexts,
+        max_tokens=tokens_remaining,
+    )
+
+def generate_intermediate_thought(operation_str, results_history, model, token_limit):
+    from cwm_prompts import prompt_intermediate_thought
+    contexts = [create_chat_message("user", prompt_intermediate_thought.format(operation_str=operation_str, sql_results=results_history))]
     tokens_remaining = token_limit - token_counter.count_message_tokens(contexts, "gpt-4")  #
     return create_chat_completion(
         model=model,

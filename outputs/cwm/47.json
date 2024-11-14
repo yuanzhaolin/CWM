@@ -1,52 +1,54 @@
 {
-  "ID": 47,
-  "q_ch": "为香港理工大学最新的订单创建裁剪一个任务，该任务裁剪的产品为该订单中任意一种产品，任务期为6月30日到7月12日，负责的裁剪团队为Expert Cutters。其他字段暂时留空。返回裁剪任务编号。",
-  "q_en": "Create a cutting task for the latest order from The Hong Kong Polytechnic University, which involves cutting any product in the order. The task period is from June 30th to July 12th, and the cutting team responsible is Expert Cutters. Other fields are temporarily left blank. Return the cutting task number.",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id FROM customers WHERE customer_name = 'PolyU';",
-        "SELECT id FROM orders WHERE user_id = 'c1' ORDER BY created_at DESC LIMIT 1;",
-        "SELECT product_id FROM order_product WHERE order_id = 'o9' LIMIT 1;",
-        "SELECT id FROM order_product WHERE order_id = 'o9' AND product_id = 'p15';",
-        "SELECT id FROM working_group WHERE name = 'Expert Cutters';",
-        "INSERT INTO cutting_tasks (id, start_time, end_time, working_group_id, order_product_id, planned_number, completed_number, is_started) VALUES (UUID(), '2023-06-30 00:00:00', '2023-07-12 23:59:59', 'wg4', 'op31', 0, 0, FALSE);",
-        "SELECT id FROM cutting_tasks WHERE order_product_id = 'op31' AND working_group_id = 'wg4' AND start_time = '2023-06-30 00:00:00' AND end_time = '2023-07-12 23:59:59';"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "c1"
-          }
-        ],
-        [
-          {
-            "id": "o9"
-          }
-        ],
-        [
-          {
-            "product_id": "p15"
-          }
-        ],
-        [
-          {
-            "id": "op31"
-          }
-        ],
-        [
-          {
-            "id": "wg4"
-          }
-        ],
-        "insert data successfully.",
-        [
-          {
-            "id": "bad37ab4-630d-11ef-8ea6-0242ac130003"
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 4882
+    "ID": 47,
+    "q_ch": "为香港理工大学最新的订单创建裁剪一个任务，该任务裁剪的产品为该订单中任意一种产品，任务期为6月30日到7月12日，负责的裁剪团队为Expert Cutters。其他字段暂时留空。返回裁剪任务编号。",
+    "q_en": "Create a cutting task for the latest order from The Hong Kong Polytechnic University, which involves cutting any product in the order. The task period is from June 30th to July 12th, and the cutting team responsible is Expert Cutters. Other fields are temporarily left blank. Return the cutting task number.",
+    "gt": "Hey there! 😄 It looks like we tried to create a cutting task for the latest order from PolyU, but we ran into a little hiccup. The system encountered an error because a field called `produced_wip_id` doesn't have a default value. \n\nHere's a quick summary of what we attempted:\n\n| Task Detail            | Information                      |\n|------------------------|----------------------------------|\n| Customer Name          | PolyU                            |\n| Latest Order ID        | 13                               |\n| Product ID             | 1                                |\n| Task Period            | June 30th to July 12th, 2024     |\n| Cutting Team           | Expert Cutters                   |\n\nUnfortunately, the task couldn't be created due to the missing default value for `produced_wip_id`. You might want to check that field and try again. If you need any more help, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
+            "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '1' ORDER BY created_at DESC LIMIT 1;",
+            "description": "Retrieve the latest order ID for the customer \"PolyU\"",
+            "results": [
+                {
+                    "id": 13
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT product_id FROM order_product WHERE order_id = '13' LIMIT 1;",
+            "description": "Retrieve any product ID from the latest order",
+            "results": [
+                {
+                    "product_id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Expert Cutters';",
+            "description": "Retrieve the working group ID for \"Expert Cutters\"",
+            "results": [
+                {
+                    "id": 4
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "INSERT INTO cutting_tasks (start_time, end_time, working_group_id, order_product_id) VALUES ('2024-06-30', '2024-07-12', '4', '1');",
+            "description": "Insert a new cutting task for the retrieved product and order, with the specified task period and cutting team",
+            "results": "(1364, \"Field 'produced_wip_id' doesn't have a default value\")"
+        }
+    ]
 }

@@ -1,0 +1,36 @@
+{
+    "ID": 46,
+    "q_ch": "对于编号为19的裁剪任务，分配裁剪物料，物料来源：Main Warehouse, 布料类别：Cotton Fabric，数量：30米。",
+    "q_en": "For cutting task with ID=19, allocate cutting materials from the Main Warehouse, with the material type being Cotton Fabric and a quantity of 30 meters.",
+    "gt": "Sure thing! Let's get those materials allocated for your cutting task. Here's the breakdown of the allocation:\n\n| Task ID | Warehouse Name | Material Type  | Quantity |\n|---------|----------------|----------------|----------|\n| 19      | Main Warehouse | Cotton Fabric  | 30 meters|\n\nEverything is set for your task! If you have any more questions or need further assistance, feel free to ask. 😊",
+    "steps": [
+        {
+            "sql": "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
+            "description": "Retrieve the warehouse ID for the warehouse with the name \"Main Warehouse\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
+            "description": "Retrieve the material ID for the material with the name \"Cotton Fabric\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "sql": "SELECT id FROM warehouse_material WHERE warehouse_id = '1' AND material_id = '1';",
+            "description": "Retrieve the warehouse material ID for the specified warehouse and material",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        "insert data successfully."
+    ]
+}

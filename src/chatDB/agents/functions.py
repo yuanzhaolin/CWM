@@ -21,21 +21,21 @@ def get_wip_materials(product_id: str):
     material_select_sql = f'''
         SELECT material_id, number FROM product_material WHERE product_id = {str(product_id)};
     '''
-    material_select_sql_results, material_select_sql_res_str = mysql_db.execute_sql(material_select_sql, raise_err=True)
+    material_select_sql_results, material_select_sql_res_str = mysql_db.execute_sql(material_select_sql)
     return material_select_sql_results
 
 def get_original_materials(wip_id: str):
     material_select_sql = f'''
         SELECT origin_material_id, number FROM wip_material WHERE wip_id = {str(wip_id)};
     '''
-    material_select_sql_results, material_select_sql_res_str = mysql_db.execute_sql(material_select_sql, raise_err=True)
+    material_select_sql_results, material_select_sql_res_str = mysql_db.execute_sql(material_select_sql)
     return material_select_sql_results
 
 def get_warehouse_materials(material_id: str):
     warehouse_material_select_sql = f'''
         SELECT id, warehouse_id, left_number FROM warehouse_material WHERE material_id = {str(material_id)};
     '''
-    warehouse_material_select_sql_results, warehouse_material_select_sql_res_str = mysql_db.execute_sql(warehouse_material_select_sql, raise_err=True)
+    warehouse_material_select_sql_results, warehouse_material_select_sql_res_str = mysql_db.execute_sql(warehouse_material_select_sql)
     return warehouse_material_select_sql_results
 
 def update_warehouse_materials(warehouse_material_id: int, left_number: int):
@@ -45,7 +45,7 @@ def update_warehouse_materials(warehouse_material_id: int, left_number: int):
     warehouse_material_update_sql = f'''
         UPDATE warehouse_material SET left_number = {left_number} WHERE id = {warehouse_material_id};
     '''
-    warehouse_material_update_sql_results = mysql_db.execute_sql(warehouse_material_update_sql, raise_err=True)
+    warehouse_material_update_sql_results = mysql_db.execute_sql(warehouse_material_update_sql)
     return warehouse_material_update_sql_results
 
 def allocate_cutting_task(order_product_id: str, produced_wip_id: str, planned_number: int, working_group_id: str):
@@ -53,7 +53,7 @@ def allocate_cutting_task(order_product_id: str, produced_wip_id: str, planned_n
         INSERT INTO cutting_tasks (order_product_id, produced_wip_id, planned_number, completed_number, working_group_id, status)
         VALUES ('{order_product_id}', '{produced_wip_id}', {planned_number}, 0, '{working_group_id}', 0);
     '''
-    result = mysql_db.execute_sql(cutting_task_insert_sql, raise_err=True)
+    result = mysql_db.execute_sql(cutting_task_insert_sql)
     result_str = []
 
     if 'successfully' in result[1]:
@@ -103,14 +103,14 @@ def find_sewing_task(sewing_task_id: str):
     sewing_task_select_sql = f'''
         SELECT * FROM sewing_tasks WHERE id = {sewing_task_id};
     '''
-    sewing_task_select_sql_results, sewing_task_select_sql_res_str = mysql_db.execute_sql(sewing_task_select_sql, raise_err=True)
+    sewing_task_select_sql_results, sewing_task_select_sql_res_str = mysql_db.execute_sql(sewing_task_select_sql)
     return sewing_task_select_sql_results
 
 def find_cutting_task(cutting_task_id: str):
     cutting_task_select_sql = f'''
         SELECT * FROM cutting_tasks WHERE id = {cutting_task_id};
     '''
-    cutting_task_select_sql_results, cutting_task_select_sql_res_str = mysql_db.execute_sql(cutting_task_select_sql, raise_err=True)
+    cutting_task_select_sql_results, cutting_task_select_sql_res_str = mysql_db.execute_sql(cutting_task_select_sql)
     return cutting_task_select_sql_results
 
 def allocate_cutting_materials(cutting_task_id: str, allocated_number: int, warehouse_material_id: Optional[str] = None):
@@ -118,7 +118,7 @@ def allocate_cutting_materials(cutting_task_id: str, allocated_number: int, ware
         INSERT INTO cutting_material_allocation (cutting_task_id, warehouse_material_id, allocated_num, is_allocated)
         VALUES ({cutting_task_id}, {warehouse_material_id if warehouse_material_id else 'null'}, {allocated_number}, 0);
     '''
-    result = mysql_db.execute_sql(allocate_cutting_materials_sql, raise_err=True)
+    result = mysql_db.execute_sql(allocate_cutting_materials_sql)
     return result
 
 def allocate_sewing_materials(sewing_task_id: str, allocated_number: int, warehouse_material_id: Optional[str] = None):
@@ -126,7 +126,7 @@ def allocate_sewing_materials(sewing_task_id: str, allocated_number: int, wareho
         INSERT INTO sewing_material_allocation (sewing_task_id, warehouse_material_id, allocated_num, is_allocated)
         VALUES ({sewing_task_id}, {warehouse_material_id if warehouse_material_id else 'null'}, {allocated_number}, 0);
     '''
-    result = mysql_db.execute_sql(allocate_sewing_materials_sql, raise_err=True)
+    result = mysql_db.execute_sql(allocate_sewing_materials_sql)
     return result
 
 def allocate_sewing_task(order_product_id: str, planned_number: int, working_group_id: str):
@@ -134,9 +134,9 @@ def allocate_sewing_task(order_product_id: str, planned_number: int, working_gro
     sewing_task_insert_sql = f''' INSERT INTO sewing_tasks (order_product_id, planned_number, completed_number, working_group_id, status)
     VALUES ('{order_product_id}', {planned_number}, 0, '{working_group_id}', 0);
     '''
-    result = mysql_db.execute_sql(sewing_task_insert_sql, raise_err=True)
+    result = mysql_db.execute_sql(sewing_task_insert_sql)
 
-    if 'successfully' in result[1]:
+    if 'error' not in result[1]:
         insert_id = mysql_db.last_insert_row_id()
         return 'Allocate sewing task {} to {}.'.format(
             str(find_sewing_task(sewing_task_id=insert_id)[0]),
@@ -158,7 +158,7 @@ def find_cutting_group_working_load():
         WHERE status != 2
         GROUP BY working_group_id;
     '''
-    cutting_group_select_sql_results, cutting_group_select_sql_res_str = mysql_db.execute_sql(cutting_group_select_sql, raise_err=True)
+    cutting_group_select_sql_results, cutting_group_select_sql_res_str = mysql_db.execute_sql(cutting_group_select_sql)
     return cutting_group_select_sql_results
 
 def find_sewing_group_working_load():
@@ -168,7 +168,7 @@ def find_sewing_group_working_load():
         WHERE status != 2
         GROUP BY working_group_id;
     '''
-    sewing_group_select_sql_results, sewing_group_select_sql_res_str = mysql_db.execute_sql(sewing_group_select_sql, raise_err=True)
+    sewing_group_select_sql_results, sewing_group_select_sql_res_str = mysql_db.execute_sql(sewing_group_select_sql)
     return sewing_group_select_sql_results
 
 def find_details_of_order(order_id: int):
@@ -179,7 +179,7 @@ def find_details_of_order(order_id: int):
         JOIN products_types pt ON p.products_type_id = pt.id
         WHERE {condition};
     '''
-    order_product_select_sql_results, order_product_select_sql_res_str = mysql_db.execute_sql(order_product_select_sql, raise_err=True)
+    order_product_select_sql_results, order_product_select_sql_res_str = mysql_db.execute_sql(order_product_select_sql)
     return order_product_select_sql_results
 
 def allocate_task_order(order_id: Optional[int] = None, order_name: Optional[str] = None) -> str:
@@ -205,7 +205,7 @@ def allocate_task_order(order_id: Optional[int] = None, order_name: Optional[str
         JOIN products_types pt ON p.products_type_id = pt.id
         WHERE {condition};"""
 
-    order_product_select_sql_results, order_product_select_sql_res_str = mysql_db.execute_sql(order_product_select_sql, raise_err=True)
+    order_product_select_sql_results, order_product_select_sql_res_str = mysql_db.execute_sql(order_product_select_sql)
     responses += ['The order products for the order {}: {}'.format(condition, order_product_select_sql_results)]
 
 
@@ -262,7 +262,8 @@ def allocate_task_order(order_id: Optional[int] = None, order_name: Optional[str
 
 if __name__ == '__main__':
     # allocate_task_order(order_name="PolyU_Tshirt")
-    result = allocate_task_order(order_name='PolyU_Tshirt')
+    # result = allocate_task_order(order_name='PolyU_Tshirt')
+    result = allocate_task_order(order_id=22)
 
 
 

@@ -1,38 +1,44 @@
 {
-  "ID": 23,
-  "q_ch": "主仓库和辅助仓库中，哪个仓库的Cotton Fabric更多？",
-  "q_en": "Which warehouse has more Cotton Fabric between the main and auxiliary warehouses?",
-  "sqls": [
-    {
-      "command": [
-        "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
-        "SELECT id, name FROM warehouse WHERE name IN ('Main Warehouse', 'Auxiliary warehouse');",
-        "SELECT wm.warehouse_id, wm.left_number FROM warehouse_material wm WHERE wm.material_id = 'm1' AND wm.warehouse_id IN ('w1', 'w2');"
-      ],
-      "Result of executing SQL": [
-        [
-          {
-            "id": "m1"
-          }
-        ],
-        [
-          {
-            "id": "w1",
-            "name": "Main Warehouse"
-          },
-          {
-            "id": "w2",
-            "name": "Auxiliary warehouse"
-          }
-        ],
-        [
-          {
-            "warehouse_id": "w1",
-            "left_number": 3500
-          }
-        ]
-      ]
-    }
-  ],
-  "total_tokens": 3871
+    "ID": 23,
+    "q_ch": "主仓库和辅助仓库中，哪个仓库的Cotton Fabric更多？",
+    "q_en": "Which warehouse has more Cotton Fabric between the main and auxiliary warehouses?",
+    "gt": "Sure! Let's take a look at the inventory of \"Cotton Fabric\" in the two warehouses you mentioned. Here's what we found:\n\n| Warehouse Name      | Cotton Fabric Quantity |\n|---------------------|------------------------|\n| Main Warehouse      | 3400                   |\n| Auxiliary Warehouse | Not available          |\n\nIt seems that the \"Main Warehouse\" has 3400 units of \"Cotton Fabric,\" while we don't have data for the \"Auxiliary Warehouse.\" So, the \"Main Warehouse\" has more \"Cotton Fabric\" at the moment. 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
+            "description": "Retrieve the material ID for the material with the name \"Cotton Fabric\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id, name FROM warehouse WHERE name IN ('Main Warehouse', 'Auxiliary warehouse');",
+            "description": "Retrieve the warehouse IDs for \"Main Warehouse\" and \"Auxiliary warehouse\"",
+            "results": [
+                {
+                    "id": 1,
+                    "name": "Main Warehouse"
+                },
+                {
+                    "id": 2,
+                    "name": "Auxiliary warehouse"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT w.name, wm.left_number FROM warehouse_material wm JOIN warehouse w ON wm.warehouse_id = w.id WHERE wm.material_id = '1' AND w.id IN ('1', '2');",
+            "description": "Retrieve the remaining material inventory quantity for \"Cotton Fabric\" in both \"Main Warehouse\" and \"Auxiliary warehouse\"",
+            "results": [
+                {
+                    "name": "Main Warehouse",
+                    "left_number": 3400
+                }
+            ]
+        }
+    ]
 }
