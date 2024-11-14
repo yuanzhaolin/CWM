@@ -17,3 +17,6 @@ python src/chatDB/chatdb-api.py
 ```bash
 src/chatDB/chatdb.py
 ```
+
+## 接入DIFY
+见```doc/dify配置.md```
