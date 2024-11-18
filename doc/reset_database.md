@@ -4,7 +4,7 @@
 - IP: ```139.159.190.208```
 - port: 22
 - user: fashion
-- password: E****
+- password: F****
 
 2. 进入```/data/yuanzhaolin/LLM_garment_MES/src/sql```目录，执行
 
