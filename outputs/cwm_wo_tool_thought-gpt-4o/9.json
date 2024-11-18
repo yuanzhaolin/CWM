@@ -1,0 +1,79 @@
+{
+    "ID": 9,
+    "q_ch": "William 的缝纫任务进度如何？",
+    "q_en": "What is the progress of sewing tasks for William?",
+    "gt": "Hello there! 😄 Let's take a look at the progress of sewing tasks for our customer, William. Here's a summary of the tasks:\n\n| Task ID | Planned Number | Completed Number | Status       |\n|---------|----------------|------------------|--------------|\n| 28      | 210            | 210              | Completed ✅ |\n| 29      | 180            | 180              | Completed ✅ |\n| 30      | 195            | 195              | Completed ✅ |\n\nAll of William's sewing tasks are completed! 🎉 If you have any more questions or need further assistance, feel free to ask!",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'William';",
+            "description": "Retrieve the customer ID for the customer with the name \"William\"",
+            "results": [
+                {
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '8';",
+            "description": "Retrieve the order IDs for the customer \"William\"",
+            "results": [
+                {
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id, number FROM order_product WHERE order_id IN (8);",
+            "description": "Retrieve the order_product IDs and their quantities for the orders of customer \"William\"",
+            "results": [
+                {
+                    "id": 28,
+                    "number": 210
+                },
+                {
+                    "id": 29,
+                    "number": 180
+                },
+                {
+                    "id": 30,
+                    "number": 195
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT SUM(completed_number) FROM sewing_tasks WHERE order_product_id IN (28, 29, 30);",
+            "description": "Retrieve the total completed quantity of sewing tasks for the order products of customer \"William\"",
+            "results": [
+                {
+                    "SUM(completed_number)": "585"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT SUM(number) FROM order_product WHERE order_id IN (8);",
+            "description": "Calculate the total quantity of products in the orders of customer \"William\"",
+            "results": [
+                {
+                    "SUM(number)": "585"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT (SUM(completed_number) / SUM(number)) * 100 AS progress FROM sewing_tasks st JOIN order_product op ON st.order_product_id = op.id WHERE op.order_id IN (8);",
+            "description": "Calculate the progress of sewing tasks for customer \"William\"",
+            "results": [
+                {
+                    "progress": "100.0000"
+                }
+            ]
+        }
+    ],
+    "response": "Hello there! 😄 Let's take a look at the progress of sewing tasks for our customer, William. Here's a summary of the information:\n\n| Task Details                  | Quantity |\n|-------------------------------|----------|\n| Total Quantity of Products    | 585      |\n| Total Completed Sewing Tasks  | 585      |\n| Progress                      | 100%     |\n\nGreat news! 🎉 All of William's sewing tasks are completed, with a progress of 100%. If you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 8435
+}

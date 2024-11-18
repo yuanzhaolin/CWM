@@ -1,0 +1,58 @@
+{
+    "ID": 39,
+    "q_ch": "使用 Leather 的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks use Leather?",
+    "gt": "Sure thing! Here are the cutting tasks that use the material \"Leather\":\n\n| Cutting Task ID | Start Time     | End Time       | Working Group ID | Order Product ID | Produced WIP ID | Planned Number | Completed Number | Status       |\n|-----------------|----------------|----------------|------------------|------------------|-----------------|----------------|------------------|--------------|\n| 15              | March 11, 2024 | March 26, 2024 | 2                | 15               | 6               | 185            | 185              | Completed    |\n| 16              | March 11, 2024 | April 10, 2024 | 4                | 16               | 8               | 200            | 200              | Completed    |\n| 17              | March 11, 2024 | March 25, 2024 | 2                | 17               | 4               | 175            | 175              | Completed    |\n| 18              | March 11, 2024 | April 7, 2024  | 1                | 18               | 10              | 200            | 200              | Completed    |\n| 20              | March 18, 2024 | April 15, 2024 | 4                | 20               | 12              | 90             | 90               | Completed    |\n| 25              | April 14, 2024 | May 14, 2024   | 2                | 25               | 6               | 75             | 75               | Completed    |\n| 27              | April 14, 2024 | May 4, 2024    | 4                | 27               | 8               | 60             | 60               | Not Completed |\n| 32              | June 1, 2024   | June 17, 2024  | 2                | 32               | 8               | 150            | 120              | Completed    |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Leather';",
+            "description": "Retrieve the material ID for the material with the name \"Leather\"",
+            "results": [
+                {
+                    "id": 7
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT wip_id FROM wip_material WHERE origin_material_id = '7';",
+            "description": "Retrieve the WIP material IDs that use the original material \"Leather\"",
+            "results": [
+                {
+                    "wip_id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM cutting_tasks WHERE produced_wip_id IN ('8');",
+            "description": "Retrieve the cutting task IDs that produce the WIP materials using \"Leather\"",
+            "results": [
+                {
+                    "id": 5
+                },
+                {
+                    "id": 11
+                },
+                {
+                    "id": 16
+                },
+                {
+                    "id": 24
+                },
+                {
+                    "id": 27
+                },
+                {
+                    "id": 31
+                },
+                {
+                    "id": 32
+                }
+            ]
+        }
+    ],
+    "response": "Sure thing! Let's dive into the cutting tasks that use leather. Based on the data, here are the tasks that involve leather as a material:\n\n| Cutting Task ID |\n|-----------------|\n| 5               |\n| 11              |\n| 16              |\n| 24              |\n| 27              |\n| 31              |\n| 32              |\n\nThese tasks are all about working with leather, so if you're into leather crafting, these are the ones to watch! 👜👞✨",
+    "token_used": 7731
+}

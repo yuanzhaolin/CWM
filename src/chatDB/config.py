@@ -42,10 +42,11 @@ class Config(metaclass=Singleton):
         self.agent_on = True
 
         self.fast_llm_model = os.getenv("FAST_LLM_MODEL", "gpt-3.5-turbo")
-        self.smart_llm_model = os.getenv("SMART_LLM_MODEL", "gpt-4")
+        self.smart_llm_model = os.getenv("SMART_LLM_MODEL", "gpt-4o")
         self.enable_rewrite_query = os.getenv("ENABLE_REWRITE_QUERY", True)
         self.fast_token_limit = int(os.getenv("FAST_TOKEN_LIMIT", 4000))
         self.smart_token_limit = int(os.getenv("SMART_TOKEN_LIMIT", 8000))
+        self.single_sql_step = os.getenv("SINGLE_SQL_STEP", "False")=="True"
         self.tool_open = os.getenv("TOOL_OPEN", "True")=="True"
         self.thought_open = os.getenv("THOUGHT_OPEN", "True")=="True"
         self.sleep = os.getenv("SLEEP", "False")=="True"

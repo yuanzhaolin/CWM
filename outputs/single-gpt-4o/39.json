@@ -1,0 +1,40 @@
+{
+    "ID": 39,
+    "q_ch": "使用 Leather 的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks use Leather?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT cta.cutting_task_id FROM cutting_material_allocation cta JOIN warehouse_material wm ON cta.warehouse_material_id = wm.id JOIN materials m ON wm.material_id = m.id WHERE m.name = 'Leather';",
+            "description": "To find the cutting tasks that use the material 'Leather', we need to identify the warehouse materials that correspond to 'Leather', then find the cutting tasks that have allocated these materials.\",",
+            "results": [
+                {
+                    "cutting_task_id": 15
+                },
+                {
+                    "cutting_task_id": 16
+                },
+                {
+                    "cutting_task_id": 17
+                },
+                {
+                    "cutting_task_id": 18
+                },
+                {
+                    "cutting_task_id": 20
+                },
+                {
+                    "cutting_task_id": 25
+                },
+                {
+                    "cutting_task_id": 27
+                },
+                {
+                    "cutting_task_id": 32
+                }
+            ]
+        }
+    ],
+    "response": "Hey there! 😄 It looks like you're curious about which cutting tasks involve the use of leather. Here's a handy table with the cutting task IDs that use leather:\n\n| Cutting Task ID |\n|-----------------|\n| 15              |\n| 16              |\n| 17              |\n| 18              |\n| 20              |\n| 25              |\n| 27              |\n| 32              |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5421
+}

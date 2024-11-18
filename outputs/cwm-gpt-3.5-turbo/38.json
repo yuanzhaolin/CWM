@@ -1,0 +1,31 @@
+{
+    "ID": 38,
+    "q_ch": "Advanced裁剪组还未完成的裁剪任务是哪些顾客的订单？",
+    "q_en": "Which customer orders are the cutting tasks that the Advanced Cutting Group has not yet completed?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM products WHERE attributes = 'Cutting Tasks';",
+            "description": "Retrieve the product ID for the products with attributes related to cutting tasks",
+            "results": "no results found."
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Advanced Cutters';",
+            "description": "Retrieve the working group ID for the working group named 'Advanced Cutters'",
+            "results": [
+                {
+                    "id": 6
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "['SELECT o.order_name, op.number\\n     FROM orders o\\n     JOIN order_product op ON o.id = op.order_id\\n     JOIN cutting_tasks ct ON op.id = ct.order_product_id\\n     WHERE ct.status != 2 AND ct.working_group_id = '6' AND op.product_id = '<product_id>';']",
+            "description": "Find the cutting tasks that the 'Advanced Cutters' working group has not completed for the specified products",
+            "results": "(1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['SELECT o.order_name, op.number\\\\n     FROM orders o\\\\n     JOIN order_product op' at line 1\")"
+        }
+    ],
+    "response": "Hey there! 😄\n\nBased on the SQL queries executed, it seems that there was an error in retrieving the cutting tasks that the 'Advanced Cutters' working group has not completed for the specified products. Unfortunately, no results were found due to a syntax error in the SQL query.\n\nIf you have any other questions or need further assistance, feel free to ask!",
+    "token_used": 7922
+}

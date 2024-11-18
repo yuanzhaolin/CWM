@@ -1,0 +1,39 @@
+{
+    "ID": 43,
+    "q_ch": "向仓库Main Warehouse，入库Leather 1000份。",
+    "q_en": "Send 1000 Leathers to the Main Warehouse for storage.",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Leather';",
+            "description": "Retrieve the material ID for the material with the name 'Leather'",
+            "results": [
+                {
+                    "id": 7
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
+            "description": "Retrieve the warehouse ID for the warehouse with the name 'Main Warehouse'",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "INSERT INTO warehouse_material (warehouse_id, material_id, total_number, left_number) VALUES ('1', '7', 1000, 1000);",
+            "description": "Insert 1000 units of Leather into the Main Warehouse",
+            "results": [
+                {
+                    "auto_increment_id": 15
+                }
+            ]
+        }
+    ],
+    "response": "Hey there! 🌟\n\nI've got everything sorted out for you! Here's what I did behind the scenes:\n\n| Action                                      | Description                                       |\n|---------------------------------------------|---------------------------------------------------|\n| Retrieve Material ID for 'Leather'         | Material ID: 7                                    |\n| Retrieve Warehouse ID for 'Main Warehouse' | Warehouse ID: 1                                   |\n| Insert 1000 units of Leather into Main Warehouse | Successfully added 1000 units of Leather to the Main Warehouse! 🎉 |\n\nYour request to send 1000 units of Leather to the Main Warehouse has been completed! If you need any more assistance, feel free to ask. 😊",
+    "token_used": 7721
+}

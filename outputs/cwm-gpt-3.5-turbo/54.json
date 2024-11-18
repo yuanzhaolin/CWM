@@ -1,0 +1,63 @@
+{
+    "ID": 54,
+    "q_ch": "列出所有缝纫组的进度百分比。",
+    "q_en": "List the progress percentage of all sewing groups",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id, name FROM working_group WHERE type = 'sew';",
+            "description": "Retrieve the working group ID and name for all sewing groups",
+            "results": [
+                {
+                    "id": 2,
+                    "name": "Master Sewers"
+                },
+                {
+                    "id": 7,
+                    "name": "Skilled Sewers"
+                },
+                {
+                    "id": 8,
+                    "name": "Advanced Sewers"
+                },
+                {
+                    "id": 9,
+                    "name": "Premier Sewers"
+                },
+                {
+                    "id": 10,
+                    "name": "Elite Sewers"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT working_group_id, SUM(completed_number) / SUM(planned_number) AS progress FROM sewing_tasks GROUP BY working_group_id;",
+            "description": "Calculate the progress for each sewing group by summing the completed numbers and dividing by the planned numbers",
+            "results": [
+                {
+                    "working_group_id": 2,
+                    "progress": "0.4826"
+                },
+                {
+                    "working_group_id": 7,
+                    "progress": "0.3804"
+                },
+                {
+                    "working_group_id": 8,
+                    "progress": "0.3272"
+                },
+                {
+                    "working_group_id": 9,
+                    "progress": "0.2424"
+                },
+                {
+                    "working_group_id": 10,
+                    "progress": "0.1262"
+                }
+            ]
+        }
+    ],
+    "response": "Sure thing! Here are the progress percentages for all Sewing Groups:\n\n| Working Group      | Progress Percentage |\n|--------------------|---------------------|\n| Master Sewers      | 48.26%              |\n| Skilled Sewers     | 38.04%              |\n| Advanced Sewers    | 32.72%              |\n| Premier Sewers     | 24.24%              |\n| Elite Sewers       | 12.62%              |\n\nI hope this helps! If you have any more questions, feel free to ask. 😄",
+    "token_used": 7341
+}

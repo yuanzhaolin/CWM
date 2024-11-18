@@ -1,0 +1,87 @@
+{
+    "ID": 4,
+    "q_ch": "James 的订单包含哪些产品？",
+    "q_en": "What products are included in James's order?",
+    "gt": "Sure! Here are the products included in James's orders:\n\n| **Order ID** | **Product** | **Attributes** | **Quantity** |\n|--------------|-------------|----------------|--------------|\n| 4            | Jacket      | Brown, S size  | 185          |\n| 4            | Coat        | Red, M size    | 200          |\n| 4            | Jacket      | Yellow, L size | 175          |\n| 4            | Jacket      | Brown, L size  | 200          |\n| 12           | Skirt       | Purple, M size | 330          |\n\nJames has quite a stylish collection! 😄 If you have any more questions, feel free to ask!",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'James';",
+            "description": "Retrieve the customer ID for the customer with the name \"James\"",
+            "results": [
+                {
+                    "id": 4
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '4';",
+            "description": "Retrieve the order IDs for the customer with the retrieved customer ID",
+            "results": [
+                {
+                    "id": 4
+                },
+                {
+                    "id": 12
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT product_id, number FROM order_product WHERE order_id IN (4, 12);",
+            "description": "Retrieve the product IDs and quantities for each order associated with the customer",
+            "results": [
+                {
+                    "product_id": 22,
+                    "number": 185
+                },
+                {
+                    "product_id": 26,
+                    "number": 200
+                },
+                {
+                    "product_id": 14,
+                    "number": 175
+                },
+                {
+                    "product_id": 6,
+                    "number": 200
+                },
+                {
+                    "product_id": 7,
+                    "number": 330
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT p.attributes, pt.description FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.id IN (22, 26, 14, 6, 7);",
+            "description": "Retrieve the product attributes and type descriptions for the retrieved product IDs",
+            "results": [
+                {
+                    "attributes": "Brown, L size",
+                    "description": "Jacket"
+                },
+                {
+                    "attributes": "Purple, M size",
+                    "description": "Skirt"
+                },
+                {
+                    "attributes": "Yellow, L size",
+                    "description": "Jacket"
+                },
+                {
+                    "attributes": "Brown, S size",
+                    "description": "Jacket"
+                },
+                {
+                    "attributes": "Red, M size",
+                    "description": "Coat"
+                }
+            ]
+        }
+    ],
+    "response": "Sure! Let's take a look at the products included in James's order. Here's a detailed list of the products along with their attributes and descriptions:\n\n| **Product ID** | **Attributes**   | **Description** |\n|----------------|------------------|-----------------|\n| 22             | Brown, L size    | Jacket          |\n| 26             | Purple, M size   | Skirt           |\n| 14             | Yellow, L size   | Jacket          |\n| 6              | Brown, S size    | Jacket          |\n| 7              | Red, M size      | Coat            |\n\nJames has quite a stylish selection! 😄 If you have any more questions or need further assistance, feel free to ask!",
+    "token_used": 8290
+}

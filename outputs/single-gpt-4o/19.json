@@ -1,0 +1,28 @@
+{
+    "ID": 19,
+    "q_ch": "使用 Silk 的缝纫任务有哪些？",
+    "q_en": "Which sewing tasks use Silk?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT st.id FROM sewing_tasks st JOIN sewing_material_allocation sma ON st.id = sma.sewing_task_id JOIN warehouse_material wm ON sma.warehouse_material_id = wm.id JOIN materials m ON wm.material_id = m.id WHERE m.name = 'Silk';",
+            "description": "To find sewing tasks that use the material 'Silk', we need to identify the warehouse_material_id for 'Silk', then find the sewing tasks that have allocated this material.",
+            "results": [
+                {
+                    "id": 11
+                },
+                {
+                    "id": 12
+                },
+                {
+                    "id": 13
+                },
+                {
+                    "id": 14
+                }
+            ]
+        }
+    ],
+    "response": "Sure thing! Here are the sewing tasks that use the material 'Silk':\n\n| Sewing Task ID |\n|----------------|\n| 11             |\n| 12             |\n| 13             |\n| 14             |\n\nThese tasks are all about that silky smooth touch! 🧵✨ If you have any more questions, feel free to ask! 😄",
+    "token_used": 5336
+}

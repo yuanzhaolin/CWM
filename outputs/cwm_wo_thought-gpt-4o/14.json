@@ -1,0 +1,30 @@
+{
+    "ID": 14,
+    "q_ch": "剩余库存最多的原料是什么？",
+    "q_en": "What is the material with the highest remaining inventory?",
+    "gt": "Sure thing! Based on the data I have, the material with the highest remaining inventory is **Silk Pieces**. Here's a quick summary for you:\n\n| Material ID | Material Name | Total Remaining Inventory |\n|-------------|---------------|---------------------------|\n| 6           | Silk Pieces   | 5,400                     |\n\nIsn't it amazing how much Silk Pieces we have left? 😄 If you have any more questions, feel free to ask!",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT material_id FROM warehouse_material ORDER BY left_number DESC LIMIT 1;",
+            "description": "Retrieve the material ID with the highest remaining inventory",
+            "results": [
+                {
+                    "material_id": 6
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT name FROM materials WHERE id = (SELECT material_id FROM warehouse_material ORDER BY left_number DESC LIMIT 1);",
+            "description": "Retrieve the name of the material with the highest remaining inventory",
+            "results": [
+                {
+                    "name": "Silk Pieces"
+                }
+            ]
+        }
+    ],
+    "response": "Sure thing! Based on the latest data, the material with the highest remaining inventory is **Silk Pieces**. 🎉\n\nHere's a quick summary for you:\n\n| Material ID | Material Name |\n|-------------|---------------|\n| 6           | Silk Pieces   |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 6349
+}

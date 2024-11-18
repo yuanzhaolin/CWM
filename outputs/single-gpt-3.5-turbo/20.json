@@ -1,0 +1,15 @@
+{
+    "ID": 20,
+    "q_ch": "剩余库存为零的材料有哪些，列出材料名字？",
+    "q_en": "What are the materials with zero remaining inventory and list their names?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT m.name FROM materials m JOIN warehouse_material wm ON m.id = wm.material_id WHERE wm.left_number = 0;",
+            "description": "To find the materials with zero remaining inventory, we can query the materials table and warehouse_material table to identify materials with zero left_number.",
+            "results": "no results found."
+        }
+    ],
+    "response": "Sure! Here is the answer to your question:\n\n| Material Name |\n|---------------|\n| No results found |\n\nUnfortunately, there are no materials with zero remaining inventory at the moment. If you have any other questions or need further assistance, feel free to ask! 😄",
+    "token_used": 4876
+}

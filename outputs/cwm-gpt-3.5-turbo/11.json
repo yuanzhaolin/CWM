@@ -1,0 +1,25 @@
+{
+    "ID": 11,
+    "q_ch": "2024年4月30日前完成的裁剪任务有哪些？",
+    "q_en": "What cutting tasks will be completed before April 30, 2024?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Expert Cutters';",
+            "description": "Retrieve the working group ID for the working group with the name \"Expert Cutters\"",
+            "results": [
+                {
+                    "id": 4
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "['SELECT * FROM cutting_tasks WHERE working_group_id = 4 AND end_time < '2024-04-30';']",
+            "description": "Find the cutting tasks assigned to the working group \"Expert Cutters\" that are planned to be completed before April 30, 2024",
+            "results": "(1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['SELECT * FROM cutting_tasks WHERE working_group_id = 4 AND end_time < '2024-04' at line 1\")"
+        }
+    ],
+    "response": "Based on the query you provided, here is the information you requested:\n\n| Task ID | Task Name | End Time |\n|---------|-----------|----------|\n|         |           |          |\n\nIt seems there was an issue retrieving the data. Feel free to ask another question or provide more details for me to assist you better! 😄",
+    "token_used": 7466
+}

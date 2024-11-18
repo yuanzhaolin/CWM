@@ -1,0 +1,40 @@
+{
+    "ID": 8,
+    "q_ch": "Olivia的订单中使用了哪些原料？",
+    "q_en": "What materials were used in Olivia's order?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT m.name FROM materials m JOIN product_material pm ON m.id = pm.material_id JOIN order_product op ON pm.product_id = op.product_id JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'Olivia';",
+            "description": "Retrieve the materials used in orders placed by the customer named Olivia by joining the relevant tables to get the material details associated with her orders.",
+            "results": [
+                {
+                    "name": "Leather Pieces"
+                },
+                {
+                    "name": "Denim Fabric Pieces"
+                },
+                {
+                    "name": "Silk Pieces"
+                },
+                {
+                    "name": "Wool Pieces"
+                },
+                {
+                    "name": "Denim Fabric Pieces"
+                },
+                {
+                    "name": "Synthetic Fiber Pieces"
+                },
+                {
+                    "name": "Silk Pieces"
+                },
+                {
+                    "name": "Fabric Pieces"
+                }
+            ]
+        }
+    ],
+    "response": "Hey there! 😄 Let's take a look at the materials used in Olivia's order. Here's a neat table for you:\n\n| Material Name           |\n|-------------------------|\n| Leather Pieces          |\n| Denim Fabric Pieces     |\n| Silk Pieces             |\n| Wool Pieces             |\n| Denim Fabric Pieces     |\n| Synthetic Fiber Pieces  |\n| Silk Pieces             |\n| Fabric Pieces           |\n\nIt seems like Olivia's order had quite a variety of materials! If you have any more questions, feel free to ask! 😊",
+    "token_used": 5429
+}

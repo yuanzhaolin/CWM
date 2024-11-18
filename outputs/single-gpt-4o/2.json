@@ -1,0 +1,19 @@
+{
+    "ID": 2,
+    "q_ch": "John 的订单全部生产完成了么？",
+    "q_en": "Have all of John's orders been completed?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT COUNT(*) = 0 AS all_completed FROM (SELECT ct.status FROM orders o JOIN customers c ON o.user_id = c.id JOIN order_product op ON o.id = op.order_id JOIN cutting_tasks ct ON op.id = ct.order_product_id WHERE c.customer_name = 'John' AND ct.status != 2 UNION SELECT st.status FROM orders o JOIN customers c ON o.user_id = c.id JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE c.customer_name = 'John' AND st.status != 2) AS incomplete_tasks;",
+            "description": "To determine if all of John's orders have been completed, we need to check if there are any cutting or sewing tasks related to John's orders that are not completed. We will first find the order IDs for John's orders, then check the status of related cutting and sewing tasks.",
+            "results": [
+                {
+                    "all_completed": 0
+                }
+            ]
+        }
+    ],
+    "response": "### Order Completion Status for John\n\nHey there! 😄 Let's take a look at whether all of John's orders have been completed.\n\n| Customer Name | All Orders Completed? |\n|---------------|-----------------------|\n| John          | No                    |\n\nIt seems that not all of John's orders have been completed yet. If you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5476
+}

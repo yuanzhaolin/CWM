@@ -22,6 +22,8 @@ parser = argparse.ArgumentParser(description='generate ground truth for question
 parser.add_argument('--q_id', type=int, default=-1, help='generate ground truth for a specific question')
 parser.add_argument('--model_name', type=str, default='', help='name of model')
 parser.add_argument('--requests_dir', type=str, default='2024-10-31', help='dir of requests')
+parser.add_argument('--llm_model', type=str, default='gpt-4o', help='dir of requests')
+
 
 
 args = parser.parse_args()
@@ -36,8 +38,12 @@ if model_name == 'cwm_wo_thought':
 if model_name == 'cwm_wo_tool_thought':
     os.environ['TOOL_OPEN'] = 'False'
     os.environ['THOUGHT_OPEN'] = 'False'
+if model_name == 'single':
+    os.environ['SINGLE_SQL_STEP'] = 'True'
 
-from chatdb import generate_chat_responses, init_database
+os.environ['SMART_LLM_MODEL'] = args.llm_model
+
+from chatdb import generate_chat_responses, init_database, cfg
 mysql_db = init_database()
 
 project_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -50,7 +56,7 @@ else:
     filter_q = None
 
 # The output directory
-outputs_dir = os.path.join(project_dir, 'outputs', args.model_name)
+outputs_dir = os.path.join(project_dir, 'outputs', '{}-{}'.format(args.model_name, cfg.smart_llm_model))
 os.makedirs(outputs_dir, exist_ok=True)
 refresh = True
 
@@ -91,10 +97,16 @@ for f in requests_list:
         print(f)
         with open(os.path.join(requests_dir, f), 'r') as file:
             q = json.loads(file.read())
-            sql_results, response, token_used = handle_request(q['q_en'])
-            q['steps'] = sql_results
-            q['response'] = response
-            q['token_used'] = token_used
+            try:
+                sql_results, response, token_used = handle_request(q['q_en'])
+                q['steps'] = sql_results
+                q['response'] = response
+                del q['gt']
+                q['token_used'] = token_used
+            except:
+                q['steps'] = []
+                q['response'] = 'A critical issue was discovered during the operation.'
+                q['token_used'] = None
             with open(os.path.join(outputs_dir, f), 'w', encoding='utf-8') as out:
                 out.write(json.dumps(q, indent=4, ensure_ascii=False, default=str))
                 # utf-8 encoding

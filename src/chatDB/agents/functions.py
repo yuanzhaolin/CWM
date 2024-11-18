@@ -173,7 +173,7 @@ def find_sewing_group_working_load():
 
 def find_details_of_order(order_id: int):
     condition = f"op.order_id = {order_id}"
-    order_product_select_sql = f'''SELECT op.order_id, p.attributes, pt.description, op.number 
+    order_product_select_sql = f'''SELECT op.id, op.order_id, op.product_id, p.attributes, pt.description, op.number 
         FROM order_product op
         JOIN products p ON op.product_id = p.id
         JOIN products_types pt ON p.products_type_id = pt.id

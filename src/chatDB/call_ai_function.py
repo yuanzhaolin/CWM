@@ -79,16 +79,21 @@ def populate_operation_statement(operation_str: str, previous_operating_results:
         function_string, args, description_string, model=cfg.smart_llm_model
     )
     # print("chatgpt", result_string)
-    brace_index = result_string.index("[")
-    result_string = result_string[brace_index:]
-    last_brace_index = result_string.rindex("]")
-    result_string = result_string[:last_brace_index + 1]
-    # print(result_string)
-    if op_type == 'Tool':
+    try:
+        brace_index = result_string.index("[")
+        result_string = result_string[brace_index:]
+        last_brace_index = result_string.rindex("]")
+        result_string = result_string[:last_brace_index + 1]
+        # print(result_string)
+        if op_type == 'Tool':
+            return [result_string]
+        else:
+            list_of_str = ast.literal_eval(result_string)
+
+            return list_of_str
+    except:
         return [result_string]
-    else:
-        list_of_str = ast.literal_eval(result_string)
-        return list_of_str
+
 
 
 if __name__ == '__main__':

@@ -1,0 +1,73 @@
+{
+    "ID": 9,
+    "q_ch": "William 的缝纫任务进度如何？",
+    "q_en": "What is the progress of sewing tasks for William?",
+    "gt": "Hello there! 😄 Let's take a look at the progress of sewing tasks for our customer, William. Here's a summary of the tasks:\n\n| Task ID | Planned Number | Completed Number | Status       |\n|---------|----------------|------------------|--------------|\n| 28      | 210            | 210              | Completed ✅ |\n| 29      | 180            | 180              | Completed ✅ |\n| 30      | 195            | 195              | Completed ✅ |\n\nAll of William's sewing tasks are completed! 🎉 If you have any more questions or need further assistance, feel free to ask!",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'William';",
+            "description": "Retrieve the customer ID for the customer with the name \"William\"",
+            "results": [
+                {
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '8';",
+            "description": "Retrieve the order IDs for the customer \"William\"",
+            "results": [
+                {
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id, number FROM order_product WHERE order_id IN (8);",
+            "description": "Retrieve the order_product IDs and the total number of products for each order",
+            "results": [
+                {
+                    "id": 28,
+                    "number": 210
+                },
+                {
+                    "id": 29,
+                    "number": 180
+                },
+                {
+                    "id": 30,
+                    "number": 195
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT order_product_id, SUM(completed_number) AS completed_number FROM sewing_tasks WHERE order_product_id IN (28, 29, 30) GROUP BY order_product_id;",
+            "description": "Retrieve the completed number of sewing tasks for each order_product",
+            "results": [
+                {
+                    "order_product_id": 28,
+                    "completed_number": "210"
+                },
+                {
+                    "order_product_id": 29,
+                    "completed_number": "180"
+                },
+                {
+                    "order_product_id": 30,
+                    "completed_number": "195"
+                }
+            ]
+        },
+        {
+            "type": "Thought",
+            "operation": "For each order, calculate the progress by dividing the total completed number of sewing tasks by the total number of products in the order.",
+            "results": "To calculate the progress for each order, we need to divide the total completed number of sewing tasks by the total number of products in the order. Based on the provided context, here are the calculations for each order:\n\n1. **Order Product ID 28:**\n   - Total number of products: 210\n   - Completed number of sewing tasks: 210\n   - Progress: \\( \\frac{210}{210} = 1.0 \\) or 100%\n\n2. **Order Product ID 29:**\n   - Total number of products: 180\n   - Completed number of sewing tasks: 180\n   - Progress: \\( \\frac{180}{180} = 1.0 \\) or 100%\n\n3. **Order Product ID 30:**\n   - Total number of products: 195\n   - Completed number of sewing tasks: 195\n   - Progress: \\( \\frac{195}{195} = 1.0 \\) or 100%\n\nEach order has a progress of 100%, indicating that all sewing tasks have been completed for each order."
+        }
+    ],
+    "response": "Hello there! 😄\n\nI've got some great news about the sewing tasks for our friend William! Here's a quick summary of the progress:\n\n| **Order Product ID** | **Total Number of Products** | **Completed Sewing Tasks** | **Progress** |\n|----------------------|------------------------------|----------------------------|--------------|\n| 28                   | 210                          | 210                        | 100%         |\n| 29                   | 180                          | 180                        | 100%         |\n| 30                   | 195                          | 195                        | 100%         |\n\n🎉 All sewing tasks for William's orders are fully completed, with each order showing a progress of 100%! Keep up the fantastic work! 🧵✨",
+    "token_used": 9356
+}

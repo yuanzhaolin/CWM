@@ -1,0 +1,30 @@
+{
+    "ID": 45,
+    "q_ch": "主仓库出库Cotton Fabric100份。",
+    "q_en": "Please release 100 units of cotton fabric from the Main warehouse.",
+    "gt": "Sure thing! Let's get those 100 units of Cotton Fabric released from the Main Warehouse. Here's a quick summary of the details:\n\n| Material Name   | Warehouse Name | Quantity to Release |\n|-----------------|----------------|---------------------|\n| Cotton Fabric   | Main Warehouse | 100 units           |\n\nEverything is set to go! If you need anything else, just let me know. 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
+            "description": "Retrieve the material ID for the material with the name \"Cotton Fabric\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
+            "description": "Retrieve the warehouse ID for the warehouse with the name \"Main Warehouse\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        }
+    ],
+    "response": "Sure thing! Let's get those 100 units of Cotton Fabric released from the Main Warehouse. Here's a quick summary of the details:\n\n| Material Name   | Warehouse Name | Quantity to Release |\n|-----------------|----------------|---------------------|\n| Cotton Fabric   | Main Warehouse | 100 units           |\n\nEverything is set! If you need anything else, just let me know. 😊",
+    "token_used": 7205
+}

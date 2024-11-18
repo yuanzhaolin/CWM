@@ -1,0 +1,47 @@
+{
+    "ID": 39,
+    "q_ch": "使用 Leather 的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks use Leather?",
+    "gt": "Sure thing! Here are the cutting tasks that use the material \"Leather\":\n\n| Cutting Task ID | Start Time     | End Time       | Working Group ID | Order Product ID | Produced WIP ID | Planned Number | Completed Number | Status       |\n|-----------------|----------------|----------------|------------------|------------------|-----------------|----------------|------------------|--------------|\n| 15              | March 11, 2024 | March 26, 2024 | 2                | 15               | 6               | 185            | 185              | Completed    |\n| 16              | March 11, 2024 | April 10, 2024 | 4                | 16               | 8               | 200            | 200              | Completed    |\n| 17              | March 11, 2024 | March 25, 2024 | 2                | 17               | 4               | 175            | 175              | Completed    |\n| 18              | March 11, 2024 | April 7, 2024  | 1                | 18               | 10              | 200            | 200              | Completed    |\n| 20              | March 18, 2024 | April 15, 2024 | 4                | 20               | 12              | 90             | 90               | Completed    |\n| 25              | April 14, 2024 | May 14, 2024   | 2                | 25               | 6               | 75             | 75               | Completed    |\n| 27              | April 14, 2024 | May 4, 2024    | 4                | 27               | 8               | 60             | 60               | Not Completed |\n| 32              | June 1, 2024   | June 17, 2024  | 2                | 32               | 8               | 150            | 120              | Completed    |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Leather';",
+            "description": "Retrieve the material ID for the material with the name \"Leather\"",
+            "results": [
+                {
+                    "id": 7
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT wip_id FROM wip_material WHERE origin_material_id = '7';",
+            "description": "Retrieve the WIP material IDs that use the material \"Leather\"",
+            "results": [
+                {
+                    "wip_id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT ct.id, ct.start_time, ct.end_time, wg.name AS working_group_name, op.id AS order_product_id, ct.planned_number, ct.completed_number, ct.status FROM cutting_tasks ct JOIN working_group wg ON ct.working_group_id = wg.id JOIN order_product op ON ct.order_product_id = op.id WHERE ct.id IN ('8');",
+            "description": "Retrieve the details of the cutting tasks that use the material \"Leather\"",
+            "results": [
+                {
+                    "id": 8,
+                    "start_time": "2024-02-28 00:00:00",
+                    "end_time": "2024-03-08 00:00:00",
+                    "working_group_name": "Expert Cutters",
+                    "order_product_id": 8,
+                    "planned_number": 50,
+                    "completed_number": 50,
+                    "status": 1
+                }
+            ]
+        }
+    ],
+    "response": "Hey there! 😄 Let's dive into the details of the cutting tasks that use the material \"Leather\". Here's what I found:\n\n| Task ID | Start Time          | End Time            | Working Group   | Order Product ID | Planned Number | Completed Number | Status |\n|---------|---------------------|---------------------|-----------------|------------------|----------------|------------------|--------|\n| 8       | 2024-02-28 00:00:00 | 2024-03-08 00:00:00 | Expert Cutters  | 8                | 50             | 50               | 1      |\n\nThe task was handled by the \"Expert Cutters\" group, and they completed all 50 planned tasks. Great job, team! 🎉 If you have any more questions, feel free to ask!",
+    "token_used": 7920
+}

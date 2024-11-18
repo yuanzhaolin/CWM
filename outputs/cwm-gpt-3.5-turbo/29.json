@@ -1,0 +1,124 @@
+{
+    "ID": 29,
+    "q_ch": "对所有已经开始但是尚未完成的缝纫任务进行统计，剩余工作量最多的工作组是哪个？",
+    "q_en": "Which workgroup has the highest remaining workload for all sewing tasks that have been started but not yet completed?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id, working_group_id FROM sewing_tasks WHERE status = 1;",
+            "description": "Retrieve the IDs and names of all sewing tasks that have been started but not yet completed",
+            "results": [
+                {
+                    "id": 2,
+                    "working_group_id": 9
+                },
+                {
+                    "id": 3,
+                    "working_group_id": 9
+                },
+                {
+                    "id": 4,
+                    "working_group_id": 2
+                },
+                {
+                    "id": 5,
+                    "working_group_id": 2
+                },
+                {
+                    "id": 6,
+                    "working_group_id": 8
+                },
+                {
+                    "id": 7,
+                    "working_group_id": 8
+                },
+                {
+                    "id": 8,
+                    "working_group_id": 7
+                },
+                {
+                    "id": 9,
+                    "working_group_id": 8
+                },
+                {
+                    "id": 12,
+                    "working_group_id": 2
+                },
+                {
+                    "id": 13,
+                    "working_group_id": 2
+                },
+                {
+                    "id": 14,
+                    "working_group_id": 2
+                },
+                {
+                    "id": 15,
+                    "working_group_id": 2
+                },
+                {
+                    "id": 19,
+                    "working_group_id": 7
+                },
+                {
+                    "id": 20,
+                    "working_group_id": 8
+                },
+                {
+                    "id": 21,
+                    "working_group_id": 8
+                },
+                {
+                    "id": 28,
+                    "working_group_id": 7
+                },
+                {
+                    "id": 29,
+                    "working_group_id": 7
+                },
+                {
+                    "id": 30,
+                    "working_group_id": 2
+                },
+                {
+                    "id": 31,
+                    "working_group_id": 10
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id;",
+            "description": "Calculate the remaining workload for each working group by subtracting the completed number from the planned number",
+            "results": [
+                {
+                    "working_group_id": 2,
+                    "remaining_workload": "40"
+                },
+                {
+                    "working_group_id": 7,
+                    "remaining_workload": "0"
+                },
+                {
+                    "working_group_id": 8,
+                    "remaining_workload": "0"
+                },
+                {
+                    "working_group_id": 9,
+                    "remaining_workload": "0"
+                },
+                {
+                    "working_group_id": 10,
+                    "remaining_workload": "0"
+                }
+            ]
+        },
+        {
+            "type": "Thought",
+            "operation": "Compare the remaining workload of all sewing tasks obtained in Step2 and identify the group with the highest remaining workload.",
+            "results": "To compare the remaining workload of all sewing tasks obtained in Step 2 and identify the group with the highest remaining workload, we need to look at the results of the SQL query that calculated the remaining workload for each working group.\n\nFrom the results, we can see that:\n- Working Group 2 has a remaining workload of 40\n- Working Group 7, 8, 9, and 10 all have a remaining workload of 0\n\nTherefore, the group with the highest remaining workload is Working Group 2 with a remaining workload of 40."
+        }
+    ],
+    "response": "Based on the SQL query results, the workgroup with the highest remaining workload for all 'Sewing Tasks' that have been started but not yet completed is Working Group 2 with a remaining workload of 40. 🎉\n\nHere is a summary of the remaining workload for each working group:\n\n| Working Group | Remaining Workload |\n|---------------|--------------------|\n| 2             | 40                 |\n| 7             | 0                  |\n| 8             | 0                  |\n| 9             | 0                  |\n| 10            | 0                  |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
+    "token_used": 8572
+}

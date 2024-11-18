@@ -1,0 +1,31 @@
+{
+    "ID": 55,
+    "q_ch": "所有订单中总共做的前三多的商品是什么？",
+    "q_en": "What are the top three products made in all orders in total?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT p.id AS product_id, p.attributes AS product_name, SUM(op.number) AS total_quantity FROM products p JOIN order_product op ON p.id = op.product_id GROUP BY p.id, p.attributes ORDER BY total_quantity DESC LIMIT 3;",
+            "description": "To find the top three products made in all orders in total, we need to calculate the total quantity of each product across all orders, then rank the products based on the total quantity in descending order, and finally select the top three products.",
+            "results": [
+                {
+                    "product_id": 7,
+                    "product_name": "Purple, M size",
+                    "total_quantity": "540"
+                },
+                {
+                    "product_id": 15,
+                    "product_name": "Pink, M size",
+                    "total_quantity": "345"
+                },
+                {
+                    "product_id": 27,
+                    "product_name": "Yellow, S size",
+                    "total_quantity": "260"
+                }
+            ]
+        }
+    ],
+    "response": "Sure! Here are the top three products made in all orders in total:\n\n| Product ID | Product Name     | Total Quantity |\n|------------|------------------|----------------|\n| 7          | Purple, M size   | 540            |\n| 15         | Pink, M size     | 345            |\n| 27         | Yellow, S size   | 260            |\n\nI hope this helps! If you have any more questions, feel free to ask. 😄",
+    "token_used": 5590
+}

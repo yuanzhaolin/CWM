@@ -1,0 +1,48 @@
+{
+    "ID": 13,
+    "q_ch": "在我们的所有仓库中，库存不为0的原材料有哪些，整理成{类型：剩余数量}的形式。",
+    "q_en": "What are the raw materials with non zero inventory in all of our warehouses, organized in the form of 'Type: Remaining Quantity'?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT m.name AS Type, SUM(wm.left_number) AS 'Remaining Quantity' FROM warehouse_material wm JOIN materials m ON wm.material_id = m.id WHERE wm.left_number > 0 AND m.type = 'origin' GROUP BY m.name;",
+            "description": "Retrieve the raw materials with non-zero inventory from all warehouses, and organize the results in the form of 'Type: Remaining Quantity'.",
+            "results": [
+                {
+                    "Type": "Cotton Fabric",
+                    "Remaining Quantity": "3500"
+                },
+                {
+                    "Type": "Denim Fabric",
+                    "Remaining Quantity": "4500"
+                },
+                {
+                    "Type": "Down",
+                    "Remaining Quantity": "1230"
+                },
+                {
+                    "Type": "Down Pieces",
+                    "Remaining Quantity": "2420"
+                },
+                {
+                    "Type": "Leather",
+                    "Remaining Quantity": "2200"
+                },
+                {
+                    "Type": "Silk",
+                    "Remaining Quantity": "1100"
+                },
+                {
+                    "Type": "Synthetic Fiber",
+                    "Remaining Quantity": "2300"
+                },
+                {
+                    "Type": "Wool",
+                    "Remaining Quantity": "4100"
+                }
+            ]
+        }
+    ],
+    "response": "Sure thing! Here's a list of raw materials with non-zero inventory in all of our warehouses, organized just for you. Check it out below! 😄\n\n| Type              | Remaining Quantity |\n|-------------------|--------------------|\n| Cotton Fabric     | 3500               |\n| Denim Fabric      | 4500               |\n| Down              | 1230               |\n| Down Pieces       | 2420               |\n| Leather           | 2200               |\n| Silk              | 1100               |\n| Synthetic Fiber   | 2300               |\n| Wool              | 4100               |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5342
+}

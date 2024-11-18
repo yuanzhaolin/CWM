@@ -4,7 +4,7 @@ from config import cfg
 import time
 import sys
 # from chatdb_prompts import prompt_ask_steps, prompt_ask_steps_no_egs
-from cwm_prompts import prompt_ask_steps, prompt_ask_steps_no_egs
+from cwm_prompts import prompt_ask_steps, prompt_ask_steps_no_egs, prompt_single_sql_step
 from tables import init_database, database_info, table_details
 from langchain.prompts import PromptTemplate
 from chatgpt import create_chat_completion
@@ -49,6 +49,23 @@ def get_steps_from_response(response):
 
 
 def init_system_msg():
+    if cfg.single_sql_step:
+        sys_temp = """
+You are Chat With MES, a powerful AI assistant, a variant of ChatGPT that can utilize the database of the Manufacturing Execution System as external symbolic memory. \
+You are an expert in databases, proficient in SQL statements and can use the database to help users.
+For any user query, you should generate a single SQL statement to complete it.
+The details of tables in the database are delimited by triple quotes.
+\"\"\"
+{table_details}
+\"\"\"
+        """
+        sys_prompt = PromptTemplate(
+            template=sys_temp,
+            input_variables=[],
+            partial_variables={"table_details": table_details}
+        )
+        return sys_prompt.format()
+
     if cfg.tool_open:
         sys_temp = """
 You are Chat With MES, a powerful AI assistant, a variant of ChatGPT that can \
@@ -171,7 +188,11 @@ def generate_chat_responses(user_inp, mysql_db, historical_message, context_abst
         user_inp = rewrite_query(user_inp)
 
     # prompt_ask_steps_str = prompt_ask_steps.format(user_inp=user_inp)
-    prompt_ask_steps_str = prompt_ask_steps.format(user_inp=user_inp, context_abstracts=context_abstract)
+    if cfg.single_sql_step:
+        prompt_ask_steps_str = prompt_single_sql_step.format(user_inp=user_inp)
+    else:
+        prompt_ask_steps_str = prompt_ask_steps.format(user_inp=user_inp, context_abstracts=context_abstract)
+
     # prompt_ask_steps_str = prompt_ask_steps_no_egs.format(user_inp=user_inp, context_abstracts=context_abstract)
     response_steps = chat_with_ai(init_system_msg(), prompt_ask_steps_str, historical_message, None,
                                   token_limit=cfg.smart_token_limit)

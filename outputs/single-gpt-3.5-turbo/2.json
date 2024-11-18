@@ -1,0 +1,20 @@
+{
+    "ID": 2,
+    "q_ch": "John 的订单全部生产完成了么？",
+    "q_en": "Have all of John's orders been completed?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT COUNT(*) AS total_orders, SUM(CASE WHEN ct.status = 2 THEN 1 ELSE 0 END) AS completed_orders FROM orders o JOIN customers c ON o.user_id = c.id LEFT JOIN order_product op ON o.id = op.order_id LEFT JOIN cutting_tasks ct ON op.id = ct.order_product_id WHERE c.customer_name = 'John';",
+            "description": "To check if all orders of the customer named 'John' have been completed, we need to count the total number of orders and the number of completed orders for this customer and compare them.\",",
+            "results": [
+                {
+                    "total_orders": 6,
+                    "completed_orders": "0"
+                }
+            ]
+        }
+    ],
+    "response": "Based on the SQL query results, it appears that there are a total of 6 orders for the customer named 'John', but none of them have been completed yet. 😔\n\nHere is a breakdown of the information in a table format:\n\n| Total Orders | Completed Orders |\n|--------------|------------------|\n|      6       |        0         |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
+    "token_used": 5385
+}

@@ -1,0 +1,60 @@
+{
+    "ID": 2,
+    "q_ch": "John 的订单全部生产完成了么？",
+    "q_en": "Have all of John's orders been completed?",
+    "gt": "Hello there! 😄 Let's take a look at John's orders and see if they've all been completed.\n\nBased on the information we have, here's a summary of John's orders and their completion status:\n\n| Order ID | Incomplete Cutting Tasks | Incomplete Sewing Tasks |\n|----------|--------------------------|-------------------------|\n| 2        | 5                        | 5                       |\n| 10       | 1                        | 1                       |\n\nIt seems that not all of John's orders have been completed yet. There are still some tasks pending in both cutting and sewing for his orders. If you have any more questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'John';",
+            "description": "Retrieve the customer ID for the customer with the name \"John\"",
+            "results": [
+                {
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = '2';",
+            "description": "Retrieve all order IDs for the customer \"John\"",
+            "results": [
+                {
+                    "id": 2
+                },
+                {
+                    "id": 10
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT op.order_id, SUM(op.number) AS total_products, SUM(st.completed_number) AS total_completed FROM order_product op LEFT JOIN sewing_tasks st ON op.id = st.order_product_id WHERE op.order_id IN (2, 10) GROUP BY op.order_id;",
+            "description": "Retrieve the total number of products and the total completed number of sewing tasks for each order",
+            "results": [
+                {
+                    "order_id": 2,
+                    "total_products": "435",
+                    "total_completed": "435"
+                },
+                {
+                    "order_id": 10,
+                    "total_products": "150",
+                    "total_completed": "0"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT order_id FROM (SELECT op.order_id, SUM(op.number) AS total_products, SUM(st.completed_number) AS total_completed FROM order_product op LEFT JOIN sewing_tasks st ON op.id = st.order_product_id WHERE op.order_id IN (2, 10) GROUP BY op.order_id) AS order_progress WHERE total_completed < total_products;",
+            "description": "Check if all orders have been completed by comparing the total completed number with the total number of products for each order",
+            "results": [
+                {
+                    "order_id": 10
+                }
+            ]
+        }
+    ],
+    "response": "Hello there! 😄 Let's take a look at John's orders to see if they've all been completed.\n\nBased on the data we have, here's a summary of John's orders:\n\n| Order ID | Total Products | Total Completed |\n|----------|----------------|-----------------|\n| 2        | 435            | 435             |\n| 10       | 150            | 0               |\n\nFrom this table, we can see that:\n\n- Order ID 2 is fully completed with all 435 products done. 🎉\n- Order ID 10, however, hasn't had any products completed yet. 😅\n\nSo, to answer your question: Not all of John's orders have been completed. Order ID 10 still needs some work! If you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 7857
+}

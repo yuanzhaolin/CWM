@@ -1,0 +1,27 @@
+{
+    "ID": 31,
+    "q_ch": "Premier Sewers的缝纫任务有哪些？",
+    "q_en": "What are the sewing tasks of Premier Sewers?",
+    "gt": "Sure thing! Let's take a look at the sewing tasks for the \"Premier Sewers\" group. Here's what I found:\n\n| Task ID | Start Time       | End Time         | Order Product ID | Planned Number | Completed Number | Status     |\n|---------|------------------|------------------|------------------|----------------|------------------|------------|\n| 2       | 2024-02-02       | 2024-02-15       | 2                | 240            | 240              | Completed  |\n| 3       | 2024-01-19       | 2024-02-08       | 3                | 150            | 150              | Completed  |\n| 11      | 2024-03-21       | 2024-04-14       | 11               | 140            | 140              | In Progress|\n| 26      | 2024-05-04       | 2024-05-15       | 26               | 70             | 70               | In Progress|\n| 32      | 2024-06-17       | 2024-07-14       | 32               | 150            | 0                | Not Started|\n\nLooks like the \"Premier Sewers\" have been busy! 😄 Some tasks are already completed, while others are still in progress or yet to start. Keep up the great work! 🚀",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Premier Sewers';",
+            "description": "Retrieve the working group ID for the working group with the name \"Premier Sewers\"",
+            "results": [
+                {
+                    "id": 9
+                }
+            ]
+        },
+        {
+            "type": "Tool",
+            "results": {
+                "input": "Retrieve the sewing tasks associated with the working group ID obtained in Step1\n['tool_find_sewing_task, {\\'sewing_task_id\\': 9}, Find the sewing task by the sewing task ID']",
+                "output": "The sewing task associated with the sewing task ID 9 is as follows:\n\n- **Task ID**: 9\n- **Start Time**: March 6, 2024\n- **End Time**: March 20, 2024\n- **Working Group ID**: 8\n- **Order Product ID**: 9\n- **Planned Number**: 80\n- **Completed Number**: 80\n- **Status**: 1 (indicating the task is completed)"
+            }
+        }
+    ],
+    "response": "Sure thing! Let's take a look at the sewing tasks for the \"Premier Sewers\" working group. Here's what I found:\n\n| **Task ID** | **Start Time**   | **End Time**     | **Working Group ID** | **Order Product ID** | **Planned Number** | **Completed Number** | **Status**       |\n|-------------|------------------|------------------|----------------------|----------------------|--------------------|----------------------|------------------|\n| 9           | March 6, 2024    | March 20, 2024   | 8                    | 9                    | 80                 | 80                   | Completed ✅     |\n\nLooks like the task was completed successfully! If you have any more questions or need further details, feel free to ask. 😊",
+    "token_used": 7738
+}

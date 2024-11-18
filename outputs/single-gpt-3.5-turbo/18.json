@@ -1,0 +1,15 @@
+{
+    "ID": 18,
+    "q_ch": "使用 Cotton Fabric 的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks use Cotton Fabric?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT wg.name AS working_group_name FROM working_group wg JOIN cutting_tasks ct ON wg.id = ct.working_group_id JOIN order_product op ON ct.order_product_id = op.id JOIN product_material pm ON op.product_id = pm.product_id JOIN materials m ON pm.material_id = m.id WHERE wg.name = 'Expert Cutters' AND m.name = 'Cotton Fabric';",
+            "description": "To find the working groups that use 'Cotton Fabric' and have the name 'Expert Cutters', we need to join the necessary tables and filter the results based on the given conditions.",
+            "results": "no results found."
+        }
+    ],
+    "response": "# Answer\nHey there! 😄\n\nAfter running the SQL query to find out which working groups named 'Expert Cutters' use 'Cotton Fabric', unfortunately, no results were found. \n\nHere's the information you requested:\n\n| Working Group Name |\n|--------------------|\n|        No results found.        |\n\nIf you have any more questions or need further assistance, feel free to ask! 🌟",
+    "token_used": 5440
+}

@@ -1,0 +1,15 @@
+{
+    "ID": 10,
+    "q_ch": "对于Michael下的SweaterAndShorts的订单，还有哪些产品没有制造完成，列出未完成产品的类型及属性描述和数量？",
+    "q_en": "For Michael's SweaterAndShorts order, which other products have not been manufactured yet? Please list the types, attributes and quantities of unfinished products.",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT pt.description AS product_type, p.attributes AS product_attributes, op.number AS order_quantity FROM order_product op JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE c.customer_name = 'Michael' AND o.order_name = 'Michael_SweaterAndShorts' AND op.completed_number < op.planned_number;",
+            "description": "To find the unfinished products for the order placed by Michael for SweaterAndShorts, we need to identify the products that have not been completed yet. We will first find the order_id for the specified order, then retrieve the products that are associated with this order but have not been fully manufactured yet.",
+            "results": "(1054, \"Unknown column 'op.completed_number' in 'where clause'\")"
+        }
+    ],
+    "response": "I'm sorry, but it seems like there was an issue with retrieving the SQL results for your query. Let me try to help you out with the information you requested!\n\nFor <customers.customer_name = 'Michael'> <orders.order_name = 'Michael_SweaterAndShorts'> order, which other products have not been manufactured yet? Please list the types, attributes, and quantities of unfinished products.\n\nUnfortunately, there was an error in retrieving the specific details you asked for. If you have any other questions or need assistance, feel free to ask! 😊",
+    "token_used": 5785
+}

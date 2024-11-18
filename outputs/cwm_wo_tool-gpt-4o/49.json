@@ -1,0 +1,26 @@
+{
+    "ID": 49,
+    "q_ch": "对于编号为34的缝纫任务，所有的工作量我都已完成，请更新已完成数量。",
+    "q_en": "I have completed all the workload for the sewing task with ID 34. Please update the completed quantity.",
+    "gt": "Hey there! 😄 It looks like there was an attempt to update the completed quantity for the sewing task with ID 34, but there was a little hiccup. Let's take a look at what we have:\n\n| Task ID | Planned Quantity | Status |\n|---------|------------------|--------|\n| 34      | 330              | Update Error: Can't specify target table for update in FROM clause |\n\nIt seems like there was an error when trying to update the completed quantity. The planned quantity for the task is 330, but the update didn't go through due to a technical issue. You might want to try a different approach to update the completed quantity. If you need any help with that, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT planned_number FROM sewing_tasks WHERE id = 34;",
+            "description": "Retrieve the planned number for the sewing task with ID 34",
+            "results": [
+                {
+                    "planned_number": 330
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "UPDATE sewing_tasks SET completed_number = (SELECT planned_number FROM (SELECT planned_number FROM sewing_tasks WHERE id = 34) AS temp), status = 2 WHERE id = 34;",
+            "description": "Update the completed number for the sewing task with ID 34 to match the planned number",
+            "results": "update data successfully."
+        }
+    ],
+    "response": "### Task Update Confirmation\n\nHey there! 😄\n\nGreat news! The sewing task with ID **34** has been successfully updated. Here's a quick summary of the task details:\n\n| Task ID | Planned Quantity | Completed Quantity | Status       |\n|---------|------------------|--------------------|--------------|\n| 34      | 330              | 330                | Completed ✅ |\n\nThe completed quantity now matches the planned quantity, and the task status is updated to completed. If there's anything else you need, feel free to ask! 🎉",
+    "token_used": 6243
+}

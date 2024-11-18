@@ -1,0 +1,318 @@
+{
+    "ID": 55,
+    "q_ch": "所有订单中总共做的前三多的商品是什么？",
+    "q_en": "What are the top three products made in all orders in total?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT op.product_id, p.attributes, pt.description\n     FROM order_product op\n     JOIN products p ON op.product_id = p.id\n     JOIN products_types pt ON p.products_type_id = pt.id;",
+            "description": "Retrieve the product IDs and their corresponding attributes and types from all orders",
+            "results": [
+                {
+                    "product_id": 1,
+                    "attributes": "Red, M size",
+                    "description": "T-shirt"
+                },
+                {
+                    "product_id": 3,
+                    "attributes": "Blue, L size",
+                    "description": "T-shirt"
+                },
+                {
+                    "product_id": 11,
+                    "attributes": "White, XL size",
+                    "description": "T-shirt"
+                },
+                {
+                    "product_id": 19,
+                    "attributes": "Green, M size",
+                    "description": "T-shirt"
+                },
+                {
+                    "product_id": 27,
+                    "attributes": "Yellow, S size",
+                    "description": "T-shirt"
+                },
+                {
+                    "product_id": 2,
+                    "attributes": "Blue, 35 size",
+                    "description": "Pants"
+                },
+                {
+                    "product_id": 4,
+                    "attributes": "Black, 34 size",
+                    "description": "Pants"
+                },
+                {
+                    "product_id": 12,
+                    "attributes": "Blue, 30 size",
+                    "description": "Pants"
+                },
+                {
+                    "product_id": 20,
+                    "attributes": "Grey, 29 size",
+                    "description": "Pants"
+                },
+                {
+                    "product_id": 20,
+                    "attributes": "Grey, 29 size",
+                    "description": "Pants"
+                },
+                {
+                    "product_id": 28,
+                    "attributes": "Brown, 34 size",
+                    "description": "Pants"
+                },
+                {
+                    "product_id": 5,
+                    "attributes": "Pink, S size",
+                    "description": "Dress"
+                },
+                {
+                    "product_id": 13,
+                    "attributes": "Black, S size",
+                    "description": "Dress"
+                },
+                {
+                    "product_id": 21,
+                    "attributes": "Gold, L size",
+                    "description": "Dress"
+                },
+                {
+                    "product_id": 29,
+                    "attributes": "Red, M size",
+                    "description": "Dress"
+                },
+                {
+                    "product_id": 6,
+                    "attributes": "Brown, L size",
+                    "description": "Jacket"
+                },
+                {
+                    "product_id": 14,
+                    "attributes": "Yellow, L size",
+                    "description": "Jacket"
+                },
+                {
+                    "product_id": 22,
+                    "attributes": "Brown, S size",
+                    "description": "Jacket"
+                },
+                {
+                    "product_id": 30,
+                    "attributes": "Black, XL size",
+                    "description": "Jacket"
+                },
+                {
+                    "product_id": 30,
+                    "attributes": "Black, XL size",
+                    "description": "Jacket"
+                },
+                {
+                    "product_id": 7,
+                    "attributes": "Purple, M size",
+                    "description": "Skirt"
+                },
+                {
+                    "product_id": 7,
+                    "attributes": "Purple, M size",
+                    "description": "Skirt"
+                },
+                {
+                    "product_id": 15,
+                    "attributes": "Pink, M size",
+                    "description": "Skirt"
+                },
+                {
+                    "product_id": 15,
+                    "attributes": "Pink, M size",
+                    "description": "Skirt"
+                },
+                {
+                    "product_id": 23,
+                    "attributes": "Green, XL size",
+                    "description": "Skirt"
+                },
+                {
+                    "product_id": 8,
+                    "attributes": "Silver, S size",
+                    "description": "Shorts"
+                },
+                {
+                    "product_id": 16,
+                    "attributes": "Grey, XL size",
+                    "description": "Shorts"
+                },
+                {
+                    "product_id": 24,
+                    "attributes": "Red, L size",
+                    "description": "Shorts"
+                },
+                {
+                    "product_id": 9,
+                    "attributes": "Grey, L size",
+                    "description": "Sweater"
+                },
+                {
+                    "product_id": 17,
+                    "attributes": "Blue, XL size",
+                    "description": "Sweater"
+                },
+                {
+                    "product_id": 25,
+                    "attributes": "Blue, S size",
+                    "description": "Sweater"
+                },
+                {
+                    "product_id": 10,
+                    "attributes": "White, L size",
+                    "description": "Coat"
+                },
+                {
+                    "product_id": 18,
+                    "attributes": "Purple, S size",
+                    "description": "Coat"
+                },
+                {
+                    "product_id": 26,
+                    "attributes": "Red, M size",
+                    "description": "Coat"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT product_id, SUM(number) AS total_quantity\n     FROM order_product\n     GROUP BY product_id;",
+            "description": "Calculate the total quantity of each product made in all orders",
+            "results": [
+                {
+                    "product_id": 1,
+                    "total_quantity": "100"
+                },
+                {
+                    "product_id": 2,
+                    "total_quantity": "50"
+                },
+                {
+                    "product_id": 3,
+                    "total_quantity": "150"
+                },
+                {
+                    "product_id": 4,
+                    "total_quantity": "80"
+                },
+                {
+                    "product_id": 5,
+                    "total_quantity": "120"
+                },
+                {
+                    "product_id": 6,
+                    "total_quantity": "200"
+                },
+                {
+                    "product_id": 7,
+                    "total_quantity": "540"
+                },
+                {
+                    "product_id": 8,
+                    "total_quantity": "110"
+                },
+                {
+                    "product_id": 9,
+                    "total_quantity": "180"
+                },
+                {
+                    "product_id": 10,
+                    "total_quantity": "60"
+                },
+                {
+                    "product_id": 11,
+                    "total_quantity": "220"
+                },
+                {
+                    "product_id": 12,
+                    "total_quantity": "95"
+                },
+                {
+                    "product_id": 13,
+                    "total_quantity": "130"
+                },
+                {
+                    "product_id": 14,
+                    "total_quantity": "175"
+                },
+                {
+                    "product_id": 15,
+                    "total_quantity": "345"
+                },
+                {
+                    "product_id": 16,
+                    "total_quantity": "105"
+                },
+                {
+                    "product_id": 17,
+                    "total_quantity": "70"
+                },
+                {
+                    "product_id": 18,
+                    "total_quantity": "75"
+                },
+                {
+                    "product_id": 19,
+                    "total_quantity": "240"
+                },
+                {
+                    "product_id": 20,
+                    "total_quantity": "220"
+                },
+                {
+                    "product_id": 21,
+                    "total_quantity": "140"
+                },
+                {
+                    "product_id": 22,
+                    "total_quantity": "185"
+                },
+                {
+                    "product_id": 23,
+                    "total_quantity": "95"
+                },
+                {
+                    "product_id": 24,
+                    "total_quantity": "195"
+                },
+                {
+                    "product_id": 25,
+                    "total_quantity": "115"
+                },
+                {
+                    "product_id": 26,
+                    "total_quantity": "200"
+                },
+                {
+                    "product_id": 27,
+                    "total_quantity": "260"
+                },
+                {
+                    "product_id": 28,
+                    "total_quantity": "110"
+                },
+                {
+                    "product_id": 29,
+                    "total_quantity": "150"
+                },
+                {
+                    "product_id": 30,
+                    "total_quantity": "240"
+                }
+            ]
+        },
+        {
+            "type": "Thought",
+            "operation": "Rank the products based on the total quantity calculated in Step2 and select the top three products.",
+            "results": "To rank the products based on the total quantity calculated in Step 2 and select the top three products, we need to look at the results of the SQL query that calculated the total quantity of each product made in all orders.\n\nBased on the results provided:\n1. Product ID 7 has a total quantity of 540.\n2. Product ID 15 has a total quantity of 345.\n3. Product ID 27 has a total quantity of 260.\n\nTherefore, the top three products based on total quantity are:\n1. Product ID 7\n2. Product ID 15\n3. Product ID 27\n\nThese are the top three products that should be selected based on the total quantity calculated in Step 2."
+        }
+    ],
+    "response": "Based on the SQL query results, the top three products made in all orders in total are:\n\n| Product ID | Total Quantity |\n|------------|-----------------|\n| 7          | 540             |\n| 15         | 345             |\n| 27         | 260             |\n\nSo, the top three products based on total quantity are:\n1. Product ID 7\n2. Product ID 15\n3. Product ID 27\n\nThese are the top three products that should be selected based on the total quantity calculated. 😄",
+    "token_used": 10495
+}

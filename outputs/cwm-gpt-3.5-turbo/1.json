@@ -1,0 +1,26 @@
+{
+    "ID": 1,
+    "q_ch": "PolyU的订单有哪些？",
+    "q_en": "What are the orders for PolyU?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
+            "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "Tool",
+            "results": {
+                "input": "Retrieve the order details for the customer \"PolyU\"\n['tool_find_order_details, {\"order_id\": <order_id>}, Find the product details of an order']",
+                "output": "The order details for the customer \"PolyU\" are as follows:\n1. Product: T-shirt, Color: Red, Size: M, Quantity: 100\n2. Product: T-shirt, Color: Green, Size: M, Quantity: 240\n3. Product: T-shirt, Color: Blue, Size: L, Quantity: 150\n4. Product: T-shirt, Color: White, Size: XL, Quantity: 220\n5. Product: T-shirt, Color: Yellow, Size: S, Quantity: 260"
+            }
+        }
+    ],
+    "response": "Sure! Here is the answer to the user's question:\n\n### Orders for Customer \"PolyU\"\n\n| Product | Color | Size | Quantity |\n|---------|-------|------|----------|\n| T-shirt | Red   | M    | 100      |\n| T-shirt | Green | M    | 240      |\n| T-shirt | Blue  | L    | 150      |\n| T-shirt | White | XL   | 220      |\n| T-shirt | Yellow| S    | 260      |\n\nFeel free to reach out if you have any more questions! 😄",
+    "token_used": 7518
+}

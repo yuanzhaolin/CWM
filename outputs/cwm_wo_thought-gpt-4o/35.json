@@ -1,0 +1,169 @@
+{
+    "ID": 35,
+    "q_ch": "对于所有Expert Cutters负责的且尚未完成的裁剪任务，共分配了哪些原料，按照裁剪任务进行整理？",
+    "q_en": "Which materials have been allocated for all cutting tasks that are assigned to Expert Cutters and have not been completed, organized by cutting task?",
+    "gt": "Sure thing! Let's dive into the materials allocated for the cutting tasks assigned to the \"Expert Cutters\" group that haven't been completed yet. Here's a neat table to show you the details:\n\n| Cutting Task ID | Material Name       |\n|-----------------|---------------------|\n| 8               | Denim Fabric        |\n| 11              | Wool, Silk          |\n| 16              | Wool, Leather, Down |\n| 19              | Cotton Fabric, Synthetic Fiber |\n| 20              | Wool, Leather       |\n| 21              | Cotton Fabric, Synthetic Fiber |\n| 26              | Wool                |\n| 27              | Wool, Leather, Down |\n| 34              | Cotton Fabric, Synthetic Fiber |\n\nI hope this helps! If you have any more questions or need further assistance, feel free to ask. 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Expert Cutters';",
+            "description": "Retrieve the working group ID for the working group with the name \"Expert Cutters\"",
+            "results": [
+                {
+                    "id": 4
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM cutting_tasks WHERE working_group_id = '4' AND status != 2;",
+            "description": "Retrieve the cutting task IDs for tasks assigned to \"Expert Cutters\" that have not been completed",
+            "results": [
+                {
+                    "id": 8
+                },
+                {
+                    "id": 11
+                },
+                {
+                    "id": 16
+                },
+                {
+                    "id": 19
+                },
+                {
+                    "id": 20
+                },
+                {
+                    "id": 21
+                },
+                {
+                    "id": 26
+                },
+                {
+                    "id": 27
+                },
+                {
+                    "id": 34
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT cma.cutting_task_id, wm.id AS warehouse_material_id, wm.total_number, wm.left_number FROM cutting_material_allocation cma JOIN warehouse_material wm ON cma.warehouse_material_id = wm.id WHERE cma.cutting_task_id IN (8, 11, 16, 19, 20, 21, 26, 27, 34);",
+            "description": "Retrieve the materials allocated for each cutting task that is not completed",
+            "results": [
+                {
+                    "cutting_task_id": 19,
+                    "warehouse_material_id": 1,
+                    "total_number": 3500,
+                    "left_number": 3500
+                },
+                {
+                    "cutting_task_id": 21,
+                    "warehouse_material_id": 1,
+                    "total_number": 3500,
+                    "left_number": 3500
+                },
+                {
+                    "cutting_task_id": 34,
+                    "warehouse_material_id": 1,
+                    "total_number": 3500,
+                    "left_number": 3500
+                },
+                {
+                    "cutting_task_id": 11,
+                    "warehouse_material_id": 3,
+                    "total_number": 4100,
+                    "left_number": 4100
+                },
+                {
+                    "cutting_task_id": 16,
+                    "warehouse_material_id": 3,
+                    "total_number": 4100,
+                    "left_number": 4100
+                },
+                {
+                    "cutting_task_id": 20,
+                    "warehouse_material_id": 3,
+                    "total_number": 4100,
+                    "left_number": 4100
+                },
+                {
+                    "cutting_task_id": 26,
+                    "warehouse_material_id": 3,
+                    "total_number": 4100,
+                    "left_number": 4100
+                },
+                {
+                    "cutting_task_id": 27,
+                    "warehouse_material_id": 3,
+                    "total_number": 4100,
+                    "left_number": 4100
+                },
+                {
+                    "cutting_task_id": 11,
+                    "warehouse_material_id": 5,
+                    "total_number": 1100,
+                    "left_number": 1100
+                },
+                {
+                    "cutting_task_id": 16,
+                    "warehouse_material_id": 7,
+                    "total_number": 2200,
+                    "left_number": 2200
+                },
+                {
+                    "cutting_task_id": 20,
+                    "warehouse_material_id": 7,
+                    "total_number": 2200,
+                    "left_number": 2200
+                },
+                {
+                    "cutting_task_id": 27,
+                    "warehouse_material_id": 7,
+                    "total_number": 2200,
+                    "left_number": 2200
+                },
+                {
+                    "cutting_task_id": 19,
+                    "warehouse_material_id": 9,
+                    "total_number": 2300,
+                    "left_number": 2300
+                },
+                {
+                    "cutting_task_id": 21,
+                    "warehouse_material_id": 9,
+                    "total_number": 2300,
+                    "left_number": 2300
+                },
+                {
+                    "cutting_task_id": 34,
+                    "warehouse_material_id": 9,
+                    "total_number": 2300,
+                    "left_number": 2300
+                },
+                {
+                    "cutting_task_id": 8,
+                    "warehouse_material_id": 11,
+                    "total_number": 4500,
+                    "left_number": 4500
+                },
+                {
+                    "cutting_task_id": 16,
+                    "warehouse_material_id": 13,
+                    "total_number": 1230,
+                    "left_number": 1230
+                },
+                {
+                    "cutting_task_id": 27,
+                    "warehouse_material_id": 13,
+                    "total_number": 1230,
+                    "left_number": 1230
+                }
+            ]
+        }
+    ],
+    "response": "Sure thing! Let's dive into the materials allocated for the cutting tasks assigned to the \"Expert Cutters\" group that haven't been completed yet. Here's a neat table to show you the details:\n\n| Cutting Task ID | Warehouse Material ID | Total Number | Left Number |\n|-----------------|-----------------------|--------------|-------------|\n| 8               | 11                    | 4500         | 4500        |\n| 11              | 3                     | 4100         | 4100        |\n| 11              | 5                     | 1100         | 1100        |\n| 16              | 3                     | 4100         | 4100        |\n| 16              | 7                     | 2200         | 2200        |\n| 16              | 13                    | 1230         | 1230        |\n| 19              | 1                     | 3500         | 3500        |\n| 19              | 9                     | 2300         | 2300        |\n| 20              | 3                     | 4100         | 4100        |\n| 20              | 7                     | 2200         | 2200        |\n| 21              | 1                     | 3500         | 3500        |\n| 21              | 9                     | 2300         | 2300        |\n| 26              | 3                     | 4100         | 4100        |\n| 27              | 3                     | 4100         | 4100        |\n| 27              | 7                     | 2200         | 2200        |\n| 27              | 13                    | 1230         | 1230        |\n| 34              | 1                     | 3500         | 3500        |\n| 34              | 9                     | 2300         | 2300        |\n\nI hope this helps you get a clear picture of the materials allocated! If you have any more questions, feel free to ask. 😊",
+    "token_used": 9341
+}

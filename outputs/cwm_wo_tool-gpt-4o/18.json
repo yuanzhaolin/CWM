@@ -1,0 +1,347 @@
+{
+    "ID": 18,
+    "q_ch": "使用 Cotton Fabric 的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks use Cotton Fabric?",
+    "gt": "Sure thing! Here are the cutting tasks that use \"Cotton Fabric\" as a material. I've organized the details into a table for you. 😊\n\n| Cutting Task ID | Start Time      | End Time        | Working Group ID | Order Product ID | Produced WIP ID | Planned Number | Completed Number | Status     |\n|-----------------|-----------------|-----------------|------------------|------------------|-----------------|----------------|------------------|------------|\n| 1               | January 10, 2024| January 18, 2024| 2                | 1                | 2               | 100            | 100              | Completed  |\n| 2               | January 10, 2024| February 2, 2024| 3                | 2                | 10              | 240            | 240              | In Progress|\n| 3               | January 10, 2024| January 19, 2024| 3                | 3                | 2               | 150            | 150              | Completed  |\n| 4               | January 10, 2024| January 17, 2024| 2                | 4                | 4               | 220            | 220              | In Progress|\n| 5               | January 10, 2024| February 2, 2024| 2                | 5                | 8               | 260            | 260              | In Progress|\n| 19              | March 18, 2024  | April 12, 2024  | 4                | 19               | 6               | 95             | 95               | In Progress|\n| 21              | March 18, 2024  | April 4, 2024   | 4                | 21               | 10              | 85             | 85               | In Progress|\n| 28              | April 19, 2024  | May 12, 2024    | 2                | 28               | 4               | 210            | 210              | In Progress|\n\nThese tasks are all about using \"Cotton Fabric\" to create amazing products! 🧵✨ If you have any more questions, feel free to ask!",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
+            "description": "Retrieve the material ID for the material with the name \"Cotton Fabric\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT wip_id FROM wip_material WHERE origin_material_id = '1';",
+            "description": "Retrieve the WIP material ID that uses the \"Cotton Fabric\" as an origin material",
+            "results": [
+                {
+                    "wip_id": 10
+                },
+                {
+                    "wip_id": 12
+                },
+                {
+                    "wip_id": 2
+                },
+                {
+                    "wip_id": 6
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM cutting_tasks WHERE produced_wip_id = '10';",
+            "description": "Retrieve the cutting task IDs that use the WIP material obtained in Step2",
+            "results": [
+                {
+                    "id": 2
+                },
+                {
+                    "id": 12
+                },
+                {
+                    "id": 18
+                },
+                {
+                    "id": 21
+                },
+                {
+                    "id": 22
+                },
+                {
+                    "id": 30
+                },
+                {
+                    "id": 33
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM cutting_tasks WHERE produced_wip_id = '12';",
+            "description": "Retrieve the cutting task IDs that use the WIP material obtained in Step2",
+            "results": [
+                {
+                    "id": 7
+                },
+                {
+                    "id": 9
+                },
+                {
+                    "id": 13
+                },
+                {
+                    "id": 20
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM cutting_tasks WHERE produced_wip_id = '2';",
+            "description": "Retrieve the cutting task IDs that use the WIP material obtained in Step2",
+            "results": [
+                {
+                    "id": 1
+                },
+                {
+                    "id": 3
+                },
+                {
+                    "id": 34
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM cutting_tasks WHERE produced_wip_id = '6';",
+            "description": "Retrieve the cutting task IDs that use the WIP material obtained in Step2",
+            "results": [
+                {
+                    "id": 6
+                },
+                {
+                    "id": 8
+                },
+                {
+                    "id": 14
+                },
+                {
+                    "id": 15
+                },
+                {
+                    "id": 19
+                },
+                {
+                    "id": 25
+                },
+                {
+                    "id": 29
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT ct.id, ct.start_time, ct.end_time, wg.name AS working_group_name, op.id AS order_product_id, ct.planned_number, ct.completed_number, ct.status FROM cutting_tasks ct JOIN working_group wg ON ct.working_group_id = wg.id JOIN order_product op ON ct.order_product_id = op.id WHERE ct.id IN (2, 12, 18, 21, 22, 30, 33, 7, 9, 13, 20, 1, 3, 34, 6, 8, 14, 15, 19, 25, 29);",
+            "description": "Retrieve the details of the cutting tasks obtained in Step3",
+            "results": [
+                {
+                    "id": 18,
+                    "start_time": "2024-03-11 00:00:00",
+                    "end_time": "2024-04-07 00:00:00",
+                    "working_group_name": "Precision Cutters",
+                    "order_product_id": 18,
+                    "planned_number": 200,
+                    "completed_number": 200,
+                    "status": 1
+                },
+                {
+                    "id": 30,
+                    "start_time": "2024-04-19 00:00:00",
+                    "end_time": "2024-04-26 00:00:00",
+                    "working_group_name": "Precision Cutters",
+                    "order_product_id": 30,
+                    "planned_number": 195,
+                    "completed_number": 195,
+                    "status": 1
+                },
+                {
+                    "id": 1,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-01-18 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 1,
+                    "planned_number": 100,
+                    "completed_number": 100,
+                    "status": 2
+                },
+                {
+                    "id": 7,
+                    "start_time": "2024-02-28 00:00:00",
+                    "end_time": "2024-03-06 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 7,
+                    "planned_number": 110,
+                    "completed_number": 110,
+                    "status": 1
+                },
+                {
+                    "id": 13,
+                    "start_time": "2024-03-02 00:00:00",
+                    "end_time": "2024-03-27 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 13,
+                    "planned_number": 130,
+                    "completed_number": 130,
+                    "status": 1
+                },
+                {
+                    "id": 15,
+                    "start_time": "2024-03-11 00:00:00",
+                    "end_time": "2024-03-26 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 15,
+                    "planned_number": 185,
+                    "completed_number": 185,
+                    "status": 1
+                },
+                {
+                    "id": 22,
+                    "start_time": "2024-03-25 00:00:00",
+                    "end_time": "2024-04-09 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 22,
+                    "planned_number": 115,
+                    "completed_number": 115,
+                    "status": 1
+                },
+                {
+                    "id": 25,
+                    "start_time": "2024-04-14 00:00:00",
+                    "end_time": "2024-05-14 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 25,
+                    "planned_number": 75,
+                    "completed_number": 75,
+                    "status": 1
+                },
+                {
+                    "id": 29,
+                    "start_time": "2024-04-19 00:00:00",
+                    "end_time": "2024-05-11 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 29,
+                    "planned_number": 180,
+                    "completed_number": 180,
+                    "status": 2
+                },
+                {
+                    "id": 2,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-02-02 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "order_product_id": 2,
+                    "planned_number": 240,
+                    "completed_number": 240,
+                    "status": 1
+                },
+                {
+                    "id": 3,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-01-19 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "order_product_id": 3,
+                    "planned_number": 150,
+                    "completed_number": 150,
+                    "status": 2
+                },
+                {
+                    "id": 6,
+                    "start_time": "2024-02-28 00:00:00",
+                    "end_time": "2024-03-20 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "order_product_id": 6,
+                    "planned_number": 95,
+                    "completed_number": 95,
+                    "status": 1
+                },
+                {
+                    "id": 9,
+                    "start_time": "2024-03-01 00:00:00",
+                    "end_time": "2024-03-06 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "order_product_id": 9,
+                    "planned_number": 80,
+                    "completed_number": 80,
+                    "status": 1
+                },
+                {
+                    "id": 33,
+                    "start_time": "2024-06-25 00:00:00",
+                    "end_time": "2024-07-17 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "order_product_id": 33,
+                    "planned_number": 120,
+                    "completed_number": 0,
+                    "status": 0
+                },
+                {
+                    "id": 8,
+                    "start_time": "2024-02-28 00:00:00",
+                    "end_time": "2024-03-08 00:00:00",
+                    "working_group_name": "Expert Cutters",
+                    "order_product_id": 8,
+                    "planned_number": 50,
+                    "completed_number": 50,
+                    "status": 1
+                },
+                {
+                    "id": 19,
+                    "start_time": "2024-03-18 00:00:00",
+                    "end_time": "2024-04-12 00:00:00",
+                    "working_group_name": "Expert Cutters",
+                    "order_product_id": 19,
+                    "planned_number": 95,
+                    "completed_number": 95,
+                    "status": 1
+                },
+                {
+                    "id": 20,
+                    "start_time": "2024-03-18 00:00:00",
+                    "end_time": "2024-04-15 00:00:00",
+                    "working_group_name": "Expert Cutters",
+                    "order_product_id": 20,
+                    "planned_number": 90,
+                    "completed_number": 90,
+                    "status": 1
+                },
+                {
+                    "id": 21,
+                    "start_time": "2024-03-18 00:00:00",
+                    "end_time": "2024-04-04 00:00:00",
+                    "working_group_name": "Expert Cutters",
+                    "order_product_id": 21,
+                    "planned_number": 85,
+                    "completed_number": 85,
+                    "status": 1
+                },
+                {
+                    "id": 34,
+                    "start_time": "2024-06-30 00:00:00",
+                    "end_time": "2024-07-10 00:00:00",
+                    "working_group_name": "Expert Cutters",
+                    "order_product_id": 34,
+                    "planned_number": 330,
+                    "completed_number": 0,
+                    "status": 0
+                },
+                {
+                    "id": 12,
+                    "start_time": "2024-03-02 00:00:00",
+                    "end_time": "2024-03-27 00:00:00",
+                    "working_group_name": "Professional Cutters",
+                    "order_product_id": 12,
+                    "planned_number": 150,
+                    "completed_number": 150,
+                    "status": 1
+                },
+                {
+                    "id": 14,
+                    "start_time": "2024-03-02 00:00:00",
+                    "end_time": "2024-03-18 00:00:00",
+                    "working_group_name": "Professional Cutters",
+                    "order_product_id": 14,
+                    "planned_number": 120,
+                    "completed_number": 120,
+                    "status": 1
+                }
+            ]
+        }
+    ],
+    "response": "Sure! Here are the cutting tasks that use **Cotton Fabric** as a material. I've organized the details into a neat table for you. 😊\n\n| Task ID | Start Time          | End Time            | Working Group       | Order Product ID | Planned Number | Completed Number | Status |\n|---------|---------------------|---------------------|---------------------|------------------|----------------|------------------|--------|\n| 1       | 2024-01-10          | 2024-01-18          | Master Sewers       | 1                | 100            | 100              | 2      |\n| 2       | 2024-01-10          | 2024-02-02          | Master Cutters      | 2                | 240            | 240              | 1      |\n| 3       | 2024-01-10          | 2024-01-19          | Master Cutters      | 3                | 150            | 150              | 2      |\n| 6       | 2024-02-28          | 2024-03-20          | Master Cutters      | 6                | 95             | 95               | 1      |\n| 7       | 2024-02-28          | 2024-03-06          | Master Sewers       | 7                | 110            | 110              | 1      |\n| 8       | 2024-02-28          | 2024-03-08          | Expert Cutters      | 8                | 50             | 50               | 1      |\n| 9       | 2024-03-01          | 2024-03-06          | Master Cutters      | 9                | 80             | 80               | 1      |\n| 12      | 2024-03-02          | 2024-03-27          | Professional Cutters| 12               | 150            | 150              | 1      |\n| 13      | 2024-03-02          | 2024-03-27          | Master Sewers       | 13               | 130            | 130              | 1      |\n| 14      | 2024-03-02          | 2024-03-18          | Professional Cutters| 14               | 120            | 120              | 1      |\n| 15      | 2024-03-11          | 2024-03-26          | Master Sewers       | 15               | 185            | 185              | 1      |\n| 18      | 2024-03-11          | 2024-04-07          | Precision Cutters   | 18               | 200            | 200              | 1      |\n| 19      | 2024-03-18          | 2024-04-12          | Expert Cutters      | 19               | 95             | 95               | 1      |\n| 20      | 2024-03-18          | 2024-04-15          | Expert Cutters      | 20               | 90             | 90               | 1      |\n| 21      | 2024-03-18          | 2024-04-04          | Expert Cutters      | 21               | 85             | 85               | 1      |\n| 22      | 2024-03-25          | 2024-04-09          | Master Sewers       | 22               | 115            | 115              | 1      |\n| 25      | 2024-04-14          | 2024-05-14          | Master Sewers       | 25               | 75             | 75               | 1      |\n| 29      | 2024-04-19          | 2024-05-11          | Master Sewers       | 29               | 180            | 180              | 2      |\n| 30      | 2024-04-19          | 2024-04-26          | Precision Cutters   | 30               | 195            | 195              | 1      |\n| 33      | 2024-06-25          | 2024-07-17          | Master Cutters      | 33               | 120            | 0                | 0      |\n| 34      | 2024-06-30          | 2024-07-10          | Expert Cutters      | 34               | 330            | 0                | 0      |\n\n- **Status Legend**: \n  - 0: Not Started\n  - 1: Completed\n  - 2: In Progress\n\nI hope this helps! If you have any more questions, feel free to ask. 😄",
+    "token_used": 12810
+}

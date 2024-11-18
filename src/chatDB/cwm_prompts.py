@@ -61,6 +61,33 @@ for file in sql_examples_dir_list:
 #         operation_type += "|Thought"
 # tool, sql, or thought
 
+prompt_single_sql_step = f"""
+Please tell me what single SQL operation should I use in order to respond to the "USER INPUT". \
+If there is no need to use any operations, reply to the "USER INPUT" directly.
+The output should be a markdown code snippet formatted in the following schema, \
+including the leading and trailing "\`\`\`" and "\`\`\`":
+```
+Step1: <Description of first step>
+SQL `SQL command for step1`
+
+......
+```
+Please be noted that you can only use a single SQL operation to respond to the user input.
+Here are some examples:
+
+USER INPUT: 
+What materials were used in Olivia's order?
+
+ANSWER:
+```
+Step1: To calculate the production progress of the Dress ordered by Emily, we need to determine the total planned number of Dress production, the total completed number of Dress production, and then calculate the progress percentage. We will first find the order_id for the Dress ordered by Emily, then calculate the sum of planned number and completed number of Dress production, and finally calculate the progress percentage.",
+SQL `SELECT op.order_id, SUM(op.planned_number) AS total_planned, SUM(op.completed_number) AS total_completed, ROUND(SUM(op.completed_number) / SUM(op.planned_number) * 100, 2) AS progress_percentage FROM order_product op JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'Emily' AND op.product_id IN (SELECT id FROM products WHERE attributes = 'Dress');,
+```
+
+USER INPUT: {{user_inp}}
+ANSWER:
+"""
+
 prompt_ask_steps_temp = f"""
 Please tell me what basic operations, including sql, {'tool,' if cfg.tool_open else ''}{'and thought,' if cfg.thought_open else ''} should I use in order to respond to the "USER INPUT". \
 If it needs multiple operations, please list them step by step concisely, and indicate whether the operation involves {"calling a tool or " if cfg.tool_open else ""} accessing a database via SQL. \

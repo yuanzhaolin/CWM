@@ -1,0 +1,15 @@
+{
+    "ID": 43,
+    "q_ch": "向仓库Main Warehouse，入库Leather 1000份。",
+    "q_en": "Send 1000 Leathers to the Main Warehouse for storage.",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "UPDATE warehouse_material wm JOIN materials m ON wm.material_id = m.id JOIN warehouse w ON wm.warehouse_id = w.id SET wm.total_number = wm.total_number + 1000 WHERE m.name = 'Leather' AND w.name = 'Main Warehouse';",
+            "description": "To send 1000 units of Leather to the Main Warehouse for storage, we need to update the total number of Leather in the Main Warehouse by adding 1000 units.",
+            "results": "update data successfully."
+        }
+    ],
+    "response": "Sure! Here is the optimized answer in a friendly and lively tone:\n\n---\n\nHey there! 🌟\n\nTo send 1000 units of Leather to the Main Warehouse for storage, we've successfully updated the total number of Leather in the Main Warehouse by adding 1000 units. 📦✨\n\nHere's a summary of the update:\n\n| Description                                                                                           | Results               |\n|-------------------------------------------------------------------------------------------------------|-----------------------|\n| To send 1000 units of Leather to the Main Warehouse for storage, we need to update the total number | update data successfully. |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄\n\n--- \n\nI hope this helps! Let me know if you need anything else.",
+    "token_used": 5518
+}

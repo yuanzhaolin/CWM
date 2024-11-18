@@ -1,0 +1,69 @@
+{
+    "ID": 54,
+    "q_ch": "列出所有缝纫组的进度百分比。",
+    "q_en": "List the progress percentage of all sewing groups",
+    "gt": "Sure thing! Let's take a look at the progress percentages for all the sewing groups. Here's a handy table for you:\n\n| Sewing Group      | Progress Percentage |\n|-------------------|---------------------|\n| Master Sewers     | 97.4441%            |\n| Skilled Sewers    | 97.2222%            |\n| Advanced Sewers   | 81.9588%            |\n| Premier Sewers    | 74.6667%            |\n| Elite Sewers      | 44.0678%            |\n\nKeep up the great work, sewing teams! 🎉🧵",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id, name FROM working_group WHERE type = 'sew';",
+            "description": "Retrieve the working group ID and name for all sewing groups",
+            "results": [
+                {
+                    "id": 2,
+                    "name": "Master Sewers"
+                },
+                {
+                    "id": 7,
+                    "name": "Skilled Sewers"
+                },
+                {
+                    "id": 8,
+                    "name": "Advanced Sewers"
+                },
+                {
+                    "id": 9,
+                    "name": "Premier Sewers"
+                },
+                {
+                    "id": 10,
+                    "name": "Elite Sewers"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT working_group_id, SUM(completed_number) / SUM(planned_number) * 100 AS progress_percentage FROM sewing_tasks GROUP BY working_group_id;",
+            "description": "Calculate the progress for each sewing group by summing the completed numbers and dividing by the planned numbers",
+            "results": [
+                {
+                    "working_group_id": 2,
+                    "progress_percentage": "97.4441"
+                },
+                {
+                    "working_group_id": 7,
+                    "progress_percentage": "97.2222"
+                },
+                {
+                    "working_group_id": 8,
+                    "progress_percentage": "81.9588"
+                },
+                {
+                    "working_group_id": 9,
+                    "progress_percentage": "74.6667"
+                },
+                {
+                    "working_group_id": 10,
+                    "progress_percentage": "100.0000"
+                }
+            ]
+        },
+        {
+            "type": "Thought",
+            "operation": "Join the results from Step1 and Step2 to display the name of each sewing group along with its progress percentage.",
+            "results": "To achieve the objective of joining the results from Step 1 and Step 2, we need to match each sewing group's name with its corresponding progress percentage. Here is the combined information:\n\n1. **Master Sewers** - Progress Percentage: 97.4441%\n2. **Skilled Sewers** - Progress Percentage: 97.2222%\n3. **Advanced Sewers** - Progress Percentage: 81.9588%\n4. **Premier Sewers** - Progress Percentage: 74.6667%\n5. **Elite Sewers** - Progress Percentage: 100.0000%\n\nThis list displays each sewing group's name along with its progress percentage."
+        }
+    ],
+    "response": "Sure! Here's the progress percentage for all the sewing groups, neatly organized for you. 😊\n\n| Sewing Group       | Progress Percentage |\n|--------------------|---------------------|\n| Master Sewers      | 97.4441%            |\n| Skilled Sewers     | 97.2222%            |\n| Advanced Sewers    | 81.9588%            |\n| Premier Sewers     | 74.6667%            |\n| Elite Sewers       | 100.0000%           |\n\nI hope this helps! If you have any more questions, feel free to ask. 😄",
+    "token_used": 7144
+}

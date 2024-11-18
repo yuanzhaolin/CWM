@@ -1,0 +1,95 @@
+{
+    "ID": 32,
+    "q_ch": "产品类型是Dress的缝纫任务有哪些？",
+    "q_en": "What are the sewing tasks for Dress's product type?",
+    "gt": "Sure thing! Let's dive into the sewing tasks for dresses. Here's a neat table summarizing the tasks:\n\n| Task ID | Start Time       | End Time         | Working Group   | Planned Number | Completed Number | Status   |\n|---------|------------------|------------------|-----------------|----------------|------------------|----------|\n| 12      | 2024-03-27       | 2024-04-12       | Master Sewers   | 150            | 150              | Complete 😄 |\n| 13      | 2024-03-27       | 2024-04-06       | Master Sewers   | 130            | 130              | Complete 😄 |\n| 14      | 2024-03-18       | 2024-04-08       | Master Sewers   | 120            | 120              | Complete 😄 |\n| 11      | 2024-03-21       | 2024-04-14       | Premier Sewers  | 140            | 140              | In Progress 🔄 |\n\nLooks like the Master Sewers have been busy bees, completing all their tasks! The Premier Sewers are still working on theirs. Keep up the great work, team! 🧵✨",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'Dress';",
+            "description": "Retrieve the product IDs for products with the type \"Dress\"",
+            "results": [
+                {
+                    "id": 5
+                },
+                {
+                    "id": 13
+                },
+                {
+                    "id": 21
+                },
+                {
+                    "id": 29
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM order_product WHERE product_id IN (5, 13, 21, 29);",
+            "description": "Retrieve the order_product IDs for the products identified in Step1",
+            "results": [
+                {
+                    "id": 14
+                },
+                {
+                    "id": 13
+                },
+                {
+                    "id": 11
+                },
+                {
+                    "id": 12
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT * FROM sewing_tasks WHERE order_product_id IN (14, 13, 11, 12);",
+            "description": "Retrieve the sewing tasks for the order_product IDs identified in Step2",
+            "results": [
+                {
+                    "id": 11,
+                    "start_time": "2024-03-21 00:00:00",
+                    "end_time": "2024-04-14 00:00:00",
+                    "working_group_id": 9,
+                    "order_product_id": 11,
+                    "planned_number": 140,
+                    "completed_number": 100,
+                    "status": 0
+                },
+                {
+                    "id": 12,
+                    "start_time": "2024-03-27 00:00:00",
+                    "end_time": "2024-04-12 00:00:00",
+                    "working_group_id": 2,
+                    "order_product_id": 12,
+                    "planned_number": 150,
+                    "completed_number": 120,
+                    "status": 1
+                },
+                {
+                    "id": 13,
+                    "start_time": "2024-03-27 00:00:00",
+                    "end_time": "2024-04-06 00:00:00",
+                    "working_group_id": 2,
+                    "order_product_id": 13,
+                    "planned_number": 130,
+                    "completed_number": 120,
+                    "status": 1
+                },
+                {
+                    "id": 14,
+                    "start_time": "2024-03-18 00:00:00",
+                    "end_time": "2024-04-08 00:00:00",
+                    "working_group_id": 2,
+                    "order_product_id": 14,
+                    "planned_number": 120,
+                    "completed_number": 120,
+                    "status": 1
+                }
+            ]
+        }
+    ],
+    "response": "Sure thing! Let's dive into the sewing tasks for dresses. Here's a neat table summarizing the tasks for you:\n\n| Task ID | Start Time          | End Time            | Working Group ID | Planned Number | Completed Number | Status     |\n|---------|---------------------|---------------------|------------------|----------------|------------------|------------|\n| 11      | 2024-03-21 00:00:00 | 2024-04-14 00:00:00 | 9                | 140            | 100              | In Progress |\n| 12      | 2024-03-27 00:00:00 | 2024-04-12 00:00:00 | 2                | 150            | 120              | Completed   |\n| 13      | 2024-03-27 00:00:00 | 2024-04-06 00:00:00 | 2                | 130            | 120              | Completed   |\n| 14      | 2024-03-18 00:00:00 | 2024-04-08 00:00:00 | 2                | 120            | 120              | Completed   |\n\nHere's a quick breakdown of the status:\n- **In Progress**: The task is still ongoing.\n- **Completed**: The task has been finished successfully. 🎉\n\nIf you have any more questions or need further details, feel free to ask! 😊",
+    "token_used": 8251
+}

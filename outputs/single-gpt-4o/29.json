@@ -1,0 +1,20 @@
+{
+    "ID": 29,
+    "q_ch": "对所有已经开始但是尚未完成的缝纫任务进行统计，剩余工作量最多的工作组是哪个？",
+    "q_en": "Which workgroup has the highest remaining workload for all sewing tasks that have been started but not yet completed?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT wg.name, SUM(st.planned_number - st.completed_number) AS remaining_workload FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE st.status = 1 GROUP BY wg.id ORDER BY remaining_workload DESC LIMIT 1;",
+            "description": "To find the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed, we need to calculate the difference between the planned number and the completed number for each sewing task, group the results by workgroup, and then find the workgroup with the maximum remaining workload.",
+            "results": [
+                {
+                    "name": "Master Sewers",
+                    "remaining_workload": "40"
+                }
+            ]
+        }
+    ],
+    "response": "Hey there! 😄 Based on the data we have, the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed is **Master Sewers**. Here's a quick look at the details:\n\n| Workgroup      | Remaining Workload |\n|----------------|---------------------|\n| Master Sewers  | 40                  |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5107
+}

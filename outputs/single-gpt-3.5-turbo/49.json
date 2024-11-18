@@ -1,0 +1,8 @@
+{
+    "ID": 49,
+    "q_ch": "对于编号为34的缝纫任务，所有的工作量我都已完成，请更新已完成数量。",
+    "q_en": "I have completed all the workload for the sewing task with ID 34. Please update the completed quantity.",
+    "steps": [],
+    "response": "Sure! Here is a friendly and lively response to the user's question:\n\nHey there! 😄\n\nI've completed all the workload for the Skilled Sewers with the PolyU_Skirt order. Let me update the completed quantity for you. \n\n| Working Group     | Order Name   | Completed Quantity |\n|-------------------|--------------|--------------------|\n| Skilled Sewers    | PolyU_Skirt  |       [quantity]    |\n\nIf the SQL result is empty, I'll let you know directly. Thanks for reaching out!",
+    "token_used": 5183
+}

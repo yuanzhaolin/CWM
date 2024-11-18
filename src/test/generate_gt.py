@@ -60,16 +60,17 @@ def handle_request(q):
     return sql_results, response
     # return None
 
-for f in os.listdir(os.path.join(project_dir, 'questions/q0702')):
+for f in os.listdir(outputs_dir):
     if f.endswith('.json') and question_filter(f) and is_exist(f, outputs_dir) is False:
         print(f)
-        with open(os.path.join(project_dir, 'questions/q0702', f), 'r') as file:
+        with open(os.path.join(outputs_dir, f), 'r') as file:
             q = json.loads(file.read())
-            sql_results, response = handle_request(q['q_en'] + f'\n{args.prompt_add}')
-            q['steps'] = sql_results
-            q['gt'] = response
-            with open(os.path.join(outputs_dir, f), 'w', encoding='utf-8') as out:
-                out.write(json.dumps(q, indent=4, ensure_ascii=False, default=str))
+        hint = 'Hint: ' + q['hint'] if 'hint' in q.keys() else ''
+        sql_results, response = handle_request(q['q_en'] + '. ' +  hint + f'\n{args.prompt_add}')
+        q['steps'] = sql_results
+        q['gt'] = response
+        with open(os.path.join(outputs_dir, f), 'w', encoding='utf-8') as out:
+            out.write(json.dumps(q, indent=4, ensure_ascii=False, default=str))
                 # utf-8 encoding
         # break
     else:

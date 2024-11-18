@@ -1,0 +1,15 @@
+{
+    "ID": 6,
+    "q_ch": "顾客理大2024年1月的订单包含哪些产品？",
+    "q_en": "What products are included in PolyU's January 2024 orders?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT p.id, p.attributes FROM products p JOIN order_product op ON p.id = op.product_id JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'PolyU' AND o.order_name = 'James_WinterOrder';",
+            "description": "To find the products included in PolyU's order named James_WinterOrder, we need to join the orders, customers, order_product, and products tables to get the product details for the specified customer and order.",
+            "results": "no results found."
+        }
+    ],
+    "response": "It looks like there are no products included in PolyU's order named James_WinterOrder. 🤔 If you have any other questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5404
+}

@@ -1,0 +1,137 @@
+{
+    "ID": 51,
+    "q_ch": "未完成的订单中，哪个订单完成的进度最快？",
+    "q_en": "Which order has the fastest completion progress among the unfinished orders?",
+    "gt": "It seems like there was an issue with the SQL query that was supposed to calculate the completion progress for each unfinished order. Unfortunately, due to a technical error, we couldn't retrieve the progress data. 😅\n\nHowever, based on the available information, here are the unfinished orders:\n\n| Order ID | Order Name                |\n|----------|---------------------------|\n| 1        | PolyU_Tshirt              |\n| 2        | John_Pants                |\n| 3        | Emily_Dress               |\n| 4        | James_WinterOrder         |\n| 5        | Sophia_SkirtAndJacket     |\n| 6        | Michael_SweaterAndShorts  |\n| 7        | Olivia_WinterOrder        |\n| 8        | William_Skirt_Sweater_Shorts |\n| 9        | PolyU_Skirt               |\n| 10       | John_Jacket               |\n| 11       | Emily_Pants               |\n| 12       | James_Skirt               |\n\nSince we couldn't determine the fastest completion progress, you might want to check the system or database for any updates or corrections. If you have any other questions or need further assistance, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT o.id, o.order_name FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id;",
+            "description": "Retrieve the order ID and name for all unfinished orders",
+            "results": [
+                {
+                    "id": 1,
+                    "order_name": "PolyU_Tshirt"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants"
+                },
+                {
+                    "id": 3,
+                    "order_name": "Emily_Dress"
+                },
+                {
+                    "id": 4,
+                    "order_name": "James_WinterOrder"
+                },
+                {
+                    "id": 5,
+                    "order_name": "Sophia_SkirtAndJacket"
+                },
+                {
+                    "id": 6,
+                    "order_name": "Michael_SweaterAndShorts"
+                },
+                {
+                    "id": 7,
+                    "order_name": "Olivia_WinterOrder"
+                },
+                {
+                    "id": 8,
+                    "order_name": "William_Skirt_Sweater_Shorts"
+                },
+                {
+                    "id": 9,
+                    "order_name": "PolyU_Skirt"
+                },
+                {
+                    "id": 10,
+                    "order_name": "John_Jacket"
+                },
+                {
+                    "id": 11,
+                    "order_name": "Emily_Pants"
+                },
+                {
+                    "id": 12,
+                    "order_name": "James_Skirt"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT o.id, o.order_name, SUM(st.completed_number) / SUM(op.number) AS progress FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id;",
+            "description": "Calculate the progress for each order by summing the completed numbers of sewing tasks and dividing by the total quantity of products in the order",
+            "results": [
+                {
+                    "id": 1,
+                    "order_name": "PolyU_Tshirt",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 2,
+                    "order_name": "John_Pants",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 3,
+                    "order_name": "Emily_Dress",
+                    "progress": "0.8519"
+                },
+                {
+                    "id": 4,
+                    "order_name": "James_WinterOrder",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 5,
+                    "order_name": "Sophia_SkirtAndJacket",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 6,
+                    "order_name": "Michael_SweaterAndShorts",
+                    "progress": "0.7424"
+                },
+                {
+                    "id": 7,
+                    "order_name": "Olivia_WinterOrder",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 8,
+                    "order_name": "William_Skirt_Sweater_Shorts",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 9,
+                    "order_name": "PolyU_Skirt",
+                    "progress": "1.0000"
+                },
+                {
+                    "id": 10,
+                    "order_name": "John_Jacket",
+                    "progress": "0.0000"
+                },
+                {
+                    "id": 11,
+                    "order_name": "Emily_Pants",
+                    "progress": "0.0000"
+                },
+                {
+                    "id": 12,
+                    "order_name": "James_Skirt",
+                    "progress": "0.0000"
+                }
+            ]
+        },
+        {
+            "type": "Thought",
+            "operation": "Compare the progress of all unfinished orders obtained in Step2 and identify the order with the highest progress.",
+            "results": "To identify the order with the highest progress among the unfinished orders, we need to compare the progress values from the results of the second SQL query. Here are the progress values for each unfinished order:\n\n1. PolyU_Tshirt: 1.0000\n2. John_Pants: 1.0000\n3. Emily_Dress: 0.8519\n4. James_WinterOrder: 1.0000\n5. Sophia_SkirtAndJacket: 1.0000\n6. Michael_SweaterAndShorts: 0.7424\n7. Olivia_WinterOrder: 1.0000\n8. William_Skirt_Sweater_Shorts: 1.0000\n9. PolyU_Skirt: 1.0000\n10. John_Jacket: 0.0000\n11. Emily_Pants: 0.0000\n12. James_Skirt: 0.0000\n\nThe orders with the highest progress (1.0000) are:\n- PolyU_Tshirt\n- John_Pants\n- James_WinterOrder\n- Sophia_SkirtAndJacket\n- Olivia_WinterOrder\n- William_Skirt_Sweater_Shorts\n- PolyU_Skirt\n\nThese orders all have the highest progress value of 1.0000, indicating they are fully completed among the unfinished orders."
+        }
+    ],
+    "response": "Sure! Let's take a look at the progress of the unfinished orders and find out which ones are leading the pack. 🚀\n\nHere's a table showing the progress of each unfinished order:\n\n| Order Name                     | Progress  |\n|--------------------------------|-----------|\n| PolyU_Tshirt                   | 1.0000    |\n| John_Pants                     | 1.0000    |\n| Emily_Dress                    | 0.8519    |\n| James_WinterOrder              | 1.0000    |\n| Sophia_SkirtAndJacket          | 1.0000    |\n| Michael_SweaterAndShorts       | 0.7424    |\n| Olivia_WinterOrder             | 1.0000    |\n| William_Skirt_Sweater_Shorts   | 1.0000    |\n| PolyU_Skirt                    | 1.0000    |\n| John_Jacket                    | 0.0000    |\n| Emily_Pants                    | 0.0000    |\n| James_Skirt                    | 0.0000    |\n\nThe orders with the fastest completion progress, all at 100% (1.0000), are:\n\n- PolyU_Tshirt\n- John_Pants\n- James_WinterOrder\n- Sophia_SkirtAndJacket\n- Olivia_WinterOrder\n- William_Skirt_Sweater_Shorts\n- PolyU_Skirt\n\nThese orders are fully completed among the unfinished ones! 🎉 Keep up the great work!",
+    "token_used": 9348
+}

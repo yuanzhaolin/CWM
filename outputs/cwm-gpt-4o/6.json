@@ -1,0 +1,27 @@
+{
+    "ID": 6,
+    "q_ch": "顾客理大2024年1月的订单包含哪些产品？",
+    "q_en": "What products are included in PolyU's January 2024 orders?",
+    "gt": "Hey there! 😄 Let's take a look at the products included in PolyU's January 2024 orders. Here's a neat table for you:\n\n| Product ID | Quantity | Attributes     | Description |\n|------------|----------|----------------|-------------|\n| 1          | 100      | Red, M size    | T-shirt     |\n| 19         | 240      | Blue, L size   | T-shirt     |\n| 3          | 150      | White, XL size | T-shirt     |\n| 11         | 220      | Green, M size  | T-shirt     |\n| 27         | 260      | Yellow, S size | T-shirt     |\n\nThese are the awesome T-shirts that PolyU ordered in January 2024. If you have any more questions, feel free to ask! 😊",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
+            "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "Tool",
+            "results": {
+                "input": "Retrieve the product details for the order obtained in Step2\n[\"tool_find_order_details, {'order_id': <order_id>}, Find the product details of an order\"]",
+                "output": "Here are the product details for order ID 2:\n\n1. **Product Description:** Pants\n   - **Attributes:** Blue, 30 size\n   - **Quantity:** 95\n\n2. **Product Description:** Pants\n   - **Attributes:** Brown, 34 size\n   - **Quantity:** 110\n\n3. **Product Description:** Pants\n   - **Attributes:** Blue, 35 size\n   - **Quantity:** 50\n\n4. **Product Description:** Pants\n   - **Attributes:** Black, 34 size\n   - **Quantity:** 80\n\n5. **Product Description:** Pants\n   - **Attributes:** Grey, 29 size\n   - **Quantity:** 100"
+            }
+        }
+    ],
+    "response": "Hey there! 😄 Let's take a look at the products included in the order named \"James_WinterOrder\" for the customer \"PolyU\". Here's what I found:\n\n| **Product Description** | **Attributes** | **Quantity** |\n|-------------------------|----------------|--------------|\n| Pants                   | Blue, 30 size  | 95           |\n| Pants                   | Brown, 34 size | 110          |\n| Pants                   | Blue, 35 size  | 50           |\n| Pants                   | Black, 34 size | 80           |\n| Pants                   | Grey, 29 size  | 100          |\n\nLooks like \"PolyU\" has quite a stylish collection of pants in their order! If you have any more questions, feel free to ask! 😊",
+    "token_used": 8222
+}

@@ -1,0 +1,32 @@
+{
+    "ID": 1,
+    "q_ch": "PolyU的订单有哪些？",
+    "q_en": "What are the orders for PolyU?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT * FROM orders o JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'PolyU';",
+            "description": "To retrieve the orders for the customer with the name 'PolyU', we need to query the orders table based on the customer's name.",
+            "results": [
+                {
+                    "id": 1,
+                    "user_id": 1,
+                    "order_name": "PolyU_Tshirt",
+                    "created_at": "2024-01-10 00:00:00",
+                    "c.id": 1,
+                    "customer_name": "PolyU"
+                },
+                {
+                    "id": 9,
+                    "user_id": 1,
+                    "order_name": "PolyU_Skirt",
+                    "created_at": "2024-05-10 00:00:00",
+                    "c.id": 1,
+                    "customer_name": "PolyU"
+                }
+            ]
+        }
+    ],
+    "response": "Sure! Here is the answer to your question:\n\n| Order ID | Order Name    | Created At          |\n|----------|---------------|---------------------|\n| 1        | PolyU_Tshirt  | 2024-01-10 00:00:00 |\n| 9        | PolyU_Skirt   | 2024-05-10 00:00:00 |\n\nI hope this helps! If you have any more questions, feel free to ask. 😄",
+    "token_used": 5395
+}

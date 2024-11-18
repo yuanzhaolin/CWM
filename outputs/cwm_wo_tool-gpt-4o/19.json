@@ -1,0 +1,96 @@
+{
+    "ID": 19,
+    "q_ch": "使用 Silk 的缝纫任务有哪些？",
+    "q_en": "Which sewing tasks use Silk?",
+    "gt": "Sure! Here are the sewing tasks that use **Silk** as a material. I've organized the details into a table for you. 😊\n\n| Sewing Task ID | Start Time     | End Time       | Working Group ID | Order Product ID | Planned Number | Completed Number | Status      |\n|----------------|----------------|----------------|------------------|------------------|----------------|------------------|-------------|\n| 5              | February 2, 2024 | February 25, 2024 | 2                | 5                | 260            | 260              | Completed   |\n| 6              | March 20, 2024 | April 7, 2024  | 8                | 6                | 95             | 95               | Completed   |\n| 8              | March 8, 2024  | April 5, 2024  | 7                | 8                | 50             | 50               | Completed   |\n| 11             | March 21, 2024 | April 14, 2024 | 9                | 11               | 140            | 140              | In Progress |\n| 14             | March 18, 2024 | April 8, 2024  | 2                | 14               | 120            | 120              | Completed   |\n| 15             | March 26, 2024 | April 9, 2024  | 2                | 15               | 185            | 185              | Completed   |\n| 16             | April 10, 2024 | May 7, 2024    | 8                | 16               | 200            | 200              | Completed   |\n| 19             | April 12, 2024 | April 23, 2024 | 7                | 19               | 95             | 95               | Completed   |\n| 24             | April 23, 2024 | May 20, 2024   | 2                | 24               | 105            | 105              | In Progress |\n| 25             | May 14, 2024   | June 3, 2024   | 8                | 25               | 75             | 75               | In Progress |\n| 27             | May 4, 2024    | May 15, 2024   | 7                | 27               | 60             | 60               | In Progress |\n| 29             | May 11, 2024   | May 19, 2024   | 7                | 29               | 180            | 180              | Completed   |\n| 31             | May 26, 2024   | June 4, 2024   | 10               | 31               | 260            | 260              | Completed   |\n| 32             | June 17, 2024  | July 14, 2024  | 9                | 32               | 150            | 0                | In Progress |\n\nThese tasks are all about creating beautiful items with the luxurious touch of silk! 🧵✨",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM materials WHERE name = 'Silk';",
+            "description": "Retrieve the material ID for the material with the name \"Silk\"",
+            "results": [
+                {
+                    "id": 5
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse_material WHERE material_id = '5';",
+            "description": "Retrieve the warehouse material IDs that correspond to the material ID obtained in Step1",
+            "results": [
+                {
+                    "id": 5
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT sewing_task_id FROM sewing_material_allocation WHERE warehouse_material_id IN ('5');",
+            "description": "Retrieve the sewing task IDs that use the warehouse material IDs obtained in Step2",
+            "results": [
+                {
+                    "sewing_task_id": 11
+                },
+                {
+                    "sewing_task_id": 12
+                },
+                {
+                    "sewing_task_id": 13
+                },
+                {
+                    "sewing_task_id": 14
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT * FROM sewing_tasks WHERE id IN ('11', '12', '13', '14');",
+            "description": "Retrieve the details of the sewing tasks using the sewing task IDs obtained in Step3",
+            "results": [
+                {
+                    "id": 11,
+                    "start_time": "2024-03-21 00:00:00",
+                    "end_time": "2024-04-14 00:00:00",
+                    "working_group_id": 9,
+                    "order_product_id": 11,
+                    "planned_number": 140,
+                    "completed_number": 100,
+                    "status": 0
+                },
+                {
+                    "id": 12,
+                    "start_time": "2024-03-27 00:00:00",
+                    "end_time": "2024-04-12 00:00:00",
+                    "working_group_id": 2,
+                    "order_product_id": 12,
+                    "planned_number": 150,
+                    "completed_number": 120,
+                    "status": 1
+                },
+                {
+                    "id": 13,
+                    "start_time": "2024-03-27 00:00:00",
+                    "end_time": "2024-04-06 00:00:00",
+                    "working_group_id": 2,
+                    "order_product_id": 13,
+                    "planned_number": 130,
+                    "completed_number": 120,
+                    "status": 1
+                },
+                {
+                    "id": 14,
+                    "start_time": "2024-03-18 00:00:00",
+                    "end_time": "2024-04-08 00:00:00",
+                    "working_group_id": 2,
+                    "order_product_id": 14,
+                    "planned_number": 120,
+                    "completed_number": 120,
+                    "status": 1
+                }
+            ]
+        }
+    ],
+    "response": "Sure thing! Here are the sewing tasks that use silk as a material:\n\n| Sewing Task ID | Start Time          | End Time            | Working Group ID | Order Product ID | Planned Number | Completed Number | Status |\n|----------------|---------------------|---------------------|------------------|------------------|----------------|------------------|--------|\n| 11             | 2024-03-21 00:00:00 | 2024-04-14 00:00:00 | 9                | 11               | 140            | 100              | 0      |\n| 12             | 2024-03-27 00:00:00 | 2024-04-12 00:00:00 | 2                | 12               | 150            | 120              | 1      |\n| 13             | 2024-03-27 00:00:00 | 2024-04-06 00:00:00 | 2                | 13               | 130            | 120              | 1      |\n| 14             | 2024-03-18 00:00:00 | 2024-04-08 00:00:00 | 2                | 14               | 120            | 120              | 1      |\n\nHere's a quick breakdown of the status:\n- **0**: Not completed\n- **1**: Completed\n\nI hope this helps! If you have any more questions, feel free to ask. 😊",
+    "token_used": 8650
+}

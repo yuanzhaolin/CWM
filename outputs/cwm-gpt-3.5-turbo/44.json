@@ -1,0 +1,39 @@
+{
+    "ID": 44,
+    "q_ch": "请将100件ID为15的产品入库到辅助仓库。",
+    "q_en": "Please store 100 units of product with ID=15 in the auxiliary warehouse.",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM products WHERE attributes = 'Blue, 35 size';",
+            "description": "Retrieve the product ID for the product with attributes \"Blue, 35 size\"",
+            "results": [
+                {
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Auxiliary warehouse';",
+            "description": "Retrieve the warehouse ID for the warehouse with the name \"Auxiliary warehouse\"",
+            "results": [
+                {
+                    "id": 2
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "INSERT INTO warehouse_product (warehouse_id, product_id, left_number) VALUES (2, 2, 100);",
+            "description": "Insert 100 units of the product into the warehouse",
+            "results": [
+                {
+                    "auto_increment_id": 3
+                }
+            ]
+        }
+    ],
+    "response": "Hey there! 😄\n\nI've got great news for you! Your request to store 100 units of products with attributes 'Blue, 35 size' in the warehouse named 'Auxiliary warehouse' has been successfully completed. Here's a breakdown of what happened:\n\n| Action                                      | Description                                                                                   |\n|---------------------------------------------|-----------------------------------------------------------------------------------------------|\n| Retrieve Product ID                         | Retrieved the product ID for the product with attributes 'Blue, 35 size' (ID: 2)             |\n| Retrieve Warehouse ID                       | Retrieved the warehouse ID for the warehouse named 'Auxiliary warehouse' (ID: 2)             |\n| Insert 100 Units into Warehouse            | Successfully inserted 100 units of the product into the warehouse (Auto Increment ID: 3)     |\n\nYour products are now safely stored in the Auxiliary warehouse! If you have any more questions or need assistance, feel free to ask. 😊",
+    "token_used": 7840
+}

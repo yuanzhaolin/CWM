@@ -1,0 +1,64 @@
+{
+    "ID": 12,
+    "q_ch": "2024年5月31日前完成的缝纫任务有哪些？",
+    "q_en": "What sewing tasks will be completed before May 31, 2024?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT m.id, m.name, m.unit, m.type FROM materials m JOIN product_material pm ON m.id = pm.material_id JOIN products p ON pm.product_id = p.id JOIN order_product op ON p.id = op.product_id JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'Olivia';",
+            "description": "To find out what materials were used in Olivia's order, we need to retrieve the material information associated with the products in Olivia's order. We will first find Olivia's order ID, then identify the product IDs in that order, and finally list the materials used in those products.\",",
+            "results": [
+                {
+                    "id": 8,
+                    "name": "Leather Pieces",
+                    "unit": "pieces",
+                    "type": "wip"
+                },
+                {
+                    "id": 12,
+                    "name": "Denim Fabric Pieces",
+                    "unit": "pieces",
+                    "type": "wip"
+                },
+                {
+                    "id": 6,
+                    "name": "Silk Pieces",
+                    "unit": "pieces",
+                    "type": "wip"
+                },
+                {
+                    "id": 4,
+                    "name": "Wool Pieces",
+                    "unit": "pieces",
+                    "type": "wip"
+                },
+                {
+                    "id": 12,
+                    "name": "Denim Fabric Pieces",
+                    "unit": "pieces",
+                    "type": "wip"
+                },
+                {
+                    "id": 10,
+                    "name": "Synthetic Fiber Pieces",
+                    "unit": "pieces",
+                    "type": "wip"
+                },
+                {
+                    "id": 6,
+                    "name": "Silk Pieces",
+                    "unit": "pieces",
+                    "type": "wip"
+                },
+                {
+                    "id": 2,
+                    "name": "Fabric Pieces",
+                    "unit": "pieces",
+                    "type": "wip"
+                }
+            ]
+        }
+    ],
+    "response": "I'm sorry, but I couldn't find any specific information related to the completion of tasks by the 'Skilled Sewers' working group before May 31, 2024. If you have any other questions or need assistance with something else, feel free to ask! 😊",
+    "token_used": 5628
+}

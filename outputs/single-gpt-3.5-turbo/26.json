@@ -1,0 +1,15 @@
+{
+    "ID": 26,
+    "q_ch": "Skilled Sewers使用了哪些原料？",
+    "q_en": "What raw materials are used by Skilled Sewers?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT m.id, m.name, m.unit, m.type FROM materials m JOIN product_material pm ON m.id = pm.material_id JOIN products p ON pm.product_id = p.id WHERE p.attributes = 'Fabric Pieces';",
+            "description": "To find out what raw materials are used by 'Fabric Pieces', we need to query the database for the materials associated with the product having the name 'Fabric Pieces'.",
+            "results": "no results found."
+        }
+    ],
+    "response": "Sure! Here is the answer to your question:\n\n| Material ID | Material Name | Unit | Type |\n|-------------|---------------|------|------|\n| No results found | No results found | No results found | No results found |\n\nUnfortunately, no raw materials were found to be used by 'Fabric Pieces'. If you have any other questions, feel free to ask! 😄",
+    "token_used": 5275
+}

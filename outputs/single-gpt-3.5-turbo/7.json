@@ -1,0 +1,19 @@
+{
+    "ID": 7,
+    "q_ch": "顾客PolyU 下的订单总数是多少？",
+    "q_en": "How many orders are there in total under PolyU?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT COUNT(*) AS total_orders FROM orders WHERE order_name = 'PolyU';",
+            "description": "To find the total number of orders under the order name 'PolyU', we can simply count the orders that match this criteria.",
+            "results": [
+                {
+                    "total_orders": 0
+                }
+            ]
+        }
+    ],
+    "response": "Sure! Here is the answer to your question:\n\n| Total Orders |\n|--------------|\n|       0      |\n\nLooks like there are currently no orders under the name 'PolyU'. If you have any more questions or need further assistance, feel free to ask! 😄",
+    "token_used": 5176
+}

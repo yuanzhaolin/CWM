@@ -1,0 +1,46 @@
+{
+    "ID": 18,
+    "q_ch": "使用 Cotton Fabric 的裁剪任务有哪些？",
+    "q_en": "Which cutting tasks use Cotton Fabric?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT cta.cutting_task_id FROM cutting_material_allocation cta JOIN warehouse_material wm ON cta.warehouse_material_id = wm.id JOIN materials m ON wm.material_id = m.id WHERE m.name = 'Cotton Fabric';",
+            "description": "To find the cutting tasks that use the material 'Cotton Fabric', we need to identify the cutting tasks associated with the warehouse materials that correspond to 'Cotton Fabric'. We will join the `cutting_material_allocation`, `warehouse_material`, and `materials` tables to achieve this.\",",
+            "results": [
+                {
+                    "cutting_task_id": 1
+                },
+                {
+                    "cutting_task_id": 2
+                },
+                {
+                    "cutting_task_id": 3
+                },
+                {
+                    "cutting_task_id": 4
+                },
+                {
+                    "cutting_task_id": 5
+                },
+                {
+                    "cutting_task_id": 19
+                },
+                {
+                    "cutting_task_id": 21
+                },
+                {
+                    "cutting_task_id": 28
+                },
+                {
+                    "cutting_task_id": 31
+                },
+                {
+                    "cutting_task_id": 34
+                }
+            ]
+        }
+    ],
+    "response": "Hey there! 😄 It looks like you're curious about which cutting tasks use Cotton Fabric. Here's a handy table with the cutting task IDs that involve this material:\n\n| Cutting Task ID |\n|-----------------|\n| 1               |\n| 2               |\n| 3               |\n| 4               |\n| 5               |\n| 19              |\n| 21              |\n| 28              |\n| 31              |\n| 34              |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5532
+}

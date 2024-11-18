@@ -1,0 +1,39 @@
+{
+    "ID": 4,
+    "q_ch": "James 的订单包含哪些产品？",
+    "q_en": "What products are included in James's order?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM customers WHERE customer_name = 'James';",
+            "description": "Retrieve the customer ID for the customer with the name \"James\"",
+            "results": [
+                {
+                    "id": 4
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM orders WHERE user_id = 4;",
+            "description": "Retrieve the order ID for the customer \"James\"",
+            "results": [
+                {
+                    "id": 4
+                },
+                {
+                    "id": 12
+                }
+            ]
+        },
+        {
+            "type": "Tool",
+            "results": {
+                "input": "Retrieve the product details for the order belonging to the customer \"James\"\n['tool_find_order_details, {\"order_id\": 4}, Find the product details of an order']",
+                "output": "The order belonging to the customer \"James\" contains the following products:\n1. Product ID: 22, Description: Jacket, Attributes: Brown, S size, Quantity: 185\n2. Product ID: 26, Description: Coat, Attributes: Red, M size, Quantity: 200\n3. Product ID: 14, Description: Jacket, Attributes: Yellow, L size, Quantity: 175\n4. Product ID: 6, Description: Jacket, Attributes: Brown, L size, Quantity: 200"
+            }
+        }
+    ],
+    "response": "Hey there! 🌟\n\nBased on the data I found, the order belonging to customer \"James\" includes the following products:\n\n| Product ID | Description | Attributes | Size | Quantity |\n|------------|-------------|------------|------|----------|\n| 22         | Jacket      | Brown      | S    | 185      |\n| 26         | Coat        | Red        | M    | 200      |\n| 14         | Jacket      | Yellow     | L    | 175      |\n| 6          | Jacket      | Brown      | L    | 200      |\n\nLooks like James has quite the stylish order! Let me know if you need more information. 😄",
+    "token_used": 7914
+}

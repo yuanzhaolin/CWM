@@ -1,0 +1,62 @@
+{
+    "ID": 13,
+    "q_ch": "在我们的所有仓库中，库存不为0的原材料有哪些，整理成{类型：剩余数量}的形式。",
+    "q_en": "What are the raw materials with non zero inventory in all of our warehouses, organized in the form of 'Type: Remaining Quantity'?",
+    "gt": "Sure thing! Here's a list of raw materials with non-zero inventory in all of our warehouses, organized in a neat table for you. 😊\n\n| Material Type      | Remaining Quantity |\n|--------------------|--------------------|\n| Cotton Fabric      | 3500               |\n| Wool               | 4100               |\n| Silk               | 1100               |\n| Leather            | 2200               |\n| Synthetic Fiber    | 2300               |\n| Denim Fabric       | 4500               |\n| Down               | 1230               |\n| Down Pieces        | 2420               |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT m.id, m.name, wm.left_number FROM materials m JOIN warehouse_material wm ON m.id = wm.material_id WHERE m.type = 'origin' AND wm.left_number > 0;",
+            "description": "Retrieve the material ID, name, and remaining quantity for all raw materials with non-zero inventory in all warehouses",
+            "results": [
+                {
+                    "id": 1,
+                    "name": "Cotton Fabric",
+                    "left_number": 3500
+                },
+                {
+                    "id": 3,
+                    "name": "Wool",
+                    "left_number": 4100
+                },
+                {
+                    "id": 5,
+                    "name": "Silk",
+                    "left_number": 1100
+                },
+                {
+                    "id": 7,
+                    "name": "Leather",
+                    "left_number": 2200
+                },
+                {
+                    "id": 9,
+                    "name": "Synthetic Fiber",
+                    "left_number": 2300
+                },
+                {
+                    "id": 11,
+                    "name": "Denim Fabric",
+                    "left_number": 4500
+                },
+                {
+                    "id": 13,
+                    "name": "Down",
+                    "left_number": 1230
+                },
+                {
+                    "id": 14,
+                    "name": "Down Pieces",
+                    "left_number": 2420
+                }
+            ]
+        },
+        {
+            "type": "Thought",
+            "operation": "For each raw material obtained in Step1, format the output as 'Material Name: Remaining Quantity'.",
+            "results": "Here is the formatted output for each raw material obtained in Step 1:\n\n- Cotton Fabric: Remaining Quantity 3500\n- Wool: Remaining Quantity 4100\n- Silk: Remaining Quantity 1100\n- Leather: Remaining Quantity 2200\n- Synthetic Fiber: Remaining Quantity 2300\n- Denim Fabric: Remaining Quantity 4500\n- Down: Remaining Quantity 1230\n- Down Pieces: Remaining Quantity 2420"
+        }
+    ],
+    "response": "Sure thing! Here's a lively and friendly summary of the raw materials with non-zero inventory in all of our warehouses, organized in a neat table for you. 😊\n\n| Material Name       | Remaining Quantity |\n|---------------------|--------------------|\n| Cotton Fabric       | 3500               |\n| Wool                | 4100               |\n| Silk                | 1100               |\n| Leather             | 2200               |\n| Synthetic Fiber     | 2300               |\n| Denim Fabric        | 4500               |\n| Down                | 1230               |\n| Down Pieces         | 2420               |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
+    "token_used": 7079
+}

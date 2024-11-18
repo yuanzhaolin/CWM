@@ -1,0 +1,36 @@
+{
+    "ID": 54,
+    "q_ch": "列出所有缝纫组的进度百分比。",
+    "q_en": "List the progress percentage of all sewing groups",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT wg.name AS sewing_group_name, ROUND(SUM(st.completed_number) / SUM(st.planned_number) * 100, 2) AS progress_percentage FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE wg.type = 'sew' GROUP BY wg.name;",
+            "description": "To list the progress percentage of all Sewing Groups, we need to calculate the progress percentage for each Sewing Group. We will join the sewing_tasks table with the working_group table on the working_group_id to identify the Sewing Groups and then calculate the progress percentage based on the completed number and planned number of sewing tasks.",
+            "results": [
+                {
+                    "sewing_group_name": "Advanced Sewers",
+                    "progress_percentage": "81.96"
+                },
+                {
+                    "sewing_group_name": "Elite Sewers",
+                    "progress_percentage": "44.07"
+                },
+                {
+                    "sewing_group_name": "Master Sewers",
+                    "progress_percentage": "97.44"
+                },
+                {
+                    "sewing_group_name": "Premier Sewers",
+                    "progress_percentage": "74.67"
+                },
+                {
+                    "sewing_group_name": "Skilled Sewers",
+                    "progress_percentage": "97.22"
+                }
+            ]
+        }
+    ],
+    "response": "Sure! Here is the progress percentage of all Sewing Groups:\n\n| Sewing Group Name | Progress Percentage |\n|-------------------|---------------------|\n| Advanced Sewers    | 81.96%              |\n| Elite Sewers       | 44.07%              |\n| Master Sewers      | 97.44%              |\n| Premier Sewers     | 74.67%              |\n| Skilled Sewers     | 97.22%              |\n\nFeel free to ask if you have any more questions! 😄",
+    "token_used": 5551
+}

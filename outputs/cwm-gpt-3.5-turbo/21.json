@@ -1,0 +1,25 @@
+{
+    "ID": 21,
+    "q_ch": "列出Advanced Sewers在2024年4月到5月的工作任务。",
+    "q_en": "List the work tasks of Advanced Sewers from April to May 2024.",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Advanced Sewers';",
+            "description": "Retrieve the working group ID for the working group named \"Advanced Sewers\"",
+            "results": [
+                {
+                    "id": 8
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "['SELECT * FROM sewing_tasks WHERE working_group_id = '8' AND start_time >= '2024-04-01' AND end_time <= '2024-05-31';']",
+            "description": "Retrieve the work tasks of the \"Advanced Sewers\" group within the specified time frame",
+            "results": "(1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['SELECT * FROM sewing_tasks WHERE working_group_id = '8' AND start_time >= '202' at line 1\")"
+        }
+    ],
+    "response": "Sure! Here is the answer to your question:\n\n| Task ID | Task Name       | Start Date | End Date   |\n|---------|-----------------|------------|------------|\n|         |                 |            |            |\n\nOops! It seems like there was an issue retrieving the work tasks for the \"Advanced Sewers\" group within the specified time frame. If you have any other questions or need further assistance, feel free to ask! 😄",
+    "token_used": 7532
+}

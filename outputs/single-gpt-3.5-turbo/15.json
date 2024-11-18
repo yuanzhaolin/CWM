@@ -1,0 +1,20 @@
+{
+    "ID": 15,
+    "q_ch": "剩余库存最少的原料是什么？",
+    "q_en": "What is the material with the lowest remaining inventory?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT material_id, MIN(left_number) AS lowest_remaining_inventory FROM warehouse_material GROUP BY material_id ORDER BY lowest_remaining_inventory LIMIT 1;",
+            "description": "To find the material with the lowest remaining inventory, we can sort the warehouse_material table by the 'left_number' column in ascending order and select the top 1 record.",
+            "results": [
+                {
+                    "material_id": 5,
+                    "lowest_remaining_inventory": 1100
+                }
+            ]
+        }
+    ],
+    "response": "Sure! Here is the answer to your question:\n\n| Material ID | Lowest Remaining Inventory |\n|-------------|----------------------------|\n| 5           | 1100                       |\n\nI hope this helps! If you have any more questions, feel free to ask. 😄",
+    "token_used": 4898
+}

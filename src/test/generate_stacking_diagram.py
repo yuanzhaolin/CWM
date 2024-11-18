@@ -3,7 +3,11 @@ import json
 import matplotlib.pyplot as plt
 import numpy as np
 
-folder_path = '../../outputs/cwm'
+folder_path = '../../outputs/cwm-gpt-4o'
+# Change font to Times new roman
+plt.rcParams['font.family'] = 'Times New Roman'
+
+output_path = '../../outputs/figs/stacked_bar_chart.pdf'
 
 
 def get_json(folder_path: str) -> list[list[dict]]:
@@ -50,26 +54,31 @@ def draw_stacking_diagram(steps_cnt: list[dict[str, int]]) -> None:
     :param steps_cnt: 每个步骤中SQL、Tool、Thought的数量
     :return:
     """
-    labels = [f'Step {i+1}' for i in range(len(steps_cnt))]
+    # labels = [f'Step {i+1}' for i in range(len(steps_cnt))]
+    labels = [f'{i+1}' for i in range(len(steps_cnt))]
     sql_counts = [step['SQL'] for step in steps_cnt]
     tool_counts = [step['Tool'] for step in steps_cnt]
     thought_counts = [step['Thought'] for step in steps_cnt]
 
     # 绘图
-    fig, ax = plt.subplots(figsize=(10, 6))
+    fig, ax = plt.subplots(figsize=(5, 2))
     n = len(sql_counts)
     width = 0.35
     ind = np.arange(n)
     sql_plot = ax.bar(ind, sql_counts, width, label='SQL')
     tool_plot = ax.bar(ind, tool_counts, width, bottom=sql_counts, label='Tool')
     thought_plot = ax.bar(ind, thought_counts, width, bottom=[sql_counts[i] + tool_counts[i] for i in range(n)], label='Thought')
+    # 设置y轴范围
+    ax.set_ylim(0, 60)
     ax.set_xlabel('Steps')
-    ax.set_ylabel('Counts')
-    ax.set_title('Stacked Bar Chart of SQL, Tool, and Thought Steps')
+    ax.set_ylabel('Frequency')
+    # ax.set_title('Stacked Bar Chart of SQL, Tool, and Thought Steps')
     ax.set_xticks(ind)
     ax.set_xticklabels(labels)
     ax.legend()
+    plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.show()
+
     # plt.savefig('stacked_bar_chart.png')
 
 

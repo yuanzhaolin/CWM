@@ -1,0 +1,19 @@
+{
+    "ID": 16,
+    "q_ch": "2024年5月1日后才开始的裁剪任务有哪些？",
+    "q_en": "What are the cutting tasks that will only start after May 1, 2024?",
+    "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT DISTINCT wg.name AS working_group_name FROM working_group wg JOIN cutting_tasks ct ON wg.id = ct.working_group_id WHERE wg.name = 'Expert Cutters' AND ct.start_time > '2024-05-01';",
+            "description": "To find the working groups named 'Expert Cutters' that will only start after May 1, 2024, we need to query the cutting tasks associated with these working groups and filter based on the start time.",
+            "results": [
+                {
+                    "working_group_name": "Expert Cutters"
+                }
+            ]
+        }
+    ],
+    "response": "Sure! Here is the answer to your question:\n\n| working_group_name |\n|--------------------|\n| Expert Cutters     |\n\nLooks like the only working group that will start after May 1, 2024, is 'Expert Cutters'! If you have any more questions or need further assistance, feel free to ask! 😄",
+    "token_used": 5486
+}
