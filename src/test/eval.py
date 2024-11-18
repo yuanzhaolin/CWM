@@ -7,6 +7,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/chatDB')
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from chat import chat_with_ai, generate_abstract_context, create_chat_message, create_chat_completion, generate_final_response, generate_intermediate_thought
+
 from config import cfg
 import token_counter
 import json
@@ -32,16 +33,14 @@ eval_prompt = """
 
 你需要评价被测试模型的回答以及生成答案的逻辑是否正确，如果错误请给出错误类别和错误原因。你的评价需要按照如下格式:
 评价结果;错误类别;评价理由
-其中错误类别包括以下三种：
+其中错误类别包括以下五种：
 1. Wrong COT：模型的回答不符合标准答案的逻辑推理过程，
-2. Wrong syntax：生成的SQL查询语句、工具调用语句、模型思维链推理过程中存在语法错误，被测试模型的回答中包含报错信息
+2. Wrong syntax：生成的SQL查询语句、工具调用语句过程中存在语法错误，被测试模型的回答中包含报错信息
 3. Wrong calculation：模型进行数学计算时出现错误，比如计算任务完成百分比时，使用了错误的计算公式或者输入参数。
 4. Wrong understanding: 模型对请求的理解出现了错误，导致答非所问或执行了与预期不符的操作
-4. Else: 不属于上述三种错误类型的错误
+5. Else: 不属于上述四种错误类型的错误
 
-错误类别应该严格隶属于上述四种错误类型中的一个。
-
-如果问题回答正确，错误类别留空
+错误类别应该严格隶属于上述五种错误类型中的一个。如果问题回答正确，错误类别留空
 
 下面是例子：
 True;; Both the answer and the process of generating the answer are correct.

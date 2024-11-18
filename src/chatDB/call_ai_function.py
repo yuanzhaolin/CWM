@@ -1,9 +1,10 @@
 from config import Config
 import ast
+import global_token
+from chatgpt import create_chat_completion
 
 cfg = Config()
 
-from chatgpt import create_chat_completion
 
 
 # This is a magic function that can do anything with no-code. See

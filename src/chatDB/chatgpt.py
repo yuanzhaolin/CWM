@@ -4,6 +4,8 @@ import openai
 from openai import OpenAI
 from colorama import Fore
 from config import cfg
+import global_token
+
 
 client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),
@@ -26,6 +28,7 @@ def create_chat_completion(messages, model=cfg.fast_llm_model, temperature=cfg.t
                 params["response_format"] = {"type": "json_object"}
             
             completion = client.chat.completions.create(**params)
+            global_token.increment_token_count(completion.usage.total_tokens)
             return completion.choices[0].message.content
         except openai.RateLimitError:
             if cfg.debug_mode:

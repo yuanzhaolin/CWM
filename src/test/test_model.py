@@ -16,6 +16,8 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 # 添加args
 import argparse
+import global_token
+
 parser = argparse.ArgumentParser(description='generate ground truth for questions')
 parser.add_argument('--q_id', type=int, default=-1, help='generate ground truth for a specific question')
 parser.add_argument('--model_name', type=str, default='', help='name of model')
@@ -75,10 +77,11 @@ def is_exist(q_name, outputs_dir):
 def handle_request(q):
     print(q)
     historical_message, context_abstract = [], ""
+    global_token.reset_token_count()
     sql_results, sql_commands, err, response, context_abstract = generate_chat_responses(
         user_inp=q, mysql_db=mysql_db, historical_message=historical_message, context_abstract=context_abstract
     )
-    return sql_results, response
+    return sql_results, response, global_token.get_token_count()
     # return None
 
 for f in os.listdir(requests_dir):
@@ -86,9 +89,10 @@ for f in os.listdir(requests_dir):
         print(f)
         with open(os.path.join(requests_dir, f), 'r') as file:
             q = json.loads(file.read())
-            sql_results, response = handle_request(q['q_en'])
+            sql_results, response, token_used = handle_request(q['q_en'])
             q['steps'] = sql_results
-            q['gt'] = response
+            q['response'] = response
+            q['token_used'] = token_used
             with open(os.path.join(outputs_dir, f), 'w', encoding='utf-8') as out:
                 out.write(json.dumps(q, indent=4, ensure_ascii=False, default=str))
                 # utf-8 encoding
