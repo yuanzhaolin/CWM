@@ -83,8 +83,10 @@ def handle_request(q):
     )
     return sql_results, response, global_token.get_token_count()
     # return None
+requests_list = os.listdir(requests_dir)
+requests_list.sort(key=lambda x: int(x.split('.')[0]))
 
-for f in os.listdir(requests_dir):
+for f in requests_list:
     if f.endswith('.json') and question_filter(f) and is_exist(f, outputs_dir) is False:
         print(f)
         with open(os.path.join(requests_dir, f), 'r') as file:

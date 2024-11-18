@@ -81,7 +81,7 @@ SQL `SQL command for step2`
 {"Tool `Tool name, arguments for tool, purpose of using this tool`" if cfg.tool_open else ""}
 
 {f"Step{(1 if cfg.tool_open else 0) + 3}: <Description of {'fourth' if cfg.tool_open else 'third'} step>" if cfg.thought_open else ''}
-{"Thought Purpose of this intermediate reasoning step, what intermediate results are expected. and how to get them based on the results from the previous steps." if cfg.thought_open else ""}
+{"Thought `Purpose of this intermediate reasoning step, what intermediate results are expected. and how to get them based on the results from the previous steps.`" if cfg.thought_open else ""}
 ......
 ```
 

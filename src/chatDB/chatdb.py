@@ -235,11 +235,12 @@ if __name__ == '__main__':
     # query = 'Find the latest order placed by the customer with the name "Polyu".'
 
     queries = [
+        '寻找当前任务完成进度最快的裁剪组和缝纫组'
         # "今天是2024年11月8日。请帮用户香港理工大学创建一个订单，包括50件红色M号T恤和30件蓝色XL号毛衣，并自动分配生产任务",
         # "ID为1,3,5,9,11,13的原材料，他们的名字叫什么",
         # "PolyU的订单有多少个产品"
         # "Retrieve all orders and item details for the Customer PolyU",
-        "Find the latest order from polyu that requires a blue XL sweater, increase the quantity of the blue XL sweater by 10 units, and then automatically allocate the production tasks for this order."
+        # "Find the latest order from polyu that requires a blue XL sweater, increase the quantity of the blue XL sweater by 10 units, and then automatically allocate the production tasks for this order."
         # "Find the latest order placed by the customer with the name 'Polyu'.",
         # "Find the order with the ID of 1.",
     ]
