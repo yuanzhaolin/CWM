@@ -2,9 +2,11 @@
     "ID": 49,
     "q_ch": "对于编号为34的缝纫任务，所有的工作量我都已完成，请更新已完成数量。",
     "q_en": "I have completed all the workload for the sewing task with ID 34. Please update the completed quantity.",
-    "gt": "Hey there! 😄 It looks like there was an attempt to update the completed quantity for the sewing task with ID 34, but there was a little hiccup. Let's take a look at what we have:\n\n| Task ID | Planned Quantity | Status |\n|---------|------------------|--------|\n| 34      | 330              | Update Error: Can't specify target table for update in FROM clause |\n\nIt seems like there was an error when trying to update the completed quantity. The planned quantity for the task is 330, but the update didn't go through due to a technical issue. You might want to try a different approach to update the completed quantity. If you need any help with that, feel free to ask! 😊",
+    "hint": "To avoid the simultaneous occurrence of update and select in the same SQL statement, a step-by-step query can be used to organize the select query results into a fixed update statement",
+    "gt": "Hey there! 😄 It looks like you've completed all the work for the sewing task with ID 34. Let's update the completed quantity based on the planned number. Here's a quick summary of what we found:\n\n| Task ID | Planned Number |\n|---------|----------------|\n| 34      | 330            |\n\nTo update the completed quantity, you can follow these steps:\n\n1. **Retrieve the Planned Number**: You've already done this with the query to get the planned number, which is 330.\n\n2. **Update the Completed Quantity**: Now, you can use this information to form an `UPDATE` SQL statement. Here's an example of what that might look like:\n\n   ```sql\n   UPDATE sewing_tasks SET completed_quantity = 330 WHERE id = 34;\n   ```\n\n3. **Record the Update**: It's a good idea to log this update in a JSON file for future reference. Here's a simple JSON entry you could use:\n\n   ```json\n   {\n     \"task_id\": 34,\n     \"completed_quantity\": 330,\n     \"timestamp\": \"2023-10-05T12:34:56Z\"\n   }\n   ```\n\nFeel free to reach out if you need more help! 😊",
     "steps": [
         {
+            "type": "SQL",
             "sql": "SELECT planned_number FROM sewing_tasks WHERE id = 34;",
             "description": "Retrieve the planned number for the sewing task with ID 34",
             "results": [
@@ -12,11 +14,6 @@
                     "planned_number": 330
                 }
             ]
-        },
-        {
-            "sql": "UPDATE sewing_tasks SET completed_number = (SELECT planned_number FROM sewing_tasks WHERE id = 34) WHERE id = 34;",
-            "description": "Update the completed number for the sewing task with ID 34 to match the planned number",
-            "results": "(1093, \"You can't specify target table 'sewing_tasks' for update in FROM clause\")"
         }
     ]
 }

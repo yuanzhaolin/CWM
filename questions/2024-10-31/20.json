@@ -2,8 +2,38 @@
     "ID": 20,
     "q_ch": "剩余库存为零的材料有哪些，列出材料名字？",
     "q_en": "What are the materials with zero remaining inventory and list their names?",
-    "gt": "It looks like there are no materials with zero remaining inventory at the moment. Everything seems to be well-stocked! 🎉 If you have any other questions or need further assistance, feel free to ask. 😊",
+    "gt": "Sure thing! Here are the materials with zero remaining inventory:\n\n| ID  | Material Name              |\n|-----|----------------------------|\n| 2   | Fabric Pieces              |\n| 4   | Wool Pieces                |\n| 6   | Silk Pieces                |\n| 8   | Leather Pieces             |\n| 10  | Synthetic Fiber Pieces     |\n| 12  | Denim Fabric Pieces        |\n\nLooks like these materials are all out of stock! 🏭📦 If you need more info, feel free to ask! 😊",
     "steps": [
-        "no results found."
+        {
+            "type": "SQL",
+            "sql": "SELECT m.id, m.name FROM materials m JOIN warehouse_material wm ON m.id = wm.material_id WHERE wm.left_number = 0;",
+            "description": "Retrieve the material IDs and names for materials with zero remaining inventory",
+            "results": [
+                {
+                    "id": 2,
+                    "name": "Fabric Pieces"
+                },
+                {
+                    "id": 4,
+                    "name": "Wool Pieces"
+                },
+                {
+                    "id": 6,
+                    "name": "Silk Pieces"
+                },
+                {
+                    "id": 8,
+                    "name": "Leather Pieces"
+                },
+                {
+                    "id": 10,
+                    "name": "Synthetic Fiber Pieces"
+                },
+                {
+                    "id": 12,
+                    "name": "Denim Fabric Pieces"
+                }
+            ]
+        }
     ]
 }
