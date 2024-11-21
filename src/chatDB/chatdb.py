@@ -131,10 +131,9 @@ def chain_of_memory(sql_steps, mysql_db):
                     print(f"Execute: \n{operation_str}\n")
                     sql_results, sql_res_str = mysql_db.execute_sql(operation_str)
                     print(f"Database response:\n{sql_res_str}\n")
-                    if sql_results:
-                        results_history.append(
-                            {'type': 'SQL', 'sql': operation_str, 'description': cur_step['description'], 'results': sql_results if sql_results else sql_res_str}
-                        )
+                    results_history.append(
+                        {'type': 'SQL', 'sql': operation_str, 'description': cur_step['description'], 'results': sql_results if sql_results else sql_res_str}
+                    )
                 elif cur_step['operation_type'] == 'Tool':
                     try:
                         response = agent_executor.invoke({"input": cur_step['description'] + '\n' + operation_str})

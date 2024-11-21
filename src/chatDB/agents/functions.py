@@ -17,6 +17,56 @@ from typing import Optional
 
 mysql_db = init_database()
 
+def complete_task(task_id: str, task_type: str, number):
+    if task_type == 'cutting':
+        task_select_sql = f'''
+            SELECT planned_number, completed_number FROM cutting_tasks WHERE id = {task_id};
+        '''
+        task_select_sql_results, task_select_sql_res_str = mysql_db.execute_sql(task_select_sql)
+        if task_select_sql_results[0]['planned_number'] <= task_select_sql_results[0]['completed_number'] + number:
+            task_update_sql = f'''
+                UPDATE cutting_tasks SET completed_number = completed_number + {number}, status = 2 WHERE id = {task_id};
+            '''
+        else:
+            task_update_sql = f'''
+                UPDATE cutting_tasks SET completed_number = completed_number + {number} WHERE id = {task_id};
+            '''
+            
+    elif task_type == 'sewing':
+        task_select_sql = f'''
+            SELECT planned_number, completed_number FROM sewing_tasks WHERE id = {task_id};
+        '''
+        task_select_sql_results, task_select_sql_res_str = mysql_db.execute_sql(task_select_sql)
+        if task_select_sql_results[0]['planned_number'] <= task_select_sql_results[0]['completed_number'] + number:
+            task_update_sql = f'''
+                UPDATE sewing_tasks SET completed_number = completed_number + {number}, status = 2 WHERE id = {task_id};
+            '''
+        else:
+            task_update_sql = f'''
+                UPDATE sewing_tasks SET completed_number = completed_number + {number} WHERE id = {task_id};
+            '''
+    else:
+        print(f"Invalid task type {task_type}.")
+        return
+    task_update_sql_results = mysql_db.execute_sql(task_update_sql)
+    return task_update_sql_results
+
+def store_materials(material_id: str, quantity: int, warehouse_id: int):
+    material_insert_sql = f'''
+        INSERT INTO warehouse_material (material_id, warehouse_id, total_number, left_number) VALUES ({material_id}, {warehouse_id}, {quantity}, {quantity});
+    '''
+    material_insert_sql_results = mysql_db.execute_sql(material_insert_sql)
+    # 判断是否插入成功
+    if 'successfully' not in material_insert_sql_results[1]:
+        return "Failed to store material"
+
+    # 检索最新插入的记录
+    material_select_sql = f'''
+        SELECT * FROM warehouse_material WHERE id = {mysql_db.last_insert_row_id()};
+    '''
+    material_select_sql_results, material_select_sql_res_str = mysql_db.execute_sql(material_select_sql)
+    return material_select_sql_results
+
 def get_wip_materials(product_id: str):
     material_select_sql = f'''
         SELECT material_id, number FROM product_material WHERE product_id = {str(product_id)};

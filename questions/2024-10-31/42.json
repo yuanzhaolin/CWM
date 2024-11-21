@@ -2,9 +2,10 @@
     "ID": 42,
     "q_ch": "对于PolyU在2024年1月提交的订单，将所有生产红色小码类型T-shirt的缝纫任务设置成开始状态。",
     "q_en": "For orders submitted by PolyU in January 2024, set all sewing tasks for producing Red, M size type T-shirts to start status. ",
-    "gt": "Sure thing! Let's take a look at the details for the orders and products you mentioned. Here's a summary of the information:\n\n| **Description** | **Details** |\n|-----------------|-------------|\n| **Customer Name** | PolyU |\n| **Order Date** | January 2024 |\n| **Product Attributes** | Red, M size |\n| **Product Type** | T-shirt |\n\nBased on the data, all sewing tasks for producing the specified T-shirts have been set to start status. 🎉 If you have any more questions or need further assistance, feel free to ask! 😊",
+    "gt": "Sure thing! Let's break down the task and see what we've accomplished. 😄\n\n### Task Summary\nFor orders submitted by **PolyU** in January 2024, we needed to set all sewing tasks for producing **Red, M size T-shirts** to start status.\n\n### Steps and Results\n\n| Step | Description | Result |\n|------|-------------|--------|\n| 1️⃣  | Retrieve the customer ID for **PolyU** | Customer ID: 1 |\n| 2️⃣  | Retrieve the order IDs for orders submitted by **PolyU** in January 2024 | Order ID: 1 |\n| 3️⃣  | Retrieve the product ID for **Red, M size T-shirt** | Product ID: 1 |\n| 4️⃣  | Retrieve the order_product IDs for the specific orders and product | Order_Product ID: 1 |\n| 5️⃣  | Update the status of all sewing tasks to start status | Status updated successfully! 🎉 |\n\nAll tasks have been completed successfully, and the sewing tasks are now set to start status. If you have any more questions or need further assistance, feel free to ask! 😊",
     "steps": [
         {
+            "type": "SQL",
             "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
             "description": "Retrieve the customer ID for the customer with the name \"PolyU\"",
             "results": [
@@ -14,6 +15,7 @@
             ]
         },
         {
+            "type": "SQL",
             "sql": "SELECT id FROM orders WHERE user_id = '1' AND created_at BETWEEN '2024-01-01' AND '2024-01-31';",
             "description": "Retrieve the order IDs for orders submitted by the customer \"PolyU\" in January 2024",
             "results": [
@@ -23,6 +25,7 @@
             ]
         },
         {
+            "type": "SQL",
             "sql": "SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.attributes = 'Red, M size' AND pt.description = 'T-shirt';",
             "description": "Retrieve the product ID for the product with attributes \"Red, M size\" and type \"T-shirt\"",
             "results": [
@@ -32,6 +35,7 @@
             ]
         },
         {
+            "type": "SQL",
             "sql": "SELECT id FROM order_product WHERE order_id IN (1) AND product_id = '1';",
             "description": "Retrieve the order_product IDs for the specific orders and product",
             "results": [
@@ -40,6 +44,11 @@
                 }
             ]
         },
-        "update data successfully."
+        {
+            "type": "SQL",
+            "sql": "UPDATE sewing_tasks SET status = 1 WHERE order_product_id IN (1);",
+            "description": "Update the status of all sewing tasks for the specified order_product IDs to start status",
+            "results": "update data successfully."
+        }
     ]
 }

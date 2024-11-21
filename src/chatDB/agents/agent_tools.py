@@ -90,10 +90,32 @@ def tool_find_order_details(order_id: int) -> str:
     """
     return find_details_of_order(order_id)
 
+@tool(parse_docstring=True)
+def tool_complete_task(task_id: str) -> str:
+    """ Complete the task with the given task ID.
+
+    Args:
+        task_id: The task ID.
+    """
+    return complete_task(task_id)
+
+@tool(parse_docstring=True)
+def tool_store_materials(material_id: str, quantity: int, warehouse_id: int=1) -> str:
+    """ Store the materials with the given material ID and quantity in the warehouse with the given warehouse ID.
+
+    Args:
+        material_id: The material ID.
+        quantity: The quantity of materials.
+        warehouse_id: The warehouse ID, default is 1.
+    """
+    return store_materials(material_id, quantity, warehouse_id)
+
+
 
 # tools = [allocate_task_order, void]
-tools = [tool_allocate_task_order, tool_find_cutting_task, tool_find_sewing_task, tool_get_wip_materials,
-         tool_get_original_materials, tool_get_warehouse_materials, tool_find_order_details]
+# tools = [tool_allocate_task_order, tool_find_cutting_task, tool_find_sewing_task, tool_get_wip_materials,
+#          tool_get_original_materials, tool_get_warehouse_materials, tool_find_order_details]
+tools = [tool_allocate_task_order, tool_find_order_details, tool_complete_task, tool_store_materials]
 tools_dict = {tool.name: tool for tool in tools}
 
 tools_description_str = "\n\n".join([f"{tool.name}: {tool.description}\n{str(tool.args)}" for tool in tools])
