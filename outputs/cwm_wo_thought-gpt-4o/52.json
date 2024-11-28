@@ -2,7 +2,6 @@
     "ID": 52,
     "q_ch": "列出2024年6月的订单使用的原料和数量？并整理成{原料：使用数量}的形式。",
     "q_en": "List the raw materials and quantities used for orders in June 2024? And organize it into the form of {raw materials: used quantity}.",
-    "gt": "Sure thing! Here's a lively summary of the raw materials and quantities used for orders in June 2024, organized in a neat table for you. 😄\n\n| Original Material ID | Used Quantity |\n|----------------------|---------------|\n| 1                    | 8.45          |\n| 11                   | 8.7           |\n| 3                    | 1.6           |\n| 9                    | 0.6           |\n| 13                   | 0.8           |\n| 5                    | 4.5           |\n\nFeel free to ask if you need more details or have any other questions! 😊",
     "steps": [
         {
             "type": "SQL",
@@ -22,8 +21,8 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT product_id, number FROM order_product WHERE order_id IN (10, 11, 12);",
-            "description": "Retrieve the product IDs and quantities for the orders from June 2024",
+            "sql": "SELECT order_product.product_id, order_product.number FROM order_product WHERE order_id IN (10, 11, 12);",
+            "description": "Retrieve the product IDs and quantities for each order in June 2024",
             "results": [
                 {
                     "product_id": 30,
@@ -40,51 +39,60 @@
             ]
         },
         {
-            "type": "Tool",
-            "results": {
-                "input": "Retrieve the WIP material IDs and quantities for each product\n['tool_get_wip_materials, {\\'product_id\\': 30}, Get the required work-in-progress materials for a product', 'tool_get_wip_materials, {\\'product_id\\': 20}, Get the required work-in-progress materials for a product', 'tool_get_wip_materials, {\\'product_id\\': 7}, Get the required work-in-progress materials for a product']",
-                "output": "Here are the work-in-progress (WIP) material IDs and quantities for each product:\n\n- **Product ID 30:**\n  - Material ID: 2, Quantity: 5\n  - Material ID: 10, Quantity: 1\n\n- **Product ID 20:**\n  - Material ID: 2, Quantity: 3\n  - Material ID: 6, Quantity: 4\n\n- **Product ID 7:**\n  - Material ID: 12, Quantity: 5\n  - Material ID: 6, Quantity: 2"
-            }
-        },
-        {
-            "type": "Tool",
-            "results": {
-                "input": "Retrieve the original material IDs and quantities for each WIP material\n['tool_get_original_materials, {\\'wip_id\\': 2}, Get the original materials for a work-in-progress material', 'tool_get_original_materials, {\\'wip_id\\': 10}, Get the original materials for a work-in-progress material', 'tool_get_original_materials, {\\'wip_id\\': 6}, Get the original materials for a work-in-progress material', 'tool_get_original_materials, {\\'wip_id\\': 12}, Get the original materials for a work-in-progress material']",
-                "output": "Here are the original material IDs and quantities for each WIP material:\n\n1. **WIP Material ID 2:**\n   - Original Material ID: 1, Quantity: 0.4\n   - Original Material ID: 11, Quantity: 0.65\n   - Original Material ID: 3, Quantity: 0.2\n\n2. **WIP Material ID 10:**\n   - Original Material ID: 9, Quantity: 0.6\n   - Original Material ID: 1, Quantity: 0.35\n   - Original Material ID: 13, Quantity: 0.8\n\n3. **WIP Material ID 6:**\n   - Original Material ID: 5, Quantity: 0.75\n   - Original Material ID: 1, Quantity: 0.4\n\n4. **WIP Material ID 12:**\n   - Original Material ID: 11, Quantity: 0.7\n   - Original Material ID: 1, Quantity: 0.5"
-            }
+            "type": "SQL",
+            "sql": "SELECT product_material.material_id, product_material.number FROM product_material WHERE product_id IN (30, 20, 7);",
+            "description": "Retrieve the raw material IDs and required quantities for each product",
+            "results": [
+                {
+                    "material_id": 2,
+                    "number": 3
+                },
+                {
+                    "material_id": 6,
+                    "number": 4
+                },
+                {
+                    "material_id": 2,
+                    "number": 5
+                },
+                {
+                    "material_id": 10,
+                    "number": 1
+                },
+                {
+                    "material_id": 12,
+                    "number": 5
+                },
+                {
+                    "material_id": 6,
+                    "number": 2
+                }
+            ]
         },
         {
             "type": "SQL",
-            "sql": "SELECT m.name, SUM(wm.number) AS used_quantity FROM wip_material wm JOIN materials m ON wm.origin_material_id = m.id WHERE wm.wip_id IN (2, 10, 6, 12) GROUP BY m.name;",
-            "description": "Aggregate the quantities of each original material used",
+            "sql": "SELECT materials.name, SUM(product_material.number * order_product.number) AS used_quantity FROM product_material JOIN materials ON product_material.material_id = materials.id JOIN order_product ON product_material.product_id = order_product.product_id WHERE order_product.order_id IN (10, 11, 12) GROUP BY product_material.material_id;",
+            "description": "Calculate the total used quantity for each raw material",
             "results": [
                 {
-                    "name": "Cotton Fabric",
-                    "used_quantity": 1.6500000059604645
+                    "name": "Fabric Pieces",
+                    "used_quantity": "1110"
                 },
                 {
-                    "name": "Denim Fabric",
-                    "used_quantity": 1.3499999642372131
+                    "name": "Silk Pieces",
+                    "used_quantity": "1140"
                 },
                 {
-                    "name": "Down",
-                    "used_quantity": 0.800000011920929
+                    "name": "Synthetic Fiber Pieces",
+                    "used_quantity": "150"
                 },
                 {
-                    "name": "Silk",
-                    "used_quantity": 0.75
-                },
-                {
-                    "name": "Synthetic Fiber",
-                    "used_quantity": 0.6000000238418579
-                },
-                {
-                    "name": "Wool",
-                    "used_quantity": 0.20000000298023224
+                    "name": "Denim Fabric Pieces",
+                    "used_quantity": "1650"
                 }
             ]
         }
     ],
-    "response": "Sure! Here's a summary of the raw materials and their quantities used for orders in June 2024, organized in a friendly table format. 😊\n\n| Raw Material       | Used Quantity |\n|--------------------|---------------|\n| Cotton Fabric      | 1.65          |\n| Denim Fabric       | 1.35          |\n| Down               | 0.80          |\n| Silk               | 0.75          |\n| Synthetic Fiber    | 0.60          |\n| Wool               | 0.20          |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
-    "token_used": 10057
+    "response": "Sure thing! Let's take a look at the raw materials and quantities used for orders in June 2024. Here's a neat table to show you the details:\n\n| Raw Material              | Used Quantity |\n|---------------------------|---------------|\n| Fabric Pieces             | 1110          |\n| Silk Pieces               | 1140          |\n| Synthetic Fiber Pieces    | 150           |\n| Denim Fabric Pieces       | 1650          |\n\nI hope this helps! If you have any more questions, feel free to ask. 😊",
+    "token_used": 7722
 }

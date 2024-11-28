@@ -2,11 +2,12 @@
     "ID": 24,
     "q_ch": "Elite Sewers 在2024年6月30日前分配的缝纫任务有哪些？",
     "q_en": "What sewing tasks will Elite Sewers be assigned before June 30, 2024?",
+    "hint": "应查找Elite Sewers所有任务中start_time < 2024-6-30的任务",
     "steps": [
         {
             "type": "SQL",
             "sql": "SELECT st.* FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE wg.name = 'Elite Sewers' AND st.start_time < '2024-06-30';",
-            "description": "To find the sewing tasks assigned to the working group 'Elite Sewers' before June 30, 2024, we need to join the sewing_tasks table with the working_group table to filter by the working group name and the task start time.",
+            "description": "To find the sewing tasks assigned to the working group 'Elite Sewers' before June 30, 2024, we need to join the sewing_tasks table with the working_group table to filter by the working group name and the start_time of the tasks.",
             "results": [
                 {
                     "id": 31,
@@ -21,6 +22,6 @@
             ]
         }
     ],
-    "response": "Hey there! 😄 Let's take a look at the sewing tasks assigned to the \"Elite Sewers\" before June 30, 2024. Here's what I found:\n\n| Task ID | Start Time       | End Time         | Planned Number | Completed Number | Status |\n|---------|------------------|------------------|----------------|------------------|--------|\n| 31      | May 26, 2024     | June 4, 2024     | 260            | 260              | 1      |\n\nIt looks like the \"Elite Sewers\" have a task starting on May 26, 2024, and ending on June 4, 2024. They've planned and completed 260 items, and the task status is marked as complete. Keep up the great work, Elite Sewers! 🧵✨",
-    "token_used": 5735
+    "response": "Hey there! 😄 Let's take a look at the sewing tasks assigned to the \"Elite Sewers\" before June 30, 2024. Here's what I found:\n\n| Task ID | Start Time       | End Time         | Planned Number | Completed Number | Status |\n|---------|------------------|------------------|----------------|------------------|--------|\n| 31      | May 26, 2024     | June 4, 2024     | 260            | 260              | 1      |\n\nThe \"Elite Sewers\" have a task starting on May 26, 2024, and ending on June 4, 2024. They've planned and completed 260 units, and the task status is marked as complete. Keep up the great work, Elite Sewers! 🎉✂️",
+    "token_used": 5770
 }

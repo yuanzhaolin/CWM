@@ -2,7 +2,7 @@
     "ID": 49,
     "q_ch": "对于编号为34的缝纫任务，所有的工作量我都已完成，请更新已完成数量。",
     "q_en": "I have completed all the workload for the sewing task with ID 34. Please update the completed quantity.",
-    "gt": "Sure thing! 🎉 It looks like you've completed all the work for the sewing task with ID 34. Here's the planned quantity for that task:\n\n| Task ID | Planned Quantity |\n|---------|------------------|\n| 34      | 330              |\n\nFeel free to update the completed quantity to match the planned number. Great job on finishing the task! 🧵✨",
+    "hint": "To avoid the simultaneous occurrence of update and select in the same SQL statement, a step-by-step query can be used to organize the select query results into a fixed update statement",
     "steps": [
         {
             "type": "SQL",
@@ -13,6 +13,14 @@
                     "planned_number": 330
                 }
             ]
+        },
+        {
+            "type": "SQL",
+            "sql": "UPDATE sewing_tasks SET completed_number = 330 WHERE id = 34;",
+            "description": "Update the completed number for the sewing task with ID 34 to match the planned number",
+            "results": "update data successfully."
         }
-    ]
+    ],
+    "response": "Hey there! 😄\n\nGreat news! The sewing task with ID 34 has been successfully updated. Here's a quick summary for you:\n\n| Task ID | Planned Quantity | Completed Quantity |\n|---------|------------------|--------------------|\n| 34      | 330              | 330                |\n\nYou've completed all the workload for this task, and everything is now up to date. Keep up the fantastic work! 🎉",
+    "token_used": 5584
 }

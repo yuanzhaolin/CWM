@@ -2,7 +2,6 @@
     "ID": 43,
     "q_ch": "向仓库Main Warehouse，入库Leather 1000份。",
     "q_en": "Send 1000 Leathers to the Main Warehouse for storage.",
-    "gt": "Sure thing! Here's the information you need to send 1000 units of Leather to the Main Warehouse for storage. 📦\n\n| Material Name | Material ID | Warehouse Name | Warehouse ID |\n|---------------|-------------|----------------|--------------|\n| Leather       | 7           | Main Warehouse | 1            |\n\nEverything is set for the transfer! If you have any more questions or need further assistance, feel free to ask. 😊",
     "steps": [
         {
             "type": "SQL",
@@ -23,6 +22,18 @@
                     "id": 1
                 }
             ]
+        },
+        {
+            "type": "SQL",
+            "sql": "INSERT INTO warehouse_material (warehouse_id, material_id, total_number, left_number) VALUES ('1', '7', 1000, 1000);",
+            "description": "Insert 1000 units of \"Leather\" into the \"Main Warehouse\"",
+            "results": [
+                {
+                    "auto_increment_id": 15
+                }
+            ]
         }
-    ]
+    ],
+    "response": "Sure thing! Here's a summary of the action taken based on your request:\n\n| Material Name | Warehouse Name | Quantity Sent | Status |\n|---------------|----------------|---------------|--------|\n| Leather       | Main Warehouse | 1000          | Successfully Stored 🎉 |\n\nWe've successfully sent 1000 units of Leather to the Main Warehouse for storage. If there's anything else you need, feel free to ask! 😊",
+    "token_used": 6177
 }

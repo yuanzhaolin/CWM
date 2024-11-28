@@ -6,7 +6,7 @@
         {
             "type": "SQL",
             "sql": "SELECT p.id, p.attributes, SUM(op.number) AS total_quantity FROM order_product op JOIN products p ON op.product_id = p.id GROUP BY p.id, p.attributes ORDER BY total_quantity DESC LIMIT 3;",
-            "description": "To find the top three products made in all orders in total, we need to sum the quantities of each product across all orders and then order the results in descending order to get the top three.",
+            "description": "To find the top three products made in all orders in total, we need to sum the quantities of each product across all orders and then order the results in descending order to get the top three products.",
             "results": [
                 {
                     "id": 7,
@@ -26,6 +26,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Here are the top three products made in all orders in total:\n\n| Product ID | Attributes     | Total Quantity |\n|------------|----------------|----------------|\n| 7          | Purple, M size | 540            |\n| 15         | Pink, M size   | 345            |\n| 27         | Yellow, S size | 260            |\n\nThese products are flying off the shelves! 🚀 If you have any more questions, feel free to ask! 😊",
-    "token_used": 5120
+    "response": "Hey there! 😄 Let's dive into the top three products made in all orders. Here's a neat little table for you:\n\n| Product ID | Attributes     | Total Quantity |\n|------------|----------------|----------------|\n| 7          | Purple, M size | 540            |\n| 15         | Pink, M size   | 345            |\n| 27         | Yellow, S size | 260            |\n\nThese are the most popular products based on the total quantities ordered. Hope this helps! 🎉",
+    "token_used": 5127
 }

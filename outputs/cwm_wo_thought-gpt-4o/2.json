@@ -2,7 +2,6 @@
     "ID": 2,
     "q_ch": "John 的订单全部生产完成了么？",
     "q_en": "Have all of John's orders been completed?",
-    "gt": "Hello there! 😄 Let's take a look at John's orders and see if they've all been completed.\n\nBased on the information we have, here's a summary of John's orders and their completion status:\n\n| Order ID | Incomplete Cutting Tasks | Incomplete Sewing Tasks |\n|----------|--------------------------|-------------------------|\n| 2        | 5                        | 5                       |\n| 10       | 1                        | 1                       |\n\nIt seems that not all of John's orders have been completed yet. There are still some tasks pending in both cutting and sewing for his orders. If you have any more questions or need further assistance, feel free to ask! 😊",
     "steps": [
         {
             "type": "SQL",
@@ -16,7 +15,7 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT id FROM orders WHERE user_id = '2';",
+            "sql": "SELECT id FROM orders WHERE user_id = 2;",
             "description": "Retrieve all order IDs for the customer \"John\"",
             "results": [
                 {
@@ -29,50 +28,20 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT order_product.order_id, SUM(sewing_tasks.completed_number) AS total_completed FROM sewing_tasks JOIN order_product ON sewing_tasks.order_product_id = order_product.id WHERE order_product.order_id IN (2, 10) GROUP BY order_product.order_id;",
-            "description": "Calculate the total completed quantity of all sewing tasks for each order",
-            "results": [
-                {
-                    "order_id": 2,
-                    "total_completed": "435"
-                },
-                {
-                    "order_id": 10,
-                    "total_completed": "0"
-                }
-            ]
-        },
-        {
-            "type": "SQL",
-            "sql": "SELECT order_id, SUM(number) AS total_quantity FROM order_product WHERE order_id IN (2, 10) GROUP BY order_id;",
-            "description": "Calculate the total quantity of products for each order",
-            "results": [
-                {
-                    "order_id": 2,
-                    "total_quantity": "435"
-                },
-                {
-                    "order_id": 10,
-                    "total_quantity": "150"
-                }
-            ]
-        },
-        {
-            "type": "SQL",
-            "sql": "SELECT o.id, CASE WHEN completed.total_completed >= quantity.total_quantity THEN 'Completed' ELSE 'Not Completed' END AS status FROM orders o JOIN (SELECT order_product.order_id, SUM(sewing_tasks.completed_number) AS total_completed FROM sewing_tasks JOIN order_product ON sewing_tasks.order_product_id = order_product.id WHERE order_product.order_id IN (2, 10) GROUP BY order_product.order_id) AS completed ON o.id = completed.order_id JOIN (SELECT order_id, SUM(number) AS total_quantity FROM order_product WHERE order_id IN (2, 10) GROUP BY order_id) AS quantity ON o.id = quantity.order_id;",
-            "description": "Compare the total completed quantity with the total quantity for each order to determine if all orders are completed",
+            "sql": "SELECT o.id, CASE WHEN SUM(st.completed_number) = SUM(op.number) THEN 'Completed' ELSE 'Not Completed' END AS order_status FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE o.user_id = 2 GROUP BY o.id;",
+            "description": "Check the status of all sewing tasks for each order to determine if they are completed",
             "results": [
                 {
                     "id": 2,
-                    "status": "Completed"
+                    "order_status": "Completed"
                 },
                 {
                     "id": 10,
-                    "status": "Not Completed"
+                    "order_status": "Not Completed"
                 }
             ]
         }
     ],
-    "response": "Hello there! 😄 Let's take a look at John's orders to see if they've all been completed. Here's what we found:\n\n| Order ID | Status        |\n|----------|---------------|\n| 2        | Completed     |\n| 10       | Not Completed |\n\nSo, it seems that not all of John's orders have been completed. Order ID 2 is all set, but Order ID 10 still needs some work. If you have any more questions or need further assistance, feel free to ask! 😊",
-    "token_used": 9144
+    "response": "Hey there! 😄 Let's take a look at John's orders and see if they've all been completed. Here's what I found:\n\n| Order ID | Status       |\n|----------|--------------|\n| 2        | Completed    |\n| 10       | Not Completed|\n\nSo, it seems like not all of John's orders have been completed. Order ID 2 is all set, but Order ID 10 still needs some work. If you have any more questions, feel free to ask! 😊",
+    "token_used": 7024
 }

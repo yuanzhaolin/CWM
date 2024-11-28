@@ -5,8 +5,8 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT id FROM working_group WHERE name = 'Precision Cutters';",
-            "description": "Retrieve the working group ID for the working group named 'Precision Cutters'",
+            "sql": "SELECT id FROM working_group WHERE name = 'Precision Cutters' AND type = 'cut';",
+            "description": "Retrieve the working group ID for the group named 'Precision Cutters'",
             "results": [
                 {
                     "id": 1
@@ -16,7 +16,7 @@
         {
             "type": "SQL",
             "sql": "SELECT * FROM cutting_tasks WHERE working_group_id = 1;",
-            "description": "Find the cutting tasks assigned to the working group with the retrieved ID",
+            "description": "Retrieve the cutting tasks assigned to the working group with the ID obtained in Step1",
             "results": [
                 {
                     "id": 18,
@@ -42,84 +42,18 @@
                 },
                 {
                     "id": 35,
-                    "start_time": "2024-11-18 13:39:05",
-                    "end_time": "2024-11-18 13:39:05",
-                    "working_group_id": 1,
-                    "order_product_id": 1,
-                    "produced_wip_id": 10,
-                    "planned_number": 140,
-                    "completed_number": 0,
-                    "status": 0
-                },
-                {
-                    "id": 39,
-                    "start_time": "2024-11-18 13:39:06",
-                    "end_time": "2024-11-18 13:39:06",
+                    "start_time": "2024-11-21 09:29:03",
+                    "end_time": "2024-11-21 09:29:03",
                     "working_group_id": 1,
                     "order_product_id": 5,
                     "produced_wip_id": 10,
-                    "planned_number": 520,
-                    "completed_number": 0,
-                    "status": 0
-                },
-                {
-                    "id": 45,
-                    "start_time": "2024-11-18 13:39:06",
-                    "end_time": "2024-11-18 13:39:06",
-                    "working_group_id": 1,
-                    "order_product_id": 4,
-                    "produced_wip_id": 4,
-                    "planned_number": 660,
-                    "completed_number": 0,
-                    "status": 0
-                },
-                {
-                    "id": 52,
-                    "start_time": "2024-11-18 13:39:07",
-                    "end_time": "2024-11-18 13:39:07",
-                    "working_group_id": 1,
-                    "order_product_id": 3,
-                    "produced_wip_id": 4,
-                    "planned_number": 450,
-                    "completed_number": 0,
-                    "status": 0
-                },
-                {
-                    "id": 57,
-                    "start_time": "2024-11-18 13:40:14",
-                    "end_time": "2024-11-18 13:40:14",
-                    "working_group_id": 1,
-                    "order_product_id": 11,
-                    "produced_wip_id": 12,
-                    "planned_number": 280,
-                    "completed_number": 0,
-                    "status": 0
-                },
-                {
-                    "id": 58,
-                    "start_time": "2024-11-18 13:40:14",
-                    "end_time": "2024-11-18 13:40:14",
-                    "working_group_id": 1,
-                    "order_product_id": 11,
-                    "produced_wip_id": 8,
-                    "planned_number": 420,
-                    "completed_number": 0,
-                    "status": 0
-                },
-                {
-                    "id": 63,
-                    "start_time": "2024-11-18 13:40:15",
-                    "end_time": "2024-11-18 13:40:15",
-                    "working_group_id": 1,
-                    "order_product_id": 14,
-                    "produced_wip_id": 4,
-                    "planned_number": 480,
+                    "planned_number": 330,
                     "completed_number": 0,
                     "status": 0
                 }
             ]
         }
     ],
-    "response": "Sure! Here is the answer to your question:\n\n| Task ID | Start Time           | End Time             | Order Product ID | Planned Number | Completed Number | Status |\n|---------|----------------------|----------------------|------------------|----------------|------------------|--------|\n| 18      | 2024-03-11 00:00:00  | 2024-04-07 00:00:00  | 18               | 200            | 200              | 1      |\n| 30      | 2024-04-19 00:00:00  | 2024-04-26 00:00:00  | 30               | 195            | 195              | 1      |\n| 35      | 2024-11-18 13:39:05  | 2024-11-18 13:39:05  | 1                | 140            | 0                | 0      |\n| 39      | 2024-11-18 13:39:06  | 2024-11-18 13:39:06  | 5                | 520            | 0                | 0      |\n| 45      | 2024-11-18 13:39:06  | 2024-11-18 13:39:06  | 4                | 660            | 0                | 0      |\n| 52      | 2024-11-18 13:39:07  | 2024-11-18 13:39:07  | 3                | 450            | 0                | 0      |\n| 57      | 2024-11-18 13:40:14  | 2024-11-18 13:40:14  | 11               | 280            | 0                | 0      |\n| 58      | 2024-11-18 13:40:14  | 2024-11-18 13:40:14  | 11               | 420            | 0                | 0      |\n| 63      | 2024-11-18 13:40:15  | 2024-11-18 13:40:15  | 14               | 480            | 0                | 0      |\n\nI hope this helps! If you have any more questions, feel free to ask. 😄",
-    "token_used": 9163
+    "response": "Hey there! 😄\n\nBased on the SQL queries executed, here are the cutting tasks assigned to the working group named 'Precision Cutters':\n\n| Task ID | Start Time           | End Time             | Order Product ID | Planned Number | Completed Number | Status |\n|---------|----------------------|----------------------|------------------|----------------|------------------|--------|\n| 18      | 2024-03-11 00:00:00  | 2024-04-07 00:00:00  | 18               | 200            | 200              | 1      |\n| 30      | 2024-04-19 00:00:00  | 2024-04-26 00:00:00  | 30               | 195            | 195              | 1      |\n| 35      | 2024-11-21 09:29:03  | 2024-11-21 09:29:03  | 5                | 330            | 0                | 0      |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 7349
 }

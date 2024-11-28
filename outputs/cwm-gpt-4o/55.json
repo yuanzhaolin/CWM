@@ -2,7 +2,6 @@
     "ID": 55,
     "q_ch": "所有订单中总共做的前三多的商品是什么？",
     "q_en": "What are the top three products made in all orders in total?",
-    "gt": "Hey there! 😄 Let's dive into the top three products made in all orders. Here's a neat little table for you:\n\n| Product ID | Total Made | Attributes     | Description |\n|------------|------------|----------------|-------------|\n| 7          | 540        | Purple, M size | Skirt       |\n| 15         | 345        | Pink, M size   | Skirt       |\n| 27         | 260        | Yellow, S size | T-shirt     |\n\nThese are the champions of production! 🏆 If you have any more questions, feel free to ask!",
     "steps": [
         {
             "type": "SQL",
@@ -133,27 +132,43 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT p.id, p.attributes, pt.description FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.id IN (SELECT product_id FROM (SELECT op.product_id FROM order_product op GROUP BY op.product_id ORDER BY SUM(op.number) DESC LIMIT 3) AS top_products);",
-            "description": "Retrieve the product details including attributes and type description for the top three products with the highest total quantity",
+            "sql": "SELECT product_id FROM (SELECT op.product_id, SUM(op.number) AS total_quantity FROM order_product op GROUP BY op.product_id ORDER BY total_quantity DESC LIMIT 3) AS top_products;",
+            "description": "Identify the top three products with the highest total quantity",
             "results": [
                 {
-                    "id": 27,
-                    "attributes": "Yellow, S size",
-                    "description": "T-shirt"
+                    "product_id": 7
                 },
                 {
+                    "product_id": 15
+                },
+                {
+                    "product_id": 27
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT p.id, pt.description, p.attributes FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.id IN (7, 15, 27);",
+            "description": "Retrieve the product details for the top three products",
+            "results": [
+                {
                     "id": 7,
-                    "attributes": "Purple, M size",
-                    "description": "Skirt"
+                    "description": "Skirt",
+                    "attributes": "Purple, M size"
                 },
                 {
                     "id": 15,
-                    "attributes": "Pink, M size",
-                    "description": "Skirt"
+                    "description": "Skirt",
+                    "attributes": "Pink, M size"
+                },
+                {
+                    "id": 27,
+                    "description": "T-shirt",
+                    "attributes": "Yellow, S size"
                 }
             ]
         }
     ],
-    "response": "Sure thing! Let's dive into the top three products made in all orders. Here are the details for you:\n\n| Product ID | Attributes     | Description |\n|------------|----------------|-------------|\n| 27         | Yellow, S size | T-shirt     |\n| 7          | Purple, M size | Skirt       |\n| 15         | Pink, M size   | Skirt       |\n\nThese products are the stars of the show, leading the pack in total quantity! 🌟 If you have any more questions or need further details, feel free to ask! 😄",
-    "token_used": 7481
+    "response": "Sure thing! Let's dive into the top three products made in all orders. Here they are, along with some details:\n\n| Product ID | Description | Attributes       |\n|------------|-------------|------------------|\n| 7          | Skirt       | Purple, M size   |\n| 15         | Skirt       | Pink, M size     |\n| 27         | T-shirt     | Yellow, S size   |\n\nThese products are the stars of the show, leading the pack in total quantity! 🌟 If you have any more questions or need further details, feel free to ask! 😄",
+    "token_used": 7867
 }

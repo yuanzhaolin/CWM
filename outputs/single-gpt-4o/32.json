@@ -6,7 +6,7 @@
         {
             "type": "SQL",
             "sql": "SELECT st.* FROM sewing_tasks st JOIN order_product op ON st.order_product_id = op.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'Dress';",
-            "description": "To find the sewing tasks for products of type 'Dress', we need to join the sewing_tasks table with the order_product, products, and products_types tables to filter the tasks related to the 'Dress' product type.",
+            "description": "Retrieve the sewing tasks associated with products of type 'Dress'. This involves joining the sewing_tasks table with the order_product, products, and products_types tables to filter by the product type description.",
             "results": [
                 {
                     "id": 14,
@@ -51,6 +51,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Here are the sewing tasks for products of type 'Dress' that we found:\n\n| Task ID | Start Time          | End Time            | Working Group ID | Planned Number | Completed Number | Status   |\n|---------|---------------------|---------------------|------------------|----------------|------------------|----------|\n| 14      | 2024-03-18          | 2024-04-08          | 2                | 120            | 120              | Complete 😄 |\n| 13      | 2024-03-27          | 2024-04-06          | 2                | 130            | 120              | Complete 😄 |\n| 11      | 2024-03-21          | 2024-04-14          | 9                | 140            | 100              | In Progress 🔄 |\n| 12      | 2024-03-27          | 2024-04-12          | 2                | 150            | 120              | Complete 😄 |\n\nFeel free to ask if you need more details or have any other questions! 😊",
-    "token_used": 6281
+    "response": "Sure thing! Let's take a look at the sewing tasks for dresses. Here are the details:\n\n| Task ID | Start Time          | End Time            | Working Group ID | Planned Number | Completed Number | Status     |\n|---------|---------------------|---------------------|------------------|----------------|------------------|------------|\n| 14      | 2024-03-18          | 2024-04-08          | 2                | 120            | 120              | Completed  |\n| 13      | 2024-03-27          | 2024-04-06          | 2                | 130            | 120              | Completed  |\n| 11      | 2024-03-21          | 2024-04-14          | 9                | 140            | 100              | In Progress|\n| 12      | 2024-03-27          | 2024-04-12          | 2                | 150            | 120              | Completed  |\n\nHere's a quick breakdown:\n- **Task 14** and **Task 13** are all wrapped up! 🎉\n- **Task 11** is still in progress, so there's more sewing magic happening! 🧵✨\n- **Task 12** is also completed, great job team! 👏\n\nIf you have any more questions or need further details, feel free to ask! 😊",
+    "token_used": 6381
 }

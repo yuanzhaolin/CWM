@@ -2,18 +2,8 @@
     "ID": 45,
     "q_ch": "主仓库出库Cotton Fabric100份。",
     "q_en": "Please release 100 units of cotton fabric from the Main warehouse.",
-    "gt": "Sure thing! Here's the update on your request to release 100 units of Cotton Fabric from the Main Warehouse:\n\n| Material Name   | Warehouse Name | Current Stock | Units Released | New Stock Level |\n|-----------------|----------------|---------------|----------------|-----------------|\n| Cotton Fabric   | Main Warehouse | 3400          | 100            | 3300            |\n\n🎉 Success! We've successfully released 100 units of Cotton Fabric from the Main Warehouse. The new stock level is now 3300 units. If there's anything else you need, just let me know! 😊",
+    "gt": "Sure thing! We've successfully released 100 units of Cotton Fabric from the Main Warehouse. 🎉\n\nHere's a quick summary of the current status:\n\n| Material       | Warehouse      | Units Released | Units Remaining |\n|----------------|----------------|----------------|-----------------|\n| Cotton Fabric  | Main Warehouse | 100            | 3400            |\n\nIf you need anything else, just let me know! 😊",
     "steps": [
-        {
-            "type": "SQL",
-            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
-            "description": "Retrieve the material ID for the material with the name \"Cotton Fabric\"",
-            "results": [
-                {
-                    "id": 1
-                }
-            ]
-        },
         {
             "type": "SQL",
             "sql": "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
@@ -26,20 +16,31 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT id, left_number FROM warehouse_material WHERE material_id = '1' AND warehouse_id = '1';",
-            "description": "Retrieve the warehouse material ID and the current left number for the specific material in the specified warehouse",
+            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
+            "description": "Retrieve the material ID for the material with the name \"Cotton Fabric\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id, left_number FROM warehouse_material WHERE warehouse_id = '1' AND material_id = '1';",
+            "description": "Retrieve the warehouse material record for \"Cotton Fabric\" in \"Main Warehouse\"",
             "results": [
                 {
                     "id": 1,
-                    "left_number": 3400
+                    "left_number": 3500
                 }
             ]
         },
         {
             "type": "SQL",
             "sql": "UPDATE warehouse_material SET left_number = left_number - 100 WHERE id = '1';",
-            "description": "Update the left number of the material in the warehouse by subtracting 100 units",
+            "description": "Update the left number of \"Cotton Fabric\" in \"Main Warehouse\" by releasing 100 units",
             "results": "update data successfully."
         }
-    ]
+    ],
+    "token_used": 6647
 }

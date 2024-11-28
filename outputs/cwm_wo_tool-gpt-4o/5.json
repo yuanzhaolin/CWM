@@ -2,7 +2,6 @@
     "ID": 5,
     "q_ch": "Sophia的订单创建时间是什么时候？",
     "q_en": "When was Sophia's order created?",
-    "gt": "Sure thing! Let's find out when Sophia's order was created. 🎉\n\n| Customer Name | Order Creation Date     |\n|---------------|-------------------------|\n| Sophia        | March 18, 2024          |\n\nSophia's order was created on March 18, 2024. If you have any more questions, feel free to ask! 😊",
     "steps": [
         {
             "type": "SQL",
@@ -17,7 +16,7 @@
         {
             "type": "SQL",
             "sql": "SELECT created_at FROM orders WHERE user_id = '5';",
-            "description": "Retrieve the creation time of the order placed by the customer \"Sophia\"",
+            "description": "Retrieve the creation time of the order for the customer with the retrieved customer ID",
             "results": [
                 {
                     "created_at": "2024-03-18 00:00:00"
@@ -25,6 +24,6 @@
             ]
         }
     ],
-    "response": "Hey there! 😄\n\nI've got the information you were looking for. Here's when Sophia's order was created:\n\n| Customer Name | Order Creation Date |\n|---------------|----------------------|\n| Sophia        | March 18, 2024       |\n\nIf you have any more questions or need further assistance, feel free to ask! 📅✨",
-    "token_used": 6624
+    "response": "Sure thing! Let's take a look at the information we have. Based on the data, here's what I found about Sophia's order:\n\n| Customer Name | Order Creation Date |\n|---------------|----------------------|\n| Sophia        | March 18, 2024       |\n\nSophia's order was created on March 18, 2024. 🎉 If you have any more questions, feel free to ask! 😊",
+    "token_used": 6195
 }

@@ -5,16 +5,11 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT o.id AS order_id, ROUND(SUM(ct.completed_number) / SUM(ct.planned_number) * 100, 2) AS progress_percentage FROM orders o JOIN order_product op ON o.id = op.order_id JOIN cutting_tasks ct ON op.id = ct.order_product_id WHERE ct.status != 2 GROUP BY o.id ORDER BY progress_percentage DESC LIMIT 1;",
+            "sql": "SELECT op.order_id, ROUND(SUM(op.completed_number) / SUM(op.planned_number) * 100, 2) AS progress_percentage FROM cutting_tasks ct JOIN order_product op ON ct.order_product_id = op.id WHERE ct.status != 2 GROUP BY op.order_id ORDER BY progress_percentage DESC LIMIT 1;",
             "description": "To find the order with the fastest completion progress among the unfinished orders, we need to calculate the progress percentage for each order and then identify the order with the highest progress percentage among the orders that are not completed yet.",
-            "results": [
-                {
-                    "order_id": 8,
-                    "progress_percentage": "100.00"
-                }
-            ]
+            "results": "(1054, \"Unknown column 'op.completed_number' in 'field list'\")"
         }
     ],
-    "response": "Sure! Here is the answer to your question:\n\n| Order ID | Progress Percentage |\n|----------|---------------------|\n| 8        | 100.00%             |\n\nLooks like Order 8 has the fastest completion progress among the unfinished orders! 🎉\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
-    "token_used": 5460
+    "response": "I'm sorry, but I encountered an error while trying to retrieve the information you requested. 😔\n\nIf you have any other questions or need assistance with something else, feel free to ask! 😄",
+    "token_used": 5484
 }

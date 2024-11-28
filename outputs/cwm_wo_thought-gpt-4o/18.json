@@ -2,7 +2,6 @@
     "ID": 18,
     "q_ch": "使用 Cotton Fabric 的裁剪任务有哪些？",
     "q_en": "Which cutting tasks use Cotton Fabric?",
-    "gt": "Sure thing! Here are the cutting tasks that use \"Cotton Fabric\" as a material. I've organized the details into a table for you. 😊\n\n| Cutting Task ID | Start Time      | End Time        | Working Group ID | Order Product ID | Produced WIP ID | Planned Number | Completed Number | Status     |\n|-----------------|-----------------|-----------------|------------------|------------------|-----------------|----------------|------------------|------------|\n| 1               | January 10, 2024| January 18, 2024| 2                | 1                | 2               | 100            | 100              | Completed  |\n| 2               | January 10, 2024| February 2, 2024| 3                | 2                | 10              | 240            | 240              | In Progress|\n| 3               | January 10, 2024| January 19, 2024| 3                | 3                | 2               | 150            | 150              | Completed  |\n| 4               | January 10, 2024| January 17, 2024| 2                | 4                | 4               | 220            | 220              | In Progress|\n| 5               | January 10, 2024| February 2, 2024| 2                | 5                | 8               | 260            | 260              | In Progress|\n| 19              | March 18, 2024  | April 12, 2024  | 4                | 19               | 6               | 95             | 95               | In Progress|\n| 21              | March 18, 2024  | April 4, 2024   | 4                | 21               | 10              | 85             | 85               | In Progress|\n| 28              | April 19, 2024  | May 12, 2024    | 2                | 28               | 4               | 210            | 210              | In Progress|\n\nThese tasks are all about using \"Cotton Fabric\" to create amazing products! 🧵✨ If you have any more questions, feel free to ask!",
     "steps": [
         {
             "type": "SQL",
@@ -16,18 +15,8 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT id FROM warehouse_material WHERE material_id = '1';",
-            "description": "Retrieve the warehouse material ID for the material \"Cotton Fabric\"",
-            "results": [
-                {
-                    "id": 1
-                }
-            ]
-        },
-        {
-            "type": "SQL",
-            "sql": "SELECT cutting_task_id FROM cutting_material_allocation WHERE warehouse_material_id = '1' AND is_allocated = 1;",
-            "description": "Retrieve the cutting task IDs that use the warehouse material \"Cotton Fabric\"",
+            "sql": "SELECT cutting_task_id FROM cutting_material_allocation WHERE warehouse_material_id IN (SELECT id FROM warehouse_material WHERE material_id = '1');",
+            "description": "Retrieve the cutting task IDs that use the material \"Cotton Fabric\"",
             "results": [
                 {
                     "cutting_task_id": 1
@@ -52,17 +41,93 @@
                 },
                 {
                     "cutting_task_id": 28
+                },
+                {
+                    "cutting_task_id": 31
+                },
+                {
+                    "cutting_task_id": 34
                 }
             ]
         },
         {
-            "type": "Tool",
-            "results": {
-                "input": "Retrieve the details of the cutting tasks using the IDs obtained\n[\"tool_find_cutting_task, {'cutting_task_id': 1}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 2}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 3}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 4}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 5}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 19}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 21}, Find the cutting task details\", \"tool_find_cutting_task, {'cutting_task_id': 28}, Find the cutting task details\"]",
-                "output": "Here are the details of the cutting tasks:\n\n1. **Cutting Task ID: 1**\n   - Start Time: January 10, 2024\n   - End Time: January 18, 2024\n   - Working Group ID: 2\n   - Order Product ID: 1\n   - Produced WIP ID: 2\n   - Planned Number: 100\n   - Completed Number: 100\n   - Status: 2\n\n2. **Cutting Task ID: 2**\n   - Start Time: January 10, 2024\n   - End Time: February 2, 2024\n   - Working Group ID: 3\n   - Order Product ID: 2\n   - Produced WIP ID: 10\n   - Planned Number: 240\n   - Completed Number: 240\n   - Status: 1\n\n3. **Cutting Task ID: 3**\n   - Start Time: January 10, 2024\n   - End Time: January 19, 2024\n   - Working Group ID: 3\n   - Order Product ID: 3\n   - Produced WIP ID: 2\n   - Planned Number: 150\n   - Completed Number: 150\n   - Status: 2\n\n4. **Cutting Task ID: 4**\n   - Start Time: January 10, 2024\n   - End Time: January 17, 2024\n   - Working Group ID: 2\n   - Order Product ID: 4\n   - Produced WIP ID: 4\n   - Planned Number: 220\n   - Completed Number: 220\n   - Status: 1\n\n5. **Cutting Task ID: 5**\n   - Start Time: January 10, 2024\n   - End Time: February 2, 2024\n   - Working Group ID: 2\n   - Order Product ID: 5\n   - Produced WIP ID: 8\n   - Planned Number: 260\n   - Completed Number: 260\n   - Status: 1\n\n6. **Cutting Task ID: 19**\n   - Start Time: March 18, 2024\n   - End Time: April 12, 2024\n   - Working Group ID: 4\n   - Order Product ID: 19\n   - Produced WIP ID: 6\n   - Planned Number: 95\n   - Completed Number: 95\n   - Status: 1\n\n7. **Cutting Task ID: 21**\n   - Start Time: March 18, 2024\n   - End Time: April 4, 2024\n   - Working Group ID: 4\n   - Order Product ID: 21\n   - Produced WIP ID: 10\n   - Planned Number: 85\n   - Completed Number: 85\n   - Status: 1\n\n8. **Cutting Task ID: 28**\n   - Start Time: April 19, 2024\n   - End Time: May 12, 2024\n   - Working Group ID: 2\n   - Order Product ID: 28\n   - Produced WIP ID: 4\n   - Planned Number: 210\n   - Completed Number: 210\n   - Status: 1\n\nThe status values indicate the progress of the task, where 1 might represent \"in progress\" and 2 might represent \"completed.\""
-            }
+            "type": "SQL",
+            "sql": "SELECT ct.id, ct.start_time, ct.end_time, wg.name AS working_group_name, op.id AS order_product_id FROM cutting_tasks ct JOIN working_group wg ON ct.working_group_id = wg.id JOIN order_product op ON ct.order_product_id = op.id WHERE ct.id IN (1, 2, 3, 4, 5, 19, 21, 28, 31, 34);",
+            "description": "Retrieve the details of cutting tasks that use the material \"Cotton Fabric\"",
+            "results": [
+                {
+                    "id": 1,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-01-18 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 1
+                },
+                {
+                    "id": 4,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-01-17 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 4
+                },
+                {
+                    "id": 5,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-02-02 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 5
+                },
+                {
+                    "id": 28,
+                    "start_time": "2024-04-19 00:00:00",
+                    "end_time": "2024-05-12 00:00:00",
+                    "working_group_name": "Master Sewers",
+                    "order_product_id": 28
+                },
+                {
+                    "id": 2,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-02-02 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "order_product_id": 2
+                },
+                {
+                    "id": 3,
+                    "start_time": "2024-01-10 00:00:00",
+                    "end_time": "2024-01-19 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "order_product_id": 3
+                },
+                {
+                    "id": 31,
+                    "start_time": "2024-05-10 00:00:00",
+                    "end_time": "2024-05-26 00:00:00",
+                    "working_group_name": "Master Cutters",
+                    "order_product_id": 31
+                },
+                {
+                    "id": 19,
+                    "start_time": "2024-03-18 00:00:00",
+                    "end_time": "2024-04-12 00:00:00",
+                    "working_group_name": "Expert Cutters",
+                    "order_product_id": 19
+                },
+                {
+                    "id": 21,
+                    "start_time": "2024-03-18 00:00:00",
+                    "end_time": "2024-04-04 00:00:00",
+                    "working_group_name": "Expert Cutters",
+                    "order_product_id": 21
+                },
+                {
+                    "id": 34,
+                    "start_time": "2024-06-30 00:00:00",
+                    "end_time": "2024-07-10 00:00:00",
+                    "working_group_name": "Expert Cutters",
+                    "order_product_id": 34
+                }
+            ]
         }
     ],
-    "response": "Sure thing! Here are the cutting tasks that use **Cotton Fabric** as a material. I've organized the details into a neat table for you. 😊\n\n| Cutting Task ID | Start Time     | End Time       | Working Group ID | Order Product ID | Produced WIP ID | Planned Number | Completed Number | Status     |\n|-----------------|----------------|----------------|------------------|------------------|-----------------|----------------|------------------|------------|\n| 1               | January 10, 2024 | January 18, 2024 | 2                | 1                | 2               | 100            | 100              | Completed  |\n| 2               | January 10, 2024 | February 2, 2024 | 3                | 2                | 10              | 240            | 240              | In Progress|\n| 3               | January 10, 2024 | January 19, 2024 | 3                | 3                | 2               | 150            | 150              | Completed  |\n| 4               | January 10, 2024 | January 17, 2024 | 2                | 4                | 4               | 220            | 220              | In Progress|\n| 5               | January 10, 2024 | February 2, 2024 | 2                | 5                | 8               | 260            | 260              | In Progress|\n| 19              | March 18, 2024   | April 12, 2024   | 4                | 19               | 6               | 95             | 95               | In Progress|\n| 21              | March 18, 2024   | April 4, 2024    | 4                | 21               | 10              | 85             | 85               | In Progress|\n| 28              | April 19, 2024   | May 12, 2024     | 2                | 28               | 4               | 210            | 210              | In Progress|\n\nThe status values indicate the progress of the task, where \"In Progress\" might represent ongoing tasks and \"Completed\" represents finished tasks. If you have any more questions, feel free to ask! 😄",
-    "token_used": 10139
+    "response": "Sure thing! Let's dive into the details of the cutting tasks that use **Cotton Fabric**. Here's a neat table summarizing the tasks for you:\n\n| Cutting Task ID | Start Time          | End Time            | Working Group Name | Order Product ID |\n|-----------------|---------------------|---------------------|--------------------|------------------|\n| 1               | 2024-01-10 00:00    | 2024-01-18 00:00    | Master Sewers      | 1                |\n| 2               | 2024-01-10 00:00    | 2024-02-02 00:00    | Master Cutters     | 2                |\n| 3               | 2024-01-10 00:00    | 2024-01-19 00:00    | Master Cutters     | 3                |\n| 4               | 2024-01-10 00:00    | 2024-01-17 00:00    | Master Sewers      | 4                |\n| 5               | 2024-01-10 00:00    | 2024-02-02 00:00    | Master Sewers      | 5                |\n| 19              | 2024-03-18 00:00    | 2024-04-12 00:00    | Expert Cutters     | 19               |\n| 21              | 2024-03-18 00:00    | 2024-04-04 00:00    | Expert Cutters     | 21               |\n| 28              | 2024-04-19 00:00    | 2024-05-12 00:00    | Master Sewers      | 28               |\n| 31              | 2024-05-10 00:00    | 2024-05-26 00:00    | Master Cutters     | 31               |\n| 34              | 2024-06-30 00:00    | 2024-07-10 00:00    | Expert Cutters     | 34               |\n\nThese tasks are handled by various skilled groups like the **Master Sewers**, **Master Cutters**, and **Expert Cutters**. If you have any more questions or need further details, feel free to ask! 😄",
+    "token_used": 9089
 }

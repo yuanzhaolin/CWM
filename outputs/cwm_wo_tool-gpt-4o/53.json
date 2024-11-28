@@ -2,11 +2,10 @@
     "ID": 53,
     "q_ch": "列出已开始但未完成的裁剪任务，并计算还有总共多少未完成。",
     "q_en": "List the cutting tasks that have started but are not yet completed, and calculate the total number of unfinished tasks.",
-    "gt": "Sure thing! Let's dive into the cutting tasks that have started but aren't finished yet. Here's a neat table to show you the details:\n\n| Task ID | Start Time          | End Time            | Working Group Name | Order Product ID | Planned Number | Completed Number |\n|---------|---------------------|---------------------|--------------------|------------------|----------------|------------------|\n| 32      | 2024-06-01 00:00:00 | 2024-06-17 00:00:00 | Master Sewers      | 32               | 150            | 120              |\n\nAnd guess what? The total number of unfinished tasks is **27**! 🎉\n\nIf you have any more questions or need further details, feel free to ask! 😊",
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT id, start_time, end_time, working_group_id, order_product_id, planned_number, completed_number FROM cutting_tasks WHERE status = 1;",
+            "sql": "SELECT id, start_time, end_time, working_group_id, order_product_id, produced_wip_id, planned_number, completed_number, status FROM cutting_tasks WHERE status = 1;",
             "description": "Retrieve the cutting tasks that have started but are not yet completed",
             "results": [
                 {
@@ -15,8 +14,10 @@
                     "end_time": "2024-02-02 00:00:00",
                     "working_group_id": 3,
                     "order_product_id": 2,
+                    "produced_wip_id": 10,
                     "planned_number": 240,
-                    "completed_number": 240
+                    "completed_number": 240,
+                    "status": 1
                 },
                 {
                     "id": 4,
@@ -24,8 +25,10 @@
                     "end_time": "2024-01-17 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 4,
+                    "produced_wip_id": 4,
                     "planned_number": 220,
-                    "completed_number": 220
+                    "completed_number": 220,
+                    "status": 1
                 },
                 {
                     "id": 5,
@@ -33,8 +36,10 @@
                     "end_time": "2024-02-02 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 5,
+                    "produced_wip_id": 8,
                     "planned_number": 260,
-                    "completed_number": 260
+                    "completed_number": 260,
+                    "status": 1
                 },
                 {
                     "id": 6,
@@ -42,8 +47,10 @@
                     "end_time": "2024-03-20 00:00:00",
                     "working_group_id": 3,
                     "order_product_id": 6,
+                    "produced_wip_id": 6,
                     "planned_number": 95,
-                    "completed_number": 95
+                    "completed_number": 95,
+                    "status": 1
                 },
                 {
                     "id": 7,
@@ -51,8 +58,10 @@
                     "end_time": "2024-03-06 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 7,
+                    "produced_wip_id": 12,
                     "planned_number": 110,
-                    "completed_number": 110
+                    "completed_number": 110,
+                    "status": 1
                 },
                 {
                     "id": 8,
@@ -60,8 +69,10 @@
                     "end_time": "2024-03-08 00:00:00",
                     "working_group_id": 4,
                     "order_product_id": 8,
+                    "produced_wip_id": 6,
                     "planned_number": 50,
-                    "completed_number": 50
+                    "completed_number": 50,
+                    "status": 1
                 },
                 {
                     "id": 9,
@@ -69,8 +80,10 @@
                     "end_time": "2024-03-06 00:00:00",
                     "working_group_id": 3,
                     "order_product_id": 9,
+                    "produced_wip_id": 12,
                     "planned_number": 80,
-                    "completed_number": 80
+                    "completed_number": 80,
+                    "status": 1
                 },
                 {
                     "id": 10,
@@ -78,8 +91,10 @@
                     "end_time": "2024-03-29 00:00:00",
                     "working_group_id": 3,
                     "order_product_id": 10,
+                    "produced_wip_id": 4,
                     "planned_number": 100,
-                    "completed_number": 100
+                    "completed_number": 100,
+                    "status": 1
                 },
                 {
                     "id": 11,
@@ -87,8 +102,10 @@
                     "end_time": "2024-03-21 00:00:00",
                     "working_group_id": 4,
                     "order_product_id": 11,
+                    "produced_wip_id": 8,
                     "planned_number": 140,
-                    "completed_number": 140
+                    "completed_number": 140,
+                    "status": 1
                 },
                 {
                     "id": 12,
@@ -96,8 +113,10 @@
                     "end_time": "2024-03-27 00:00:00",
                     "working_group_id": 5,
                     "order_product_id": 12,
+                    "produced_wip_id": 10,
                     "planned_number": 150,
-                    "completed_number": 150
+                    "completed_number": 150,
+                    "status": 1
                 },
                 {
                     "id": 13,
@@ -105,8 +124,10 @@
                     "end_time": "2024-03-27 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 13,
+                    "produced_wip_id": 12,
                     "planned_number": 130,
-                    "completed_number": 130
+                    "completed_number": 130,
+                    "status": 1
                 },
                 {
                     "id": 14,
@@ -114,8 +135,10 @@
                     "end_time": "2024-03-18 00:00:00",
                     "working_group_id": 5,
                     "order_product_id": 14,
+                    "produced_wip_id": 6,
                     "planned_number": 120,
-                    "completed_number": 120
+                    "completed_number": 120,
+                    "status": 1
                 },
                 {
                     "id": 15,
@@ -123,8 +146,10 @@
                     "end_time": "2024-03-26 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 15,
+                    "produced_wip_id": 6,
                     "planned_number": 185,
-                    "completed_number": 185
+                    "completed_number": 185,
+                    "status": 1
                 },
                 {
                     "id": 16,
@@ -132,8 +157,10 @@
                     "end_time": "2024-04-10 00:00:00",
                     "working_group_id": 4,
                     "order_product_id": 16,
+                    "produced_wip_id": 8,
                     "planned_number": 200,
-                    "completed_number": 200
+                    "completed_number": 200,
+                    "status": 1
                 },
                 {
                     "id": 17,
@@ -141,8 +168,10 @@
                     "end_time": "2024-03-25 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 17,
+                    "produced_wip_id": 4,
                     "planned_number": 175,
-                    "completed_number": 175
+                    "completed_number": 175,
+                    "status": 1
                 },
                 {
                     "id": 18,
@@ -150,8 +179,10 @@
                     "end_time": "2024-04-07 00:00:00",
                     "working_group_id": 1,
                     "order_product_id": 18,
+                    "produced_wip_id": 10,
                     "planned_number": 200,
-                    "completed_number": 200
+                    "completed_number": 200,
+                    "status": 1
                 },
                 {
                     "id": 19,
@@ -159,8 +190,10 @@
                     "end_time": "2024-04-12 00:00:00",
                     "working_group_id": 4,
                     "order_product_id": 19,
+                    "produced_wip_id": 6,
                     "planned_number": 95,
-                    "completed_number": 95
+                    "completed_number": 95,
+                    "status": 1
                 },
                 {
                     "id": 20,
@@ -168,8 +201,10 @@
                     "end_time": "2024-04-15 00:00:00",
                     "working_group_id": 4,
                     "order_product_id": 20,
+                    "produced_wip_id": 12,
                     "planned_number": 90,
-                    "completed_number": 90
+                    "completed_number": 90,
+                    "status": 1
                 },
                 {
                     "id": 21,
@@ -177,8 +212,10 @@
                     "end_time": "2024-04-04 00:00:00",
                     "working_group_id": 4,
                     "order_product_id": 21,
+                    "produced_wip_id": 10,
                     "planned_number": 85,
-                    "completed_number": 85
+                    "completed_number": 85,
+                    "status": 1
                 },
                 {
                     "id": 22,
@@ -186,8 +223,10 @@
                     "end_time": "2024-04-09 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 22,
+                    "produced_wip_id": 10,
                     "planned_number": 115,
-                    "completed_number": 115
+                    "completed_number": 115,
+                    "status": 1
                 },
                 {
                     "id": 23,
@@ -195,8 +234,10 @@
                     "end_time": "2024-04-19 00:00:00",
                     "working_group_id": 3,
                     "order_product_id": 23,
+                    "produced_wip_id": 4,
                     "planned_number": 110,
-                    "completed_number": 110
+                    "completed_number": 110,
+                    "status": 1
                 },
                 {
                     "id": 24,
@@ -204,8 +245,10 @@
                     "end_time": "2024-04-23 00:00:00",
                     "working_group_id": 3,
                     "order_product_id": 24,
+                    "produced_wip_id": 8,
                     "planned_number": 105,
-                    "completed_number": 105
+                    "completed_number": 105,
+                    "status": 1
                 },
                 {
                     "id": 25,
@@ -213,8 +256,10 @@
                     "end_time": "2024-05-14 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 25,
+                    "produced_wip_id": 6,
                     "planned_number": 75,
-                    "completed_number": 75
+                    "completed_number": 75,
+                    "status": 1
                 },
                 {
                     "id": 28,
@@ -222,8 +267,10 @@
                     "end_time": "2024-05-12 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 28,
+                    "produced_wip_id": 4,
                     "planned_number": 210,
-                    "completed_number": 210
+                    "completed_number": 210,
+                    "status": 1
                 },
                 {
                     "id": 30,
@@ -231,17 +278,21 @@
                     "end_time": "2024-04-26 00:00:00",
                     "working_group_id": 1,
                     "order_product_id": 30,
+                    "produced_wip_id": 10,
                     "planned_number": 195,
-                    "completed_number": 195
+                    "completed_number": 195,
+                    "status": 1
                 },
                 {
                     "id": 31,
                     "start_time": "2024-05-10 00:00:00",
                     "end_time": "2024-05-26 00:00:00",
-                    "working_group_id": 9,
+                    "working_group_id": 3,
                     "order_product_id": 31,
+                    "produced_wip_id": 8,
                     "planned_number": 260,
-                    "completed_number": 260
+                    "completed_number": 260,
+                    "status": 1
                 },
                 {
                     "id": 32,
@@ -249,8 +300,10 @@
                     "end_time": "2024-06-17 00:00:00",
                     "working_group_id": 2,
                     "order_product_id": 32,
+                    "produced_wip_id": 8,
                     "planned_number": 150,
-                    "completed_number": 120
+                    "completed_number": 120,
+                    "status": 1
                 }
             ]
         },
@@ -265,6 +318,6 @@
             ]
         }
     ],
-    "response": "Sure! Let's take a look at the cutting tasks that have started but are not yet completed. Here's a summary of the tasks:\n\n| Task ID | Start Time          | End Time            | Working Group ID | Order Product ID | Planned Number | Completed Number |\n|---------|---------------------|---------------------|------------------|------------------|----------------|------------------|\n| 2       | 2024-01-10 00:00:00 | 2024-02-02 00:00:00 | 3                | 2                | 240            | 240              |\n| 4       | 2024-01-10 00:00:00 | 2024-01-17 00:00:00 | 2                | 4                | 220            | 220              |\n| 5       | 2024-01-10 00:00:00 | 2024-02-02 00:00:00 | 2                | 5                | 260            | 260              |\n| 6       | 2024-02-28 00:00:00 | 2024-03-20 00:00:00 | 3                | 6                | 95             | 95               |\n| 7       | 2024-02-28 00:00:00 | 2024-03-06 00:00:00 | 2                | 7                | 110            | 110              |\n| 8       | 2024-02-28 00:00:00 | 2024-03-08 00:00:00 | 4                | 8                | 50             | 50               |\n| 9       | 2024-03-01 00:00:00 | 2024-03-06 00:00:00 | 3                | 9                | 80             | 80               |\n| 10      | 2024-03-02 00:00:00 | 2024-03-29 00:00:00 | 3                | 10               | 100            | 100              |\n| 11      | 2024-03-02 00:00:00 | 2024-03-21 00:00:00 | 4                | 11               | 140            | 140              |\n| 12      | 2024-03-02 00:00:00 | 2024-03-27 00:00:00 | 5                | 12               | 150            | 150              |\n| 13      | 2024-03-02 00:00:00 | 2024-03-27 00:00:00 | 2                | 13               | 130            | 130              |\n| 14      | 2024-03-02 00:00:00 | 2024-03-18 00:00:00 | 5                | 14               | 120            | 120              |\n| 15      | 2024-03-11 00:00:00 | 2024-03-26 00:00:00 | 2                | 15               | 185            | 185              |\n| 16      | 2024-03-11 00:00:00 | 2024-04-10 00:00:00 | 4                | 16               | 200            | 200              |\n| 17      | 2024-03-11 00:00:00 | 2024-03-25 00:00:00 | 2                | 17               | 175            | 175              |\n| 18      | 2024-03-11 00:00:00 | 2024-04-07 00:00:00 | 1                | 18               | 200            | 200              |\n| 19      | 2024-03-18 00:00:00 | 2024-04-12 00:00:00 | 4                | 19               | 95             | 95               |\n| 20      | 2024-03-18 00:00:00 | 2024-04-15 00:00:00 | 4                | 20               | 90             | 90               |\n| 21      | 2024-03-18 00:00:00 | 2024-04-04 00:00:00 | 4                | 21               | 85             | 85               |\n| 22      | 2024-03-25 00:00:00 | 2024-04-09 00:00:00 | 2                | 22               | 115            | 115              |\n| 23      | 2024-03-25 00:00:00 | 2024-04-19 00:00:00 | 3                | 23               | 110            | 110              |\n| 24      | 2024-03-25 00:00:00 | 2024-04-23 00:00:00 | 3                | 24               | 105            | 105              |\n| 25      | 2024-04-14 00:00:00 | 2024-05-14 00:00:00 | 2                | 25               | 75             | 75               |\n| 28      | 2024-04-19 00:00:00 | 2024-05-12 00:00:00 | 2                | 28               | 210            | 210              |\n| 30      | 2024-04-19 00:00:00 | 2024-04-26 00:00:00 | 1                | 30               | 195            | 195              |\n| 31      | 2024-05-10 00:00:00 | 2024-05-26 00:00:00 | 9                | 31               | 260            | 260              |\n| 32      | 2024-06-01 00:00:00 | 2024-06-17 00:00:00 | 2                | 32               | 150            | 120              |\n\nThe total number of unfinished tasks is **27**. Keep up the great work! 🚀",
-    "token_used": 11471
+    "response": "Sure! Let's take a look at the cutting tasks that have started but are not yet completed. Here's a summary of the tasks:\n\n| Task ID | Start Time          | End Time            | Working Group ID | Order Product ID | Produced WIP ID | Planned Number | Completed Number | Status |\n|---------|---------------------|---------------------|------------------|------------------|-----------------|----------------|------------------|--------|\n| 32      | 2024-06-01 00:00:00 | 2024-06-17 00:00:00 | 2                | 32               | 8               | 150            | 120              | 1      |\n\nAnd the total number of unfinished tasks is **27**. 🎉\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 8600
 }

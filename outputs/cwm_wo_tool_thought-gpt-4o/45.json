@@ -2,7 +2,6 @@
     "ID": 45,
     "q_ch": "主仓库出库Cotton Fabric100份。",
     "q_en": "Please release 100 units of cotton fabric from the Main warehouse.",
-    "gt": "Sure thing! Let's take a look at the details for releasing 100 units of Cotton Fabric from the Main Warehouse. Here's what we found:\n\n| **Warehouse**     | **Material**     | **Current Stock** | **Units to Release** | **Remaining Stock** |\n|-------------------|------------------|-------------------|----------------------|---------------------|\n| Main Warehouse    | Cotton Fabric    | 3500              | 100                  | 3400                |\n\n🎉 Great news! We have enough Cotton Fabric in the Main Warehouse to fulfill your request. After releasing 100 units, you'll still have 3400 units left. If there's anything else you need, just let me know! 😊",
     "steps": [
         {
             "type": "SQL",
@@ -27,13 +26,21 @@
         {
             "type": "SQL",
             "sql": "SELECT id, left_number FROM warehouse_material WHERE warehouse_id = '1' AND material_id = '1';",
-            "description": "Retrieve the warehouse_material ID and the current left number for the specific warehouse and material",
+            "description": "Retrieve the warehouse material record for \"Cotton Fabric\" in \"Main Warehouse\"",
             "results": [
                 {
                     "id": 1,
                     "left_number": 3500
                 }
             ]
+        },
+        {
+            "type": "SQL",
+            "sql": "UPDATE warehouse_material SET left_number = left_number - 100 WHERE id = '1';",
+            "description": "Update the left number of \"Cotton Fabric\" in \"Main Warehouse\" by releasing 100 units",
+            "results": "update data successfully."
         }
-    ]
+    ],
+    "response": "Sure thing! We've successfully released 100 units of Cotton Fabric from the Main Warehouse. 🎉\n\nHere's a quick summary of the current status:\n\n| Material       | Warehouse      | Units Released | Units Remaining |\n|----------------|----------------|----------------|-----------------|\n| Cotton Fabric  | Main Warehouse | 100            | 3400            |\n\nIf you need anything else, just let me know! 😊",
+    "token_used": 6647
 }

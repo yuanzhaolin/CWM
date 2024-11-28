@@ -5,8 +5,8 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT COUNT(*) = SUM(st.status = 2) AS all_completed FROM sewing_tasks st JOIN order_product op ON st.order_product_id = op.id JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'PolyU' AND MONTH(o.created_at) = 1 AND YEAR(o.created_at) = 2024;",
-            "description": "To determine if all the sewing tasks for the orders placed by PolyU in January have been completed, we need to find the orders placed by PolyU in January, then check the status of the sewing tasks associated with those orders. If all tasks have a status of 2 (completed), then all tasks are completed.",
+            "sql": "SELECT COUNT(*) = 0 AS all_completed FROM sewing_tasks st JOIN order_product op ON st.order_product_id = op.id JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'PolyU' AND MONTH(o.created_at) = 1 AND YEAR(o.created_at) = 2024 AND st.status != 2;",
+            "description": "To determine if all the sewing tasks for the orders placed by the customer 'PolyU' in January have been completed, we need to find the orders placed by 'PolyU' in January, then check the status of the sewing tasks associated with those orders. If all tasks have a status of 2 (completed), then all tasks are completed.",
             "results": [
                 {
                     "all_completed": 0
@@ -14,6 +14,6 @@
             ]
         }
     ],
-    "response": "Based on the information provided, it seems that not all the sewing tasks for the orders placed by PolyU in January have been completed. Here's a quick summary:\n\n| Customer | Month | Year | All Tasks Completed? |\n|----------|-------|------|----------------------|\n| PolyU    | January | 2024 | No 😅 |\n\nIt looks like there are still some tasks left to finish. If you have any more questions or need further assistance, feel free to ask! 😊",
-    "token_used": 5557
+    "response": "Hello there! 😄\n\nBased on the information I have, it seems that not all the sewing tasks for the orders placed by PolyU in January have been completed. Here's a quick summary:\n\n| Customer | Month | Year | All Tasks Completed? |\n|----------|-------|------|----------------------|\n| PolyU    | January| 2024 | No                  |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5550
 }

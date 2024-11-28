@@ -2,71 +2,132 @@
     "ID": 29,
     "q_ch": "对所有已经开始但是尚未完成的缝纫任务进行统计，剩余工作量最多的工作组是哪个？",
     "q_en": "Which workgroup has the highest remaining workload for all sewing tasks that have been started but not yet completed?",
-    "gt": "Hey there! 😄 Based on the data, the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed is the **Master Sewers**. Here's a quick summary of the remaining workloads for each workgroup:\n\n| Workgroup Name   | Remaining Workload |\n|------------------|--------------------|\n| Master Sewers    | 40                 |\n| Skilled Sewers   | 0                  |\n| Advanced Sewers  | 0                  |\n| Premier Sewers   | 0                  |\n| Elite Sewers     | 0                  |\n\nIt looks like the Master Sewers have a bit more to finish up compared to the others. Keep up the great work, Master Sewers! 💪🧵",
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT id, name FROM working_group WHERE type = 'sew';",
-            "description": "Retrieve the IDs and names of all working groups",
+            "sql": "SELECT id, working_group_id, planned_number, completed_number FROM sewing_tasks WHERE status = 1;",
+            "description": "Retrieve all sewing tasks that have been started but not yet completed",
             "results": [
                 {
                     "id": 2,
-                    "name": "Master Sewers"
+                    "working_group_id": 9,
+                    "planned_number": 240,
+                    "completed_number": 240
+                },
+                {
+                    "id": 3,
+                    "working_group_id": 9,
+                    "planned_number": 150,
+                    "completed_number": 150
+                },
+                {
+                    "id": 4,
+                    "working_group_id": 2,
+                    "planned_number": 220,
+                    "completed_number": 220
+                },
+                {
+                    "id": 5,
+                    "working_group_id": 2,
+                    "planned_number": 260,
+                    "completed_number": 260
+                },
+                {
+                    "id": 6,
+                    "working_group_id": 8,
+                    "planned_number": 95,
+                    "completed_number": 95
                 },
                 {
                     "id": 7,
-                    "name": "Skilled Sewers"
+                    "working_group_id": 8,
+                    "planned_number": 110,
+                    "completed_number": 110
                 },
                 {
                     "id": 8,
-                    "name": "Advanced Sewers"
+                    "working_group_id": 7,
+                    "planned_number": 50,
+                    "completed_number": 50
                 },
                 {
                     "id": 9,
-                    "name": "Premier Sewers"
-                },
-                {
-                    "id": 10,
-                    "name": "Elite Sewers"
-                }
-            ]
-        },
-        {
-            "type": "SQL",
-            "sql": "SELECT working_group_id, SUM(planned_number) AS total_planned, SUM(completed_number) AS total_completed FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id;",
-            "description": "Retrieve the total planned number and completed number of sewing tasks for each working group that have been started but not yet completed",
-            "results": [
-                {
-                    "working_group_id": 2,
-                    "total_planned": "1260",
-                    "total_completed": "1220"
-                },
-                {
-                    "working_group_id": 7,
-                    "total_planned": "535",
-                    "total_completed": "535"
-                },
-                {
                     "working_group_id": 8,
-                    "total_planned": "460",
-                    "total_completed": "460"
+                    "planned_number": 80,
+                    "completed_number": 80
                 },
                 {
-                    "working_group_id": 9,
-                    "total_planned": "390",
-                    "total_completed": "390"
+                    "id": 12,
+                    "working_group_id": 2,
+                    "planned_number": 150,
+                    "completed_number": 120
                 },
                 {
+                    "id": 13,
+                    "working_group_id": 2,
+                    "planned_number": 130,
+                    "completed_number": 120
+                },
+                {
+                    "id": 14,
+                    "working_group_id": 2,
+                    "planned_number": 120,
+                    "completed_number": 120
+                },
+                {
+                    "id": 15,
+                    "working_group_id": 2,
+                    "planned_number": 185,
+                    "completed_number": 185
+                },
+                {
+                    "id": 19,
+                    "working_group_id": 7,
+                    "planned_number": 95,
+                    "completed_number": 95
+                },
+                {
+                    "id": 20,
+                    "working_group_id": 8,
+                    "planned_number": 90,
+                    "completed_number": 90
+                },
+                {
+                    "id": 21,
+                    "working_group_id": 8,
+                    "planned_number": 85,
+                    "completed_number": 85
+                },
+                {
+                    "id": 28,
+                    "working_group_id": 7,
+                    "planned_number": 210,
+                    "completed_number": 210
+                },
+                {
+                    "id": 29,
+                    "working_group_id": 7,
+                    "planned_number": 180,
+                    "completed_number": 180
+                },
+                {
+                    "id": 30,
+                    "working_group_id": 2,
+                    "planned_number": 195,
+                    "completed_number": 195
+                },
+                {
+                    "id": 31,
                     "working_group_id": 10,
-                    "total_planned": "260",
-                    "total_completed": "260"
+                    "planned_number": 260,
+                    "completed_number": 260
                 }
             ]
         },
         {
             "type": "SQL",
-            "sql": "SELECT working_group_id, (total_planned - total_completed) AS remaining_workload FROM (SELECT working_group_id, SUM(planned_number) AS total_planned, SUM(completed_number) AS total_completed FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id) AS workload;",
-            "description": "Calculate the remaining workload for each working group by subtracting the total completed number from the total planned number",
+            "sql": "SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id;",
+            "description": "Calculate the remaining workload for each workgroup by summing the difference between planned and completed numbers for each task",
             "results": [
                 {
                     "working_group_id": 2,
@@ -92,13 +153,25 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT name FROM working_group WHERE id = (SELECT working_group_id FROM (SELECT working_group_id, (total_planned - total_completed) AS remaining_workload FROM (SELECT working_group_id, SUM(planned_number) AS total_planned, SUM(completed_number) AS total_completed FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id) AS workload ORDER BY remaining_workload DESC LIMIT 1) AS max_workload);",
-            "description": "Identify the working group with the highest remaining workload",
+            "sql": "SELECT working_group_id FROM (SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id) AS workload_summary ORDER BY remaining_workload DESC LIMIT 1;",
+            "description": "Identify the workgroup with the highest remaining workload",
+            "results": [
+                {
+                    "working_group_id": 2
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT name FROM working_group WHERE id = '2';",
+            "description": "Retrieve the name of the workgroup with the highest remaining workload",
             "results": [
                 {
                     "name": "Master Sewers"
                 }
             ]
         }
-    ]
+    ],
+    "response": "Sure thing! Based on the data, the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed is **Master Sewers**. 🎉\n\nHere's a quick summary of the remaining workloads for each workgroup:\n\n| Workgroup ID | Workgroup Name | Remaining Workload |\n|--------------|----------------|--------------------|\n| 2            | Master Sewers  | 40                 |\n| 7            | -              | 0                  |\n| 8            | -              | 0                  |\n| 9            | -              | 0                  |\n| 10           | -              | 0                  |\n\nAs you can see, the Master Sewers have a bit more work to do compared to the others. Keep up the great work! 💪",
+    "token_used": 7487
 }

@@ -2,12 +2,11 @@
     "ID": 38,
     "q_ch": "Advanced裁剪组还未完成的裁剪任务是哪些顾客的订单？",
     "q_en": "Which customer orders are the cutting tasks that the Advanced Cutting Group has not yet completed?",
-    "gt": "Sure thing! Based on the information provided, here's what I found about the customer orders that the \"Advanced Cutters\" have not yet completed:\n\n| Customer Name | Order Name  |\n|---------------|-------------|\n| John          | John_Pants  |\n\nIt looks like John is waiting for his \"John_Pants\" order to be completed by the Advanced Cutters. If you have any more questions or need further assistance, feel free to ask! 😄",
     "steps": [
         {
             "type": "SQL",
             "sql": "SELECT id FROM working_group WHERE name = 'Advanced Cutters';",
-            "description": "Retrieve the working group ID for \"Advanced Cutters\"",
+            "description": "Retrieve the working group ID for the working group with the name \"Advanced Cutters\"",
             "results": [
                 {
                     "id": 6
@@ -16,34 +15,11 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT order_product_id FROM cutting_tasks WHERE id IN (SELECT id FROM working_group WHERE name = 'Advanced Cutters');",
-            "description": "Retrieve the order_product IDs associated with the incomplete cutting tasks",
-            "results": [
-                {
-                    "order_product_id": 6
-                }
-            ]
-        },
-        {
-            "type": "SQL",
-            "sql": "SELECT order_id FROM order_product WHERE id IN (6);",
-            "description": "Retrieve the order IDs associated with the order_product IDs",
-            "results": [
-                {
-                    "order_id": 2
-                }
-            ]
-        },
-        {
-            "type": "SQL",
-            "sql": "SELECT c.customer_name, o.order_name FROM orders o JOIN customers c ON o.user_id = c.id WHERE o.id IN (2);",
-            "description": "Retrieve the customer names and order names for the orders",
-            "results": [
-                {
-                    "customer_name": "John",
-                    "order_name": "John_Pants"
-                }
-            ]
+            "sql": "SELECT order_product_id FROM cutting_tasks WHERE working_group_id = '6' AND status != 2;",
+            "description": "Retrieve the order product IDs for cutting tasks assigned to the working group \"Advanced Cutters\" that are not yet completed",
+            "results": "no results found."
         }
-    ]
+    ],
+    "response": "Hey there! 😄 It looks like the \"Advanced Cutters\" team is all caught up with their cutting tasks. There are no pending customer orders for them at the moment. If you have any more questions or need further assistance, feel free to ask! 📋✨",
+    "token_used": 6668
 }

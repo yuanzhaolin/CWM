@@ -5,42 +5,11 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT * FROM sewing_tasks WHERE start_time > '2024-06-01';",
-            "description": "To find the sewing tasks after June 1, 2024, we need to query the sewing tasks table for tasks that have a start time after June 1, 2024.",
-            "results": [
-                {
-                    "id": 32,
-                    "start_time": "2024-06-17 00:00:00",
-                    "end_time": "2024-07-14 00:00:00",
-                    "working_group_id": 9,
-                    "order_product_id": 32,
-                    "planned_number": 150,
-                    "completed_number": 0,
-                    "status": 0
-                },
-                {
-                    "id": 33,
-                    "start_time": "2024-07-17 00:00:00",
-                    "end_time": "2024-08-03 00:00:00",
-                    "working_group_id": 8,
-                    "order_product_id": 33,
-                    "planned_number": 120,
-                    "completed_number": 0,
-                    "status": 0
-                },
-                {
-                    "id": 34,
-                    "start_time": "2024-07-10 00:00:00",
-                    "end_time": "2024-07-20 00:00:00",
-                    "working_group_id": 10,
-                    "order_product_id": 34,
-                    "planned_number": 330,
-                    "completed_number": 0,
-                    "status": 0
-                }
-            ]
+            "sql": "SELECT * FROM sewing_tasks WHERE DATE(start_time) = '2024-06-01';",
+            "description": "To find the sewing tasks scheduled for June 1, 2024, we need to query the sewing tasks table based on the specified date.",
+            "results": "no results found."
         }
     ],
-    "response": "Sure! Here is the answer to your question:\n\n| Task ID | Start Time           | End Time             | Working Group ID | Order Product ID | Planned Number | Completed Number | Status |\n|---------|----------------------|----------------------|------------------|------------------|----------------|------------------|--------|\n| 32      | 2024-06-17 00:00:00  | 2024-07-14 00:00:00  | 9                | 32               | 150            | 0                | 0      |\n| 33      | 2024-07-17 00:00:00  | 2024-08-03 00:00:00  | 8                | 33               | 120            | 0                | 0      |\n| 34      | 2024-07-10 00:00:00  | 2024-07-20 00:00:00  | 10               | 34               | 330            | 0                | 0      |\n\nLooks like there are some exciting sewing tasks lined up after June 1, 2024! 😄🧵 Let me know if you need more information or assistance!",
-    "token_used": 6030
+    "response": "Sure! Here is the response to the user's question:\n\n---\n\n### Sewing Tasks for June 1, 2024\n\n| Task Name | Description | Start Time | End Time |\n|-----------|-------------|------------|----------|\n| No tasks found for this date 😔 | - | - | - |\n\n---\n\nFeel free to ask if you have any more questions! 😄",
+    "token_used": 5287
 }

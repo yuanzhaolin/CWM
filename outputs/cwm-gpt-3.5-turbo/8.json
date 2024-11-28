@@ -15,25 +15,22 @@
         },
         {
             "type": "SQL",
-            "sql": "['SELECT id FROM orders WHERE user_id = '7';']",
+            "sql": "SELECT id FROM orders WHERE user_id = 7;",
             "description": "Retrieve the order ID for the customer \"Olivia\"",
-            "results": "(1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['SELECT id FROM orders WHERE user_id = '7'' at line 1\")"
+            "results": [
+                {
+                    "id": 7
+                }
+            ]
         },
         {
             "type": "Tool",
             "results": {
-                "input": "Retrieve the product details for the order of customer \"Olivia\"\n['tool_find_order_details, {'order_id': <order_id>}, Find the product details of an order']",
-                "output": "The product details for the order of customer \"Olivia\" are as follows:\n1. Product ID: 1, Description: T-shirt, Attributes: Red, M size, Quantity: 100\n2. Product ID: 19, Description: T-shirt, Attributes: Green, M size, Quantity: 240\n3. Product ID: 3, Description: T-shirt, Attributes: Blue, L size, Quantity: 150\n4. Product ID: 11, Description: T-shirt, Attributes: White, XL size, Quantity: 220\n5. Product ID: 27, Description: T-shirt, Attributes: Yellow, S size, Quantity: 260"
-            }
-        },
-        {
-            "type": "Tool",
-            "results": {
-                "input": "Retrieve the materials used in the order\n['tool_get_wip_materials, {'product_id': <product_id>}, Get the required work-in-progress materials for a product']",
-                "output": "{tool_void}"
+                "input": "Retrieve the product details of the order for the customer \"Olivia\"\n['tool_find_order_details, {\"order_id\": 7}, Find the product details of an order']",
+                "output": "The product details of the order for the customer \"Olivia\" are as follows:\n1. Product: Coat\n   - Attributes: Purple, S size\n   - Quantity: 75\n\n2. Product: Sweater\n   - Attributes: Blue, XL size\n   - Quantity: 70\n\n3. Product: Coat\n   - Attributes: White, L size\n   - Quantity: 60"
             }
         }
     ],
-    "response": "Hey there! 🌟\n\nBased on the data I found, here are the materials used in Olivia's order:\n\n| Product ID | Description | Attributes         | Quantity |\n|------------|-------------|--------------------|----------|\n| 1          | T-shirt     | Red, M size        | 100      |\n| 19         | T-shirt     | Green, M size      | 240      |\n| 3          | T-shirt     | Blue, L size       | 150      |\n| 11         | T-shirt     | White, XL size     | 220      |\n| 27         | T-shirt     | Yellow, S size     | 260      |\n\nLooks like Olivia ordered quite a variety of t-shirts! If you have any more questions or need further assistance, feel free to ask. 😊",
-    "token_used": 8773
+    "response": "Based on the SQL queries executed, the materials used in Olivia's order are as follows:\n\n| Product | Attributes      | Quantity |\n|---------|-----------------|----------|\n| Coat    | Purple, S size  | 75       |\n| Sweater | Blue, XL size   | 70       |\n| Coat    | White, L size   | 60       |\n\nHope this helps! If you have any more questions, feel free to ask. 😄",
+    "token_used": 7157
 }

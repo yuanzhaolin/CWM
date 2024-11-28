@@ -5,15 +5,11 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT SUM(left_number) AS total_number_of_products FROM warehouse_product WHERE warehouse_id = 5;",
-            "description": "To find the total number of products in the warehouse with ID 5, we need to sum up the left_number column from the warehouse_product table for the specified warehouse ID.",
-            "results": [
-                {
-                    "total_number_of_products": null
-                }
-            ]
+            "sql": "SELECT material_id, MAX(left_number) AS highest_remaining_inventory FROM warehouse_material ORDER BY left_number DESC LIMIT 1;",
+            "description": "To find the material with the highest remaining inventory, we can sort the warehouse_material table in descending order based on the left_number column and select the top 1 record.",
+            "results": "(1140, \"In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'fashion.warehouse_material.material_id'; this is incompatible with sql_mode=only_full_group_by\")"
         }
     ],
-    "response": "Hey there! 🌟\n\nAfter checking the warehouse data, it seems that there is no information available on the material with the highest remaining inventory at the moment. If you have any other questions or need assistance with anything else, feel free to ask! 😊",
-    "token_used": 4809
+    "response": "I'm sorry, but I couldn't retrieve the information about the material with the highest remaining inventory at the moment. Let me try again or provide you with some other assistance. 😅",
+    "token_used": 4826
 }

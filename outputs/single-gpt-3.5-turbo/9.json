@@ -5,11 +5,17 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT ot.user_id, SUM(st.planned_number) AS total_planned, SUM(st.completed_number) AS total_completed, ROUND(SUM(st.completed_number) / SUM(st.planned_number) * 100, 2) AS progress_percentage FROM sewing_tasks st JOIN order_product op ON st.order_product_id = op.id JOIN orders ot ON op.order_id = ot.id JOIN customers c ON ot.user_id = c.id WHERE c.customer_name = 'William';",
-            "description": "To determine the progress of sewing tasks for the customer named William, we need to calculate the total planned number of sewing tasks, the total completed number of sewing tasks, and then calculate the progress percentage. We will first find the customer_id for the customer named William, then calculate the sum of planned number and completed number of sewing tasks, and finally calculate the progress percentage.",
-            "results": "(1140, \"In aggregated query without GROUP BY, expression #1 of SELECT list contains nonaggregated column 'fashion.ot.user_id'; this is incompatible with sql_mode=only_full_group_by\")"
+            "sql": "SELECT SUM(st.planned_number) AS total_planned, SUM(st.completed_number) AS total_completed, ROUND(SUM(st.completed_number) / SUM(st.planned_number) * 100, 2) AS progress_percentage FROM sewing_tasks st JOIN order_product op ON st.order_product_id = op.id JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id JOIN working_group wg ON st.working_group_id = wg.id WHERE wg.name = 'Skilled Sewers' AND c.customer_name = 'William';",
+            "description": "To determine the progress of 'Skilled Sewers' for 'William', we need to calculate the total planned number and completed number of sewing tasks for the specified working group and customer. We will join the sewing_tasks table with the order_product and customers tables to filter based on the working group and customer names.",
+            "results": [
+                {
+                    "total_planned": "390",
+                    "total_completed": "390",
+                    "progress_percentage": "100.00"
+                }
+            ]
         }
     ],
-    "response": "Hey there! 🌟\n\nI've looked into the progress of sewing tasks for customer William, and here's what I found:\n\n| User ID | Total Planned | Total Completed | Progress Percentage |\n|---------|---------------|-----------------|---------------------|\n| N/A     | N/A           | N/A             | N/A                 |\n\nIt seems like there was an issue with retrieving the data this time. But don't worry, I'll keep trying to get the information for you! Feel free to ask me anything else in the meantime. 😊",
-    "token_used": 5619
+    "response": "### Progress of 'Skilled Sewers' for 'William'\n\n| Total Planned | Total Completed | Progress Percentage |\n|---------------|-----------------|--------------------|\n| 390           | 390             | 100.00%            |\n\nGreat news! The progress of 'Skilled Sewers' for 'William' is at 100.00% completion. 🎉 Keep up the fantastic work! If you have any more questions or need further assistance, feel free to ask! 😄",
+    "token_used": 5629
 }

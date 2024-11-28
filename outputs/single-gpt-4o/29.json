@@ -6,7 +6,7 @@
         {
             "type": "SQL",
             "sql": "SELECT wg.name, SUM(st.planned_number - st.completed_number) AS remaining_workload FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE st.status = 1 GROUP BY wg.id ORDER BY remaining_workload DESC LIMIT 1;",
-            "description": "To find the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed, we need to calculate the difference between the planned number and the completed number for each sewing task, group the results by workgroup, and then find the workgroup with the maximum remaining workload.",
+            "description": "To find the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed, we need to calculate the difference between the planned number and the completed number for each sewing task, then sum these differences for each workgroup, and finally identify the workgroup with the highest total remaining workload.",
             "results": [
                 {
                     "name": "Master Sewers",
@@ -15,6 +15,6 @@
             ]
         }
     ],
-    "response": "Hey there! 😄 Based on the data we have, the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed is **Master Sewers**. Here's a quick look at the details:\n\n| Workgroup      | Remaining Workload |\n|----------------|---------------------|\n| Master Sewers  | 40                  |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
-    "token_used": 5107
+    "response": "Sure thing! Let's dive into the details of the workgroup with the highest remaining workload for sewing tasks that have been started but not yet completed. 🧵✨\n\n| Workgroup Name   | Remaining Workload |\n|------------------|--------------------|\n| Master Sewers    | 40                 |\n\nThe \"Master Sewers\" workgroup currently has the highest remaining workload, with a total of 40 tasks still in progress. Keep up the great work, team! 💪😄",
+    "token_used": 5146
 }

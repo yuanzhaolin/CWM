@@ -2,12 +2,11 @@
     "ID": 31,
     "q_ch": "Premier Sewers的缝纫任务有哪些？",
     "q_en": "What are the sewing tasks of Premier Sewers?",
-    "gt": "Sure thing! Let's take a look at the sewing tasks for the \"Premier Sewers\" group. Here's what I found:\n\n| Task ID | Start Time       | End Time         | Order Product ID | Planned Number | Completed Number | Status     |\n|---------|------------------|------------------|------------------|----------------|------------------|------------|\n| 2       | 2024-02-02       | 2024-02-15       | 2                | 240            | 240              | Completed  |\n| 3       | 2024-01-19       | 2024-02-08       | 3                | 150            | 150              | Completed  |\n| 11      | 2024-03-21       | 2024-04-14       | 11               | 140            | 140              | In Progress|\n| 26      | 2024-05-04       | 2024-05-15       | 26               | 70             | 70               | In Progress|\n| 32      | 2024-06-17       | 2024-07-14       | 32               | 150            | 0                | Not Started|\n\nLooks like the \"Premier Sewers\" have been busy! 😄 Some tasks are already completed, while others are still in progress or yet to start. Keep up the great work! 🚀",
     "steps": [
         {
             "type": "SQL",
             "sql": "SELECT id FROM working_group WHERE name = 'Premier Sewers';",
-            "description": "Retrieve the working group ID for the group named \"Premier Sewers\"",
+            "description": "Retrieve the working group ID for the group with the name \"Premier Sewers\"",
             "results": [
                 {
                     "id": 9
@@ -17,7 +16,7 @@
         {
             "type": "SQL",
             "sql": "SELECT * FROM sewing_tasks WHERE working_group_id = '9';",
-            "description": "Retrieve the sewing tasks associated with the working group \"Premier Sewers\"",
+            "description": "Retrieve the sewing tasks associated with the working group ID obtained in Step1",
             "results": [
                 {
                     "id": 2,
@@ -72,6 +71,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Let's take a look at the sewing tasks for the \"Premier Sewers\" group. Here's a summary of their tasks:\n\n| Task ID | Start Time       | End Time         | Order Product ID | Planned Number | Completed Number | Status     |\n|---------|------------------|------------------|------------------|----------------|------------------|------------|\n| 2       | 2024-02-02       | 2024-02-15       | 2                | 240            | 240              | Completed  |\n| 3       | 2024-01-19       | 2024-02-08       | 3                | 150            | 150              | Completed  |\n| 11      | 2024-03-21       | 2024-04-14       | 11               | 140            | 100              | In Progress|\n| 26      | 2024-05-04       | 2024-05-15       | 26               | 70             | 70               | Completed  |\n| 32      | 2024-06-17       | 2024-07-14       | 32               | 150            | 0                | Not Started|\n\n- **Status Legend**:\n  - **Completed**: All planned tasks are done! 🎉\n  - **In Progress**: Tasks are underway, but not yet finished. 🚧\n  - **Not Started**: Tasks are planned but haven't begun yet. ⏳\n\nIf you have any more questions or need further details, feel free to ask! 😊",
-    "token_used": 7989
+    "response": "Sure! Let's take a look at the sewing tasks for the \"Premier Sewers\" group. Here’s a summary of their tasks:\n\n| Task ID | Start Time       | End Time         | Order Product ID | Planned Number | Completed Number | Status     |\n|---------|------------------|------------------|------------------|----------------|------------------|------------|\n| 2       | 2024-02-02       | 2024-02-15       | 2                | 240            | 240              | Completed  |\n| 3       | 2024-01-19       | 2024-02-08       | 3                | 150            | 150              | Completed  |\n| 11      | 2024-03-21       | 2024-04-14       | 11               | 140            | 100              | In Progress|\n| 26      | 2024-05-04       | 2024-05-15       | 26               | 70             | 70               | Completed  |\n| 32      | 2024-06-17       | 2024-07-14       | 32               | 150            | 0                | Not Started|\n\n- **Status Key**:\n  - **Completed**: Task is fully completed. 🎉\n  - **In Progress**: Task is ongoing. 🔄\n  - **Not Started**: Task has not begun yet. ⏳\n\nThe \"Premier Sewers\" have been quite busy! If you have any more questions or need further details, feel free to ask. 😊",
+    "token_used": 7513
 }

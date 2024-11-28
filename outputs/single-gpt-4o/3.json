@@ -14,6 +14,6 @@
             ]
         }
     ],
-    "response": "Hey there! 😄\n\nI've got some great news for you regarding the production progress of the Dress ordered by Emily. Here's the scoop:\n\n| Product Type | Customer | Production Progress (%) |\n|--------------|----------|-------------------------|\n| Dress        | Emily    | 100.00%                 |\n\nEmily's Dress is fully completed, reaching a perfect 100% in production progress! 🎉 If you have any more questions or need further assistance, feel free to ask!",
-    "token_used": 5675
+    "response": "Sure thing! Let's take a look at the production progress for the Dress ordered by Emily. 🎉\n\n| Product Type | Customer | Production Progress (%) |\n|--------------|----------|-------------------------|\n| Dress        | Emily    | 100.00%                 |\n\nGreat news! The production of the Dress ordered by Emily is fully completed at 100%! 🥳",
+    "token_used": 5617
 }

@@ -2,7 +2,6 @@
     "ID": 21,
     "q_ch": "列出Advanced Sewers在2024年4月到5月的工作任务。",
     "q_en": "List the work tasks of Advanced Sewers from April to May 2024.",
-    "gt": "Sure! Here are the work tasks for the \"Advanced Sewers\" working group from April to May 2024. Let's take a look at what they've been up to! 🧵✨\n\n| Task ID | Start Time       | End Time         | Planned Number | Completed Number | Status |\n|---------|------------------|------------------|----------------|------------------|--------|\n| 16      | April 10, 2024   | May 7, 2024      | 200            | 200              | Completed ✅ |\n| 20      | April 15, 2024   | May 7, 2024      | 90             | 90               | Completed ✅ |\n| 21      | April 4, 2024    | April 12, 2024   | 85             | 85               | Completed ✅ |\n| 22      | April 9, 2024    | April 22, 2024   | 115            | 115              | In Progress 🔄 |\n\nLooks like they've been quite busy and productive! Keep up the great work, Advanced Sewers! 🎉",
     "steps": [
         {
             "type": "SQL",
@@ -62,6 +61,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Here are the work tasks for the \"Advanced Sewers\" group from April to May 2024. Let's take a look at what they've been up to! 🧵✨\n\n| Task ID | Start Time       | End Time         | Order Product ID | Planned Number | Completed Number | Status       |\n|---------|------------------|------------------|------------------|----------------|------------------|--------------|\n| 16      | April 10, 2024   | May 7, 2024      | 16               | 200            | 200              | Completed ✅ |\n| 20      | April 15, 2024   | May 7, 2024      | 20               | 90             | 90               | Completed ✅ |\n| 21      | April 4, 2024    | April 12, 2024   | 21               | 85             | 85               | Completed ✅ |\n| 22      | April 9, 2024    | April 22, 2024   | 22               | 115            | 60               | In Progress 🔄 |\n\nLooks like they've been busy bees! 🐝 If you need more details, feel free to ask!",
-    "token_used": 8482
+    "response": "Sure! Here are the work tasks for the \"Advanced Sewers\" group from April to May 2024. Let's take a look at what they've been up to! 🧵✨\n\n| Task ID | Start Date  | End Date    | Planned Number | Completed Number | Status       |\n|---------|-------------|-------------|----------------|------------------|--------------|\n| 16      | 2024-04-10  | 2024-05-07  | 200            | 200              | Completed ✅ |\n| 20      | 2024-04-15  | 2024-05-07  | 90             | 90               | Completed ✅ |\n| 21      | 2024-04-04  | 2024-04-12  | 85             | 85               | Completed ✅ |\n| 22      | 2024-04-09  | 2024-04-22  | 115            | 60               | In Progress 🔄 |\n\nLooks like they've been busy bees! 🐝 If you have any more questions, feel free to ask!",
+    "token_used": 7669
 }

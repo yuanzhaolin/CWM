@@ -5,16 +5,11 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT COUNT(*) AS total_orders, SUM(CASE WHEN ct.status = 2 THEN 1 ELSE 0 END) AS completed_orders FROM orders o JOIN customers c ON o.user_id = c.id LEFT JOIN order_product op ON o.id = op.order_id LEFT JOIN cutting_tasks ct ON op.id = ct.order_product_id WHERE c.customer_name = 'John';",
-            "description": "To check if all orders of the customer named 'John' have been completed, we need to count the total number of orders and the number of completed orders for this customer and compare them.\",",
-            "results": [
-                {
-                    "total_orders": 6,
-                    "completed_orders": "0"
-                }
-            ]
+            "sql": "SELECT COUNT(*) AS total_orders, SUM(CASE WHEN ot.status = 2 THEN 1 ELSE 0 END) AS completed_orders FROM orders ot JOIN customers c ON ot.user_id = c.id WHERE c.customer_name = 'John';",
+            "description": "To check if John's orders have been completed, we need to count the number of orders placed by John and check how many of them have a completed status.",
+            "results": "(1054, \"Unknown column 'ot.status' in 'field list'\")"
         }
     ],
-    "response": "Based on the SQL query results, it appears that there are a total of 6 orders for the customer named 'John', but none of them have been completed yet. 😔\n\nHere is a breakdown of the information in a table format:\n\n| Total Orders | Completed Orders |\n|--------------|------------------|\n|      6       |        0         |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
-    "token_used": 5385
+    "response": "Hey there! 😄\n\nBased on the data available, it seems like there was an issue with the SQL query execution. Unfortunately, we couldn't retrieve the information about John's completed orders at the moment. \n\nFeel free to ask any other questions you may have, and I'll do my best to assist you!",
+    "token_used": 5256
 }

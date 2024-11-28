@@ -5,91 +5,99 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT id, working_group_id FROM sewing_tasks WHERE status = 1;",
-            "description": "Retrieve the IDs and names of all sewing tasks that have been started but not yet completed",
+            "sql": "SELECT id, name FROM working_group WHERE type = 'sew';",
+            "description": "Retrieve the IDs and names of all sewing groups",
             "results": [
                 {
                     "id": 2,
-                    "working_group_id": 9
-                },
-                {
-                    "id": 3,
-                    "working_group_id": 9
-                },
-                {
-                    "id": 4,
-                    "working_group_id": 2
-                },
-                {
-                    "id": 5,
-                    "working_group_id": 2
-                },
-                {
-                    "id": 6,
-                    "working_group_id": 8
+                    "name": "Master Sewers"
                 },
                 {
                     "id": 7,
-                    "working_group_id": 8
+                    "name": "Skilled Sewers"
                 },
                 {
                     "id": 8,
-                    "working_group_id": 7
+                    "name": "Advanced Sewers"
                 },
                 {
                     "id": 9,
-                    "working_group_id": 8
+                    "name": "Premier Sewers"
                 },
                 {
-                    "id": 12,
-                    "working_group_id": 2
-                },
-                {
-                    "id": 13,
-                    "working_group_id": 2
-                },
-                {
-                    "id": 14,
-                    "working_group_id": 2
-                },
-                {
-                    "id": 15,
-                    "working_group_id": 2
-                },
-                {
-                    "id": 19,
-                    "working_group_id": 7
-                },
-                {
-                    "id": 20,
-                    "working_group_id": 8
-                },
-                {
-                    "id": 21,
-                    "working_group_id": 8
-                },
-                {
-                    "id": 28,
-                    "working_group_id": 7
-                },
-                {
-                    "id": 29,
-                    "working_group_id": 7
-                },
-                {
-                    "id": 30,
-                    "working_group_id": 2
-                },
-                {
-                    "id": 31,
-                    "working_group_id": 10
+                    "id": 10,
+                    "name": "Elite Sewers"
                 }
             ]
         },
         {
             "type": "SQL",
-            "sql": "SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id;",
-            "description": "Calculate the remaining workload for each working group by subtracting the completed number from the planned number",
+            "sql": "SELECT id FROM sewing_tasks WHERE status = 1;",
+            "description": "Identify the sewing tasks that have been started but not yet completed",
+            "results": [
+                {
+                    "id": 2
+                },
+                {
+                    "id": 3
+                },
+                {
+                    "id": 4
+                },
+                {
+                    "id": 5
+                },
+                {
+                    "id": 6
+                },
+                {
+                    "id": 7
+                },
+                {
+                    "id": 8
+                },
+                {
+                    "id": 9
+                },
+                {
+                    "id": 12
+                },
+                {
+                    "id": 13
+                },
+                {
+                    "id": 14
+                },
+                {
+                    "id": 15
+                },
+                {
+                    "id": 19
+                },
+                {
+                    "id": 20
+                },
+                {
+                    "id": 21
+                },
+                {
+                    "id": 28
+                },
+                {
+                    "id": 29
+                },
+                {
+                    "id": 30
+                },
+                {
+                    "id": 31
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE id IN (2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 19, 20, 21, 28, 29, 30, 31) GROUP BY working_group_id;",
+            "description": "Calculate the remaining workload for each sewing group by summing the difference between planned number and completed number for the identified tasks",
             "results": [
                 {
                     "working_group_id": 2,
@@ -115,10 +123,10 @@
         },
         {
             "type": "Thought",
-            "operation": "Compare the remaining workload of all sewing tasks obtained in Step2 and identify the group with the highest remaining workload.",
-            "results": "To compare the remaining workload of all sewing tasks obtained in Step 2 and identify the group with the highest remaining workload, we need to look at the results of the SQL query that calculated the remaining workload for each working group.\n\nFrom the results, we can see that:\n- Working Group 2 has a remaining workload of 40\n- Working Group 7, 8, 9, and 10 all have a remaining workload of 0\n\nTherefore, the group with the highest remaining workload is Working Group 2 with a remaining workload of 40."
+            "operation": "Compare the remaining workload of all sewing groups obtained in Step3 and identify the group with the highest remaining workload.",
+            "results": "To compare the remaining workload of all sewing groups obtained in Step3 and identify the group with the highest remaining workload, we need to look at the results of the SQL query in Step3. \n\nThe results show the remaining workload for each sewing group:\n- Master Sewers: 40\n- Skilled Sewers: 0\n- Advanced Sewers: 0\n- Premier Sewers: 0\n- Elite Sewers: 0\n\nTherefore, the group with the highest remaining workload is Master Sewers with a remaining workload of 40."
         }
     ],
-    "response": "Based on the SQL query results, the workgroup with the highest remaining workload for all 'Sewing Tasks' that have been started but not yet completed is Working Group 2 with a remaining workload of 40. 🎉\n\nHere is a summary of the remaining workload for each working group:\n\n| Working Group | Remaining Workload |\n|---------------|--------------------|\n| 2             | 40                 |\n| 7             | 0                  |\n| 8             | 0                  |\n| 9             | 0                  |\n| 10            | 0                  |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
-    "token_used": 8572
+    "response": "Based on the SQL query results, the workgroup with the highest remaining workload for all 'Sewing Tasks' that have been started but not yet completed is the Master Sewers group with a remaining workload of 40. 🧵\n\nHere is a summary in a table format:\n\n| Working Group    | Remaining Workload |\n|------------------|--------------------|\n| Master Sewers    | 40                 |\n| Skilled Sewers   | 0                  |\n| Advanced Sewers  | 0                  |\n| Premier Sewers   | 0                  |\n| Elite Sewers     | 0                  |\n\nFeel free to reach out if you have any more questions! 😄",
+    "token_used": 8547
 }

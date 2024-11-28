@@ -6,7 +6,7 @@
         {
             "type": "SQL",
             "sql": "SELECT st.* FROM sewing_tasks st JOIN order_product op ON st.order_product_id = op.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE pt.description = 'Dress';",
-            "description": "To retrieve the sewing tasks for the product type with the description 'Dress', we need to first find the product type ID for 'Dress' from the products_types table, then query the sewing tasks associated with that product type ID.",
+            "description": "To retrieve the sewing tasks for the product type with description 'Dress', we need to first find the product type ID for 'Dress', then query the sewing tasks associated with that product type ID.",
             "results": [
                 {
                     "id": 14,
@@ -51,6 +51,6 @@
             ]
         }
     ],
-    "response": "Sure! Here is the response to the user's question:\n\n---\n\n### Sewing Tasks for Dress Product Type\n\n| Task ID | Start Time | End Time | Working Group ID | Planned Number | Completed Number | Status |\n|---------|------------|----------|------------------|----------------|------------------|--------|\n| 14      | 2024-03-18 | 2024-04-08 | 2                | 120            | 120              | 1      |\n| 13      | 2024-03-27 | 2024-04-06 | 2                | 130            | 120              | 1      |\n| 11      | 2024-03-21 | 2024-04-14 | 9                | 140            | 100              | 0      |\n| 12      | 2024-03-27 | 2024-04-12 | 2                | 150            | 120              | 1      |\n\nI hope this information helps! If you have any more questions, feel free to ask. 😄\n\n---",
-    "token_used": 6006
+    "response": "### Sewing Tasks for Dress Product Type:\n\n| Task ID | Start Time | End Time | Working Group ID | Planned Number | Completed Number | Status |\n|---------|------------|----------|------------------|----------------|------------------|--------|\n| 14      | 2024-03-18 | 2024-04-08 | 2                | 120            | 120              | 1      |\n| 13      | 2024-03-27 | 2024-04-06 | 2                | 130            | 120              | 1      |\n| 11      | 2024-03-21 | 2024-04-14 | 9                | 140            | 100              | 0      |\n| 12      | 2024-03-27 | 2024-04-12 | 2                | 150            | 120              | 1      |\n\nFeel free to reach out if you need more information or assistance! 😄",
+    "token_used": 6111
 }

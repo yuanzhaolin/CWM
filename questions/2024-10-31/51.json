@@ -2,7 +2,7 @@
     "ID": 51,
     "q_ch": "未完成的订单中，哪个订单完成的进度最快？",
     "q_en": "Which order has the fastest completion progress among the unfinished orders?",
-    "gt": "Hey there! 😄 Let's take a look at the unfinished orders and see which ones are making the fastest progress. Here's a handy table for you:\n\n| Order ID | Order Name                  | Progress  |\n|----------|-----------------------------|-----------|\n| 1        | PolyU_Tshirt                | 11.36%    |\n| 2        | John_Pants                  | 50.00%    |\n| 3        | Emily_Dress                 | 42.59%    |\n| 4        | James_WinterOrder           | 100.00%   |\n| 5        | Sophia_SkirtAndJacket       | 100.00%   |\n| 6        | Michael_SweaterAndShorts    | 74.24%    |\n| 7        | Olivia_WinterOrder          | 100.00%   |\n| 8        | William_Skirt_Sweater_Shorts| 100.00%   |\n| 9        | PolyU_Skirt                 | 100.00%   |\n| 10       | John_Jacket                 | 0.00%     |\n| 11       | Emily_Pants                 | 0.00%     |\n| 12       | James_Skirt                 | 100.00%   |\n\nThe orders with the fastest completion progress, reaching 100%, are:\n\n- **James_WinterOrder**\n- **Sophia_SkirtAndJacket**\n- **Olivia_WinterOrder**\n- **William_Skirt_Sweater_Shorts**\n- **PolyU_Skirt**\n- **James_Skirt**\n\nThese orders are leading the pack! 🚀 Keep up the great work!",
+    "gt": "Hey there! 😄 Let's take a look at the unfinished orders and their completion progress. I've organized the information into a neat table for you:\n\n| Order ID | Order Name              | Progress  |\n|----------|-------------------------|-----------|\n| 1        | PolyU_Tshirt            | 1.0000    |\n| 2        | John_Pants              | 1.0000    |\n| 3        | Emily_Dress             | 0.8519    |\n| 4        | James_WinterOrder       | 1.0000    |\n| 5        | Sophia_SkirtAndJacket   | 1.0000    |\n| 6        | Michael_SweaterAndShorts| 0.7424    |\n| 7        | Olivia_WinterOrder      | 1.0000    |\n| 8        | William_Skirt_Sweater_Shorts | 1.0000 |\n| 9        | PolyU_Skirt             | 1.0000    |\n| 10       | John_Jacket             | 0.0000    |\n| 11       | Emily_Pants             | 0.0000    |\n| 12       | James_Skirt             | 0.0000    |\n\nThe orders with the fastest completion progress (1.0000) are:\n\n- PolyU_Tshirt\n- John_Pants\n- James_WinterOrder\n- Sophia_SkirtAndJacket\n- Olivia_WinterOrder\n- William_Skirt_Sweater_Shorts\n- PolyU_Skirt\n\nThese orders are all tied for the top spot in terms of progress! 🚀 Keep up the great work!",
     "steps": [
         {
             "type": "SQL",
@@ -62,19 +62,19 @@
         {
             "type": "SQL",
             "sql": "SELECT op.order_id, SUM(st.completed_number) / SUM(op.number) AS progress FROM order_product op JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY op.order_id;",
-            "description": "Calculate the progress for each unfinished order by summing the completed numbers of sewing tasks and dividing by the total quantity of products in the order",
+            "description": "Calculate the progress for each unfinished order",
             "results": [
                 {
                     "order_id": 1,
-                    "progress": "0.1136"
+                    "progress": "1.0000"
                 },
                 {
                     "order_id": 2,
-                    "progress": "0.5000"
+                    "progress": "1.0000"
                 },
                 {
                     "order_id": 3,
-                    "progress": "0.4259"
+                    "progress": "0.8519"
                 },
                 {
                     "order_id": 4,
@@ -110,14 +110,14 @@
                 },
                 {
                     "order_id": 12,
-                    "progress": "1.0000"
+                    "progress": "0.0000"
                 }
             ]
         },
         {
             "type": "Thought",
             "operation": "Compare the progress of all unfinished orders obtained in Step2 and identify the order with the highest progress.",
-            "results": "To identify the order with the highest progress among the unfinished orders, we need to compare the progress values from the results of the second SQL query. Here are the progress values for each unfinished order:\n\n1. Order ID 1 (PolyU_Tshirt): 0.1136\n2. Order ID 2 (John_Pants): 0.5000\n3. Order ID 3 (Emily_Dress): 0.4259\n4. Order ID 4 (James_WinterOrder): 1.0000\n5. Order ID 5 (Sophia_SkirtAndJacket): 1.0000\n6. Order ID 6 (Michael_SweaterAndShorts): 0.7424\n7. Order ID 7 (Olivia_WinterOrder): 1.0000\n8. Order ID 8 (William_Skirt_Sweater_Shorts): 1.0000\n9. Order ID 9 (PolyU_Skirt): 1.0000\n10. Order ID 10 (John_Jacket): 0.0000\n11. Order ID 11 (Emily_Pants): 0.0000\n12. Order ID 12 (James_Skirt): 1.0000\n\nThe orders with the highest progress (1.0000) are:\n- Order ID 4 (James_WinterOrder)\n- Order ID 5 (Sophia_SkirtAndJacket)\n- Order ID 7 (Olivia_WinterOrder)\n- Order ID 8 (William_Skirt_Sweater_Shorts)\n- Order ID 9 (PolyU_Skirt)\n- Order ID 12 (James_Skirt)\n\nThese orders have the highest progress among the unfinished orders."
+            "results": "To identify the order with the highest progress among the unfinished orders, we need to compare the progress values from the results of the second SQL query. Here are the progress values for each unfinished order:\n\n1. Order ID 1: Progress 1.0000\n2. Order ID 2: Progress 1.0000\n3. Order ID 3: Progress 0.8519\n4. Order ID 4: Progress 1.0000\n5. Order ID 5: Progress 1.0000\n6. Order ID 6: Progress 0.7424\n7. Order ID 7: Progress 1.0000\n8. Order ID 8: Progress 1.0000\n9. Order ID 9: Progress 1.0000\n10. Order ID 10: Progress 0.0000\n11. Order ID 11: Progress 0.0000\n12. Order ID 12: Progress 0.0000\n\nThe highest progress value is 1.0000, which is shared by multiple orders (Order IDs 1, 2, 4, 5, 7, 8, and 9). Therefore, these orders all have the highest progress among the unfinished orders."
         }
     ]
 }

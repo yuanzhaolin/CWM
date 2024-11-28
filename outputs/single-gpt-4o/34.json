@@ -16,6 +16,6 @@
             ]
         }
     ],
-    "response": "Hey there! 😄 It looks like the \"Master Cutters\" have been busy! Here's a summary of the cutting tasks they've completed:\n\n| Task ID | Start Time          | End Time            |\n|---------|---------------------|---------------------|\n| 3       | January 10, 2024    | January 19, 2024    |\n\nIf you have any more questions or need further details, feel free to ask! 😊",
-    "token_used": 5405
+    "response": "Hey there! 😄 Let's take a look at the cutting tasks completed by the \"Master Cutters\" team. Here's what I found:\n\n| Task ID | Start Time          | End Time            |\n|---------|---------------------|---------------------|\n| 3       | January 10, 2024    | January 19, 2024    |\n\nIt seems like they completed a task that started on January 10, 2024, and wrapped up on January 19, 2024. Great job, Master Cutters! 🎉 If you have any more questions, feel free to ask!",
+    "token_used": 5522
 }

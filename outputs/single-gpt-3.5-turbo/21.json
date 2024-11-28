@@ -5,8 +5,8 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT * FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE wg.name = 'Advanced Sewers' AND st.start_time >= '2024-04-01' AND st.end_time <= '2024-05-31';",
-            "description": "To list the work tasks of 'Advanced Sewers' from April to May 2024, we need to retrieve the sewing tasks associated with the working group 'Advanced Sewers' within the specified time frame.",
+            "sql": "SELECT * FROM sewing_tasks WHERE working_group_id = (SELECT id FROM working_group WHERE name = 'Advanced Sewers') AND start_time >= '2024-04-01' AND end_time <= '2024-05-31';",
+            "description": "To list the work tasks of 'Advanced Sewers' from April to May 2024, we need to retrieve the task details from the sewing_tasks table based on the working_group_id and the time range specified.",
             "results": [
                 {
                     "id": 16,
@@ -16,10 +16,7 @@
                     "order_product_id": 16,
                     "planned_number": 200,
                     "completed_number": 200,
-                    "status": 2,
-                    "wg.id": 8,
-                    "type": "sew",
-                    "name": "Advanced Sewers"
+                    "status": 2
                 },
                 {
                     "id": 20,
@@ -29,10 +26,7 @@
                     "order_product_id": 20,
                     "planned_number": 90,
                     "completed_number": 90,
-                    "status": 1,
-                    "wg.id": 8,
-                    "type": "sew",
-                    "name": "Advanced Sewers"
+                    "status": 1
                 },
                 {
                     "id": 21,
@@ -42,10 +36,7 @@
                     "order_product_id": 21,
                     "planned_number": 85,
                     "completed_number": 85,
-                    "status": 1,
-                    "wg.id": 8,
-                    "type": "sew",
-                    "name": "Advanced Sewers"
+                    "status": 1
                 },
                 {
                     "id": 22,
@@ -55,14 +46,11 @@
                     "order_product_id": 22,
                     "planned_number": 115,
                     "completed_number": 60,
-                    "status": 0,
-                    "wg.id": 8,
-                    "type": "sew",
-                    "name": "Advanced Sewers"
+                    "status": 0
                 }
             ]
         }
     ],
-    "response": "Certainly! Here is the answer to your question:\n\n| Task ID | Start Time           | End Time             | Planned Number | Completed Number | Status | Type | Name            |\n|---------|----------------------|----------------------|----------------|------------------|--------|------|-----------------|\n| 16      | 2024-04-10 00:00:00  | 2024-05-07 00:00:00  | 200            | 200              | 2      | sew  | Advanced Sewers |\n| 20      | 2024-04-15 00:00:00  | 2024-05-07 00:00:00  | 90             | 90               | 1      | sew  | Advanced Sewers |\n| 21      | 2024-04-04 00:00:00  | 2024-04-12 00:00:00  | 85             | 85               | 1      | sew  | Advanced Sewers |\n| 22      | 2024-04-09 00:00:00  | 2024-04-22 00:00:00  | 115            | 60               | 0      | sew  | Advanced Sewers |\n\nI hope this helps! If you have any more questions or need further assistance, feel free to ask. 😄",
-    "token_used": 6265
+    "response": "Sure! Here is the answer to your question:\n\n| Task ID | Start Time           | End Time             | Planned Number | Completed Number | Status |\n|---------|----------------------|----------------------|----------------|------------------|--------|\n| 16      | 2024-04-10 00:00:00  | 2024-05-07 00:00:00  | 200            | 200              | 2      |\n| 20      | 2024-04-15 00:00:00  | 2024-05-07 00:00:00  | 90             | 90               | 1      |\n| 21      | 2024-04-04 00:00:00  | 2024-04-12 00:00:00  | 85             | 85               | 1      |\n| 22      | 2024-04-09 00:00:00  | 2024-04-22 00:00:00  | 115            | 60               | 0      |\n\nI hope this helps! If you have any more questions, feel free to ask. 😄",
+    "token_used": 6077
 }

@@ -2,12 +2,11 @@
     "ID": 38,
     "q_ch": "Advanced裁剪组还未完成的裁剪任务是哪些顾客的订单？",
     "q_en": "Which customer orders are the cutting tasks that the Advanced Cutting Group has not yet completed?",
-    "gt": "Sure thing! Let's dive into the details of the customer orders that the \"Advanced Cutters\" haven't completed yet. Here's what I found:\n\n| Order ID | Customer Name |\n|----------|---------------|\n| 2        | John          |\n\nIt looks like John has an order that the \"Advanced Cutters\" are still working on. If you have any more questions or need further assistance, feel free to ask! 😄",
     "steps": [
         {
             "type": "SQL",
             "sql": "SELECT id FROM working_group WHERE name = 'Advanced Cutters';",
-            "description": "Retrieve the working group ID for the working group with the name \"Advanced Cutters\"",
+            "description": "Retrieve the working group ID for the group with the name \"Advanced Cutters\"",
             "results": [
                 {
                     "id": 6
@@ -16,26 +15,17 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT DISTINCT order_id FROM order_product WHERE id IN (6);",
-            "description": "Retrieve the order IDs associated with the order_product IDs from Step2",
-            "results": [
-                {
-                    "order_id": 2
-                }
-            ]
+            "sql": "SELECT order_product_id FROM cutting_tasks WHERE working_group_id = '6' AND status != 2;",
+            "description": "Retrieve the order product IDs for cutting tasks assigned to \"Advanced Cutters\" that are not yet completed",
+            "results": "no results found."
         },
         {
             "type": "SQL",
-            "sql": "SELECT c.customer_name, o.order_name FROM orders o JOIN customers c ON o.user_id = c.id WHERE o.id IN (2);",
+            "sql": "SELECT c.customer_name, o.order_name FROM orders o JOIN customers c ON o.user_id = c.id WHERE o.id IN ();",
             "description": "Retrieve the customer names and order names for the orders obtained in Step3",
-            "results": [
-                {
-                    "customer_name": "John",
-                    "order_name": "John_Pants"
-                }
-            ]
+            "results": "(1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1\")"
         }
     ],
-    "response": "Sure! Let's take a look at the customer orders that the \"Advanced Cutters\" have not yet completed. Based on the data, here's what we found:\n\n| Customer Name | Order Name  |\n|---------------|-------------|\n| John          | John_Pants  |\n\nIt seems like John is waiting for his \"John_Pants\" order to be completed by the Advanced Cutters. Hang in there, John! 😄",
-    "token_used": 8107
+    "token_used": 7592,
+    "response": "It looks like the \"Advanced Cutters\" team doesn't have any pending cutting tasks at the moment! 🎉 There are no customer orders with incomplete cutting tasks assigned to them. If you have any more questions or need further assistance, feel free to ask! 😊"
 }

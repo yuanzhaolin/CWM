@@ -5,11 +5,23 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT * FROM cutting_tasks WHERE status <> 2 AND end_time < '2024-07-01' AND working_group_id = (SELECT id FROM working_group WHERE name = 'Cut') ORDER BY planned_number DESC LIMIT 1;",
-            "description": "To find the task with the highest planned quantity among all 'Cutting Tasks' that have not been completed and have an end date before July 2024, we need to filter the cutting tasks based on the specified conditions and then order them by planned quantity in descending order to get the task with the highest planned quantity.",
-            "results": "no results found."
+            "sql": "SELECT * FROM cutting_tasks WHERE working_group_id IN (SELECT id FROM working_group WHERE name = 'Expert Cutters') AND status != 2 AND end_time < '2024-07-01' ORDER BY planned_number DESC LIMIT 1;",
+            "description": "To find the task with the highest planned quantity among all 'Expert Cutters' working groups that have not been completed and have an end date before July 2024, we need to select the task with the maximum planned quantity from cutting tasks that meet the specified conditions.",
+            "results": [
+                {
+                    "id": 16,
+                    "start_time": "2024-03-11 00:00:00",
+                    "end_time": "2024-04-10 00:00:00",
+                    "working_group_id": 4,
+                    "order_product_id": 16,
+                    "produced_wip_id": 8,
+                    "planned_number": 200,
+                    "completed_number": 200,
+                    "status": 1
+                }
+            ]
         }
     ],
-    "response": "Certainly! Let me provide you with the answer to your question:\n\n| Task Name | Planned Quantity |\n|-----------|------------------|\n| No tasks found matching the criteria. 😔 | N/A |\n\nIt seems that there are no tasks that meet the specified conditions at the moment. If you have any other questions or need further assistance, feel free to ask! 😄",
-    "token_used": 5614
+    "response": "I'm glad you asked! 🌟\n\nBased on the data I found, the task with the highest planned quantity among all 'Expert Cutters' working groups that have not been completed and have an end date before July 2024 is Task ID 16. Here are the details:\n\n| Task ID | Start Time | End Time | Planned Quantity | Completed Quantity |\n|---------|------------|----------|------------------|--------------------|\n|   16    | 2024-03-11 | 2024-04-10 |       200        |        200         |\n\nIt seems like Task ID 16 had a planned quantity of 200 and all of it was completed! Great job to the 'Expert Cutters' team! 🎉\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5808
 }

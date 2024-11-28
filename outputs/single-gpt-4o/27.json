@@ -6,7 +6,7 @@
         {
             "type": "SQL",
             "sql": "SELECT st.id, st.start_time, st.end_time, st.planned_number, st.completed_number, st.status FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE wg.name = 'Advanced Sewers' AND st.status IN (0, 1);",
-            "description": "To find the tasks that the working group 'Advanced Sewers' has not yet completed, we need to identify the sewing tasks associated with this group that have a status of not completed (status 0 or 1). We will first find the working_group_id for 'Advanced Sewers', then select the tasks with status 0 or 1.",
+            "description": "To find the tasks that the working group 'Advanced Sewers' has not yet completed, we need to identify the sewing tasks associated with this group that have a status of not started (0) or on-going (1). We will first find the working_group_id for 'Advanced Sewers' and then select the tasks with the specified status.",
             "results": [
                 {
                     "id": 6,
@@ -75,6 +75,6 @@
             ]
         }
     ],
-    "response": "Hello there, Advanced Sewers! 😄 Let's take a look at the tasks you haven't completed yet. Here's a handy table for you:\n\n| Task ID | Start Time       | End Time         | Planned Number | Completed Number | Status       |\n|---------|------------------|------------------|----------------|------------------|--------------|\n| 22      | 2024-04-09       | 2024-04-22       | 115            | 60               | Not Started  |\n| 25      | 2024-05-14       | 2024-06-03       | 75             | 75               | Not Started  |\n| 33      | 2024-07-17       | 2024-08-03       | 120            | 0                | Not Started  |\n\nThese tasks are still in progress or haven't been started yet. Keep up the great work, and you'll have them completed in no time! 🚀",
-    "token_used": 6362
+    "response": "Hello there! 😄 Let's take a look at the tasks that the 'Advanced Sewers' group hasn't completed yet. Here's a handy table for you:\n\n| Task ID | Start Time       | End Time         | Planned Number | Completed Number | Status       |\n|---------|------------------|------------------|----------------|------------------|--------------|\n| 22      | 2024-04-09       | 2024-04-22       | 115            | 60               | Not Started  |\n| 25      | 2024-05-14       | 2024-06-03       | 75             | 75               | Not Started  |\n| 33      | 2024-07-17       | 2024-08-03       | 120            | 0                | Not Started  |\n\nThe status indicates that these tasks are either not started or ongoing. Keep up the great work, and you'll have these tasks completed in no time! 🚀",
+    "token_used": 6474
 }

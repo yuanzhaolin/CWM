@@ -51,6 +51,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Let's take a look at the sewing and cutting groups we have right now. Here's a handy table for you:\n\n| Group Name          | Type  |\n|---------------------|-------|\n| Precision Cutters   | Cut   |\n| Master Sewers       | Sew   |\n| Master Cutters      | Cut   |\n| Expert Cutters      | Cut   |\n| Professional Cutters| Cut   |\n| Advanced Cutters    | Cut   |\n| Skilled Sewers      | Sew   |\n| Advanced Sewers     | Sew   |\n| Premier Sewers      | Sew   |\n| Elite Sewers        | Sew   |\n\nLooks like we have a great mix of talented sewing and cutting groups! 🧵✂️ If you have any more questions, feel free to ask! 😄",
-    "token_used": 5183
+    "response": "Sure thing! Here's a list of the sewing and cutting groups we currently have:\n\n| Group Name          | Type  |\n|---------------------|-------|\n| Precision Cutters   | Cut   |\n| Master Sewers       | Sew   |\n| Master Cutters      | Cut   |\n| Expert Cutters      | Cut   |\n| Professional Cutters| Cut   |\n| Advanced Cutters    | Cut   |\n| Skilled Sewers      | Sew   |\n| Advanced Sewers     | Sew   |\n| Premier Sewers      | Sew   |\n| Elite Sewers        | Sew   |\n\nLooks like we have a great mix of talented groups! 🧵✂️ If you have any more questions, feel free to ask! 😄",
+    "token_used": 5162
 }

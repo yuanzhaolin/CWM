@@ -2,7 +2,6 @@
     "ID": 22,
     "q_ch": "我们现在有哪些缝纫组，哪些裁剪组？",
     "q_en": "What sewing groups and cutting groups do we have now?",
-    "gt": "Sure thing! Let's take a look at the sewing and cutting groups we have right now. Here's a handy table for you:\n\n| **Sewing Groups**     | **Cutting Groups**     |\n|-----------------------|------------------------|\n| Master Sewers         | Precision Cutters      |\n| Skilled Sewers        | Master Cutters         |\n| Advanced Sewers       | Expert Cutters         |\n| Premier Sewers        | Professional Cutters   |\n| Elite Sewers          | Advanced Cutters       |\n\nI hope this helps! If you have any more questions, feel free to ask. Happy crafting! 🧵✂️😄",
     "steps": [
         {
             "type": "SQL",
@@ -48,5 +47,7 @@
                 }
             ]
         }
-    ]
+    ],
+    "response": "Sure thing! Let's take a look at the sewing and cutting groups we have right now. Here's a handy table for you:\n\n| **Sewing Groups**     | **Cutting Groups**     |\n|-----------------------|------------------------|\n| Master Sewers         | Precision Cutters      |\n| Skilled Sewers        | Master Cutters         |\n| Advanced Sewers       | Expert Cutters         |\n| Premier Sewers        | Professional Cutters   |\n| Elite Sewers          | Advanced Cutters       |\n\nI hope this helps! If you have any more questions, feel free to ask. Happy crafting! 🧵✂️😄",
+    "token_used": 5476
 }

@@ -2,7 +2,6 @@
     "ID": 44,
     "q_ch": "请将100件ID为15的产品入库到辅助仓库。",
     "q_en": "Please store 100 units of product with ID=15 in the auxiliary warehouse.",
-    "gt": "Sure thing! 🎉\n\nBased on the information provided, we've successfully stored 100 units of the product with ID=15 in the \"Auxiliary warehouse.\" Here's a quick summary:\n\n| Product ID | Quantity | Warehouse Name      | Warehouse ID |\n|------------|----------|---------------------|--------------|\n| 15         | 100      | Auxiliary warehouse | 2            |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
     "steps": [
         {
             "type": "SQL",
@@ -17,7 +16,7 @@
         {
             "type": "SQL",
             "sql": "INSERT INTO warehouse_product (warehouse_id, product_id, left_number) VALUES ('2', 15, 100);",
-            "description": "Insert 100 units of the product with ID=15 into the warehouse",
+            "description": "Insert 100 units of the product with ID=15 into the specified warehouse",
             "results": [
                 {
                     "auto_increment_id": 3
@@ -26,5 +25,5 @@
         }
     ],
     "response": "Sure thing! Here's what we've done for you:\n\n| Action | Details |\n|--------|---------|\n| **Warehouse** | Auxiliary warehouse |\n| **Product ID** | 15 |\n| **Quantity Stored** | 100 units |\n\nWe've successfully stored 100 units of the product with ID=15 in the Auxiliary warehouse. Everything is set! 🎉 If you have any more requests or questions, feel free to ask. 😊",
-    "token_used": 7391
+    "token_used": 6823
 }

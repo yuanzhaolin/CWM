@@ -5,11 +5,11 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT m.name AS raw_material, SUM(pm.number * op.number) AS used_quantity FROM orders o JOIN order_product op ON o.id = op.order_id JOIN product_material pm ON op.product_id = pm.product_id JOIN materials m ON pm.material_id = m.id WHERE m.type = 'origin' AND o.created_at BETWEEN '2024-06-01' AND '2024-06-30' GROUP BY m.name;",
-            "description": "To list the raw materials and quantities used for orders in June 2024, we need to find the orders created in June 2024, then join with order_product to get the products, and further join with product_material to get the raw materials and their quantities.",
+            "sql": "SELECT m.name AS raw_material, SUM(pm.number * op.number) AS used_quantity FROM orders o JOIN order_product op ON o.id = op.order_id JOIN product_material pm ON op.product_id = pm.product_id JOIN materials m ON pm.material_id = m.id WHERE o.created_at BETWEEN '2024-06-01' AND '2024-06-30' AND m.type = 'origin' GROUP BY m.name;",
+            "description": "To list the raw materials and quantities used for orders in June 2024, we need to find the orders created in June 2024, then join with order_product to get the products, and finally join with product_material to get the raw materials and their quantities.",
             "results": "create table successfully."
         }
     ],
-    "response": "It seems like the SQL query was executed successfully, but unfortunately, there are no results available to display the raw materials and quantities used for orders in June 2024. 😅\n\nIf you have any other questions or need further assistance, feel free to ask! 😊",
-    "token_used": 5082
+    "response": "It looks like the SQL query was set up successfully, but there are no results available for the raw materials and quantities used for orders in June 2024. 😅\n\nIf you have any other questions or need further assistance, feel free to ask!",
+    "token_used": 5077
 }

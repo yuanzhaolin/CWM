@@ -5,22 +5,20 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT * FROM working_group WHERE name IN ('Elite Sewers', 'Expert Cutters');",
-            "description": "To find the working groups with the names 'Elite Sewers' and 'Expert Cutters', we can use a single SQL query to retrieve the information.",
+            "sql": "SELECT id, name FROM working_group WHERE name IN ('Elite Sewers', 'Expert Cutters');",
+            "description": "To find the working groups with the names 'Elite Sewers' and 'Expert Cutters', we can use a single SQL query to retrieve the working group IDs for these names.",
             "results": [
                 {
                     "id": 4,
-                    "type": "cut",
                     "name": "Expert Cutters"
                 },
                 {
                     "id": 10,
-                    "type": "sew",
                     "name": "Elite Sewers"
                 }
             ]
         }
     ],
-    "response": "Hey there! 🌟\n\nBased on the data I found, we currently have the following working groups:\n| ID  | Type  | Name           |\n|-----|-------|-----------------|\n| 4   | cut   | Expert Cutters  |\n| 10  | sew   | Elite Sewers    |\n\nLooks like we have some talented folks in the Elite Sewers and Expert Cutters groups! If you have any more questions or need further assistance, feel free to ask. 😊",
-    "token_used": 5407
+    "response": "Sure! Here is the answer to the user's question:\n\n| ID  | Name           |\n|-----|----------------|\n| 4   | Expert Cutters |\n| 10  | Elite Sewers   |\n\nWe currently have the working groups \"Expert Cutters\" and \"Elite Sewers\"! 😄",
+    "token_used": 5356
 }

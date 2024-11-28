@@ -2,30 +2,7 @@
     "ID": 22,
     "q_ch": "我们现在有哪些缝纫组，哪些裁剪组？",
     "q_en": "What sewing groups and cutting groups do we have now?",
-    "gt": "Sure thing! Here are the sewing and cutting groups we currently have:\n\n| Group Type     | Group Name         |\n|----------------|--------------------|\n| Cutting Group  | Precision Cutters  |\n| Sewing Group   | Master Sewers      |\n| Cutting Group  | Master Cutters     |\n| Cutting Group  | Expert Cutters     |\n| Cutting Group  | Professional Cutters|\n| Cutting Group  | Advanced Cutters   |\n| Sewing Group   | Skilled Sewers     |\n| Sewing Group   | Advanced Sewers    |\n| Sewing Group   | Premier Sewers     |\n| Sewing Group   | Elite Sewers       |\n\nLooks like we have a fantastic lineup of groups! If you need more details, feel free to ask. 😊",
     "steps": [
-        {
-            "type": "SQL",
-            "sql": "SELECT name FROM working_group WHERE type = 'sew';",
-            "description": "Retrieve the names of all sewing groups",
-            "results": [
-                {
-                    "name": "Master Sewers"
-                },
-                {
-                    "name": "Skilled Sewers"
-                },
-                {
-                    "name": "Advanced Sewers"
-                },
-                {
-                    "name": "Premier Sewers"
-                },
-                {
-                    "name": "Elite Sewers"
-                }
-            ]
-        },
         {
             "type": "SQL",
             "sql": "SELECT name FROM working_group WHERE type = 'cut';",
@@ -47,8 +24,30 @@
                     "name": "Advanced Cutters"
                 }
             ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT name FROM working_group WHERE type = 'sew';",
+            "description": "Retrieve the names of all sewing groups",
+            "results": [
+                {
+                    "name": "Master Sewers"
+                },
+                {
+                    "name": "Skilled Sewers"
+                },
+                {
+                    "name": "Advanced Sewers"
+                },
+                {
+                    "name": "Premier Sewers"
+                },
+                {
+                    "name": "Elite Sewers"
+                }
+            ]
         }
     ],
-    "response": "Sure thing! Here are the sewing and cutting groups we currently have:\n\n| Sewing Groups       | Cutting Groups       |\n|---------------------|----------------------|\n| Master Sewers       | Precision Cutters    |\n| Skilled Sewers      | Master Cutters       |\n| Advanced Sewers     | Expert Cutters       |\n| Premier Sewers      | Professional Cutters |\n| Elite Sewers        | Advanced Cutters     |\n\nHope this helps! If you have any more questions, feel free to ask. 😊",
-    "token_used": 6778
+    "response": "Sure thing! Let's take a look at the sewing and cutting groups we have right now. 😊\n\n| **Group Type** | **Group Name**          |\n|----------------|-------------------------|\n| Cutting        | Precision Cutters       |\n| Cutting        | Master Cutters          |\n| Cutting        | Expert Cutters          |\n| Cutting        | Professional Cutters    |\n| Cutting        | Advanced Cutters        |\n| Sewing         | Master Sewers           |\n| Sewing         | Skilled Sewers          |\n| Sewing         | Advanced Sewers         |\n| Sewing         | Premier Sewers          |\n| Sewing         | Elite Sewers            |\n\nThese are the fantastic groups we have in our lineup! If you have any more questions, feel free to ask. 😄",
+    "token_used": 6333
 }

@@ -2,14 +2,15 @@
     "ID": 48,
     "q_ch": "我是Advanced Sewers，请将属于我的所有2024年5月1日-2024年5月30日之间开始的裁剪任务转给Premier Sewers。",
     "q_en": "I am an Advanced Sewer. Please transfer all cutting tasks that started between May 1, 2024, and May 30, 2024, to Premier Sewers.",
+    "hint": "The ID of Advanced Sewers is 8, and the ID of Premier Sewers is 9. Update the database according to the time requirements described",
     "steps": [
         {
             "type": "SQL",
-            "sql": "UPDATE cutting_tasks SET working_group_id = (SELECT id FROM working_group WHERE name = 'Premier Sewers') WHERE start_time BETWEEN '2024-05-01' AND '2024-05-30';",
-            "description": "Update the working group for all cutting tasks that started between May 1, 2024, and May 30, 2024, to the working group with the name 'Premier Sewers'.",
+            "sql": "UPDATE cutting_tasks SET working_group_id = (SELECT id FROM working_group WHERE name = 'Premier Sewers') WHERE working_group_id = (SELECT id FROM working_group WHERE name = 'Advanced Sewers') AND start_time BETWEEN '2024-05-01' AND '2024-05-30';",
+            "description": "Update the working group for all cutting tasks that started between May 1, 2024, and May 30, 2024, from 'Advanced Sewers' to 'Premier Sewers'.",
             "results": "update data successfully."
         }
     ],
-    "response": "Sure thing! 🎉 The cutting tasks that started between May 1, 2024, and May 30, 2024, have been successfully transferred to the 'Premier Sewers' working group. Here's a quick summary of the update:\n\n| Task Update | Status                  |\n|-------------|-------------------------|\n| Transfer    | Completed Successfully ✅ |\n\nIf you have any more requests or need further assistance, feel free to ask! 😊",
-    "token_used": 5647
+    "response": "### Task Transfer Update\n\nHey there! 😄 Great news! All cutting tasks that started between May 1, 2024, and May 30, 2024, have been successfully transferred from the **Advanced Sewers** group to the **Premier Sewers** group. 🎉\n\nHere's a quick summary of the update:\n\n| Task Type       | Original Group     | New Group        | Date Range                | Status                  |\n|-----------------|--------------------|------------------|---------------------------|-------------------------|\n| Cutting Tasks   | Advanced Sewers    | Premier Sewers   | May 1, 2024 - May 30, 2024| Successfully Updated ✅ |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5836
 }

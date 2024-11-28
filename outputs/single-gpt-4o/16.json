@@ -6,7 +6,7 @@
         {
             "type": "SQL",
             "sql": "SELECT * FROM cutting_tasks WHERE start_time > '2024-05-01';",
-            "description": "To find the cutting tasks that will only start after May 1, 2024, we need to query the cutting_tasks table for tasks with a start_time greater than May 1, 2024.",
+            "description": "To find the cutting tasks that will only start after May 1, 2024, we need to filter the cutting_tasks table for tasks with a start_time greater than May 1, 2024.",
             "results": [
                 {
                     "id": 31,
@@ -55,6 +55,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Here are the cutting tasks that will only start after May 1, 2024:\n\n| Task ID | Start Time          | End Time            | Working Group ID | Order Product ID | Produced WIP ID | Planned Number | Completed Number | Status |\n|---------|---------------------|---------------------|------------------|------------------|-----------------|----------------|------------------|--------|\n| 31      | May 10, 2024        | May 26, 2024        | 3                | 31               | 8               | 260            | 260              | 1      |\n| 32      | June 1, 2024        | June 17, 2024       | 2                | 32               | 8               | 150            | 120              | 1      |\n| 33      | June 25, 2024       | July 17, 2024       | 3                | 33               | 10              | 120            | 0                | 0      |\n| 34      | June 30, 2024       | July 10, 2024       | 4                | 34               | 2               | 330            | 0                | 0      |\n\nThese tasks are all set to kick off after May 1, 2024. If you have any more questions or need further details, feel free to ask! 😊",
-    "token_used": 6070
+    "response": "Sure thing! Here are the cutting tasks that will only start after May 1, 2024:\n\n| Task ID | Start Time          | End Time            | Working Group ID | Order Product ID | Produced WIP ID | Planned Number | Completed Number | Status |\n|---------|---------------------|---------------------|------------------|------------------|-----------------|----------------|------------------|--------|\n| 31      | May 10, 2024        | May 26, 2024        | 3                | 31               | 8               | 260            | 260              | 1      |\n| 32      | June 1, 2024        | June 17, 2024       | 2                | 32               | 8               | 150            | 120              | 1      |\n| 33      | June 25, 2024       | July 17, 2024       | 3                | 33               | 10              | 120            | 0                | 0      |\n| 34      | June 30, 2024       | July 10, 2024       | 4                | 34               | 2               | 330            | 0                | 0      |\n\nThese tasks are all set to start after the specified date. If you have any more questions or need further details, feel free to ask! 😊",
+    "token_used": 6089
 }

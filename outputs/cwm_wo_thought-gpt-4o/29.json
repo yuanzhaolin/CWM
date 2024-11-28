@@ -2,23 +2,131 @@
     "ID": 29,
     "q_ch": "对所有已经开始但是尚未完成的缝纫任务进行统计，剩余工作量最多的工作组是哪个？",
     "q_en": "Which workgroup has the highest remaining workload for all sewing tasks that have been started but not yet completed?",
-    "gt": "Hey there! 😄 Let's dive into the sewing world and find out which workgroup has the highest remaining workload for all those sewing tasks that have been started but not yet completed.\n\nBased on the data, here's what we found:\n\n| Workgroup Name  | Remaining Workload |\n|-----------------|--------------------|\n| Master Sewers   | 0                  |\n\nIt looks like the \"Master Sewers\" have a remaining workload of zero for the tasks that have been started but not yet completed. So, all the sewing workgroups have completed their tasks! 🎉\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT working_group_id, SUM(planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1 GROUP BY working_group_id ORDER BY remaining_workload DESC LIMIT 1;",
-            "description": "Retrieve the working group ID and the total remaining workload for all sewing tasks that have been started but not yet completed",
+            "sql": "SELECT working_group_id, (planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1;",
+            "description": "Retrieve the IDs and remaining workload for all sewing tasks that have been started but not yet completed",
             "results": [
                 {
+                    "working_group_id": 9,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 9,
+                    "remaining_workload": 0
+                },
+                {
                     "working_group_id": 2,
-                    "remaining_workload": "40"
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 2,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 8,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 8,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 7,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 8,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 2,
+                    "remaining_workload": 30
+                },
+                {
+                    "working_group_id": 2,
+                    "remaining_workload": 10
+                },
+                {
+                    "working_group_id": 2,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 2,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 7,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 8,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 8,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 7,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 7,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 2,
+                    "remaining_workload": 0
+                },
+                {
+                    "working_group_id": 10,
+                    "remaining_workload": 0
                 }
             ]
         },
         {
             "type": "SQL",
-            "sql": "SELECT name FROM working_group WHERE id = '2';",
-            "description": "Retrieve the name of the working group with the highest remaining workload",
+            "sql": "SELECT working_group_id, SUM(remaining_workload) AS total_remaining_workload FROM (SELECT working_group_id, (planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1) AS ongoing_tasks GROUP BY working_group_id;",
+            "description": "Calculate the total remaining workload for each workgroup",
+            "results": [
+                {
+                    "working_group_id": 2,
+                    "total_remaining_workload": "40"
+                },
+                {
+                    "working_group_id": 7,
+                    "total_remaining_workload": "0"
+                },
+                {
+                    "working_group_id": 8,
+                    "total_remaining_workload": "0"
+                },
+                {
+                    "working_group_id": 9,
+                    "total_remaining_workload": "0"
+                },
+                {
+                    "working_group_id": 10,
+                    "total_remaining_workload": "0"
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT working_group_id FROM (SELECT working_group_id, SUM(remaining_workload) AS total_remaining_workload FROM (SELECT working_group_id, (planned_number - completed_number) AS remaining_workload FROM sewing_tasks WHERE status = 1) AS ongoing_tasks GROUP BY working_group_id) AS workload_summary ORDER BY total_remaining_workload DESC LIMIT 1;",
+            "description": "Identify the workgroup with the highest remaining workload",
+            "results": [
+                {
+                    "working_group_id": 2
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT name FROM working_group WHERE id = 2;",
+            "description": "Retrieve the name of the workgroup with the highest remaining workload",
             "results": [
                 {
                     "name": "Master Sewers"
@@ -26,6 +134,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Based on the data, the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed is **Master Sewers**. Here's a quick summary for you:\n\n| Workgroup Name | Remaining Workload |\n|----------------|---------------------|\n| Master Sewers  | 40                  |\n\nLooks like the Master Sewers have their hands full! 🧵✂️ Keep up the great work! 😄",
-    "token_used": 6791
+    "response": "Sure thing! Based on the data, the workgroup with the highest remaining workload for all sewing tasks that have been started but not yet completed is **Master Sewers**. Here's a quick summary for you:\n\n| Workgroup ID | Workgroup Name | Total Remaining Workload |\n|--------------|----------------|--------------------------|\n| 2            | Master Sewers  | 40                       |\n\nIt looks like the Master Sewers have a bit of work ahead of them! Keep up the great work, team! 😄✂️",
+    "token_used": 7496
 }

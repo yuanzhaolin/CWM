@@ -2,7 +2,6 @@
     "ID": 43,
     "q_ch": "向仓库Main Warehouse，入库Leather 1000份。",
     "q_en": "Send 1000 Leathers to the Main Warehouse for storage.",
-    "gt": "Sure thing! Let's get those materials stored away safely. Here's what we need to do:\n\n| Material Name | Material ID | Warehouse Name | Warehouse ID | Quantity |\n|---------------|-------------|----------------|--------------|----------|\n| Leather       | 7           | Main Warehouse | 1            | 1000     |\n\nTo store 1000 units of Leather in the Main Warehouse, we'll insert a new entry with the material type ID and warehouse ID. This ensures that the existing records remain unchanged. 📦✨\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
     "steps": [
         {
             "type": "SQL",
@@ -23,8 +22,15 @@
                     "id": 1
                 }
             ]
+        },
+        {
+            "type": "Tool",
+            "results": {
+                "input": "Store 1000 units of \"Leather\" in the \"Main Warehouse\"\n[\"tool_store_materials, {'material_id': 7, 'quantity': 1000, 'warehouse_id': 1}, Store the materials in the warehouse\"]",
+                "output": "It seems there was an issue with storing the materials. Please check the details and try again."
+            }
         }
     ],
-    "response": "Sure thing! Let's get those materials moving! 🚚\n\nHere's the plan:\n\n| Material Name | Material ID | Warehouse Name | Warehouse ID | Quantity |\n|---------------|-------------|----------------|--------------|----------|\n| Leather       | 7           | Main Warehouse | 1            | 1000     |\n\nWe'll send 1000 units of **Leather** to the **Main Warehouse** for storage. Everything is set and ready to go! 📦✨\n\nIf you have any more requests or need further assistance, just let me know! 😊",
-    "token_used": 7319
+    "response": "Sure thing! Let's take a look at the task of sending 1000 units of Leather to the Main Warehouse. Here's what we found:\n\n| Material Name | Material ID | Warehouse Name | Warehouse ID | Quantity | Status |\n|---------------|-------------|----------------|--------------|----------|--------|\n| Leather       | 7           | Main Warehouse | 1            | 1000     | ❌ Issue encountered |\n\nIt seems there was an issue with storing the materials. Please double-check the details and try again. If you need further assistance, feel free to ask! 😊",
+    "token_used": 6827
 }

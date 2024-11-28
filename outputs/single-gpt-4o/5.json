@@ -14,6 +14,6 @@
             ]
         }
     ],
-    "response": "Hey there! 😄 It looks like you're curious about when Sophia's order was created. Let's take a look at the details:\n\n| Customer Name | Order Creation Date |\n|---------------|----------------------|\n| Sophia        | March 18, 2024       |\n\nSophia's order was created on March 18, 2024. If you have any more questions or need further assistance, feel free to ask! 📅✨",
-    "token_used": 5280
+    "response": "Sure thing! Let's take a look at when Sophia's order was created. Here's the information you need:\n\n| Customer Name | Order Creation Date |\n|---------------|----------------------|\n| Sophia        | March 18, 2024       |\n\nSophia's order was created on March 18, 2024. 🎉 If you have any more questions, feel free to ask! 😊",
+    "token_used": 5252
 }

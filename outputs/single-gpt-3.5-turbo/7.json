@@ -5,15 +5,15 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT COUNT(*) AS total_orders FROM orders WHERE order_name = 'PolyU';",
-            "description": "To find the total number of orders under the order name 'PolyU', we can simply count the orders that match this criteria.",
+            "sql": "SELECT COUNT(*) AS total_orders FROM orders o JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'PolyU';",
+            "description": "To find the total number of orders under PolyU, we need to count the orders associated with the customer 'PolyU'.",
             "results": [
                 {
-                    "total_orders": 0
+                    "total_orders": 2
                 }
             ]
         }
     ],
-    "response": "Sure! Here is the answer to your question:\n\n| Total Orders |\n|--------------|\n|       0      |\n\nLooks like there are currently no orders under the name 'PolyU'. If you have any more questions or need further assistance, feel free to ask! 😄",
-    "token_used": 5176
+    "response": "Sure! Here is the answer to your question:\n\n| Total Orders |\n|--------------|\n|       2      |\n\nThere are a total of 2 orders under PolyU. 😄",
+    "token_used": 4755
 }

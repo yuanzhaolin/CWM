@@ -2,7 +2,6 @@
     "ID": 36,
     "q_ch": "顾客是PolyU 的裁剪任务有哪些？",
     "q_en": "What are the cutting tasks for customers who are PolyU?",
-    "gt": "Sure! Here are the cutting tasks for the customer \"PolyU\" that we found:\n\n| Task ID | Start Time          | End Time            | Working Group Name | Order Product ID |\n|---------|---------------------|---------------------|--------------------|------------------|\n| 1       | 2024-01-10 00:00:00 | 2024-01-18 00:00:00 | Master Sewers      | 1                |\n| 4       | 2024-01-10 00:00:00 | 2024-01-17 00:00:00 | Master Sewers      | 4                |\n| 5       | 2024-01-10 00:00:00 | 2024-02-02 00:00:00 | Master Sewers      | 5                |\n| 2       | 2024-01-10 00:00:00 | 2024-02-02 00:00:00 | Master Cutters     | 2                |\n| 3       | 2024-01-10 00:00:00 | 2024-01-19 00:00:00 | Master Cutters     | 3                |\n| 31      | 2024-05-10 00:00:00 | 2024-05-26 00:00:00 | Master Cutters     | 31               |\n\nThese tasks are handled by the talented teams of \"Master Sewers\" and \"Master Cutters\". If you have any more questions or need further assistance, feel free to ask! 😄",
     "steps": [
         {
             "type": "SQL",
@@ -16,8 +15,8 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT id FROM orders WHERE user_id = '1';",
-            "description": "Retrieve the order IDs for orders placed by the customer \"PolyU\"",
+            "sql": "SELECT id FROM orders WHERE user_id = 1;",
+            "description": "Retrieve the order IDs for the customer \"PolyU\"",
             "results": [
                 {
                     "id": 1
@@ -30,7 +29,7 @@
         {
             "type": "SQL",
             "sql": "SELECT id FROM order_product WHERE order_id IN (1, 9);",
-            "description": "Retrieve the order_product IDs for the orders placed by \"PolyU\"",
+            "description": "Retrieve the order product IDs for the orders of customer \"PolyU\"",
             "results": [
                 {
                     "id": 1
@@ -54,66 +53,60 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT ct.id, ct.start_time, ct.end_time, wg.name AS working_group_name, ct.planned_number, ct.completed_number, ct.status FROM cutting_tasks ct JOIN working_group wg ON ct.working_group_id = wg.id WHERE ct.order_product_id IN (1, 2, 3, 4, 5, 31);",
-            "description": "Retrieve the cutting tasks for the order products associated with \"PolyU\"",
+            "sql": "SELECT ct.id, ct.start_time, ct.end_time, wg.name AS working_group_name, p.attributes AS product_attributes, pt.description AS product_type FROM cutting_tasks ct JOIN working_group wg ON ct.working_group_id = wg.id JOIN order_product op ON ct.order_product_id = op.id JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id IN (1, 2, 3, 4, 5, 31);",
+            "description": "Retrieve the cutting tasks for the order products of customer \"PolyU\"",
             "results": [
                 {
                     "id": 1,
                     "start_time": "2024-01-10 00:00:00",
                     "end_time": "2024-01-18 00:00:00",
                     "working_group_name": "Master Sewers",
-                    "planned_number": 100,
-                    "completed_number": 100,
-                    "status": 2
+                    "product_attributes": "Red, M size",
+                    "product_type": "T-shirt"
                 },
                 {
                     "id": 4,
                     "start_time": "2024-01-10 00:00:00",
                     "end_time": "2024-01-17 00:00:00",
                     "working_group_name": "Master Sewers",
-                    "planned_number": 220,
-                    "completed_number": 220,
-                    "status": 1
+                    "product_attributes": "White, XL size",
+                    "product_type": "T-shirt"
                 },
                 {
                     "id": 5,
                     "start_time": "2024-01-10 00:00:00",
                     "end_time": "2024-02-02 00:00:00",
                     "working_group_name": "Master Sewers",
-                    "planned_number": 260,
-                    "completed_number": 260,
-                    "status": 1
+                    "product_attributes": "Yellow, S size",
+                    "product_type": "T-shirt"
                 },
                 {
                     "id": 2,
                     "start_time": "2024-01-10 00:00:00",
                     "end_time": "2024-02-02 00:00:00",
                     "working_group_name": "Master Cutters",
-                    "planned_number": 240,
-                    "completed_number": 240,
-                    "status": 1
+                    "product_attributes": "Green, M size",
+                    "product_type": "T-shirt"
                 },
                 {
                     "id": 3,
                     "start_time": "2024-01-10 00:00:00",
                     "end_time": "2024-01-19 00:00:00",
                     "working_group_name": "Master Cutters",
-                    "planned_number": 150,
-                    "completed_number": 150,
-                    "status": 2
+                    "product_attributes": "Blue, L size",
+                    "product_type": "T-shirt"
                 },
                 {
                     "id": 31,
                     "start_time": "2024-05-10 00:00:00",
                     "end_time": "2024-05-26 00:00:00",
                     "working_group_name": "Master Cutters",
-                    "planned_number": 260,
-                    "completed_number": 260,
-                    "status": 1
+                    "product_attributes": "Pink, M size",
+                    "product_type": "Skirt"
                 }
             ]
         }
     ],
-    "response": "Sure! Let's take a look at the cutting tasks for the customer \"PolyU\". Here is a summary of the tasks:\n\n| Task ID | Start Time       | End Time         | Working Group    | Planned Number | Completed Number | Status |\n|---------|------------------|------------------|------------------|----------------|------------------|--------|\n| 1       | 2024-01-10       | 2024-01-18       | Master Sewers    | 100            | 100              | 2      |\n| 4       | 2024-01-10       | 2024-01-17       | Master Sewers    | 220            | 220              | 1      |\n| 5       | 2024-01-10       | 2024-02-02       | Master Sewers    | 260            | 260              | 1      |\n| 2       | 2024-01-10       | 2024-02-02       | Master Cutters   | 240            | 240              | 1      |\n| 3       | 2024-01-10       | 2024-01-19       | Master Cutters   | 150            | 150              | 2      |\n| 31      | 2024-05-10       | 2024-05-26       | Master Cutters   | 260            | 260              | 1      |\n\nHere's a quick breakdown of the status codes:\n- **1**: In Progress\n- **2**: Completed\n\nIt looks like \"PolyU\" has been quite busy with their cutting tasks! If you have any more questions or need further details, feel free to ask. 😄",
-    "token_used": 9515
+    "response": "Sure thing! Here are the cutting tasks for the customer \"PolyU\". I've organized the details into a neat table for you. 😊\n\n| Task ID | Start Time          | End Time            | Working Group   | Product Attributes | Product Type |\n|---------|---------------------|---------------------|-----------------|--------------------|--------------|\n| 1       | 2024-01-10 00:00    | 2024-01-18 00:00    | Master Sewers   | Red, M size        | T-shirt      |\n| 4       | 2024-01-10 00:00    | 2024-01-17 00:00    | Master Sewers   | White, XL size     | T-shirt      |\n| 5       | 2024-01-10 00:00    | 2024-02-02 00:00    | Master Sewers   | Yellow, S size     | T-shirt      |\n| 2       | 2024-01-10 00:00    | 2024-02-02 00:00    | Master Cutters  | Green, M size      | T-shirt      |\n| 3       | 2024-01-10 00:00    | 2024-01-19 00:00    | Master Cutters  | Blue, L size       | T-shirt      |\n| 31      | 2024-05-10 00:00    | 2024-05-26 00:00    | Master Cutters  | Pink, M size       | Skirt        |\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
+    "token_used": 8987
 }

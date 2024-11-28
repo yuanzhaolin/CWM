@@ -10,6 +10,6 @@
             "results": "update data successfully."
         }
     ],
-    "response": "Sure thing! 🎉 Here's the update on your request:\n\n| Material       | Warehouse      | Action Taken                  | Status                  |\n|----------------|----------------|-------------------------------|-------------------------|\n| Cotton Fabric  | Main Warehouse | Released 100 units            | Update successful! ✅   |\n\nThe 100 units of Cotton Fabric have been successfully released from the Main Warehouse. If there's anything else you need, feel free to ask! 😊",
-    "token_used": 5441
+    "response": "### Release Confirmation\n\nGreat news! 🎉 We've successfully updated the inventory. Here's a quick summary of the action taken:\n\n| Material       | Warehouse      | Units Released |\n|----------------|----------------|----------------|\n| Cotton Fabric  | Main Warehouse | 100            |\n\nThe 'Cotton Fabric' stock in the 'Main Warehouse' has been reduced by 100 units. If there's anything else you need, feel free to ask! 😊",
+    "token_used": 5418
 }

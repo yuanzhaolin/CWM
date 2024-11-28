@@ -5,11 +5,11 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT wg.name AS working_group_name FROM working_group wg JOIN cutting_tasks ct ON wg.id = ct.working_group_id JOIN order_product op ON ct.order_product_id = op.id JOIN product_material pm ON op.product_id = pm.product_id JOIN materials m ON pm.material_id = m.id WHERE wg.name = 'Expert Cutters' AND m.name = 'Cotton Fabric';",
-            "description": "To find the working groups that use 'Cotton Fabric' and have the name 'Expert Cutters', we need to join the necessary tables and filter the results based on the given conditions.",
+            "sql": "SELECT DISTINCT wg.name AS working_group_name, c.customer_name AS customer_name FROM working_group wg JOIN cutting_tasks ct ON wg.id = ct.working_group_id JOIN order_product op ON ct.order_product_id = op.id JOIN orders o ON op.order_id = o.id JOIN customers c ON o.user_id = c.id JOIN product_material pm ON op.product_id = pm.product_id JOIN materials m ON pm.material_id = m.id WHERE wg.name = 'Expert Cutters' AND m.name = 'Cotton Fabric';",
+            "description": "To find the working group members who use 'Cotton Fabric' and belong to the 'Expert Cutters' group, we need to join the necessary tables and filter the results based on the given conditions.",
             "results": "no results found."
         }
     ],
-    "response": "# Answer\nHey there! 😄\n\nAfter running the SQL query to find out which working groups named 'Expert Cutters' use 'Cotton Fabric', unfortunately, no results were found. \n\nHere's the information you requested:\n\n| Working Group Name |\n|--------------------|\n|        No results found.        |\n\nIf you have any more questions or need further assistance, feel free to ask! 🌟",
-    "token_used": 5440
+    "response": "Hey there! 😄\n\nBased on your question \"Which <working_group.name = 'Expert Cutters'> use <materials.name = 'Cotton Fabric'>?\", I've checked the database and unfortunately, no results were found for this query. \n\nFeel free to ask me anything else! 🤖",
+    "token_used": 5423
 }

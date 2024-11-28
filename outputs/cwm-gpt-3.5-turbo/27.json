@@ -6,7 +6,7 @@
         {
             "type": "SQL",
             "sql": "SELECT id FROM working_group WHERE name = 'Advanced Sewers';",
-            "description": "Retrieve the ID of the working group with the name \"Advanced Sewers\"",
+            "description": "Retrieve the ID of the working group named \"Advanced Sewers\"",
             "results": [
                 {
                     "id": 8
@@ -16,7 +16,7 @@
         {
             "type": "SQL",
             "sql": "SELECT * FROM sewing_tasks WHERE working_group_id = 8 AND status != 2;",
-            "description": "Find the sewing tasks that belong to the working group \"Advanced Sewers\" and have not been completed",
+            "description": "Find the sewing tasks that belong to the working group with the ID obtained in Step1 and have not been completed",
             "results": [
                 {
                     "id": 6,
@@ -97,10 +97,20 @@
                     "planned_number": 120,
                     "completed_number": 0,
                     "status": 0
+                },
+                {
+                    "id": 38,
+                    "start_time": "2024-11-21 09:23:41",
+                    "end_time": "2024-11-21 09:23:41",
+                    "working_group_id": 8,
+                    "order_product_id": 14,
+                    "planned_number": 120,
+                    "completed_number": 0,
+                    "status": 0
                 }
             ]
         }
     ],
-    "response": "Hey there! 😄\n\nBased on the SQL queries executed, here are the tasks that you have not yet completed for the working group \"Advanced Sewers\":\n\n| Task ID | Start Time | End Time | Planned Number | Completed Number | Status |\n|---------|------------|----------|----------------|------------------|--------|\n| 22      | 2024-04-09 | 2024-04-22 | 115            | 60               | Not Completed |\n| 25      | 2024-05-14 | 2024-06-03 | 75             | 75               | Not Completed |\n| 33      | 2024-07-17 | 2024-08-03 | 120            | 0                | Not Completed |\n\nLooks like there are a few tasks that still need your attention. Keep up the good work! If you have any more questions, feel free to ask. 😊",
-    "token_used": 8323
+    "response": "Hey there! 😄\n\nBased on the SQL queries executed, here are the tasks that you have not yet completed for the working group named \"Advanced Sewers\":\n\n| Task ID | Start Time | End Time | Order Product ID | Planned Number | Completed Number | Status |\n|---------|------------|----------|------------------|----------------|------------------|--------|\n| 22      | 2024-04-09 | 2024-04-22 | 22               | 115            | 60               | 0      |\n| 25      | 2024-05-14 | 2024-06-03 | 25               | 75             | 75               | 0      |\n| 33      | 2024-07-17 | 2024-08-03 | 33               | 120            | 0                | 0      |\n| 38      | 2024-11-21 09:23:41 | 2024-11-21 09:23:41 | 14 | 120 | 0 | 0 |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 7906
 }

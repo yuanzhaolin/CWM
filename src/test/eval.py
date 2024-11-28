@@ -33,12 +33,13 @@ eval_prompt = """
 
 你需要评价被测试模型的回答以及生成答案的逻辑是否正确，如果错误请给出错误类别和错误原因。你的评价需要按照如下格式:
 评价结果;错误类别;评价理由
-其中错误类别包括以下五种：
-1. Wrong COT：模型的回答不符合标准答案的逻辑推理过程，
+其中错误类别包括以下六种：
+1. Wrong COT：模型的回答不符合标准答案的逻辑推理过程，并且被测试模型的回答也与标准答案不符，
 2. Wrong syntax：生成的SQL查询语句、工具调用语句过程中存在语法错误，被测试模型的回答中包含报错信息
 3. Wrong calculation：模型进行数学计算时出现错误，比如计算任务完成百分比时，使用了错误的计算公式或者输入参数。
 4. Wrong understanding: 模型对请求的理解出现了错误，导致答非所问或执行了与预期不符的操作
-5. Else: 不属于上述四种错误类型的错误
+5. Information Deviation: 被测试模型在做查询时，给定了实体的名字但未能检索到有效信息
+6. Else: 不属于上述五种错误类型的错误
 
 错误类别应该严格隶属于上述五种错误类型中的一个。如果问题回答正确，错误类别留空
 
@@ -49,7 +50,11 @@ False; Wrong syntax; An error is made in the SQL query result. In step 5, The mo
 
 注意:
 1. 如果标准答案使用了Tool或者Thought，被测试模型没有使用Tool或者Thought也是被允许的,只要通过其他有效手段获得了所需的数据，且最后结果正确即可。
-2. 如果被测试模型的回答中包含报错信息，比如SQL查询失败，工具调用失败等，直接认为回答错误,且错误类别为Wrong syntax。
+2. 如果被测试模型的回答或回答的生成流程中包含报错信息，比如SQL查询失败，工具调用失败等，直接认为回答错误,且错误类别为Wrong syntax。
+3. 标准答案和被测试模型给出的答案会包含结论和数据两部分，如果被测试模型回答的结论正确，则不应判定为Wrong COT错误，除非被测试模型的结论与标准答案的结论不同
+4. 如果被测试模型的回答包括正确答案，也可以被认为是正确的，例如：问题要求订单，但模型列出了订单详细，依然被认为正确
+5. 如果被测试模型的回答数据格式与标准答案不符，或者结论一致但提供了比标准答案更丰富或更简略的回答，依然被认为是正确的
+
 
 原始问题: {request}
 标准答案: {gt_results}
@@ -93,7 +98,8 @@ def eval_all(output_dir, gt_dir):
                             request=gt['q_en'],
                             gt_results=gt['gt'],
                             gt_steps=gt['steps'],
-                            test_results=test['gt'],
+                            # test_results=test['gt'],
+                            test_results=test['response'],
                             test_steps=test['steps'],
                             model=cfg.smart_llm_model
                         )

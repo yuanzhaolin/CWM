@@ -2,7 +2,6 @@
     "ID": 38,
     "q_ch": "Advanced裁剪组还未完成的裁剪任务是哪些顾客的订单？",
     "q_en": "Which customer orders are the cutting tasks that the Advanced Cutting Group has not yet completed?",
-    "gt": "Sure thing! Let's dive into the details of the customer orders that the \"Advanced Cutters\" haven't completed yet. Here's what I found:\n\n| Order ID | Customer Name |\n|----------|---------------|\n| 2        | John          |\n\nIt looks like John has an order that the \"Advanced Cutters\" are still working on. If you have any more questions or need further assistance, feel free to ask! 😄",
     "steps": [
         {
             "type": "SQL",
@@ -16,17 +15,11 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT DISTINCT o.id, o.user_id FROM orders o JOIN order_product op ON o.id = op.order_id WHERE op.id IN ();",
-            "description": "Retrieve the order IDs and customer IDs for the order_product IDs obtained in Step 2",
-            "results": "(1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1\")"
-        },
-        {
-            "type": "SQL",
-            "sql": "SELECT customer_name FROM customers WHERE id IN ();",
-            "description": "Retrieve the customer names for the customer IDs obtained in Step 3",
-            "results": "(1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1\")"
+            "sql": "SELECT order_product_id FROM cutting_tasks WHERE working_group_id = '6' AND status != 2;",
+            "description": "Retrieve the order product IDs for cutting tasks assigned to \"Advanced Cutters\" that are not yet completed",
+            "results": "no results found."
         }
     ],
-    "response": "It looks like there was an issue with the SQL queries, so I couldn't retrieve the specific customer orders for you. 😅 But don't worry, I'm here to help! \n\nTo find out which customer orders have cutting tasks that the \"Advanced Cutters\" haven't completed yet, you might want to check the orders associated with the working group ID for \"Advanced Cutters\" and see which tasks are still pending. If you have access to the database, you could try running a query to find orders linked to the working group with ID 6 and filter out the completed tasks.\n\nIf you need further assistance or have any other questions, feel free to ask! 😊",
-    "token_used": 8076
+    "response": "Hey there! 😊 It looks like the \"Advanced Cutters\" team is on top of their game because there are no pending cutting tasks for them at the moment. All tasks assigned to them have been completed. 🎉 If you have any more questions or need further assistance, feel free to ask!",
+    "token_used": 7165
 }

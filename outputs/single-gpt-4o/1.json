@@ -5,24 +5,22 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT o.* FROM orders o JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'PolyU';",
-            "description": "Retrieve all orders associated with the customer named 'PolyU' by joining the orders and customers tables.",
+            "sql": "SELECT o.id, o.order_name, o.created_at FROM orders o JOIN customers c ON o.user_id = c.id WHERE c.customer_name = 'PolyU';",
+            "description": "Retrieve the orders for the customer named 'PolyU' by joining the customers and orders tables.",
             "results": [
                 {
                     "id": 1,
-                    "user_id": 1,
                     "order_name": "PolyU_Tshirt",
                     "created_at": "2024-01-10 00:00:00"
                 },
                 {
                     "id": 9,
-                    "user_id": 1,
                     "order_name": "PolyU_Skirt",
                     "created_at": "2024-05-10 00:00:00"
                 }
             ]
         }
     ],
-    "response": "Sure thing! Here are the orders for the customer named \"PolyU\":\n\n| Order ID | Order Name   | Created At          |\n|----------|--------------|---------------------|\n| 1        | PolyU_Tshirt | January 10, 2024    |\n| 9        | PolyU_Skirt  | May 10, 2024        |\n\nLooks like PolyU has some stylish choices! 😄 If you have any more questions, feel free to ask!",
-    "token_used": 5373
+    "response": "Sure thing! Here are the orders for the customer named \"PolyU\":\n\n| Order ID | Order Name   | Created At   |\n|----------|--------------|--------------|\n| 1        | PolyU_Tshirt | 2024-01-10   |\n| 9        | PolyU_Skirt  | 2024-05-10   |\n\nLooks like PolyU has some stylish choices! 😄 If you have any more questions, feel free to ask!",
+    "token_used": 5385
 }

@@ -2,9 +2,10 @@
     "ID": 19,
     "q_ch": "使用 Silk 的缝纫任务有哪些？",
     "q_en": "Which sewing tasks use Silk?",
-    "gt": "Sure! Here are the sewing tasks that use **Silk** as a material. I've organized the details into a table for you. 😊\n\n| Sewing Task ID | Start Time     | End Time       | Working Group ID | Order Product ID | Planned Number | Completed Number | Status      |\n|----------------|----------------|----------------|------------------|------------------|----------------|------------------|-------------|\n| 5              | February 2, 2024 | February 25, 2024 | 2                | 5                | 260            | 260              | Completed   |\n| 6              | March 20, 2024 | April 7, 2024  | 8                | 6                | 95             | 95               | Completed   |\n| 8              | March 8, 2024  | April 5, 2024  | 7                | 8                | 50             | 50               | Completed   |\n| 11             | March 21, 2024 | April 14, 2024 | 9                | 11               | 140            | 140              | In Progress |\n| 14             | March 18, 2024 | April 8, 2024  | 2                | 14               | 120            | 120              | Completed   |\n| 15             | March 26, 2024 | April 9, 2024  | 2                | 15               | 185            | 185              | Completed   |\n| 16             | April 10, 2024 | May 7, 2024    | 8                | 16               | 200            | 200              | Completed   |\n| 19             | April 12, 2024 | April 23, 2024 | 7                | 19               | 95             | 95               | Completed   |\n| 24             | April 23, 2024 | May 20, 2024   | 2                | 24               | 105            | 105              | In Progress |\n| 25             | May 14, 2024   | June 3, 2024   | 8                | 25               | 75             | 75               | In Progress |\n| 27             | May 4, 2024    | May 15, 2024   | 7                | 27               | 60             | 60               | In Progress |\n| 29             | May 11, 2024   | May 19, 2024   | 7                | 29               | 180            | 180              | Completed   |\n| 31             | May 26, 2024   | June 4, 2024   | 10               | 31               | 260            | 260              | Completed   |\n| 32             | June 17, 2024  | July 14, 2024  | 9                | 32               | 150            | 0                | In Progress |\n\nThese tasks are all about creating beautiful items with the luxurious touch of silk! 🧵✨",
+    "gt": "Hey there! 😄 Let's dive into the sewing tasks that use the luxurious material, Silk. Here's a neat table with all the details:\n\n| Sewing Task ID | Start Time          | End Time            | Working Group Name |\n|----------------|---------------------|---------------------|--------------------|\n| 11             | March 21, 2024      | April 14, 2024      | Premier Sewers     |\n| 12             | March 27, 2024      | April 12, 2024      | Master Sewers      |\n| 13             | March 27, 2024      | April 6, 2024       | Master Sewers      |\n| 14             | March 18, 2024      | April 8, 2024       | Master Sewers      |\n\nThese tasks are handled by the talented Premier Sewers and Master Sewers groups. Happy sewing! 🧵✨",
     "steps": [
         {
+            "type": "SQL",
             "sql": "SELECT id FROM materials WHERE name = 'Silk';",
             "description": "Retrieve the material ID for the material with the name \"Silk\"",
             "results": [
@@ -14,116 +15,54 @@
             ]
         },
         {
-            "sql": "SELECT wip_id FROM wip_material WHERE origin_material_id = '5';",
-            "description": "Retrieve the WIP material IDs that use the original material \"Silk\"",
+            "type": "SQL",
+            "sql": "SELECT sewing_task_id FROM sewing_material_allocation WHERE warehouse_material_id IN (SELECT id FROM warehouse_material WHERE material_id = '5');",
+            "description": "Retrieve the sewing task IDs that use the material \"Silk\"",
             "results": [
                 {
-                    "wip_id": 6
+                    "sewing_task_id": 11
                 },
                 {
-                    "wip_id": 8
+                    "sewing_task_id": 12
+                },
+                {
+                    "sewing_task_id": 13
+                },
+                {
+                    "sewing_task_id": 14
                 }
             ]
         },
         {
-            "sql": "SELECT order_product_id FROM cutting_tasks WHERE produced_wip_id IN ('6', '8');",
-            "description": "Retrieve the order product IDs that produce the WIP materials using \"Silk\"",
+            "type": "SQL",
+            "sql": "SELECT st.id, st.start_time, st.end_time, wg.name AS working_group_name FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE st.id IN (11, 12, 13, 14);",
+            "description": "Retrieve the details of sewing tasks using the task IDs obtained in Step2",
             "results": [
                 {
-                    "order_product_id": 5
+                    "id": 12,
+                    "start_time": "2024-03-27 00:00:00",
+                    "end_time": "2024-04-12 00:00:00",
+                    "working_group_name": "Master Sewers"
                 },
                 {
-                    "order_product_id": 6
+                    "id": 13,
+                    "start_time": "2024-03-27 00:00:00",
+                    "end_time": "2024-04-06 00:00:00",
+                    "working_group_name": "Master Sewers"
                 },
                 {
-                    "order_product_id": 8
+                    "id": 14,
+                    "start_time": "2024-03-18 00:00:00",
+                    "end_time": "2024-04-08 00:00:00",
+                    "working_group_name": "Master Sewers"
                 },
                 {
-                    "order_product_id": 11
-                },
-                {
-                    "order_product_id": 14
-                },
-                {
-                    "order_product_id": 15
-                },
-                {
-                    "order_product_id": 16
-                },
-                {
-                    "order_product_id": 19
-                },
-                {
-                    "order_product_id": 24
-                },
-                {
-                    "order_product_id": 25
-                },
-                {
-                    "order_product_id": 27
-                },
-                {
-                    "order_product_id": 29
-                },
-                {
-                    "order_product_id": 31
-                },
-                {
-                    "order_product_id": 32
+                    "id": 11,
+                    "start_time": "2024-03-21 00:00:00",
+                    "end_time": "2024-04-14 00:00:00",
+                    "working_group_name": "Premier Sewers"
                 }
             ]
-        },
-        {
-            "sql": "SELECT id FROM sewing_tasks WHERE order_product_id IN ('5', '6', '8', '11', '14', '15', '16', '19', '24', '25', '27', '29', '31', '32');",
-            "description": "Retrieve the sewing task IDs that use the order products associated with the WIP materials using \"Silk\"",
-            "results": [
-                {
-                    "id": 5
-                },
-                {
-                    "id": 6
-                },
-                {
-                    "id": 8
-                },
-                {
-                    "id": 11
-                },
-                {
-                    "id": 14
-                },
-                {
-                    "id": 15
-                },
-                {
-                    "id": 16
-                },
-                {
-                    "id": 19
-                },
-                {
-                    "id": 24
-                },
-                {
-                    "id": 25
-                },
-                {
-                    "id": 27
-                },
-                {
-                    "id": 29
-                },
-                {
-                    "id": 31
-                },
-                {
-                    "id": 32
-                }
-            ]
-        },
-        {
-            "input": "Retrieve the sewing task details for the tasks that use \"Silk\"\n[\"tool_find_sewing_task, {'sewing_task_id': 5}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 6}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 8}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 11}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 14}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 15}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 16}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 19}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 24}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 25}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 27}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 29}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 31}, Find the sewing task details\", \"tool_find_sewing_task, {'sewing_task_id': 32}, Find the sewing task details\"]",
-            "output": "Here are the details for the sewing tasks that use \"Silk\":\n\n1. **Sewing Task ID: 5**\n   - Start Time: February 2, 2024\n   - End Time: February 25, 2024\n   - Working Group ID: 2\n   - Order Product ID: 5\n   - Planned Number: 260\n   - Completed Number: 260\n   - Status: Completed\n\n2. **Sewing Task ID: 6**\n   - Start Time: March 20, 2024\n   - End Time: April 7, 2024\n   - Working Group ID: 8\n   - Order Product ID: 6\n   - Planned Number: 95\n   - Completed Number: 95\n   - Status: Completed\n\n3. **Sewing Task ID: 8**\n   - Start Time: March 8, 2024\n   - End Time: April 5, 2024\n   - Working Group ID: 7\n   - Order Product ID: 8\n   - Planned Number: 50\n   - Completed Number: 50\n   - Status: Completed\n\n4. **Sewing Task ID: 11**\n   - Start Time: March 21, 2024\n   - End Time: April 14, 2024\n   - Working Group ID: 9\n   - Order Product ID: 11\n   - Planned Number: 140\n   - Completed Number: 140\n   - Status: In Progress\n\n5. **Sewing Task ID: 14**\n   - Start Time: March 18, 2024\n   - End Time: April 8, 2024\n   - Working Group ID: 2\n   - Order Product ID: 14\n   - Planned Number: 120\n   - Completed Number: 120\n   - Status: Completed\n\n6. **Sewing Task ID: 15**\n   - Start Time: March 26, 2024\n   - End Time: April 9, 2024\n   - Working Group ID: 2\n   - Order Product ID: 15\n   - Planned Number: 185\n   - Completed Number: 185\n   - Status: Completed\n\n7. **Sewing Task ID: 16**\n   - Start Time: April 10, 2024\n   - End Time: May 7, 2024\n   - Working Group ID: 8\n   - Order Product ID: 16\n   - Planned Number: 200\n   - Completed Number: 200\n   - Status: Completed\n\n8. **Sewing Task ID: 19**\n   - Start Time: April 12, 2024\n   - End Time: April 23, 2024\n   - Working Group ID: 7\n   - Order Product ID: 19\n   - Planned Number: 95\n   - Completed Number: 95\n   - Status: Completed\n\n9. **Sewing Task ID: 24**\n   - Start Time: April 23, 2024\n   - End Time: May 20, 2024\n   - Working Group ID: 2\n   - Order Product ID: 24\n   - Planned Number: 105\n   - Completed Number: 105\n   - Status: In Progress\n\n10. **Sewing Task ID: 25**\n    - Start Time: May 14, 2024\n    - End Time: June 3, 2024\n    - Working Group ID: 8\n    - Order Product ID: 25\n    - Planned Number: 75\n    - Completed Number: 75\n    - Status: In Progress\n\n11. **Sewing Task ID: 27**\n    - Start Time: May 4, 2024\n    - End Time: May 15, 2024\n    - Working Group ID: 7\n    - Order Product ID: 27\n    - Planned Number: 60\n    - Completed Number: 60\n    - Status: In Progress\n\n12. **Sewing Task ID: 29**\n    - Start Time: May 11, 2024\n    - End Time: May 19, 2024\n    - Working Group ID: 7\n    - Order Product ID: 29\n    - Planned Number: 180\n    - Completed Number: 180\n    - Status: Completed\n\n13. **Sewing Task ID: 31**\n    - Start Time: May 26, 2024\n    - End Time: June 4, 2024\n    - Working Group ID: 10\n    - Order Product ID: 31\n    - Planned Number: 260\n    - Completed Number: 260\n    - Status: Completed\n\n14. **Sewing Task ID: 32**\n    - Start Time: June 17, 2024\n    - End Time: July 14, 2024\n    - Working Group ID: 9\n    - Order Product ID: 32\n    - Planned Number: 150\n    - Completed Number: 0\n    - Status: In Progress\n\nThese tasks involve the use of \"Silk\" as a material."
         }
     ]
 }

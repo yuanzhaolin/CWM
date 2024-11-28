@@ -6,14 +6,20 @@
         {
             "type": "SQL",
             "sql": "SELECT id FROM working_group WHERE name = 'Expert Cutters';",
-            "description": "Retrieve the working group ID for the working group named \"Expert Cutters\"",
+            "description": "Retrieve the working group ID for the group named 'Expert Cutters'",
             "results": [
                 {
                     "id": 4
                 }
             ]
+        },
+        {
+            "type": "SQL",
+            "sql": "UPDATE cutting_tasks SET end_time = '2024-07-31' WHERE working_group_id = 4;",
+            "description": "Update the end time of cutting tasks for the working group 'Expert Cutters' to July 31, 2024",
+            "results": "update data successfully."
         }
     ],
-    "response": "Sure! Here is the response to the user's question:\n\n| Working Group ID |\n|------------------|\n|         4        |\n\nThe expected completion date for the working group named 'Expert Cutters' has been extended to July 31, 2024. 😄",
-    "token_used": 7407
+    "response": "Certainly! Here is the response to the user's question:\n\n---\n\nHey there! 🌟\n\nI've successfully extended the expected completion date for the working group 'Expert Cutters' to July 31, 2024. Everything is all set! 🎉\n\nHere's a summary of what I did:\n\n| Task Description                                              | Status                |\n|---------------------------------------------------------------|-----------------------|\n| Retrieve the working group ID for 'Expert Cutters'            | ID: 4                |\n| Update the end time of cutting tasks to July 31, 2024         | Update successful     |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 7021
 }

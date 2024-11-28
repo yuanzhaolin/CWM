@@ -10,6 +10,6 @@
             "results": "no results found."
         }
     ],
-    "response": "Sure! Here is the answer to your question:\n\n| Material Name |\n|--------------|\n| No results found. |\n\nUnfortunately, there are no materials with zero remaining inventory at the moment. If you have any other questions or need further assistance, feel free to ask! 😄",
-    "token_used": 6711
+    "response": "Sure! Here is the answer to your question:\n\n| Material Name |\n| ------------- |\n| No results found. |\n\nUnfortunately, there are no materials with zero remaining inventory at the moment. If you have any other questions or need further assistance, feel free to ask! 😄",
+    "token_used": 6080
 }

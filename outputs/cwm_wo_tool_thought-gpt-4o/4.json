@@ -2,7 +2,6 @@
     "ID": 4,
     "q_ch": "James 的订单包含哪些产品？",
     "q_en": "What products are included in James's order?",
-    "gt": "Sure! Here are the products included in James's orders:\n\n| **Order ID** | **Product** | **Attributes** | **Quantity** |\n|--------------|-------------|----------------|--------------|\n| 4            | Jacket      | Brown, S size  | 185          |\n| 4            | Coat        | Red, M size    | 200          |\n| 4            | Jacket      | Yellow, L size | 175          |\n| 4            | Jacket      | Brown, L size  | 200          |\n| 12           | Skirt       | Purple, M size | 330          |\n\nJames has quite a stylish collection! 😄 If you have any more questions, feel free to ask!",
     "steps": [
         {
             "type": "SQL",
@@ -17,7 +16,7 @@
         {
             "type": "SQL",
             "sql": "SELECT id FROM orders WHERE user_id = '4';",
-            "description": "Retrieve the order IDs for the orders placed by the customer \"James\"",
+            "description": "Retrieve the order IDs for orders placed by the customer \"James\"",
             "results": [
                 {
                     "id": 4
@@ -29,32 +28,64 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT DISTINCT p.id, p.attributes FROM order_product op JOIN products p ON op.product_id = p.id WHERE op.order_id IN (4, 12);",
-            "description": "Retrieve the product IDs and their attributes for the products included in the orders placed by \"James\"",
+            "sql": "SELECT product_id, number FROM order_product WHERE order_id IN ('4', '12');",
+            "description": "Retrieve the product IDs and quantities for the products included in the orders of the customer \"James\"",
             "results": [
                 {
-                    "id": 22,
-                    "attributes": "Brown, S size"
+                    "product_id": 22,
+                    "number": 185
                 },
                 {
-                    "id": 26,
-                    "attributes": "Red, M size"
+                    "product_id": 26,
+                    "number": 200
                 },
                 {
-                    "id": 14,
-                    "attributes": "Yellow, L size"
+                    "product_id": 14,
+                    "number": 175
                 },
+                {
+                    "product_id": 6,
+                    "number": 200
+                },
+                {
+                    "product_id": 7,
+                    "number": 330
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT p.id, pt.description, p.attributes FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.id IN ('22', '26', '14', '6', '7');",
+            "description": "Retrieve the product details including type and attributes for the products in the orders of the customer \"James\"",
+            "results": [
                 {
                     "id": 6,
+                    "description": "Jacket",
                     "attributes": "Brown, L size"
                 },
                 {
                     "id": 7,
+                    "description": "Skirt",
                     "attributes": "Purple, M size"
+                },
+                {
+                    "id": 14,
+                    "description": "Jacket",
+                    "attributes": "Yellow, L size"
+                },
+                {
+                    "id": 22,
+                    "description": "Jacket",
+                    "attributes": "Brown, S size"
+                },
+                {
+                    "id": 26,
+                    "description": "Coat",
+                    "attributes": "Red, M size"
                 }
             ]
         }
     ],
-    "response": "Hey there! 😄 Let's take a look at the products included in James's order. Here's what we found:\n\n| Product ID | Attributes       |\n|------------|------------------|\n| 22         | Brown, S size    |\n| 26         | Red, M size      |\n| 14         | Yellow, L size   |\n| 6          | Brown, L size    |\n| 7          | Purple, M size   |\n\nThese are the awesome products that James has ordered. If you have any more questions, feel free to ask! 😊",
-    "token_used": 7029
+    "response": "Hey there! 😄 Let's take a look at what products are included in James's order. Here's a neat table with all the details:\n\n| Product ID | Description | Attributes       | Quantity |\n|------------|-------------|------------------|----------|\n| 22         | Jacket      | Brown, S size    | 185      |\n| 26         | Coat        | Red, M size      | 200      |\n| 14         | Jacket      | Yellow, L size   | 175      |\n| 6          | Jacket      | Brown, L size    | 200      |\n| 7          | Skirt       | Purple, M size   | 330      |\n\nJames has quite a stylish selection, don't you think? 🧥👗 If you have any more questions, feel free to ask!",
+    "token_used": 7330
 }

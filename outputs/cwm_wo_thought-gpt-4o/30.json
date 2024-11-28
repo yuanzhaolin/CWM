@@ -2,7 +2,6 @@
     "ID": 30,
     "q_ch": "Skilled Sewers 在2024年6月前完成了多少个缝纫任务，这些缝纫任务都做了什么类型的产品？",
     "q_en": "How many sewing tasks did Skilled Sewers complete before June 2024, and what types of products were produced for these sewing tasks?",
-    "gt": "Hey there! 😄 Let's dive into the details of the sewing tasks completed by the \"Skilled Sewers\" before June 2024. Here's what we found:\n\n| **Number of Sewing Tasks** | **Product Types** |\n|----------------------------|-------------------|\n| 2                          | Jacket            |\n\nThe \"Skilled Sewers\" completed a total of 2 sewing tasks, and they were all about crafting some stylish jackets! 🧥✨ If you have any more questions or need further details, feel free to ask!",
     "steps": [
         {
             "type": "SQL",
@@ -16,13 +15,15 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT order_product_id FROM sewing_tasks WHERE working_group_id = '7' AND status = 2 AND end_time < '2024-06-01';",
-            "description": "Retrieve the sewing tasks completed by \"Skilled Sewers\" before June 2024",
+            "sql": "SELECT id, order_product_id FROM sewing_tasks WHERE working_group_id = '7' AND status = 2 AND end_time < '2024-06-01';",
+            "description": "Retrieve the completed sewing tasks before June 2024 for the working group \"Skilled Sewers\"",
             "results": [
                 {
+                    "id": 17,
                     "order_product_id": 17
                 },
                 {
+                    "id": 18,
                     "order_product_id": 18
                 }
             ]
@@ -38,6 +39,6 @@
             ]
         }
     ],
-    "response": "Hey there! 😄 Let's dive into the details of the sewing tasks completed by the \"Skilled Sewers\" before June 2024. Here's what we found:\n\n| **Number of Sewing Tasks** | **Product Types** |\n|----------------------------|-------------------|\n| 2                          | Jacket            |\n\nThe \"Skilled Sewers\" completed a total of 2 sewing tasks, and they were all about crafting some stylish jackets! 🧥✨ If you have any more questions or need further details, feel free to ask!",
-    "token_used": 7830
+    "response": "Hello there! 😄 Let's dive into the details of the sewing tasks completed by the \"Skilled Sewers\" before June 2024. Here's what we found:\n\n| **Number of Sewing Tasks** | **Product Types** |\n|----------------------------|-------------------|\n| 2                          | Jacket            |\n\nThe \"Skilled Sewers\" completed a total of 2 sewing tasks, and the product type produced for these tasks was a Jacket. If you have any more questions or need further assistance, feel free to ask! 🧵👗",
+    "token_used": 7320
 }

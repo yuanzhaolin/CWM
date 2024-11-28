@@ -5,18 +5,14 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT id FROM products WHERE attributes = 'Blue, 35 size';",
-            "description": "Retrieve the product ID for the product with attributes \"Blue, 35 size\"",
-            "results": [
-                {
-                    "id": 2
-                }
-            ]
+            "sql": "SELECT name FROM products WHERE id = 15;",
+            "description": "Retrieve the name of the product with ID=15",
+            "results": "(1054, \"Unknown column 'name' in 'field list'\")"
         },
         {
             "type": "SQL",
             "sql": "SELECT id FROM warehouse WHERE name = 'Auxiliary warehouse';",
-            "description": "Retrieve the warehouse ID for the warehouse with the name \"Auxiliary warehouse\"",
+            "description": "Retrieve the warehouse ID for the warehouse with the name 'Auxiliary warehouse'",
             "results": [
                 {
                     "id": 2
@@ -24,16 +20,13 @@
             ]
         },
         {
-            "type": "SQL",
-            "sql": "INSERT INTO warehouse_product (warehouse_id, product_id, left_number) VALUES (2, 2, 100);",
-            "description": "Insert 100 units of the product into the warehouse",
-            "results": [
-                {
-                    "auto_increment_id": 3
-                }
-            ]
+            "type": "Tool",
+            "results": {
+                "input": "Store 100 units of the product in the warehouse\n['tool_store_materials, {'material_id': 'product_name', 'quantity': 100, 'warehouse_id': 2}, Store the materials in the warehouse']",
+                "output": "I'm unable to store the materials in the warehouse at the moment. Would you like to try again later or proceed with a different task?"
+            }
         }
     ],
-    "response": "Hey there! 😄\n\nI've got great news for you! Your request to store 100 units of products with attributes 'Blue, 35 size' in the warehouse named 'Auxiliary warehouse' has been successfully completed. Here's a breakdown of what happened:\n\n| Action                                      | Description                                                                                   |\n|---------------------------------------------|-----------------------------------------------------------------------------------------------|\n| Retrieve Product ID                         | Retrieved the product ID for the product with attributes 'Blue, 35 size' (ID: 2)             |\n| Retrieve Warehouse ID                       | Retrieved the warehouse ID for the warehouse named 'Auxiliary warehouse' (ID: 2)             |\n| Insert 100 Units into Warehouse            | Successfully inserted 100 units of the product into the warehouse (Auto Increment ID: 3)     |\n\nYour products are now safely stored in the Auxiliary warehouse! If you have any more questions or need assistance, feel free to ask. 😊",
-    "token_used": 7840
+    "response": "I'm sorry, but I'm currently unable to store the materials in the warehouse at the moment. Would you like to try again later or proceed with a different task? 😅\n\n| Task Description | Results |\n|------------------|---------|\n| Retrieve the name of the product with ID=15 | OperationalError(1054, \"Unknown column 'name' in 'field list'\") |\n| Retrieve the warehouse ID for the warehouse with the name 'Auxiliary warehouse' | [{'id': 2}] |",
+    "token_used": 7031
 }

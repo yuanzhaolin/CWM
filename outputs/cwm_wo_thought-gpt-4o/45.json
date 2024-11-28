@@ -2,7 +2,6 @@
     "ID": 45,
     "q_ch": "主仓库出库Cotton Fabric100份。",
     "q_en": "Please release 100 units of cotton fabric from the Main warehouse.",
-    "gt": "Sure thing! Let's get those 100 units of Cotton Fabric released from the Main Warehouse. Here's a quick summary of the details:\n\n| Material Name   | Warehouse Name | Quantity to Release |\n|-----------------|----------------|---------------------|\n| Cotton Fabric   | Main Warehouse | 100 units           |\n\nEverything is set to go! If you need anything else, just let me know. 😊",
     "steps": [
         {
             "type": "SQL",
@@ -23,8 +22,14 @@
                     "id": 1
                 }
             ]
+        },
+        {
+            "type": "SQL",
+            "sql": "UPDATE warehouse_material SET left_number = left_number - 100 WHERE material_id = 1 AND warehouse_id = 1;",
+            "description": "Update the remaining material inventory quantity by releasing 100 units of \"Cotton Fabric\" from the \"Main Warehouse\"",
+            "results": "update data successfully."
         }
     ],
-    "response": "Sure thing! Let's get those 100 units of Cotton Fabric released from the Main Warehouse. Here's a quick summary of the details:\n\n| Material Name   | Warehouse Name | Quantity to Release |\n|-----------------|----------------|---------------------|\n| Cotton Fabric   | Main Warehouse | 100 units           |\n\nEverything is set! If you need anything else, just let me know. 😊",
-    "token_used": 7205
+    "response": "Sure! Here's the information you requested:\n\n| Action | Material | Warehouse | Status |\n|--------|----------|-----------|--------|\n| Release | Cotton Fabric | Main Warehouse | Successfully released 100 units! 🎉 |\n\nThe 100 units of Cotton Fabric have been successfully released from the Main Warehouse. If there's anything else you need, feel free to ask! 😊",
+    "token_used": 6707
 }

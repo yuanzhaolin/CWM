@@ -2,7 +2,6 @@
     "ID": 46,
     "q_ch": "对于编号为19的裁剪任务，分配裁剪物料，物料来源：Main Warehouse, 布料类别：Cotton Fabric，数量：30米。",
     "q_en": "For cutting task with ID=19, allocate cutting materials from the Main Warehouse, with the material type being Cotton Fabric and a quantity of 30 meters.",
-    "gt": "Sure thing! Let's get those materials allocated for your cutting task. Here's the breakdown of the allocation:\n\n| Task ID | Warehouse Name | Material Type  | Quantity |\n|---------|----------------|----------------|----------|\n| 19      | Main Warehouse | Cotton Fabric  | 30 meters|\n\nEverything is set for your task! If you have any more questions or need further assistance, feel free to ask. 😊",
     "steps": [
         {
             "type": "SQL",
@@ -27,7 +26,7 @@
         {
             "type": "SQL",
             "sql": "SELECT id FROM warehouse_material WHERE warehouse_id = '1' AND material_id = '1';",
-            "description": "Retrieve the warehouse_material ID for the specified warehouse and material",
+            "description": "Retrieve the warehouse material ID for the specified warehouse and material",
             "results": [
                 {
                     "id": 1
@@ -37,7 +36,7 @@
         {
             "type": "SQL",
             "sql": "INSERT INTO cutting_material_allocation (warehouse_material_id, cutting_task_id, allocated_num, is_allocated) VALUES ('1', 19, 30, 1);",
-            "description": "Allocate 30 meters of the specified material to the cutting task with ID=19",
+            "description": "Allocate 30 meters of \"Cotton Fabric\" to the cutting task with ID=19",
             "results": [
                 {
                     "auto_increment_id": 55
@@ -45,6 +44,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Let's take a look at the allocation details for your cutting task. Here's what we've got:\n\n| **Task**                | **Details**                      |\n|-------------------------|----------------------------------|\n| **Cutting Task ID**     | 19                               |\n| **Warehouse**           | Main Warehouse                   |\n| **Material Type**       | Cotton Fabric                    |\n| **Quantity Allocated**  | 30 meters                        |\n| **Allocation Status**   | Successfully Allocated 🎉        |\n\nThe materials have been successfully allocated to your cutting task. If you have any more questions or need further assistance, feel free to ask! 😊",
-    "token_used": 7665
+    "response": "### Cutting Material Allocation Details\n\nHey there! 😄 Here's the allocation information for your cutting task:\n\n| **Task ID** | **Warehouse**     | **Material**     | **Quantity (meters)** | **Allocation Status** |\n|-------------|-------------------|------------------|-----------------------|-----------------------|\n| 19          | Main Warehouse    | Cotton Fabric    | 30                    | Allocated             |\n\nThe materials have been successfully allocated to your task. If you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 7179
 }

@@ -5,11 +5,15 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "INSERT INTO cutting_material_allocation (warehouse_material_id, cutting_task_id, allocated_num, is_allocated) SELECT wm.id, ct.id, 30, 1 FROM warehouse_material wm JOIN materials m ON wm.material_id = m.id JOIN warehouse w ON wm.warehouse_id = w.id JOIN working_group wg ON w.name = 'Main Warehouse' AND wg.name = 'Expert Cutters' WHERE m.name = 'Cotton Fabric';",
-            "description": "To allocate cutting materials from 'Main Warehouse' to 'Expert Cutters' for 'Cotton Fabric' with a quantity of 30 meters, we need to first identify the warehouse_material_id for the specified material in the Main Warehouse, then insert a new record into the cutting_material_allocation table with the appropriate values.",
-            "results": "(1054, \"Unknown column 'ct.id' in 'field list'\")"
+            "sql": "INSERT INTO cutting_material_allocation (warehouse_material_id, cutting_task_id, allocated_num, is_allocated) SELECT wm.id, ct.id, 30, 1 FROM warehouse_material wm JOIN materials m ON wm.material_id = m.id JOIN warehouse w ON wm.warehouse_id = w.id JOIN working_group wg ON w.name = 'Main Warehouse' AND m.name = 'Cotton Fabric' AND wg.name = 'Expert Cutters' JOIN cutting_tasks ct ON ct.working_group_id = wg.id;",
+            "description": "To allocate cutting materials from 'Main Warehouse' to 'Expert Cutters' working group for 'Cotton Fabric' with a quantity of 30 meters, we need to first identify the warehouse_material_id for the specified material in the Main Warehouse, then insert a new record into the cutting_material_allocation table with the appropriate values.",
+            "results": [
+                {
+                    "auto_increment_id": 55
+                }
+            ]
         }
     ],
-    "response": "Hey there! 🌟\n\nBased on your query, here's the allocation process for cutting materials from the Main Warehouse to the Expert Cutters for Cotton Fabric with a quantity of 30 meters:\n\n| Warehouse Material ID | Cutting Task ID | Allocated Quantity | Is Allocated |\n|-----------------------|-----------------|--------------------|--------------|\n| wm.id                 | ct.id           | 30                 | 1            |\n\nTo achieve this, we need to follow these steps:\n1. Identify the warehouse_material_id for the specified material in the Main Warehouse.\n2. Insert a new record into the cutting_material_allocation table with the above values.\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
-    "token_used": 5904
+    "response": "Sure! Here is the answer to your question:\n\n| Allocation ID |\n|---------------|\n| 55            |\n\nThe cutting materials have been successfully allocated to the Expert Cutters working group from the Main Warehouse for Cotton Fabric with a quantity of 30 meters. 🎉\n\nIf you have any more questions or need further assistance, feel free to ask! 😄",
+    "token_used": 5732
 }

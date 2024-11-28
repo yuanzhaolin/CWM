@@ -2,24 +2,8 @@
     "ID": 11,
     "q_ch": "2024年4月30日前完成的裁剪任务有哪些？",
     "q_en": "What cutting tasks will be completed before April 30, 2024?",
-    "steps": [
-        {
-            "type": "SQL",
-            "sql": "SELECT id FROM working_group WHERE name = 'Expert Cutters';",
-            "description": "Retrieve the working group ID for the working group with the name \"Expert Cutters\"",
-            "results": [
-                {
-                    "id": 4
-                }
-            ]
-        },
-        {
-            "type": "SQL",
-            "sql": "['SELECT * FROM cutting_tasks WHERE working_group_id = 4 AND end_time < '2024-04-30';']",
-            "description": "Find the cutting tasks assigned to the working group \"Expert Cutters\" that are planned to be completed before April 30, 2024",
-            "results": "(1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['SELECT * FROM cutting_tasks WHERE working_group_id = 4 AND end_time < '2024-04' at line 1\")"
-        }
-    ],
-    "response": "Based on the query you provided, here is the information you requested:\n\n| Task ID | Task Name | End Time |\n|---------|-----------|----------|\n|         |           |          |\n\nIt seems there was an issue retrieving the data. Feel free to ask another question or provide more details for me to assist you better! 😄",
-    "token_used": 7466
+    "gt": "Sure thing! Here are the cutting tasks that will be completed before April 30, 2024. I've organized them into a neat table for you! 📅✂️\n\n| Task ID | End Time          | Working Group Name  | Order Product ID |\n|---------|-------------------|---------------------|------------------|\n| 18      | April 7, 2024     | Precision Cutters   | 18               |\n| 30      | April 26, 2024    | Precision Cutters   | 30               |\n| 1       | January 18, 2024  | Master Sewers       | 1                |\n| 4       | January 17, 2024  | Master Sewers       | 4                |\n| 5       | February 2, 2024  | Master Sewers       | 5                |\n| 7       | March 6, 2024     | Master Sewers       | 7                |\n| 13      | March 27, 2024    | Master Sewers       | 13               |\n| 15      | March 26, 2024    | Master Sewers       | 15               |\n| 17      | March 25, 2024    | Master Sewers       | 17               |\n| 22      | April 9, 2024     | Master Sewers       | 22               |\n| 2       | February 2, 2024  | Master Cutters      | 2                |\n| 3       | January 19, 2024  | Master Cutters      | 3                |\n| 6       | March 20, 2024    | Master Cutters      | 6                |\n| 9       | March 6, 2024     | Master Cutters      | 9                |\n| 10      | March 29, 2024    | Master Cutters      | 10               |\n| 23      | April 19, 2024    | Master Cutters      | 23               |\n| 24      | April 23, 2024    | Master Cutters      | 24               |\n| 8       | March 8, 2024     | Expert Cutters      | 8                |\n| 11      | March 21, 2024    | Expert Cutters      | 11               |\n| 16      | April 10, 2024    | Expert Cutters      | 16               |\n| 19      | April 12, 2024    | Expert Cutters      | 19               |\n| 20      | April 15, 2024    | Expert Cutters      | 20               |\n| 21      | April 4, 2024     | Expert Cutters      | 21               |\n| 12      | March 27, 2024    | Professional Cutters| 12               |\n| 14      | March 18, 2024    | Professional Cutters| 14               |\n\nHope this helps! If you have any more questions, feel free to ask. 😊",
+    "steps": [],
+    "response": "A critical issue was discovered during the operation.",
+    "token_used": null
 }

@@ -31,6 +31,6 @@
             ]
         }
     ],
-    "response": "Sure! Here is the answer to your question:\n\n| Product ID | Attributes   |\n|------------|--------------|\n| 1          | Red, M size  |\n| 19         | Green, M size|\n| 3          | Blue, L size |\n| 11         | White, XL size|\n| 27         | Yellow, S size|\n\nThese are the products included in 'PolyU's January 2024 orders. Enjoy shopping! 😄🛍️",
-    "token_used": 5538
+    "response": "Hey there! 🌟\n\nBased on the SQL query results, the products included in PolyU's January 2024 orders are as follows:\n\n| Product ID | Attributes    |\n|------------|---------------|\n| 1          | Red, M size   |\n| 19         | Green, M size |\n| 3          | Blue, L size  |\n| 11         | White, XL size|\n| 27         | Yellow, S size|\n\nI hope this information helps! If you have any more questions, feel free to ask. 😊",
+    "token_used": 5580
 }

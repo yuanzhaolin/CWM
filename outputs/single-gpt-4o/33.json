@@ -33,6 +33,6 @@
             ]
         }
     ],
-    "response": "Hello there! 😄\n\nI've got the details on the cutting tasks assigned to the \"Precision Cutters\" working group. Here's a neat table for you:\n\n| Task ID | Start Time          | End Time            | Planned Number | Completed Number | Status |\n|---------|---------------------|---------------------|----------------|------------------|--------|\n| 18      | March 11, 2024      | April 7, 2024       | 200            | 200              | Completed |\n| 30      | April 19, 2024      | April 26, 2024      | 195            | 195              | Completed |\n\nThese tasks are all wrapped up and completed! 🎉 If you have any more questions or need further details, feel free to ask!",
-    "token_used": 5755
+    "response": "Sure thing! Here are the cutting tasks assigned to the \"Precision Cutters\" working group:\n\n| Task ID | Start Time          | End Time            | Planned Number | Completed Number | Status |\n|---------|---------------------|---------------------|----------------|------------------|--------|\n| 18      | March 11, 2024      | April 7, 2024       | 200            | 200              | Completed ✅ |\n| 30      | April 19, 2024      | April 26, 2024      | 195            | 195              | Completed ✅ |\n\nLooks like the \"Precision Cutters\" have been busy and efficient! Keep up the great work! 😄",
+    "token_used": 5761
 }

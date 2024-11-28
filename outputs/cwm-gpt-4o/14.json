@@ -2,87 +2,19 @@
     "ID": 14,
     "q_ch": "剩余库存最多的原料是什么？",
     "q_en": "What is the material with the highest remaining inventory?",
-    "gt": "Sure thing! Based on the data I have, the material with the highest remaining inventory is **Silk Pieces**. Here's a quick summary for you:\n\n| Material ID | Material Name | Total Remaining Inventory |\n|-------------|---------------|---------------------------|\n| 6           | Silk Pieces   | 5,400                     |\n\nIsn't it amazing how much Silk Pieces we have left? 😄 If you have any more questions, feel free to ask!",
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT material_id, left_number FROM warehouse_material;",
-            "description": "Retrieve the material ID and remaining inventory quantity for all materials in the warehouse",
+            "sql": "SELECT m.id, m.name FROM materials m JOIN warehouse_material wm ON m.id = wm.material_id ORDER BY wm.left_number DESC LIMIT 1;",
+            "description": "Retrieve the material ID and name with the highest remaining inventory",
             "results": [
                 {
-                    "material_id": 1,
-                    "left_number": 3500
-                },
-                {
-                    "material_id": 2,
-                    "left_number": 3200
-                },
-                {
-                    "material_id": 3,
-                    "left_number": 4100
-                },
-                {
-                    "material_id": 4,
-                    "left_number": 3550
-                },
-                {
-                    "material_id": 5,
-                    "left_number": 1100
-                },
-                {
-                    "material_id": 6,
-                    "left_number": 5400
-                },
-                {
-                    "material_id": 7,
-                    "left_number": 2200
-                },
-                {
-                    "material_id": 8,
-                    "left_number": 1300
-                },
-                {
-                    "material_id": 9,
-                    "left_number": 2300
-                },
-                {
-                    "material_id": 10,
-                    "left_number": 1500
-                },
-                {
-                    "material_id": 11,
-                    "left_number": 4500
-                },
-                {
-                    "material_id": 12,
-                    "left_number": 3180
-                },
-                {
-                    "material_id": 13,
-                    "left_number": 1230
-                },
-                {
-                    "material_id": 14,
-                    "left_number": 2420
-                }
-            ]
-        },
-        {
-            "type": "Thought",
-            "operation": "Compare the remaining inventory quantities obtained in Step1 and identify the material with the highest quantity.",
-            "results": "To identify the material with the highest remaining inventory quantity, we need to compare the `left_number` values from the provided results. Here are the quantities for each material:\n\n- Material 1: 3500\n- Material 2: 3200\n- Material 3: 4100\n- Material 4: 3550\n- Material 5: 1100\n- Material 6: 5400\n- Material 7: 2200\n- Material 8: 1300\n- Material 9: 2300\n- Material 10: 1500\n- Material 11: 4500\n- Material 12: 3180\n- Material 13: 1230\n- Material 14: 2420\n\nThe material with the highest quantity is Material 6, with a remaining inventory of 5400."
-        },
-        {
-            "type": "SQL",
-            "sql": "SELECT name FROM materials WHERE id = '6';",
-            "description": "Retrieve the name of the material with the highest remaining inventory",
-            "results": [
-                {
+                    "id": 6,
                     "name": "Silk Pieces"
                 }
             ]
         }
     ],
-    "response": "Hey there! 😄 Based on the latest inventory check, the material with the highest remaining inventory is **Silk Pieces**. Here's a quick look at the inventory numbers:\n\n| Material ID | Remaining Inventory |\n|-------------|---------------------|\n| 6           | 5400                |\n\nSilk Pieces are definitely in abundance right now! 🧵✨ If you have any more questions, feel free to ask!",
-    "token_used": 8264
+    "response": "Sure thing! Based on the latest data, the material with the highest remaining inventory is:\n\n| Material ID | Material Name  |\n|-------------|----------------|\n| 6           | Silk Pieces    |\n\nLooks like \"Silk Pieces\" are in abundance right now! 🧵✨ If you have any more questions, feel free to ask! 😊",
+    "token_used": 6018
 }

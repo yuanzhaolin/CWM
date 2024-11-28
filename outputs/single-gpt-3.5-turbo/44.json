@@ -5,15 +5,11 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "INSERT INTO warehouse_product (warehouse_id, product_id, left_number) SELECT w.id, p.id, 100 FROM warehouse w JOIN products p ON w.name = 'Auxiliary warehouse' AND p.attributes = 'Blue, 35 size';",
-            "description": "To store 100 units of products with attributes 'Blue, 35 size' in the warehouse named 'Auxiliary warehouse', we need to find the product_id for the specified product and the warehouse_id for the 'Auxiliary warehouse'. Then, we can insert a new record into the warehouse_product table with the corresponding product_id, warehouse_id, and the quantity of 100 units.",
-            "results": [
-                {
-                    "auto_increment_id": 3
-                }
-            ]
+            "sql": "UPDATE warehouse_product SET left_number = left_number + 100 WHERE product_id = 15 AND warehouse_id = (SELECT id FROM warehouse WHERE name = 'Auxiliary warehouse');",
+            "description": "To store 100 units of product with ID=15 in the warehouse named 'Auxiliary warehouse', we need to update the 'left_number' in the 'warehouse_product' table for the corresponding warehouse and product.",
+            "results": "update data successfully."
         }
     ],
-    "response": "Sure! Here is the answer to your question:\n\nTo store 100 units of products with attributes 'Blue, 35 size' in the warehouse named 'Auxiliary warehouse', we need to find the product_id for the specified product and the warehouse_id for the 'Auxiliary warehouse'. Then, we can insert a new record into the warehouse_product table with the corresponding product_id, warehouse_id, and the quantity of 100 units.\n\nHere is the SQL query that needs to be executed:\n| warehouse_id | product_id | left_number |\n|--------------|------------|-------------|\n|      3       |     5      |    100      |\n\nFeel free to reach out if you have any more questions! 😄",
-    "token_used": 5673
+    "response": "Sure! Here is the optimized answer in a friendly and lively tone:\n\n---\n\nHey there! 😄 To store 100 units of product with ID=15 in the warehouse named 'Auxiliary warehouse', we need to update the 'left_number' in the 'warehouse_product' table for the corresponding warehouse and product. \n\nHere's the SQL query that will help us achieve this:\n\n| SQL Query |\n|-----------|\n| UPDATE warehouse_product SET left_number = left_number + 100 WHERE product_id = 15 AND warehouse_id = (SELECT id FROM warehouse WHERE name = 'Auxiliary warehouse'); |\n\nThe data has been successfully updated! 🎉\n\n---\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5493
 }

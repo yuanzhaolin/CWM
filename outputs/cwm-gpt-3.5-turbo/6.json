@@ -16,17 +16,17 @@
         {
             "type": "SQL",
             "sql": "['SELECT id FROM orders WHERE user_id = 1 AND created_at >= '2024-01-01 00:00:00' AND created_at < '2024-02-01 00:00:00';']",
-            "description": "Retrieve the order IDs for the orders placed by the customer \"PolyU\" in January 2024",
+            "description": "Retrieve the orders placed by the customer \"PolyU\" in January 2024",
             "results": "(1064, \"You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '['SELECT id FROM orders WHERE user_id = 1 AND created_at >= '2024-01-01 00:00:00' at line 1\")"
         },
         {
             "type": "Tool",
             "results": {
                 "input": "Retrieve the product details for each order\n['tool_find_order_details, {\"order_id\": <order_id>}, Find the product details of an order']",
-                "output": "Here are the product details for each order:\n\n1. Product ID: 1\n   - Description: T-shirt\n   - Attributes: Red, M size\n   - Quantity: 100\n\n2. Product ID: 19\n   - Description: T-shirt\n   - Attributes: Green, M size\n   - Quantity: 240\n\n3. Product ID: 3\n   - Description: T-shirt\n   - Attributes: Blue, L size\n   - Quantity: 150\n\n4. Product ID: 11\n   - Description: T-shirt\n   - Attributes: White, XL size\n   - Quantity: 220\n\n5. Product ID: 27\n   - Description: T-shirt\n   - Attributes: Yellow, S size\n   - Quantity: 260"
+                "output": "Here are the product details for Order ID 1:\n\n1. Product ID: 1\n   - Description: T-shirt\n   - Attributes: Red, M size\n   - Quantity: 100\n\n2. Product ID: 19\n   - Description: T-shirt\n   - Attributes: Green, M size\n   - Quantity: 240\n\n3. Product ID: 3\n   - Description: T-shirt\n   - Attributes: Blue, L size\n   - Quantity: 150\n\n4. Product ID: 11\n   - Description: T-shirt\n   - Attributes: White, XL size\n   - Quantity: 220\n\n5. Product ID: 27\n   - Description: T-shirt\n   - Attributes: Yellow, S size\n   - Quantity: 260"
             }
         }
     ],
-    "response": "Hey there! 😄 Here are the products included in PolyU's January 2024 orders:\n\n| Product ID | Description | Attributes      | Quantity |\n|------------|-------------|-----------------|----------|\n| 1          | T-shirt     | Red, M size     | 100      |\n| 19         | T-shirt     | Green, M size   | 240      |\n| 3          | T-shirt     | Blue, L size    | 150      |\n| 11         | T-shirt     | White, XL size  | 220      |\n| 27         | T-shirt     | Yellow, S size  | 260      |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
-    "token_used": 8366
+    "response": "I'm sorry, but I couldn't find any products included in <customers.customer_name = 'PolyU'>'s January 2024 orders. 😔\n\nIf you have any other questions or need further assistance, feel free to ask! 😄",
+    "token_used": 7503
 }

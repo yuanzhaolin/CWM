@@ -2,12 +2,11 @@
     "ID": 30,
     "q_ch": "Skilled Sewers 在2024年6月前完成了多少个缝纫任务，这些缝纫任务都做了什么类型的产品？",
     "q_en": "How many sewing tasks did Skilled Sewers complete before June 2024, and what types of products were produced for these sewing tasks?",
-    "gt": "Hey there! 😄 Let's dive into the details of the sewing tasks completed by the \"Skilled Sewers\" before June 2024.\n\nBased on the data, the \"Skilled Sewers\" completed **2 sewing tasks**. However, there was a little hiccup when trying to retrieve the types of products produced for these tasks. It seems there was an issue with the database query, so we couldn't fetch the product details this time. 😅\n\nHere's a quick summary:\n\n| Sewing Task ID | Order Product ID |\n|----------------|------------------|\n| 17             | 17               |\n| 18             | 18               |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
     "steps": [
         {
             "type": "SQL",
             "sql": "SELECT id FROM working_group WHERE name = 'Skilled Sewers';",
-            "description": "Retrieve the working group ID for \"Skilled Sewers\"",
+            "description": "Retrieve the working group ID for the working group with the name \"Skilled Sewers\"",
             "results": [
                 {
                     "id": 7
@@ -17,7 +16,7 @@
         {
             "type": "SQL",
             "sql": "SELECT id, order_product_id FROM sewing_tasks WHERE working_group_id = '7' AND status = 2 AND end_time < '2024-06-01';",
-            "description": "Retrieve the sewing task IDs and order product IDs for tasks completed by \"Skilled Sewers\" before June 2024",
+            "description": "Retrieve the sewing tasks completed by the working group \"Skilled Sewers\" before June 2024",
             "results": [
                 {
                     "id": 17,
@@ -31,9 +30,20 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT order_product_id, product_id FROM order_product WHERE id IN (17, 18);",
-            "description": "Retrieve the product IDs and quantities for the completed sewing tasks",
-            "results": "(1054, \"Unknown column 'order_product_id' in 'field list'\")"
+            "sql": "SELECT DISTINCT op.product_id, pt.description FROM order_product op JOIN products p ON op.product_id = p.id JOIN products_types pt ON p.products_type_id = pt.id WHERE op.id IN (17, 18);",
+            "description": "Retrieve the product IDs and their types for the completed sewing tasks",
+            "results": [
+                {
+                    "product_id": 14,
+                    "description": "Jacket"
+                },
+                {
+                    "product_id": 6,
+                    "description": "Jacket"
+                }
+            ]
         }
-    ]
+    ],
+    "response": "Hey there! 😄 Let's dive into the details of the sewing tasks completed by the \"Skilled Sewers\" before June 2024. Here's what I found:\n\n| **Sewing Task ID** | **Product Type** |\n|--------------------|------------------|\n| 17                 | Jacket           |\n| 18                 | Jacket           |\n\nThe \"Skilled Sewers\" completed a total of 2 sewing tasks, and both tasks were for producing Jackets. 🧥✨\n\nIf you have any more questions or need further assistance, feel free to ask!",
+    "token_used": 6859
 }

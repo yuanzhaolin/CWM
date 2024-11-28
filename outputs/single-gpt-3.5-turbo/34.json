@@ -22,6 +22,6 @@
             ]
         }
     ],
-    "response": "Hey there! 😄\n\nBased on the SQL query results, the cutting tasks completed by the working group named 'Master Cutters' are as follows:\n\n| Task ID | Start Time | End Time | Planned Number | Completed Number |\n|---------|------------|----------|----------------|------------------|\n| 3       | 2024-01-10 | 2024-01-19 | 150            | 150              |\n\nLooks like they completed all 150 planned tasks! 🎉\n\nIf you have any more questions or need further assistance, feel free to ask!",
-    "token_used": 5465
+    "response": "Sure! Here is the answer to your question:\n\n| id | start_time           | end_time             | working_group_id | order_product_id | produced_wip_id | planned_number | completed_number | status |\n|----|----------------------|----------------------|------------------|------------------|-----------------|----------------|------------------|--------|\n| 3  | 2024-01-10 00:00:00  | 2024-01-19 00:00:00  | 3                | 3                | 2               | 150            | 150              | 2      |\n\nIt looks like the cutting task with ID 3 has been completed by the working group named 'Master Cutters'. If you have any more questions or need further assistance, feel free to ask! 😄",
+    "token_used": 5536
 }

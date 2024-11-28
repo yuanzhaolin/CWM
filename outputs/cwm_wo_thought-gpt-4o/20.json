@@ -2,7 +2,6 @@
     "ID": 20,
     "q_ch": "剩余库存为零的材料有哪些，列出材料名字？",
     "q_en": "What are the materials with zero remaining inventory and list their names?",
-    "gt": "It looks like there are no materials with zero remaining inventory at the moment. Everything seems to be well-stocked! 🎉 If you have any other questions or need further assistance, feel free to ask. 😊",
     "steps": [
         {
             "type": "SQL",
@@ -11,6 +10,6 @@
             "results": "no results found."
         }
     ],
-    "response": "It looks like there are no materials with zero remaining inventory at the moment. 🎉 Everything seems to be well-stocked! If you have any other questions or need further assistance, feel free to ask. 😊",
-    "token_used": 6257
+    "response": "It looks like there are no materials with zero remaining inventory at the moment. Everything seems to be well-stocked! 🎉 If you have any other questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5675
 }

@@ -2,7 +2,6 @@
     "ID": 45,
     "q_ch": "主仓库出库Cotton Fabric100份。",
     "q_en": "Please release 100 units of cotton fabric from the Main warehouse.",
-    "gt": "Sure thing! Let's get those 100 units of Cotton Fabric released from the Main Warehouse. Here's a quick summary of the details:\n\n| Material Name   | Warehouse Name | Quantity to Release |\n|-----------------|----------------|---------------------|\n| Cotton Fabric   | Main Warehouse | 100 units           |\n\nEverything is set to go! If you need anything else, just let me know. 😊",
     "steps": [
         {
             "type": "SQL",
@@ -26,16 +25,11 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT id, left_number FROM warehouse_material WHERE material_id = '1' AND warehouse_id = '1';",
-            "description": "Retrieve the warehouse material ID and the current left number for the specific material in the specific warehouse",
-            "results": [
-                {
-                    "id": 1,
-                    "left_number": 3500
-                }
-            ]
+            "sql": "UPDATE warehouse_material SET left_number = left_number - 100 WHERE material_id = 1 AND warehouse_id = 1;",
+            "description": "Update the left number of the material \"Cotton Fabric\" in the \"Main Warehouse\" by reducing it by 100 units",
+            "results": "update data successfully."
         }
     ],
-    "response": "Sure! Let's take a look at the details for releasing 100 units of Cotton Fabric from the Main Warehouse. Here's what we found:\n\n| Material Name   | Warehouse Name | Current Stock | Units to Release | Remaining Stock |\n|-----------------|----------------|---------------|------------------|-----------------|\n| Cotton Fabric   | Main Warehouse | 3500          | 100              | 3400            |\n\nGreat news! We have enough Cotton Fabric in the Main Warehouse to fulfill your request. After releasing 100 units, there will still be 3400 units left. 🎉\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
-    "token_used": 8106
+    "token_used": 7044,
+    "response": "### Release Confirmation 🎉\n\nGreat news! We've successfully processed your request to release 100 units of **Cotton Fabric** from the **Main Warehouse**. Here's a quick summary of the operation:\n\n| Material Name   | Warehouse Name | Units Released |\n|-----------------|----------------|----------------|\n| Cotton Fabric   | Main Warehouse | 100            |\n\nEverything went smoothly, and the inventory has been updated accordingly. If you have any more requests or questions, feel free to ask! 😊"
 }

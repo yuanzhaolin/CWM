@@ -2,12 +2,12 @@
     "ID": 23,
     "q_ch": "主仓库和辅助仓库中，哪个仓库的Cotton Fabric更多？",
     "q_en": "Which warehouse has more Cotton Fabric between the main and auxiliary warehouses?",
-    "gt": "Sure! Let's dive into the details and find out which warehouse has more Cotton Fabric. 🏢\n\nBased on the information we have:\n\n| Warehouse Name       | Cotton Fabric Quantity |\n|----------------------|------------------------|\n| Main Warehouse       | 3400                   |\n| Auxiliary Warehouse  | Not provided           |\n\nIt seems we only have the quantity for the Main Warehouse, which is 3400 units of Cotton Fabric. Unfortunately, we don't have the data for the Auxiliary Warehouse. Without that information, we can't definitively say which warehouse has more Cotton Fabric. 🤔\n\nIf you have more data or need further assistance, feel free to ask! 😊",
+    "hint": "应该统计主仓库和辅助仓库的Cotton Fabric当前剩余的数量总和进行比较",
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
-            "description": "Retrieve the warehouse ID for \"Main Warehouse\"",
+            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
+            "description": "Retrieve the ID for the material with the name \"Cotton Fabric\"",
             "results": [
                 {
                     "id": 1
@@ -16,8 +16,18 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT id FROM warehouse WHERE name = 'Auxiliary Warehouse';",
-            "description": "Retrieve the warehouse ID for \"Auxiliary Warehouse\"",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Main Warehouse';",
+            "description": "Retrieve the ID for the warehouse with the name \"Main Warehouse\"",
+            "results": [
+                {
+                    "id": 1
+                }
+            ]
+        },
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM warehouse WHERE name = 'Auxiliary warehouse';",
+            "description": "Retrieve the ID for the warehouse with the name \"Auxiliary warehouse\"",
             "results": [
                 {
                     "id": 2
@@ -26,23 +36,21 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT id FROM materials WHERE name = 'Cotton Fabric';",
-            "description": "Retrieve the material ID for \"Cotton Fabric\"",
+            "sql": "SELECT left_number FROM warehouse_material WHERE material_id = '1' AND warehouse_id = '1';",
+            "description": "Retrieve the remaining quantity of \"Cotton Fabric\" in the \"Main Warehouse\"",
             "results": [
                 {
-                    "id": 1
+                    "left_number": 3500
                 }
             ]
         },
         {
             "type": "SQL",
-            "sql": "SELECT left_number FROM warehouse_material WHERE warehouse_id = '1' AND material_id = '1';",
-            "description": "Retrieve the remaining quantity of \"Cotton Fabric\" in \"Main Warehouse\"",
-            "results": [
-                {
-                    "left_number": 3400
-                }
-            ]
+            "sql": "SELECT left_number FROM warehouse_material WHERE material_id = '1' AND warehouse_id = '2';",
+            "description": "Retrieve the remaining quantity of \"Cotton Fabric\" in the \"Auxiliary warehouse\"",
+            "results": "no results found."
         }
-    ]
+    ],
+    "response": "Hey there! 😄 Let's dive into the results and see which warehouse has more Cotton Fabric. Here's what we found:\n\n| Warehouse          | Cotton Fabric Quantity |\n|--------------------|------------------------|\n| Main Warehouse     | 3500                   |\n| Auxiliary Warehouse| No data available      |\n\nIt looks like the Main Warehouse has 3500 units of Cotton Fabric, while we couldn't find any data for the Auxiliary Warehouse. So, the Main Warehouse takes the lead! 🏆",
+    "token_used": 6961
 }

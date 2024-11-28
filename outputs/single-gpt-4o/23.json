@@ -2,11 +2,12 @@
     "ID": 23,
     "q_ch": "主仓库和辅助仓库中，哪个仓库的Cotton Fabric更多？",
     "q_en": "Which warehouse has more Cotton Fabric between the main and auxiliary warehouses?",
+    "hint": "应该统计主仓库和辅助仓库的Cotton Fabric当前剩余的数量总和进行比较",
     "steps": [
         {
             "type": "SQL",
             "sql": "SELECT w.name AS warehouse_name, wm.left_number FROM warehouse_material wm JOIN materials m ON wm.material_id = m.id JOIN warehouse w ON wm.warehouse_id = w.id WHERE m.name = 'Cotton Fabric' AND w.name IN ('Main Warehouse', 'Auxiliary Warehouse') ORDER BY wm.left_number DESC LIMIT 1;",
-            "description": "To determine which warehouse has more 'Cotton Fabric', we need to compare the remaining material inventory quantity of 'Cotton Fabric' between the 'Main Warehouse' and 'Auxiliary Warehouse'. We will first find the material_id for 'Cotton Fabric', then compare the left_number of this material in both warehouses.",
+            "description": "To determine which warehouse has more 'Cotton Fabric', we need to find the warehouse_material records for 'Cotton Fabric' in both 'Main Warehouse' and 'Auxiliary Warehouse', and compare their left_number values.",
             "results": [
                 {
                     "warehouse_name": "Main Warehouse",
@@ -15,6 +16,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Let's take a look at the comparison between the two warehouses for the 'Cotton Fabric'. Here's what we found:\n\n| Warehouse Name   | Cotton Fabric Quantity |\n|------------------|------------------------|\n| Main Warehouse   | 3500                   |\n\nIt seems that the 'Main Warehouse' has 3500 units of 'Cotton Fabric'. Unfortunately, we don't have data for the 'Auxiliary Warehouse', so it looks like the 'Main Warehouse' is leading in this case! 🎉\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
-    "token_used": 5700
+    "response": "Sure thing! Let's dive into the results to find out which warehouse has more Cotton Fabric. 🏢\n\n| Warehouse Name   | Cotton Fabric Quantity |\n|------------------|------------------------|\n| Main Warehouse   | 3500                   |\n\nIt looks like the **Main Warehouse** has more Cotton Fabric with a total of 3500 units. 🎉\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 5627
 }

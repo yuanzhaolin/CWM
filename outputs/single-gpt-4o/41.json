@@ -5,11 +5,15 @@
     "steps": [
         {
             "type": "SQL",
-            "sql": "INSERT INTO orders (user_id, order_name, created_at) VALUES ((SELECT id FROM customers WHERE customer_name = 'PolyU'), 'Order for PolyU', '2024-07-02'); INSERT INTO order_product (order_id, product_id, number) VALUES ((SELECT id FROM orders WHERE user_id = (SELECT id FROM customers WHERE customer_name = 'PolyU') ORDER BY created_at DESC LIMIT 1), (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.attributes = 'Red' AND pt.description = 'T-shirt' AND p.attributes = 'M size'), 50), ((SELECT id FROM orders WHERE user_id = (SELECT id FROM customers WHERE customer_name = 'PolyU') ORDER BY created_at DESC LIMIT 1), (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.attributes = 'Blue' AND pt.description = 'Sweater' AND p.attributes = 'XL size'), 30);",
-            "description": "Insert a new order for the customer 'PolyU' with the current date, and then insert the order products for 50 'Red' 'T-shirt' in 'M size' and 30 'Blue' 'Sweater' in 'XL size'.",
-            "results": "(1048, \"Column 'product_id' cannot be null\")"
+            "sql": "INSERT INTO orders (user_id, order_name, created_at) VALUES ((SELECT id FROM customers WHERE customer_name = 'PolyU'), 'Order for July 2, 2024', '2024-07-02'); INSERT INTO order_product (order_id, product_id, number) VALUES ((SELECT id FROM orders WHERE order_name = 'Order for July 2, 2024'), (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.attributes = 'Red, M size' AND pt.description = 'T-shirt'), 50), ((SELECT id FROM orders WHERE order_name = 'Order for July 2, 2024'), (SELECT p.id FROM products p JOIN products_types pt ON p.products_type_id = pt.id WHERE p.attributes = 'Blue, XL size' AND pt.description = 'Sweater'), 30);",
+            "description": "Insert a new order for the customer 'PolyU' with the specified products and quantities. First, find the customer ID for 'PolyU', then find the product IDs for 'Red, M size' T-shirt and 'Blue, XL size' Sweater, and finally insert the order and order products.",
+            "results": [
+                {
+                    "auto_increment_id": 35
+                }
+            ]
         }
     ],
-    "response": "Hello there! 😄 It looks like there was an attempt to create an order for you, but there was a little hiccup. Let's break it down:\n\n### Order Details\n| Product Type | Color | Size | Quantity |\n|--------------|-------|------|----------|\n| T-shirt      | Red   | M    | 50       |\n| Sweater      | Blue  | XL   | 30       |\n\nUnfortunately, there was an issue with the product IDs, which means the order couldn't be completed as expected. It seems like the product details might not be matching exactly with what's in the system. 🤔\n\nCould you please double-check the product details or let me know if there's anything else I can assist you with? I'm here to help! 😊",
-    "token_used": 6517
+    "response": "Sure thing! 🎉 Your order has been successfully created. Here's a summary of your order details:\n\n| **Customer** | **Order Date** | **Product**          | **Attributes** | **Quantity** |\n|--------------|----------------|----------------------|----------------|--------------|\n| PolyU        | July 2, 2024   | T-shirt              | Red, M size    | 50           |\n| PolyU        | July 2, 2024   | Sweater             | Blue, XL size  | 30           |\n\nIf you need any more assistance or have further questions, feel free to ask! 😊",
+    "token_used": 6361
 }

@@ -2,8 +2,18 @@
     "ID": 48,
     "q_ch": "我是Advanced Sewers，请将属于我的所有2024年5月1日-2024年5月30日之间开始的裁剪任务转给Premier Sewers。",
     "q_en": "I am an Advanced Sewer. Please transfer all cutting tasks that started between May 1, 2024, and May 30, 2024, to Premier Sewers.",
-    "gt": "Hello there! 😊 It looks like you're looking to transfer some tasks. Let's get that sorted out for you!\n\nHere's what we found:\n\n| Task ID | Action Required |\n|---------|-----------------|\n| 31      | Transfer to Premier Sewers |\n\nThe task that started between May 1, 2024, and May 30, 2024, is ready to be transferred to the Premier Sewers group. If you have any more questions or need further assistance, feel free to ask! 🚀",
+    "hint": "The ID of Advanced Sewers is 8, and the ID of Premier Sewers is 9. Update the database according to the time requirements described",
     "steps": [
+        {
+            "type": "SQL",
+            "sql": "SELECT id FROM working_group WHERE name = 'Advanced Sewers';",
+            "description": "Retrieve the working group ID for \"Advanced Sewers\"",
+            "results": [
+                {
+                    "id": 8
+                }
+            ]
+        },
         {
             "type": "SQL",
             "sql": "SELECT id FROM working_group WHERE name = 'Premier Sewers';",
@@ -16,13 +26,11 @@
         },
         {
             "type": "SQL",
-            "sql": "SELECT id FROM cutting_tasks WHERE start_time BETWEEN '2024-05-01' AND '2024-05-30';",
-            "description": "Retrieve the IDs of cutting tasks that started between May 1, 2024, and May 30, 2024",
-            "results": [
-                {
-                    "id": 31
-                }
-            ]
+            "sql": "UPDATE cutting_tasks SET working_group_id = '9' WHERE working_group_id = '8' AND start_time BETWEEN '2024-05-01' AND '2024-05-30';",
+            "description": "Update the working group ID for all cutting tasks that started between May 1, 2024, and May 30, 2024, from \"Advanced Sewers\" to \"Premier Sewers\"",
+            "results": "update data successfully."
         }
-    ]
+    ],
+    "response": "Hey there! 😄\n\nI've got some great news for you! All the cutting tasks that started between May 1, 2024, and May 30, 2024, have been successfully transferred from the \"Advanced Sewers\" group to the \"Premier Sewers\" group. 🎉\n\nHere's a quick summary of what happened:\n\n| Task | Action |\n|------|--------|\n| Cutting Tasks | Transferred from \"Advanced Sewers\" to \"Premier Sewers\" |\n\nIf you have any more questions or need further assistance, feel free to ask! 😊",
+    "token_used": 6594
 }

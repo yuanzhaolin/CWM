@@ -6,7 +6,7 @@
         {
             "type": "SQL",
             "sql": "SELECT * FROM cutting_tasks WHERE working_group_id = (SELECT id FROM working_group WHERE name = 'Precision Cutters');",
-            "description": "To find the cutting tasks assigned to the working group named 'Precision Cutters', we need to query the cutting tasks table based on the working group ID associated with the 'Precision Cutters' group.",
+            "description": "To find the cutting tasks assigned to the working group named 'Precision Cutters', we need to retrieve the cutting task details based on the working group ID. We will query the cutting_tasks table to get the relevant information.",
             "results": [
                 {
                     "id": 18,
@@ -34,5 +34,5 @@
         }
     ],
     "response": "Sure! Here is the answer to your question:\n\n| Task ID | Start Time | End Time | Order Product ID | Planned Number | Completed Number | Status |\n|---------|------------|----------|------------------|----------------|------------------|--------|\n| 18      | 2024-03-11 | 2024-04-07 | 18               | 200            | 200              | 1      |\n| 30      | 2024-04-19 | 2024-04-26 | 30               | 195            | 195              | 1      |\n\nThese are the cutting tasks assigned to the working group named 'Precision Cutters'. If you have any more questions, feel free to ask! 😄",
-    "token_used": 5610
+    "token_used": 5600
 }

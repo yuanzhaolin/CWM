@@ -2,12 +2,11 @@
     "ID": 51,
     "q_ch": "未完成的订单中，哪个订单完成的进度最快？",
     "q_en": "Which order has the fastest completion progress among the unfinished orders?",
-    "gt": "It seems like there was an issue with the SQL query that was supposed to calculate the completion progress for each unfinished order. Unfortunately, due to a technical error, we couldn't retrieve the progress data. 😅\n\nHowever, based on the available information, here are the unfinished orders:\n\n| Order ID | Order Name                |\n|----------|---------------------------|\n| 1        | PolyU_Tshirt              |\n| 2        | John_Pants                |\n| 3        | Emily_Dress               |\n| 4        | James_WinterOrder         |\n| 5        | Sophia_SkirtAndJacket     |\n| 6        | Michael_SweaterAndShorts  |\n| 7        | Olivia_WinterOrder        |\n| 8        | William_Skirt_Sweater_Shorts |\n| 9        | PolyU_Skirt               |\n| 10       | John_Jacket               |\n| 11       | Emily_Pants               |\n| 12       | James_Skirt               |\n\nSince we couldn't determine the fastest completion progress, you might want to check the system or database for any updates or corrections. If you have any other questions or need further assistance, feel free to ask! 😊",
     "steps": [
         {
             "type": "SQL",
-            "sql": "SELECT o.id, o.order_name FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id;",
-            "description": "Retrieve the IDs and names of all unfinished orders",
+            "sql": "SELECT id, order_name FROM orders WHERE id IN (SELECT order_id FROM order_product WHERE id IN (SELECT order_product_id FROM sewing_tasks WHERE status != 2));",
+            "description": "Retrieve all unfinished orders",
             "results": [
                 {
                     "id": 1,
@@ -52,91 +51,22 @@
                 {
                     "id": 11,
                     "order_name": "Emily_Pants"
-                },
-                {
-                    "id": 12,
-                    "order_name": "James_Skirt"
                 }
             ]
         },
         {
             "type": "SQL",
-            "sql": "SELECT o.id, o.order_name, SUM(st.completed_number) / SUM(op.number) AS progress FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id;",
+            "sql": "SELECT o.id, o.order_name, SUM(st.completed_number) / SUM(op.number) AS completion_progress FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id ORDER BY completion_progress DESC LIMIT 1;",
             "description": "Calculate the completion progress for each unfinished order",
             "results": [
                 {
-                    "id": 1,
-                    "order_name": "PolyU_Tshirt",
-                    "progress": "1.0000"
-                },
-                {
-                    "id": 2,
-                    "order_name": "John_Pants",
-                    "progress": "1.0000"
-                },
-                {
-                    "id": 3,
-                    "order_name": "Emily_Dress",
-                    "progress": "0.8519"
-                },
-                {
                     "id": 4,
                     "order_name": "James_WinterOrder",
-                    "progress": "1.0000"
-                },
-                {
-                    "id": 5,
-                    "order_name": "Sophia_SkirtAndJacket",
-                    "progress": "1.0000"
-                },
-                {
-                    "id": 6,
-                    "order_name": "Michael_SweaterAndShorts",
-                    "progress": "0.7424"
-                },
-                {
-                    "id": 7,
-                    "order_name": "Olivia_WinterOrder",
-                    "progress": "1.0000"
-                },
-                {
-                    "id": 8,
-                    "order_name": "William_Skirt_Sweater_Shorts",
-                    "progress": "1.0000"
-                },
-                {
-                    "id": 9,
-                    "order_name": "PolyU_Skirt",
-                    "progress": "1.0000"
-                },
-                {
-                    "id": 10,
-                    "order_name": "John_Jacket",
-                    "progress": "0.0000"
-                },
-                {
-                    "id": 11,
-                    "order_name": "Emily_Pants",
-                    "progress": "0.0000"
-                },
-                {
-                    "id": 12,
-                    "order_name": "James_Skirt",
-                    "progress": "0.0000"
-                }
-            ]
-        },
-        {
-            "type": "SQL",
-            "sql": "SELECT order_name FROM (SELECT o.id, o.order_name, SUM(st.completed_number) / SUM(op.number) AS progress FROM orders o JOIN order_product op ON o.id = op.order_id JOIN sewing_tasks st ON op.id = st.order_product_id WHERE st.status != 2 GROUP BY o.id) AS order_progress ORDER BY progress DESC LIMIT 1;",
-            "description": "Identify the order with the highest completion progress",
-            "results": [
-                {
-                    "order_name": "Sophia_SkirtAndJacket"
+                    "completion_progress": "1.0000"
                 }
             ]
         }
     ],
-    "response": "Hey there! 😄 Let's dive into the world of orders and see which one is racing ahead in terms of completion progress! 🏃‍♂️💨\n\nBased on the data, here's a quick look at the unfinished orders and their completion progress:\n\n| Order Name               | Completion Progress |\n|--------------------------|---------------------|\n| PolyU_Tshirt             | 100%                |\n| John_Pants               | 100%                |\n| Emily_Dress              | 85.19%              |\n| James_WinterOrder        | 100%                |\n| Sophia_SkirtAndJacket    | 100%                |\n| Michael_SweaterAndShorts | 74.24%              |\n| Olivia_WinterOrder       | 100%                |\n| William_Skirt_Sweater_Shorts | 100%            |\n| PolyU_Skirt              | 100%                |\n| John_Jacket              | 0%                  |\n| Emily_Pants              | 0%                  |\n| James_Skirt              | 0%                  |\n\nAnd the winner is... 🏆 **Sophia_SkirtAndJacket** with the fastest completion progress among the unfinished orders! 🎉\n\nIf you have more questions or need further assistance, feel free to ask! 😊",
-    "token_used": 7753
+    "response": "Hey there! 😄 Based on the data I have, the order with the fastest completion progress among the unfinished orders is **James_WinterOrder**. Here's a quick look at the details:\n\n| Order ID | Order Name       | Completion Progress |\n|----------|------------------|---------------------|\n| 4        | James_WinterOrder | 100%                |\n\nLooks like James is all set for winter! 🧥❄️ If you have any more questions, feel free to ask!",
+    "token_used": 6181
 }

@@ -2,7 +2,6 @@
     "ID": 1,
     "q_ch": "PolyU的订单有哪些？",
     "q_en": "What are the orders for PolyU?",
-    "gt": "Sure! Here are the orders for the customer named \"PolyU\":\n\n| Order Name       |\n|------------------|\n| PolyU_Tshirt     |\n| PolyU_Skirt      |\n| Order for PolyU  |\n\nLooks like PolyU has some stylish choices! 😄 If you have any more questions, feel free to ask!",
     "steps": [
         {
             "type": "SQL",
@@ -17,7 +16,7 @@
         {
             "type": "SQL",
             "sql": "SELECT order_name FROM orders WHERE user_id = '1';",
-            "description": "Retrieve the orders for the customer with the retrieved customer ID",
+            "description": "Retrieve the orders for the customer with the name \"PolyU\"",
             "results": [
                 {
                     "order_name": "PolyU_Tshirt"
@@ -28,6 +27,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Here are the orders for the customer named \"PolyU\":\n\n| Order Name     |\n|----------------|\n| PolyU_Tshirt   |\n| PolyU_Skirt    |\n\nLooks like PolyU has some stylish choices! 😄 If you have any more questions, feel free to ask!",
-    "token_used": 6284
+    "response": "Hey there! 😄\n\nI've got the details on the orders for our customer, PolyU. Here's what I found:\n\n| Order Name     |\n|----------------|\n| PolyU_Tshirt   |\n| PolyU_Skirt    |\n\nLooks like PolyU has some stylish choices! If you have any more questions, feel free to ask! 😊",
+    "token_used": 5849
 }

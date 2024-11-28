@@ -6,7 +6,7 @@
         {
             "type": "SQL",
             "sql": "SELECT st.* FROM sewing_tasks st JOIN working_group wg ON st.working_group_id = wg.id WHERE wg.name = 'Premier Sewers';",
-            "description": "To find the sewing tasks of the working group named 'Premier Sewers', we need to join the sewing_tasks table with the working_group table on the working_group_id and filter by the working group name.",
+            "description": "Retrieve the sewing tasks associated with the working group named 'Premier Sewers' by joining the sewing_tasks table with the working_group table on the working_group_id.",
             "results": [
                 {
                     "id": 2,
@@ -61,6 +61,6 @@
             ]
         }
     ],
-    "response": "Sure thing! Here are the sewing tasks for the \"Premier Sewers\" working group:\n\n| Task ID | Start Time       | End Time         | Planned Number | Completed Number | Status     |\n|---------|------------------|------------------|----------------|------------------|------------|\n| 2       | 2024-02-02       | 2024-02-15       | 240            | 240              | Completed  |\n| 3       | 2024-01-19       | 2024-02-08       | 150            | 150              | Completed  |\n| 11      | 2024-03-21       | 2024-04-14       | 140            | 100              | In Progress|\n| 26      | 2024-05-04       | 2024-05-15       | 70             | 70               | Completed  |\n| 32      | 2024-06-17       | 2024-07-14       | 150            | 0                | Not Started|\n\nHere's a quick breakdown of the status:\n- **Completed**: All planned tasks are done! 🎉\n- **In Progress**: Tasks are underway, but not yet finished. 🚧\n- **Not Started**: Tasks are planned but haven't begun yet. ⏳\n\nIf you have any more questions or need further details, feel free to ask! 😊",
-    "token_used": 6396
+    "response": "Sure thing! Let's take a look at the sewing tasks for the \"Premier Sewers\" working group. Here's a detailed breakdown of their tasks:\n\n| Task ID | Start Time       | End Time         | Planned Number | Completed Number | Status       |\n|---------|------------------|------------------|----------------|------------------|--------------|\n| 2       | 2024-02-02       | 2024-02-15       | 240            | 240              | Completed ✅  |\n| 3       | 2024-01-19       | 2024-02-08       | 150            | 150              | Completed ✅  |\n| 11      | 2024-03-21       | 2024-04-14       | 140            | 100              | In Progress 🔄 |\n| 26      | 2024-05-04       | 2024-05-15       | 70             | 70               | Completed ✅  |\n| 32      | 2024-06-17       | 2024-07-14       | 150            | 0                | Not Started 🚫 |\n\nThe \"Premier Sewers\" team has been quite busy! They've completed several tasks, and a few are still in progress or yet to start. Keep up the great work, team! 😄",
+    "token_used": 6303
 }

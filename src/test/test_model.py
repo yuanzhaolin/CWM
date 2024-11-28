@@ -41,6 +41,9 @@ if model_name == 'cwm_wo_tool_thought':
 if model_name == 'single':
     os.environ['SINGLE_SQL_STEP'] = 'True'
 
+if model_name == 'cwm_wo_rewriter':
+    os.environ['ENABLE_REWRITE_QUERY'] = 'False'
+
 os.environ['SMART_LLM_MODEL'] = args.llm_model
 
 from chatdb import generate_chat_responses, init_database, cfg

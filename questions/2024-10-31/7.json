@@ -2,7 +2,7 @@
     "ID": 7,
     "q_ch": "顾客PolyU 下的订单总数是多少？",
     "q_en": "How many orders are there in total under PolyU?",
-    "gt": "Hey there! 😄\n\nI've got the details you were looking for. Here's a quick summary of the total number of orders for the customer named \"PolyU\":\n\n| Customer Name | Total Orders |\n|---------------|--------------|\n| PolyU         | 3            |\n\nSo, there are **3 orders** in total for PolyU. If you have any more questions or need further assistance, feel free to ask! 📊✨",
+    "gt": "Hey there! 😄\n\nI've got the details you were looking for. Here's a quick summary of the total number of orders for the customer named \"PolyU\":\n\n| Customer Name | Total Orders |\n|---------------|--------------|\n| PolyU         | 2            |\n\nSo, there are **2 orders** in total for PolyU. If you have any more questions or need further assistance, feel free to ask! 📊✨",
     "steps": [
         {
             "sql": "SELECT id FROM customers WHERE customer_name = 'PolyU';",
@@ -18,7 +18,7 @@
             "description": "Count the total number of orders for the customer with the retrieved customer ID",
             "results": [
                 {
-                    "COUNT(*)": 3
+                    "COUNT(*)": 2
                 }
             ]
         }
