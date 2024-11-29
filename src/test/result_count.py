@@ -30,6 +30,22 @@ def convert_to_csv():
         except IOError as e:
             continue
 
+
+def token_used_count(path):
+    sum = 0
+    for file in os.listdir(path):
+        if not file.endswith(".json"):
+            continue
+        import json
+        with open(os.path.join(path, file), "r") as f:
+            data = json.load(f)
+            if data['token_used'] is None:
+                sum += 0
+            else:
+                sum += data["token_used"]
+    return sum
+
+
 def count_errors():
     result = pd.DataFrame()
     for dir in os.listdir(output_path):
@@ -39,6 +55,7 @@ def count_errors():
         dict = {}
         for e in error_type:
             dict[e] = 0
+        dict["token_used"] = token_used_count(os.path.join(output_path, dir))
         file = pd.read_csv(file_path)
         # print(file.shape)
         for i in range(file.shape[0]):
@@ -51,6 +68,7 @@ def count_errors():
 
     result = result.T
     result["total_questions"] = result.sum(axis=1)
+    result["total_questions"] -= result["token_used"]
     result["Execution Accuracy"] = result["True"] / result["total_questions"]
     # print(result)
     result.to_excel("../../outputs/result_count.xlsx")
