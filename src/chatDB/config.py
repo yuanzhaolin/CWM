@@ -62,7 +62,7 @@ class Config(metaclass=Singleton):
         self.mysql_host = os.getenv("MYSQL_HOST", "localhost")
         self.mysql_user = os.getenv("MYSQL_USER", "root")
         self.mysql_port = int(os.getenv("MYSQL_PORT", "3306"))
-        self.mysql_schema = os.getenv("MYSQL_SCHEMA", "garment")
+        self.mysql_schema = os.getenv("MYSQL_SCHEMA", "fashion")
 
         if self.use_azure:
             self.load_azure_config()

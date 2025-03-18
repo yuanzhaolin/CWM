@@ -25,6 +25,7 @@ class MySQLDB(object):
         self.cursor = None
 
     def connect(self):
+        print(self.host, self.port, self.user, self.password, self.database)
         self.conn = pymysql.connect(
             host=self.host,
             port=self.port,

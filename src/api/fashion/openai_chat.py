@@ -5,7 +5,7 @@ from config import conf
 
 client = OpenAI(
     api_key=conf().get("openai_api_key", ""),
-    base_url=conf().get("openai_base_url", "https://api.chatanywhere.tech/v1")
+    base_url=conf().get("openai_base_url", "https://api.openai.com/v1")
 )
 
 GENERATE_SQL_PROMPT = """

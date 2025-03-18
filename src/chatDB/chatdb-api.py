@@ -16,6 +16,7 @@ security = HTTPBearer()
 # 定义一个函数来验证Authorization头
 def verify_token(credentials: HTTPAuthorizationCredentials = Depends(security)):
     token = credentials.credentials
+    print(credentials)
     if token != "Fashion!@#":
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

@@ -9,6 +9,7 @@ import global_token
 
 client = OpenAI(
     api_key=os.environ.get("OPENAI_API_KEY"),
+    # base_url="https://api.302.ai/v1"
     base_url="https://api.chatanywhere.tech/v1"
 )
 

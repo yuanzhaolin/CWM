@@ -14,22 +14,26 @@ def call_ai_function(function, args, description, model=None):
     if model is None:
         model = cfg.smart_llm_model
     # For each arg, if any are None, convert to "None":
+    #print(f"\n=====before args========\n{args}")
     args = [str(arg) if arg is not None else "None" for arg in args]
     # parse args to comma separated string
     args = ", ".join(args)
     messages = [
         {
             "role": "system",
-            "content": f"You are now the following python function: ```# {description}\n{function}```\n\nOnly respond with your `return` value. Do not include any other explanatory text in your response.",
+            #"content": f"You are now the following python function: ```# {description}\n{function}```\n\nOnly respond with your `return` value. Do not include any other explanatory text in your response.",
+            "content": f"You are now the following python function: ```# {description}\n{function}```\n\nDo not write any code. Only respond with your `return` value. Do not include any other explanatory text in your response.",
         },
         {"role": "user", "content": args},
     ]
     # print(messages[0]["content"])
     # print(messages[1]["content"])
     # print(args)
+    #print(f"\n=====after args========\n{args}")
     response = create_chat_completion(
         model=model, messages=messages, temperature=0
     )
+    #print(f"\n=====response========\n{response}")
 
     return response
 

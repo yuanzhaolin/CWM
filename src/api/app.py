@@ -12,7 +12,7 @@ def fashion():
         return jsonify({"error": "Invalid Authorization header"}), 500
     payload = request.json
     query = payload['query']
-    data, err = get_data(query)
+    data, err = get_data(query, model="Qwen/Qwen2.5-7B-Instruct")
     if err:
         return jsonify({'error': err}), 500
     return jsonify({"result": data})

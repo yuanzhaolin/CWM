@@ -22,6 +22,8 @@ retrievers = {}
 
 Settings.embed_model = OpenAIEmbedding(model="text-embedding-3-small", api_base="https://api.chatanywhere.tech/v1", api_key=os.environ.get("OPENAI_API_KEY"))
 
+
+
 mysql_db = init_database()
 
 print("***** Starting building vector index retriever *****")

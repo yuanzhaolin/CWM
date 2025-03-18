@@ -44,7 +44,7 @@ def get_steps_from_response(response):
             "operation_type": operation_type.strip(),
             "operation": operation.strip(),
         })
-
+    print(result)
     return result
 
 
@@ -199,6 +199,7 @@ def generate_chat_responses(user_inp, mysql_db, historical_message, context_abst
     historical_message[-2]["content"] = prompt_ask_steps_no_egs.format(user_inp=user_inp, context_abstracts=context_abstract)
 
     response_steps_list_of_dict = get_steps_from_response(response_steps)
+    print(response_steps_list_of_dict)
 
     if len(response_steps_list_of_dict) == 0:
         print(f"NOT NEED MEMORY: {response_steps}")
